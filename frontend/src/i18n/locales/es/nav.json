@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "core": "Principal",
+    "investigation": "Investigación",
+    "intelligence": "Inteligencia",
+    "compliance": "Cumplimiento",
+    "advanced": "Forense avanzada"
+  },
+  "items": {
+    "dashboard": "Panel",
+    "boards": "Tableros",
+    "nexus": "Grafo Nexus",
+    "trace": "Rastreador de fondos",
+    "intel": "Inteligencia de dirección",
+    "nftTron": "NFT / TON",
+    "auto": "Auto-investigar",
+    "entity": "Investigación de entidad",
+    "txLens": "Lupa TX",
+    "dex": "Análisis DEX",
+    "perpDex": "DEX Perpétuo",
+    "monitor": "Monitor",
+    "evidence": "Evidencia",
+    "predictive": "IA predictiva",
+    "aiAgent": "Agente IA",
+    "osint": "Barrido OSINT",
+    "cases": "Casos",
+    "batch": "Cribado en lote",
+    "labels": "Etiquetas",
+    "victimReports": "Reportes de víctimas",
+    "scamAtlas": "Atlas de estafas",
+    "reports": "Estudio de informes",
+    "sanctions": "Sanciones",
+    "attribution": "Atribución",
+    "submissions": "Envíos",
+    "regulatory": "Regulatorio",
+    "demix": "Des-mezcla AML",
+    "comply": "Suite de cumplimiento",
+    "contractForensics": "Forense de contratos",
+    "laundering": "Rastreo de lavado",
+    "courtReadiness": "Preparación judicial",
+    "recovery": "Congelación y recuperación",
+    "freezeDesk": "Escritorio de congelación",
+    "team": "Equipo"
+  },
+  "quick": {
+    "workspace": "Espacio de trabajo",
+    "openPalette": "Abrir paleta de módulos"
+  }
+}

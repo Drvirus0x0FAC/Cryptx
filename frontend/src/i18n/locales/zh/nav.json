@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "core": "核心",
+    "investigation": "调查",
+    "intelligence": "情报",
+    "compliance": "合规",
+    "advanced": "高级取证"
+  },
+  "items": {
+    "dashboard": "仪表盘",
+    "boards": "看板",
+    "nexus": "Nexus 关系图",
+    "trace": "资金追踪器",
+    "intel": "地址情报",
+    "nftTron": "NFT / TON",
+    "auto": "自动调查",
+    "entity": "实体调查",
+    "txLens": "TX 透镜",
+    "dex": "DEX 分析",
+    "perpDex": "永续 DEX",
+    "monitor": "监控",
+    "evidence": "证据",
+    "predictive": "预测式 AI",
+    "aiAgent": "AI 智能体",
+    "osint": "OSINT 扫描",
+    "cases": "案件",
+    "batch": "批量筛查",
+    "labels": "标签",
+    "victimReports": "受害者报告",
+    "scamAtlas": "骗局图谱",
+    "reports": "报告工作室",
+    "sanctions": "制裁",
+    "attribution": "归因",
+    "submissions": "提交",
+    "regulatory": "监管",
+    "demix": "AML 还原",
+    "comply": "合规套件",
+    "contractForensics": "合约取证",
+    "laundering": "洗钱追踪",
+    "courtReadiness": "法庭就绪",
+    "recovery": "冻结与追回",
+    "freezeDesk": "冻结台",
+    "team": "团队"
+  },
+  "quick": {
+    "workspace": "工作区",
+    "openPalette": "打开模块面板"
+  }
+}

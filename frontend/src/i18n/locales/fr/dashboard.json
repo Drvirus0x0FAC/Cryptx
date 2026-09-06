@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "Solution d'investigation de cybercriminalité blockchain CrypTX",
+    "subtitle": "Tracez les fonds illicites, connectez l'attribution, évaluez le risque et préservez les preuves entre chaînes sans perdre le fil de l'investigation."
+  },
+  "pills": {
+    "evidencePipelineArmed": "Pipeline de preuves armé",
+    "systemsOnline": "En ligne",
+    "chainsSupported": "{{count}} chaînes supportées",
+    "aiTriageReady": "Tri IA prêt"
+  },
+  "search": {
+    "placeholder": "Saisissez adresse de portefeuille, domaine ENS, hash TX, entité ou piste d'affaire…",
+    "button": "Investiguer",
+    "try": "Essayer"
+  },
+  "liveBrief": {
+    "title": "Brief de renseignement en direct",
+    "radarLabel": "Radar de triage en direct",
+    "prioritySignals_one": "signal prioritaire",
+    "prioritySignals_other": "signaux prioritaires"
+  },
+  "panels": {
+    "portfolioRisk": "Risque du portefeuille",
+    "coverageMatrix": "Matrice de couverture",
+    "openMatrix": "Ouvrir la matrice",
+    "liveIntelWire": "Fil d' renseignement en direct",
+    "threatLandscape": "Paysage des menaces",
+    "threatFeedIdle": "Flux de menaces inactif — ouvrez le Paysage des menaces pour synchroniser les sources RSS.",
+    "marketPulse": "Pouls du marché",
+    "marketPulseHint": "Évaluations USD au moment de la transaction pour le traçage + gel",
+    "operationsDeck": "Tableau de bord opérationnel",
+    "live": "en direct",
+    "valueFrozen": "valeur gelée / saisie",
+    "autoQueued": "gels en file automatique",
+    "scamNetworks": "réseaux d'arnaques cartographiés",
+    "unreadMonitor": "alertes moniteur non lues",
+    "newActivity": "nouvelle activité",
+    "monitorsQuiet": "Moniteurs silencieux — aucune alerte non lue.",
+    "caseRiskDist": "Distribution des risques d'affaire",
+    "activeInvestigations": "Investigations actives",
+    "viewAll": "Tout voir",
+    "noCases": "Aucune affaire",
+    "createCase": "Créer une affaire",
+    "highRiskAlert": "{{count}} investigation(s) à haut risque nécessitent une révision",
+    "noHighRisk": "Aucune file de révision d'affaire à haut risque.",
+    "intelWire": "FIL D'INFO",
+    "stablecoins": "stablecoins",
+    "liveTraceable": "traçable en direct",
+    "addressesCount": "{{count}} adresses"
+  },
+  "stats": {
+    "activeCases": "Affaires actives",
+    "highRisk": "Risque élevé",
+    "totalCases": "Total des affaires",
+    "addresses": "Adresses",
+    "chains": "chaînes",
+    "liveTrace": "trace en direct",
+    "tokens": "jetons"
+  },
+  "families": {
+    "evm": "Réseaux EVM",
+    "utxo": "Chaînes UTXO",
+    "solana": "Solana VM",
+    "tron": "Pile Tron",
+    "cosmos": "Cosmos IBC",
+    "others": "Rails spécialisés"
+  },
+  "ticker": {
+    "risk": "risque",
+    "frozenSeized": "gelés/saisis à ce jour",
+    "syntheticKyc": "drapeaux KYC synthétiques",
+    "trackedAssets": "actifs suivis"
+  }
+}

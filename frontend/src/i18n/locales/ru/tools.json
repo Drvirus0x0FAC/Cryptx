@@ -1,0 +1,1613 @@
+{
+  "perpDex": {
+    "title": "Разведка Perp DEX — Hyperliquid",
+    "subtitle": "Покрытие там, где реально находится объём 2026: >$200 млрд/мес потока на perp-DEX. Детерминированные детекторы для wash-трейдинга, отмывания через убытки, pass-through размещения и злоупотребления HIP-3 на узких рынках — каждый вердикт является зацепкой с расчётной базой.",
+    "inputPlaceholder": "Аккаунт Hyperliquid (EVM-адрес 0x…)",
+    "analyze": "Анализировать",
+    "loading": "Получение fills, ledger и состояния из публичного API Hyperliquid…",
+    "stats": {
+      "accountValue": "Стоимость аккаунта",
+      "tradedVolume": "Объём торгов",
+      "fillsRoundTrips": "{{fills}} fills · {{rounds}} циклов",
+      "netClosedPnl": "Чистый закрытый PnL",
+      "fees": "комиссии ${{amount}}",
+      "depositsWithdrawals": "Депозиты / выводы",
+      "in": "ввод",
+      "out": "вывод"
+    },
+    "detectors": {
+      "title": "Детекторы злоупотреблений",
+      "basis": "Основа: {{basis}}",
+      "partialData": "Частичные данные: {{errors}}"
+    },
+    "volumeByMarket": {
+      "title": "Объём по рынкам",
+      "colMarket": "Рынок",
+      "colVolume": "Объём",
+      "colPnl": "PnL",
+      "colFills": "Fills",
+      "noFills": "Нет fills."
+    },
+    "openPositions": {
+      "title": "Открытые позиции",
+      "none": "Нет.",
+      "row": "{{coin}} · размер {{size}} · вход {{entry}} · стоимость ${{value}} · uPnL ${{upnl}} · {{lev}}x"
+    },
+    "pivots": {
+      "title": "On-chain переходы (тот же EOA урегулирует USDC в Arbitrum)"
+    }
+  },
+  "entity": {
+    "title": "Расследование сущности",
+    "subtitle": "Рассматривайте группу адресов как одну сущность — кластеризация, агрегирование потоков, поиск внешних контрагентов",
+    "inputLabel": "Адреса под общим контролем",
+    "inputPlaceholder": "Вставьте адреса (по одному на строку или через запятую)\n0x1234...\n0x5678...\nbc1q...",
+    "chainPlaceholder": "цепочка (eth, btc, ... опц.)",
+    "submit": "Расследовать сущность",
+    "errors": {
+      "minTwo": "Введите минимум 2 адреса для обработки как одной сущности.",
+      "failed": "Ошибка расследования"
+    },
+    "stats": {
+      "addresses": "Адреса",
+      "totalIn": "Всего ВВОД",
+      "totalOut": "Всего ВЫВОД",
+      "clusters": "Кластеры"
+    },
+    "clusters": {
+      "title": "Обнаружены кластеры общего контроля ({{count}})",
+      "disclaimer": "Принадлежность к кластеру — это «зацепка общего контроля», а не доказательство владения.",
+      "clusterN": "Кластер {{n}}",
+      "members": "{{count}} участников · достоверность {{conf}}%"
+    },
+    "counterparties": {
+      "title": "Внешние контрагенты (топ 20)",
+      "colAddress": "Адрес",
+      "colType": "Тип",
+      "colIn": "Ввод",
+      "colOut": "Вывод",
+      "colTxs": "Txs"
+    }
+  },
+  "dex": {
+    "title": "Анализ DEX",
+    "subtitle": "On-chain анализ торговли на DEX: потоки токенов, пулы ликвидности, пути свопа и экспозиция к контрагентам на основных DEX.",
+    "inputPlaceholder": "Адрес ETH / BSC…",
+    "analyze": "Анализировать",
+    "loading": "Получение активности DEX через TheGraph…",
+    "empty": "Введите адрес ETH или BSC для просмотра активности свопов на DEX.",
+    "lookupFailed": "Ошибка поиска DEX",
+    "noSwaps": "Свопы DEX для этого адреса не найдены.",
+    "noSwapsHint": "Этот поиск обращается к Uniswap v2/v3 (ETH) и PancakeSwap (BSC) через TheGraph. Задайте THEGRAPH_API_KEY в Настройках для повышения лимитов.",
+    "stats": {
+      "totalSwaps": "Всего свопов",
+      "buys": "Покупки",
+      "sells": "Продажи",
+      "uniquePairs": "Уникальных пар"
+    },
+    "washTrading": {
+      "title": "⚠ Обнаружен возможный Wash-трейдинг"
+    },
+    "chart": {
+      "title": "Топ пар свопов - Покупки vs Продажи",
+      "buys": "Покупки",
+      "sells": "Продажи"
+    },
+    "table": {
+      "historyTitle_one": "История свопов ({{count}})",
+      "historyTitle_few": "История свопов ({{count}})",
+      "historyTitle_many": "История свопов ({{count}})",
+      "historyTitle_other": "История свопов ({{count}})",
+      "showing": "Показано 50 из {{count}} свопов.",
+      "colDir": "Напр.",
+      "colTime": "Время",
+      "colPair": "Пара",
+      "colAmounts": "Суммы",
+      "colDex": "DEX",
+      "colUsd": "USD"
+    }
+  },
+  "autoInvestigate": {
+    "title": "Авто-расследование",
+    "subtitle": "Один клик: разведка → риск → криминалистика → данные об угрозах → атрибуция → черновик отчёта. Все движки локальные, цепочка хранения опциональна.",
+    "inputLabel": "Адрес субъекта",
+    "inputPlaceholder": "Адрес BTC / ETH / TRX / SOL…",
+    "caseLabel": "ID дела (хранение, опц.)",
+    "casePlaceholder": "зарегистрировать отчёт в хранилище",
+    "run": "Расследовать",
+    "failed": "Ошибка авто-расследования",
+    "empty": "Вставьте адрес и позвольте полному локальному конвейеру отработать от начала до конца.",
+    "stats": {
+      "risk": "Риск",
+      "threat": "Угроза",
+      "role": "Роль",
+      "courtDefensible": "Приемлемо в суде",
+      "courtDefensibleSub": "атрибуция",
+      "txs": "TXs",
+      "yes": "ДА",
+      "no": "нет",
+      "motifs_one": "{{count}} мотив",
+      "motifs_few": "{{count}} мотива",
+      "motifs_many": "{{count}} мотивов",
+      "motifs_other": "{{count}} мотивов"
+    },
+    "package": {
+      "title": "Пакет расследования",
+      "custody": "Зарегистрировано в цепочке хранения:",
+      "reportHtml": "Отчёт (HTML)",
+      "reportMd": "Сводка (MD)"
+    },
+    "exitVasp": {
+      "title": "VASP выхода - направляйте юридические запросы сюда",
+      "none": "Точки депозита на биржи не достигнуты за 2 прыжка - средства, возможно, ещё on-chain.",
+      "unavailable": "Трассировка Exit-VASP недоступна: {{error}}",
+      "hop": "прыжок {{n}}",
+      "kyvDirectory": "✓ каталог KYV",
+      "inspect": "инспектировать адрес депозита",
+      "cashoutIndicators": "Индикаторы вывода в фиат"
+    },
+    "continue": {
+      "title": "Продолжить расследование",
+      "addressIntel": "Анализ адреса",
+      "nexusGraph": "Граф Nexus",
+      "holisticTrace": "Холистическая трассировка",
+      "forensics": "Криминалистика"
+    }
+  },
+  "walletMonitor": {
+    "title": "Монитор кошельков",
+    "subtitle": "Следите за крипто-кошельками для новых транзакций и открывайте оповещения прямо в деталях транзакции.",
+    "stats": {
+      "watching": "Наблюдение",
+      "active": "Активны",
+      "unread": "Непрочитанные",
+      "notifications": "Уведомления",
+      "poll": "90с",
+      "pollSub": "фоновый сканер"
+    },
+    "add": {
+      "placeholder": "Один или несколько адресов кошельков, разделённых запятой или новой строкой...",
+      "labelPlaceholder": "Необязательная метка",
+      "button": "Следить",
+      "baseline": "Зафиксировать базовую линию текущих транзакций, чтобы оповещения срабатывали только на будущую активность"
+    },
+    "rules": {
+      "title": "Правила оповещений",
+      "hint": "напр. «Оповестить, если отслеживаемый кошелёк отправляет >10 в миксер» - правила выполняются автоматически при каждом фоновом сканировании.",
+      "ruleName": "Название правила",
+      "ruleNamePlaceholder": "«Mixer out > 10»",
+      "address": "Адрес (пусто = все)",
+      "addressPlaceholder": "любой отслеживаемый адрес",
+      "direction": "Направление",
+      "minValue": "Мин. значение",
+      "counterparty": "Контрагент",
+      "addRule": "Добавить правило",
+      "colRule": "Правило",
+      "colScope": "Область",
+      "colDirection": "Направление",
+      "colMinValue": "Мин. значение",
+      "colCounterparty": "Контрагент",
+      "colStatus": "Статус",
+      "allWatches": "все",
+      "enabled": "включено",
+      "disabled": "выключено"
+    },
+    "watchlist": {
+      "title": "Список наблюдения",
+      "scanNow": "Сканировать сейчас",
+      "filterPlaceholder": "Фильтр отслеживаемых кошельков...",
+      "colStatus": "Статус",
+      "colAddress": "Адрес",
+      "colChain": "Цепочка",
+      "colLabel": "Метка",
+      "colLastChecked": "Последняя проверка",
+      "colActions": "Действия",
+      "active": "активен",
+      "paused": "приостановлен",
+      "empty": "Пока нет отслеживаемых кошельков."
+    },
+    "notifications": {
+      "title": "Уведомления о транзакциях",
+      "ruleBadge": "правило: {{name}}",
+      "new": "новое",
+      "openDetails": "Открыть детали транзакции",
+      "empty": "Пока нет уведомлений о транзакциях."
+    }
+  },
+  "fundTracer": {
+    "title": "Трассировщик потоков средств",
+    "subtitle": "Многопрыжковая трассировка · обнаружение паттернов · граф риска",
+    "completedIn": "завершено за {{seconds}}с",
+    "controls": {
+      "seedAddress": "Исходный адрес",
+      "inputPlaceholder": "Адрес BTC / ETH / TRX / SOL…",
+      "hops": "Прыжки (1-5)",
+      "mode": "Режим",
+      "modeLinear": "Линейный",
+      "modeWide": "Широкий",
+      "direction": "Направление",
+      "dirOutflows": "Оттоки",
+      "dirInflows": "Притоки",
+      "dirBoth": "Оба",
+      "trace": "Трассировать",
+      "tracing": "Трассировка…",
+      "traceTitle": "Быстрая многопрыжковая трассировка",
+      "deepAnalyze": "Глубокий анализ",
+      "analyzing": "Анализ…",
+      "deepTitle": "Глубокий анализ с живым прогрессом: криминалистические мотивы, cashout, cross-chain, кластеризация, риск, peel-chain, layering, dwell",
+      "exportTitle": "Экспорт JSON"
+    },
+    "modeHintLinear": "Линейный - крупнейший одиночный поток на прыжок.",
+    "modeHintWide": "Широкий - топ-3 контрагента на прыжок (макс 20 узлов). Кликните по узлу графа для подробностей.",
+    "errors": {
+      "traceFailed": "Ошибка трассировки",
+      "deepTimeout": "Глубокий анализ превысил время — для активных адресов может занять 1–3 минуты. Попробуйте меньше прыжков или используйте обычную Трассировку для быстрого первого прохода."
+    },
+    "progress": {
+      "starting": "Запуск глубокого анализа",
+      "connecting": "Подключение…",
+      "following": "Отслеживание денег на {{hops}} прыжках и выполнение 8 проходов анализа. Очень активные кошельки возвращают частичную трассировку в рамках бюджета времени.",
+      "runningDeep": "Выполняется глубокий анализ…",
+      "tracingFlows": "Трассировка потоков средств…",
+      "deepHint": "Трассировка {{hops}} прыжков и затем выполнение 5 движков + 3 алгоритмов. Может занять 30-90с.",
+      "traceHint": "Опрос blockchain API на {{hops}} прыжках. Может занять 15-60 секунд."
+    },
+    "stats": {
+      "wallets": "Кошельки",
+      "transfers": "Переводы",
+      "flagged": "Помечено",
+      "patterns": "Паттерны",
+      "tlEvents": "События TL"
+    },
+    "warnings": {
+      "title": "Заметки трассировщика",
+      "hidden": "+{{count}} дополнительных заметок скрыто"
+    },
+    "chips": {
+      "walletClusters": "Кластеры кошельков",
+      "crosschain": "Cross-chain",
+      "crosschainValue": "{{bridges}} мостов · {{matches}} совпадений значений",
+      "peelChains": "Peel-цепочки",
+      "layering": "Расслоение",
+      "rapidWallets": "Быстрые кошельки",
+      "primaryCashout": "Основной cashout"
+    },
+    "patterns": {
+      "title": "Оповещения о паттернах ({{count}})",
+      "colSeverity": "Серьёзность",
+      "colPattern": "Паттерн",
+      "colConfidence": "Уверенность",
+      "colDescription": "Описание",
+      "docs": {
+        "sanctioned_exposure": "Средства прошли через адрес под санкциями OFAC/Chainalysis",
+        "mixer_exposure": "В потоке средств обнаружено взаимодействие с миксером или tumbler",
+        "scam_exposure": "Контрагент отмечен в общественных базах мошенничеств",
+        "bridge_swap_exposure": "Активность кросс-чейн моста или DEX-свопа - возможное расслоение",
+        "peel_chain": "Последовательные транзакции с одним выходом - классическая UTXO peel-цепочка",
+        "fan_out": "Средства распределены множеству получателей из одного источника - паттерн рассеяния",
+        "fan_in": "Множество входов сходится к одному адресу - агрегация/консолидация",
+        "pass_through": "Кошелёк получает и отправляет почти все средства без удержания",
+        "round_amounts": "Подозрительные круглые суммы транзакций - индикатор структурирования",
+        "rapid_movement": "Средства перемещены очень быстро после получения - без времени задержки",
+        "high_volume_low_balance": "Высокий объём транзакций при минимальном остаточном балансе"
+      }
+    },
+    "empty": {
+      "title": "Введите крипто-адрес для трассировки потоков средств",
+      "hint": "Трассировщик отслеживает деньги через прыжки блокчейна, обнаруживая миксеры, адреса под санкциями, расслоение через мосты и поведенческие паттерны."
+    }
+  },
+  "evidenceVault": {
+    "title": "Хранилище доказательств",
+    "subtitle": "Неизменяемое хранилище артефактов с хэшированием SHA-256 + защищённая от подделки цепочка хранения",
+    "casePlaceholder": "ID дела (UUID)",
+    "load": "Загрузить",
+    "saveArtifact": "Сохранить артефакт",
+    "deleteConfirm": "Удалить этот артефакт-доказательство?",
+    "summary": {
+      "artifacts": "Артефакты",
+      "avgQuality": "Ср. качество",
+      "byType": "По типу"
+    },
+    "filterPlaceholder": "Фильтр по названию, адресу, типу, тегу…",
+    "emptyWithCase": "Артефакты-доказательства не найдены. Сохраните первый артефакт кнопкой выше.",
+    "emptyNoCase": "Введите ID дела для просмотра или добавления доказательств",
+    "card": {
+      "notesPlaceholder": "Заметки аналитика…",
+      "tagsPlaceholder": "Теги (через запятую)",
+      "saving": "Сохранение…",
+      "save": "Сохранить",
+      "cancel": "Отмена",
+      "annotate": "Аннотировать",
+      "export": "Экспорт",
+      "auditLog": "Журнал аудита",
+      "hide": "Скрыть",
+      "delete": "Удалить"
+    },
+    "dialog": {
+      "title": "Сохранить доказательство",
+      "type": "Тип",
+      "subjectAddress": "Адрес субъекта",
+      "subjectPlaceholder": "0x…",
+      "titleField": "Название *",
+      "titlePlaceholder": "Название доказательства",
+      "content": "Содержимое (JSON или простой текст)",
+      "contentPlaceholder": "{\"ключ\": \"значение\"} или простой текст",
+      "tags": "Теги",
+      "tagsPlaceholder": "exchange, structuring, …",
+      "analystNotes": "Заметки аналитика",
+      "notesPlaceholder": "Необязательная заметка",
+      "titleRequired": "Название обязательно",
+      "save": "Сохранить доказательство",
+      "cancel": "Отмена"
+    },
+    "custody": {
+      "verify": "Проверить цепочку хранения",
+      "verifying": "…",
+      "chainIntact": "✓ Цепочка цела ({{count}} записей)",
+      "chainBroken": "✗ ЦЕПОЧКА НАРУШЕНА - {{count}} проблем",
+      "tipValid": "Конец цепочки {{tip}} · проверено {{at}}",
+      "tipInvalid": "{{title}}: {{error}}"
+    }
+  },
+  "txLens": {
+    "title": "Линза TX",
+    "subtitle": "Расследование по ID транзакции с локальным графом потоков стоимости, атрибуцией сторон, пивотами, трассировками и ИИ-синтезом",
+    "inputPlaceholder": "Хэш транзакции / TXID...",
+    "focusPlaceholder": "Необязательный ИИ-фокус, напр. определить вероятный источник средств, выход на биржу, экспозицию к миксеру или зацепки общего контроля.",
+    "submit": "Исследовать TX",
+    "options": {
+      "includeAi": "Включить ИИ-синтез",
+      "deepEnrichment": "Глубокое обогащение сторон",
+      "expandTraces": "Расширять трассировки вокруг ключевых сторон",
+      "fullModeHint": "Режим полного качества включён по умолчанию; прогресс отображается во время выполнения этапов бэкенда."
+    },
+    "errors": {
+      "failed": "Ошибка Линзы TX",
+      "jobFailed": "Ошибка задания Линзы TX",
+      "noResult": "Задание Линзы TX завершено без результата"
+    },
+    "progress": {
+      "starting": "Запуск",
+      "detailFallback": "Подготовка задания расследования на бэкенде.",
+      "stages": {
+        "resolving": "Разрешение транзакции",
+        "extracting": "Извлечение потоков стоимости",
+        "enriching": "Обогащение сторон",
+        "labels": "Загрузка локальных меток",
+        "expanding": "Расширение контекста трассировки",
+        "algorithms": "Выполнение локальных алгоритмов",
+        "ai": "Синтез ИИ-оценки",
+        "finalizing": "Финализация отчёта"
+      }
+    },
+    "graph": {
+      "findPlaceholder": "Найти адрес, роль или риск стороны...",
+      "layoutFlow": "Полосы потоков",
+      "layoutRisk": "Полосы риска",
+      "layoutRole": "Полосы ролей",
+      "allFlows": "Все потоки",
+      "focusOn": "Фокус вкл.",
+      "focusOff": "Фокус выкл.",
+      "labelsOn": "Метки вкл.",
+      "labelsOff": "Метки выкл.",
+      "minRisk": "Минимальный риск стороны:",
+      "colSenders": "ОТПРАВИТЕЛИ",
+      "colIntermediates": "ПОСРЕДНИКИ",
+      "colMediumRisk": "СРЕДНИЙ РИСК",
+      "colRecipients": "ПОЛУЧАТЕЛИ",
+      "colLowRisk": "НИЗКИЙ РИСК",
+      "legendNative": "нативный",
+      "legendToken": "токен",
+      "legendInternal": "внутренний",
+      "legendHighRisk": "сторона высокого риска",
+      "statVisibleParties": "Видимые стороны",
+      "statVisibleFlows": "Видимые потоки",
+      "statAssetFilter": "Фильтр активов",
+      "statSelected": "Выбрано",
+      "statLayout": "Раскладка",
+      "flowContract": "Контракт: {{addr}}",
+      "flowTimeUnknown": "время неизвестно"
+    },
+    "profile": {
+      "title": "Профиль транзакции",
+      "timeUnavailable": "время недоступно",
+      "explorer": "Эксплорер",
+      "exportJson": "Экспорт JSON",
+      "statTxRisk": "Риск TX",
+      "statParties": "Стороны",
+      "statFlows": "Потоки",
+      "statAssets": "Активы",
+      "statIndicators": "Индикаторы",
+      "statTopParty": "Топ сторона",
+      "statValue": "Значение"
+    },
+    "tabs": {
+      "flowGraph": "Граф потоков",
+      "analysis": "Анализ",
+      "parties": "Стороны и пивоты"
+    },
+    "panels": {
+      "graphTitle": "Граф потоков стоимости транзакции",
+      "selectedParty": "Выбранная сторона",
+      "selectPartyHint": "Выберите узел стороны в графе.",
+      "risk": "Риск",
+      "role": "Роль",
+      "inbound": "Входящий",
+      "outbound": "Исходящий",
+      "labels": "Метки:",
+      "openIntel": "Открыть разведку адреса",
+      "traceContext": "Контекст трассировки",
+      "traced": "Отслежено:",
+      "notExpanded": "не расширено",
+      "aiTitle": "ИИ-оценка транзакции",
+      "laundering": "Индикаторы отмывания",
+      "launderingEmpty": "Индикаторы отмывания на уровне транзакции не обнаружены.",
+      "attribution": "Зацепки атрибуции",
+      "nextSteps": "Следующие шаги",
+      "partyQueue": "Очередь рисков и пивотов сторон"
+    },
+    "table": {
+      "colPriority": "Приоритет",
+      "colAddress": "Адрес",
+      "colRole": "Роль",
+      "colRisk": "Риск",
+      "colFlow": "Поток",
+      "colReasons": "Причины"
+    }
+  },
+  "addressIntel": {
+    "title": "Анализ адреса",
+    "subtitle": "Комплексная разведка по адресу — оценка риска, санкционное воздействие, токен-холдинги, предупреждения о миксерах и происхождение атрибуции в одном запросе.",
+    "inputPlaceholder": "Крипто-адрес / имя ENS…",
+    "lookup": "Поиск",
+    "trace": "Трассировать",
+    "ai": "ИИ",
+    "forensics": "Криминалистика",
+    "dex": "DEX",
+    "errors": {
+      "lookupFailed": "Ошибка поиска"
+    },
+    "header": {
+      "via": "через {{source}}",
+      "copied": "Скопировано!",
+      "viewOnExplorer": "Открыть в эксплорере"
+    },
+    "stats": {
+      "balance": "Баланс",
+      "transactions": "Транзакции",
+      "txSplit": "{{native}} нативных / {{token}} токенов",
+      "firstSeen": "Первое появление",
+      "lastActive": "Последняя активность",
+      "totalReceived": "Всего получено:"
+    },
+    "tabs": {
+      "overview": "Обзор",
+      "intel": "Разведка",
+      "activity": "Активность",
+      "network": "Сеть"
+    },
+    "risk": {
+      "title": "Оценка риска",
+      "categories": "Категории риска",
+      "noneDetected": "Не обнаружено",
+      "indicators": {
+        "mixer": "Взаимодействия с миксером",
+        "scam": "Жалобы на мошенничество",
+        "bridge": "Прыжки через мост",
+        "swap": "DEX-свопы"
+      },
+      "exposure": "Экспозиция средств",
+      "signals_one": "Сигнал риска ({{count}})",
+      "signals_few": "Сигнала риска ({{count}})",
+      "signals_many": "Сигналов риска ({{count}})",
+      "signals_other": "Сигналов риска ({{count}})",
+      "snapshot": "Снимок риска",
+      "scoring": "Оценка…",
+      "unavailable": "Оценка риска недоступна."
+    },
+    "pivots": {
+      "title": "Быстрые пивоты",
+      "openNexus": "Открыть Nexus",
+      "holisticTrace": "Холистическая трассировка",
+      "fundTracer": "Трассировщик средств"
+    },
+    "addToCase": {
+      "button": "Добавить в дело",
+      "title": "Добавить в дело расследования",
+      "noCases": "Пока нет дел.",
+      "createOne": "Создать",
+      "selectCase": "Выберите дело…",
+      "labelPlaceholder": "Метка (необязательно)",
+      "addAddress": "Добавить адрес",
+      "saving": "Сохранение…",
+      "added": "✓ Добавлено!"
+    },
+    "attribution": {
+      "title": "Анализ атрибуции",
+      "running": "Выполняется анализ атрибуции по источникам разведки…",
+      "failed": "Ошибка анализа атрибуции: {{error}}",
+      "retry": "Повторить",
+      "none": "Для этого адреса не найдено публичной атрибуции владельца или профиля кошелька.",
+      "rerun": "Перезапустить анализ",
+      "owner": "Владелец",
+      "verified": "подтверждено",
+      "confidence": "{{pct}}% довер.",
+      "alsoKnownAs": "Также известен как: {{aliases}}",
+      "balances": "Связанные балансы кошелька",
+      "tokenCol": "Токен",
+      "priceCol": "Цена",
+      "amountCol": "Количество",
+      "usdCol": "Стоимость USD",
+      "moreTokens": "+{{count}} ещё токенов",
+      "scam": "мошенничество",
+      "suspicious": "подозрительно",
+      "defiPositions": "DeFi-позиции"
+    },
+    "scam": {
+      "title_one": "Жалоба ScamSearch ({{count}})",
+      "title_few": "Жалобы ScamSearch ({{count}})",
+      "title_many": "Жалоб ScamSearch ({{count}})",
+      "title_other": "Жалоб ScamSearch ({{count}})",
+      "name": "Имя:",
+      "category": "Категория:",
+      "date": "Дата:"
+    },
+    "enrichment": {
+      "title": "Публичное обогащение",
+      "subtitle": "Открытые ленты + бесплатные API",
+      "publicLabels": "Публичные метки",
+      "abuseReports": "Жалобы об злоупотреблениях",
+      "ransomwareHits": "Совпадения с программами-вымогателями",
+      "chainTvl": "TVL цепочки · рынок",
+      "ransomwareMatch": "Совпадение в датасете программ-вымогателей",
+      "via": "через {{source}}",
+      "labelsTitle": "Метки и совпадения с датасетами",
+      "labelCategoryLabel": "метка",
+      "marketContext": "Рыночный контекст",
+      "marketContextSub": "· глобальные цены, не специфичные для адреса",
+      "providerWarnings": "Предупреждения провайдеров: {{warnings}}",
+      "unavailable": "недоступно",
+      "optionalProviders": "Опциональные провайдеры доступны в Настройках: {{providers}}"
+    },
+    "activity": {
+      "title": "Активность",
+      "empty": "Текущий публичный источник данных не вернул строк транзакций.",
+      "allTransactions": "Все транзакции",
+      "recentTransactions": "Недавние транзакции"
+    }
+  },
+  "common": {
+    "loading": "Загрузка…",
+    "error": "Что-то пошло не так.",
+    "retry": "Повторить",
+    "copy": "Копировать",
+    "copied": "Скопировано",
+    "export": "Экспорт",
+    "noData": "Нет данных",
+    "address": "Адрес",
+    "amount": "Сумма",
+    "timestamp": "Метка времени"
+  },
+  "scamAtlas": {
+    "title": "Атлас сетей мошенничеств",
+    "subtitle": "Кластеризация инфраструктуры между жертвами: общие адреса депозитов, домены, e-mail и псевдонимы объединяют отдельные заявления жертв в именованные сети мошенничеств — с отпечатками наборов и сигналами deepfake-KYC как зацепками.",
+    "recluster": "Перекластеризовать",
+    "stats": {
+      "victimReports": "Заявления жертв",
+      "scamNetworks": "Сети мошенничеств",
+      "totalDamage": "Общий ущерб",
+      "syntheticKyc": "Флаги синтетического KYC"
+    },
+    "list": {
+      "victimsDamage": "{{count}} жертва(ы) · ${{damage}}",
+      "empty": "Нет сетей — сначала подайте заявления жертв.",
+      "selectPrompt": "Выберите сеть."
+    },
+    "detail": {
+      "loading": "Загрузка сети…",
+      "meta_one": "{{count}} заявление · ${{damage}} ущерба · {{dates}} · цепочки {{chains}}",
+      "meta_few": "{{count}} заявления · ${{damage}} ущерба · {{dates}} · цепочки {{chains}}",
+      "meta_many": "{{count}} заявлений · ${{damage}} ущерба · {{dates}} · цепочки {{chains}}",
+      "meta_other": "{{count}} заявлений · ${{damage}} ущерба · {{dates}} · цепочки {{chains}}",
+      "undated": "без даты",
+      "dateRange": "{{from}} → {{to}}",
+      "promote": "Повысить до атрибуции",
+      "promoted_one": "{{count}} адрес зарегистрирован как отслеживаемая зацепка атрибуции.",
+      "promoted_few": "{{count}} адреса зарегистрированы как отслеживаемые зацепки атрибуции.",
+      "promoted_many": "{{count}} адресов зарегистрированы как отслеживаемые зацепки атрибуции.",
+      "promoted_other": "{{count}} адресов зарегистрированы как отслеживаемые зацепки атрибуции.",
+      "basis": "Основа: {{basis}}",
+      "addresses": "Адреса депозитов ({{count}})",
+      "intel": "разведка",
+      "domains": "Домены",
+      "emails": "E-mail",
+      "handles": "Псевдонимы",
+      "linkingArtifacts": "Связующие артефакты",
+      "memberReports": "Заявления жертв-участниц",
+      "colType": "Тип",
+      "colScammerAddr": "Адрес мошенника",
+      "colUsd": "USD",
+      "colChain": "Цепочка",
+      "colIncident": "Инцидент",
+      "colStatus": "Статус"
+    }
+  },
+  "caseManager": {
+    "title": "Дела расследования",
+    "subtitle": "Управление делами расследования крипто-киберпреступлений",
+    "newCase": "Новое дело",
+    "create": {
+      "title": "Новое дело расследования",
+      "namePlaceholder": "Название дела (напр. Binance Hack 2024-Q3)",
+      "descPlaceholder": "Описание / цель (необязательно)",
+      "submit": "Создать дело",
+      "cancel": "Отмена",
+      "failed": "Не удалось создать дело. Попробуйте снова."
+    },
+    "filter": {
+      "all": "все",
+      "active": "активные",
+      "closed": "закрытые",
+      "archived": "архив"
+    },
+    "count_one": "{{count}} дело",
+    "count_few": "{{count}} дела",
+    "count_many": "{{count}} дел",
+    "count_other": "{{count}} дел",
+    "loadFailed": "Ошибка загрузки дел",
+    "empty": "Пока нет дел - создайте первое расследование",
+    "card": {
+      "addrCount_one": "{{count}} адрес",
+      "addrCount_few": "{{count}} адреса",
+      "addrCount_many": "{{count}} адресов",
+      "addrCount_other": "{{count}} адресов",
+      "updated": "Обновлено {{date}}",
+      "maxRisk": "Макс. риск: {{score}}/100",
+      "open": "Открыть",
+      "deleteConfirm": "Удалить дело «{{name}}»?"
+    }
+  },
+  "boardShared": {
+    "errors": {
+      "revoked": "Ссылка доступа была отозвана.",
+      "expired": "Срок действия ссылки доступа истёк.",
+      "notFound": "Ссылка доступа не найдена.",
+      "denied": "Доступ запрещён",
+      "unable": "Не удалось открыть этот борд."
+    },
+    "opening": "Открытие общего борда…",
+    "password": {
+      "title": "Защищённый борд расследования",
+      "hint": "Этот борд был опубликован с защитой паролем. Введите пароль, предоставленный следователем.",
+      "placeholder": "Пароль",
+      "unlock": "Разблокировать"
+    },
+    "header": {
+      "readonlyLive": "только чтение · живой борд",
+      "readonlySnapshot": "только чтение · снимок заморожен {{date}}",
+      "sealTitle": "SHA-256 печать целостности состояния борда",
+      "stats_one": "{{nodes}} узел · {{edges}} рёбер · Опубликовано через CrypTX",
+      "stats_few": "{{nodes}} узла · {{edges}} рёбер · Опубликовано через CrypTX",
+      "stats_many": "{{nodes}} узлов · {{edges}} рёбер · Опубликовано через CrypTX",
+      "stats_other": "{{nodes}} узлов · {{edges}} рёбер · Опубликовано через CrypTX"
+    }
+  },
+  "reportStudio": {
+    "title": "Студия отчётов",
+    "subtitle": "Создавайте адаптированные под аудиторию отчёты расследования под маркой CrypTX из дела.",
+    "caseLabel": "Дело",
+    "noCases": "Дела не найдены",
+    "caseMeta_one": "{{count}} адрес · статус {{status}}",
+    "caseMeta_few": "{{count}} адреса · статус {{status}}",
+    "caseMeta_many": "{{count}} адресов · статус {{status}}",
+    "caseMeta_other": "{{count}} адресов · статус {{status}}",
+    "reportTypeLabel": "Тип отчёта",
+    "generate": "Создать отчёт",
+    "generating": "Создание...",
+    "errors": {
+      "failed": "Ошибка создания отчёта. Проверьте, что в деле есть данные, и повторите."
+    },
+    "preview": {
+      "title": "Предпросмотр",
+      "regenerate": "Пересоздать",
+      "print": "Печать / Сохранить как PDF",
+      "openTab": "Открыть в новой вкладке",
+      "download": "Скачать HTML",
+      "downloadBtn": "Скачать",
+      "exportAs": "Экспорт в:",
+      "building": "Построение отчёта…",
+      "empty": "Выберите дело и тип отчёта, затем создайте."
+    }
+  },
+  "batchScreener": {
+    "title": "Пакетный скринер адресов",
+    "subtitle": "Параллельный скрининг до 100 адресов по санкциям, миксерам и сигналам риска",
+    "inputLabel": "Входные адреса",
+    "countLabel": "{{count}} / 100 адресов",
+    "screenBtn_one": "Скринить {{count}} адрес",
+    "screenBtn_few": "Скринить {{count}} адреса",
+    "screenBtn_many": "Скринить {{count}} адресов",
+    "screenBtn_other": "Скринить {{count}} адресов",
+    "screening": "Скрининг…",
+    "clear": "Очистить",
+    "exportCsv": "Экспорт CSV",
+    "errors": {
+      "failed": "Ошибка скрининга - запущен ли бэкенд?"
+    },
+    "stats": {
+      "total": "Всего",
+      "scored": "Оценено",
+      "avg": "Средн.",
+      "max": "Макс.",
+      "sanctioned": "Санкции",
+      "critHigh": "Крит+Высок",
+      "medium": "Средний",
+      "clean": "Чистые"
+    },
+    "filter": {
+      "all": "все",
+      "sanctioned": "санкц.",
+      "critical": "критич.",
+      "high": "высок.",
+      "medium": "средние",
+      "low": "низкие",
+      "clean": "чистые"
+    },
+    "rowsCount_one": "{{count}} строка",
+    "rowsCount_few": "{{count}} строки",
+    "rowsCount_many": "{{count}} строк",
+    "rowsCount_other": "{{count}} строк",
+    "table": {
+      "score": "Оценка",
+      "level": "Уровень",
+      "address": "Адрес",
+      "chain": "Цепочка",
+      "signals": "Сигналы",
+      "actions": "Действия",
+      "fullIntel": "Полная разведка →"
+    },
+    "empty": "Вставьте адреса выше и нажмите Скринить"
+  },
+  "labelIntel": {
+    "title": "Локальная разведка меток",
+    "subtitle": "Атрибуция, метки риска и CSV-импорты, принадлежащие следователю и используемые локальным криминалистическим движком",
+    "addLabel": {
+      "title": "Добавить метку",
+      "addressPh": "Адрес",
+      "chainPh": "Цепочка",
+      "labelPh": "Метка",
+      "categoryPh": "Категория",
+      "riskPh": "Риск",
+      "confPh": "Довер.",
+      "notesPh": "Заметки",
+      "addBtn": "Добавить"
+    },
+    "csv": {
+      "title": "Импорт CSV",
+      "placeholder": "address,chain,label,category,risk_weight,confidence,source,notes",
+      "importBtn": "Импорт CSV"
+    },
+    "attributionImports": {
+      "title": "Импорт в базу атрибуции",
+      "hint": "Растите базу отслеживаемой атрибуции из открытых наборов меток. Автодедупликация; каждая запись хранит источник. Подтверждённые заявления жертв также автоматически попадают в эту базу.",
+      "ofacBtn": "Импортировать встроенный список OFAC SDN",
+      "ofacResult": "Импортировано {{imported}} · пропущено {{skipped}} дублей (из {{rows}} строк)",
+      "ofacFailed": "Ошибка импорта - проверьте логи бэкенда.",
+      "duneHint": "Наборы меток Dune / GitHub: конвертируйте в JSON и отправьте POST на /api/attribution/import с {items: [{address, category, label, source}]}."
+    },
+    "vasp": {
+      "title": "Досье due diligence VASP",
+      "placeholder": "Название VASP, напр. «Binance»",
+      "buildBtn": "Создать досье",
+      "downloadMd": "Скачать (MD)",
+      "failed": "Ошибка досье",
+      "countryUnknown": "страна неизвестна",
+      "jurisdictionUnknown": "юрисдикция неизвестна",
+      "risk": "РИСК: {{level}}",
+      "statAddresses": "Адреса",
+      "statChains": "Цепочки",
+      "statSanctions": "Попадания под санкции",
+      "statHighRisk": "Метки высокого риска"
+    },
+    "labelsTable": {
+      "title_one": "Метка ({{count}})",
+      "title_few": "Метки ({{count}})",
+      "title_many": "Меток ({{count}})",
+      "title_other": "Меток ({{count}})",
+      "searchPh": "Поиск меток...",
+      "empty": "Пока нет локальных меток.",
+      "colAddress": "Адрес",
+      "colChain": "Цепочка",
+      "colLabel": "Метка",
+      "colCategory": "Категория",
+      "colRisk": "Риск",
+      "colSource": "Источник"
+    }
+  },
+  "osintSweep": {
+    "title": "OSINT-обход",
+    "subtitle": "Сканирование соцсетей, форумов, paste-сайтов, индекса darkweb и глубокого Reddit (посты + комментарии) для любого адреса",
+    "inputPlaceholder": "Введите любой крипто-адрес…",
+    "sweep": "Обойти",
+    "loading": "Опрос CryptoScamDB, Chainabuse, Ahmia darkweb, Reddit, X, Telegram, BitcoinTalk, GitHub, Pastebin, открытого веба…",
+    "errors": {
+      "failed": "Ошибка обхода"
+    },
+    "reddit": {
+      "all": "Reddit: посты + комментарии",
+      "posts": "Reddit: только посты",
+      "comments": "Reddit: только комментарии",
+      "off": "Reddit: быстро (без глубокого сканирования)"
+    },
+    "deepReddit": {
+      "title": "Глубокое исследование Reddit",
+      "postsWord": "постов",
+      "commentsWord": "комментариев совпало",
+      "showAll": "Показать все",
+      "showReddit": "Только Reddit"
+    },
+    "pivots": {
+      "label": "Пивот",
+      "nexus": "Исследовать в Nexus",
+      "addressIntel": "Анализ адреса"
+    },
+    "evidence": {
+      "totalHits_one": "{{count}} результат всего · обход {{at}}",
+      "totalHits_few": "{{count}} результата всего · обход {{at}}",
+      "totalHits_many": "{{count}} результатов всего · обход {{at}}",
+      "totalHits_other": "{{count}} результатов всего · обход {{at}}",
+      "cached": "в кэше",
+      "selectCase": "Выберите дело…",
+      "fileBtn": "Передать в хранилище доказательств",
+      "filedOk": "Передано как доказательство {{id}}… (цепочка {{hash}}…)",
+      "filedFail": "Ошибка передачи"
+    },
+    "hits": {
+      "empty": "Публичные упоминания не найдены. Отсутствие OSINT-совпадений само по себе является сигналом для расследования.",
+      "open": "открыть"
+    },
+    "sources": {
+      "additional": "Дополнительные источники (требуется API-ключ)",
+      "fallback": "Использован резервный поиск"
+    }
+  },
+  "predictive": {
+    "title": "Предиктивный ИИ",
+    "subtitle": "Обнаружение пред-преступлений — гибридные паттерны-предвестники · статистика популяционных аномалий · ML на исторических метках",
+    "inputPlaceholder": "Адрес для анализа на будущую преступную активность…",
+    "predict": "Прогноз",
+    "errors": {
+      "prediction": "ошибка прогноза",
+      "training": "ошибка обучения"
+    },
+    "model": {
+      "mlModel": "ML-модель",
+      "notTrained": "не обучена",
+      "heuristicMode": "эвристический + аномалийный режим",
+      "samples_one": "{{count}} образец / {{positives}} illicit",
+      "samples_few": "{{count}} образца / {{positives}} illicit",
+      "samples_many": "{{count}} образцов / {{positives}} illicit",
+      "samples_other": "{{count}} образцов / {{positives}} illicit",
+      "featureStore": "Хранилище признаков",
+      "profiles_one": "{{count}} профиль",
+      "profiles_few": "{{count}} профиля",
+      "profiles_many": "{{count}} профилей",
+      "profiles_other": "{{count}} профилей",
+      "baselineStats_one": "{{count}} базовая статистика",
+      "baselineStats_few": "{{count}} базовые статистики",
+      "baselineStats_many": "{{count}} базовых статистик",
+      "baselineStats_other": "{{count}} базовых статистик",
+      "predictions": "Прогнозы",
+      "logged_one": "{{count}} записан",
+      "logged_few": "{{count}} записано",
+      "logged_many": "{{count}} записано",
+      "logged_other": "{{count}} записано",
+      "fullAudit": "полный журнал аудита",
+      "retrain": "Переобучить из истории",
+      "trainMl": "Обучить ML-слой",
+      "training": "Обучение…",
+      "trainHint": "использует метки + санкции + данные о мошенничестве",
+      "trainedMsg": "Модель обучена: {{samples}} образцов ({{positives}} illicit), точность {{accuracy}}% [{{engine}}]",
+      "notTrainedMsg": "Не обучена — {{reason}}"
+    },
+    "verdict": {
+      "titlePrefix": "Композитная угроза:",
+      "primaryVector": "Основной вектор угрозы:",
+      "expectedWindow": "ожидаемое окно",
+      "addToMonitor": "→ Добавить в Монитор",
+      "traceFunds": "→ Трассировать средства",
+      "fullIntel": "→ Полная разведка"
+    },
+    "card": {
+      "confidence": "уверенность {{pct}}%",
+      "trend": "тренд: {{trend}}",
+      "layerPrecursors": "Предвестники",
+      "layerAnomaly": "Аномалия",
+      "layerMl": "ML-модель",
+      "evidence": "Цепочка доказательств ({{count}})",
+      "recommendedActions": "Рекомендуемые действия"
+    },
+    "history": {
+      "title": "Недавние прогнозы"
+    },
+    "types": {
+      "laundering": "Отмывание / Cash-out",
+      "rugpull": "Мошенничество / Rug-pull",
+      "trajectory": "Траектория риска",
+      "victim": "Таргетинг на жертв",
+      "launderingBlurb": "Подготовительное поведение до движения средств",
+      "rugpullBlurb": "Пред-преступные сигнатуры оператора и развёртывателя",
+      "trajectoryBlurb": "Прогноз эскалации на 7/30/90 дней",
+      "victimBlurb": "Dusting, отравление и разведка drainer"
+    }
+  },
+  "boards": {
+    "title": "Борды расследования",
+    "subtitle": "Холсты Crimewall - закрепляйте сущности, связывайте отношения, зонтируйте поток и передавайте расследования",
+    "newBoard": "Новый борд",
+    "stats": {
+      "boards_one": "{{count}} борд",
+      "boards_few": "{{count}} борда",
+      "boards_many": "{{count}} бордов",
+      "boards_other": "{{count}} бордов",
+      "pins_one": "{{count}} закрепление",
+      "pins_few": "{{count}} закрепления",
+      "pins_many": "{{count}} закреплений",
+      "pins_other": "{{count}} закреплений",
+      "connections_one": "{{count}} соединение",
+      "connections_few": "{{count}} соединения",
+      "connections_many": "{{count}} соединений",
+      "connections_other": "{{count}} соединений",
+      "openNotes": "открытых заметок о передаче"
+    },
+    "search": "Поиск бордов…",
+    "sort": {
+      "updated": "Последнее обновление",
+      "created": "Новейшие",
+      "name": "Имя А–Я",
+      "nodes": "Больше закреплений"
+    },
+    "create": {
+      "title": "Новый борд",
+      "namePh": "Название борда (напр. Alphapo hot-wallet drain - ETH leg)",
+      "descPh": "Описание (необязательно)",
+      "noCase": "Без связанного дела",
+      "submit": "Создать и открыть",
+      "cancel": "Отмена"
+    },
+    "folders": {
+      "label": "Папки",
+      "newFolder": "Новая папка",
+      "allBoards": "Все борды",
+      "namePh": "Название папки…",
+      "rename": "Переименовать",
+      "deleteFolder": "Удалить папку (борды сохраняются)"
+    },
+    "loading": "Загрузка бордов…",
+    "empty": {
+      "noMatch": "Борды не соответствуют «{{query}}».",
+      "noBoards": "Пока нет бордов. Создайте один, чтобы начать закреплять адреса, сущности и доказательства на постоянный crimewall.",
+      "noBoardsFolder": "В этой папке нет бордов. Создайте один, чтобы начать закреплять адреса, сущности и доказательства на постоянный crimewall."
+    },
+    "groups": {
+      "assigned": "Привязаны к делам ({{count}})",
+      "unassigned": "Без привязки ({{count}})",
+      "boardsCount_one": "· {{count}} борд",
+      "boardsCount_few": "· {{count}} борда",
+      "boardsCount_many": "· {{count}} бордов",
+      "boardsCount_other": "· {{count}} бордов"
+    },
+    "card": {
+      "pins_one": "{{count}} закрепление",
+      "pins_few": "{{count}} закрепления",
+      "pins_many": "{{count}} закреплений",
+      "pins_other": "{{count}} закреплений",
+      "links_one": "{{count}} связь",
+      "links_few": "{{count}} связи",
+      "links_many": "{{count}} связей",
+      "links_other": "{{count}} связей",
+      "updated": "обновлено {{date}}",
+      "duplicate": "Дублировать",
+      "delete": "Удалить",
+      "deleteConfirm": "Удалить борд «{{name}}»?"
+    }
+  },
+  "aiAgent": {
+    "title": "ИИ-следователь",
+    "subtitle": "Выберите дело для назначения ИИ. Он загрузит адреса, доказательства, риски и заметки дела в контекст, затем ответит на ваши вопросы и выполнит структурированные действия — обоснованно, с цитатами.",
+    "loadingCases": "Загрузка дел…",
+    "noCases": "Пока нет дел. Создайте одно в «Дела», затем вернитесь для назначения ИИ.",
+    "caseMeta": "{{addr}} адрес · {{evidence}} доказательств · {{notes}} заметок",
+    "assignToAi": "Назначить ИИ",
+    "changeCase": "Сменить дело",
+    "case": "Дело",
+    "assigning": "Назначение дела…",
+    "thinking": "Следователь размышляет…",
+    "chatPlaceholder": "Задавайте вопросы об адресах, доказательствах, пути отмывания, следующих шагах этого дела…",
+    "runAction": "▶ Выполнить: {{label}}",
+    "unparseable": "Модель вернула неразборчивый результат.",
+    "sidebar": {
+      "context": "Контекст дела",
+      "addresses": "Адреса",
+      "evidence": "Доказательства",
+      "notes": "Заметки",
+      "quickActions": "Быстрые действия",
+      "suggestedPrompts": "Предложения"
+    },
+    "status": {
+      "connected": "ИИ-провайдер подключён",
+      "notConfigured": "ИИ не настроен",
+      "notConfiguredHint": "ИИ не настроен — добавьте ключ провайдера в Настройках для включения ответов"
+    }
+  },
+  "caseDetail": {
+    "notFound": "Дело не найдено",
+    "allCases": "Все дела",
+    "created": "Создано {{date}}",
+    "addressCount_one": "{{count}} адрес",
+    "addressCount_few": "{{count}} адреса",
+    "addressCount_many": "{{count}} адресов",
+    "addressCount_other": "{{count}} адресов",
+    "forensicReport": "Криминалистический отчёт",
+    "exportReport": "Экспорт отчёта",
+    "addAddress": {
+      "title": "Добавить адрес",
+      "addrPh": "0x… / bc1… / T… / r… любая цепочка",
+      "labelPh": "Метка (необязательно)",
+      "addBtn": "Добавить"
+    },
+    "addresses": {
+      "title_one": "Адреса субъекта ({{count}})",
+      "title_few": "Адреса субъекта ({{count}})",
+      "title_many": "Адреса субъекта ({{count}})",
+      "title_other": "Адреса субъекта ({{count}})",
+      "empty": "Адреса пока не добавлены.",
+      "unscored": "без оценки",
+      "rescan": "Пересканировать",
+      "screen": "Скрининг",
+      "fullIntel": "Полная разведка",
+      "riskChain": "Цепочка",
+      "riskBalance": "Баланс",
+      "riskTxs": "Транзакции"
+    },
+    "notes": {
+      "title_one": "Заметки следователя ({{count}})",
+      "title_few": "Заметки следователя ({{count}})",
+      "title_many": "Заметки следователя ({{count}})",
+      "title_other": "Заметки следователя ({{count}})",
+      "placeholder": "Добавить заметку расследования…",
+      "addBtn": "Добавить"
+    },
+    "boards": {
+      "title_one": "Борды расследования ({{count}})",
+      "title_few": "Борды расследования ({{count}})",
+      "title_many": "Борды расследования ({{count}})",
+      "title_other": "Борды расследования ({{count}})",
+      "newBoard": "Новый борд",
+      "namePh": "Название борда (напр. Мозговой штурм — маршруты cashout)",
+      "createLink": "Создать и привязать к этому делу",
+      "loading": "Загрузка бордов…",
+      "empty": "К этому делу пока не привязаны борды.",
+      "emptyHint": "Создайте холст для мозгового штурма и привяжите его здесь.",
+      "pins_one": "{{count}} закрепление",
+      "pins_few": "{{count}} закрепления",
+      "pins_many": "{{count}} закреплений",
+      "pins_other": "{{count}} закреплений",
+      "links_one": "{{count}} связь",
+      "links_few": "{{count}} связи",
+      "links_many": "{{count}} связей",
+      "links_other": "{{count}} связей",
+      "comments_one": "{{count}} комментарий",
+      "comments_few": "{{count}} комментария",
+      "comments_many": "{{count}} комментариев",
+      "comments_other": "{{count}} комментариев"
+    },
+    "taskManagement": "Управление задачами",
+    "auditLog": "Журнал аудита",
+    "backToCase": "Вернуться к делу",
+    "team": {
+      "title": "Команда ({{count}})",
+      "reviewer": "Ревизор",
+      "fullAccess": "Полный доступ",
+      "rev": "Рев",
+      "full": "Полный",
+      "changeRole": "Изменить роль",
+      "removeFromCase": "Удалить из дела",
+      "toggleRole": "Переключить роль",
+      "remove": "Удалить",
+      "removeConfirm": "Удалить участника?",
+      "selectMember": "Выберите участника команды для назначения:",
+      "allAssigned": "Все участники команды уже назначены.",
+      "allAssignedShort": "Все участники назначены.",
+      "role": "Роль:",
+      "assign": "Назначить",
+      "cancel": "Отмена"
+    }
+  },
+  "caseTask": {
+    "title": "Управление задачами",
+    "pageTitle": "{{name}} — Управление задачами",
+    "caseNotFound": "Дело не найдено",
+    "backToCase": "Вернуться к делу",
+    "auditLog": "Журнал аудита",
+    "newTask": "Новая задача",
+    "tabs": {
+      "tasks": "Задачи",
+      "audit": "Аудит"
+    },
+    "stats": {
+      "open": "{{count}} открытых",
+      "inProgress": "{{count}} в процессе",
+      "done": "{{count}} завершено",
+      "overdue": "{{count}} просрочено",
+      "members": "{{count}} участников"
+    },
+    "filters": {
+      "searchPh": "Поиск задач...",
+      "allStatus": "Все статусы",
+      "allPriority": "Все приоритеты",
+      "allAssignees": "Все исполнители",
+      "clear": "Сбросить фильтры"
+    },
+    "status": {
+      "open": "Открыта",
+      "in_progress": "В процессе",
+      "done": "Завершена",
+      "closed": "Закрыта"
+    },
+    "priority": {
+      "low": "Низкий",
+      "medium": "Средний",
+      "high": "Высокий",
+      "urgent": "Срочный"
+    },
+    "taskCard": {
+      "assigned": "Назначено:",
+      "overdue": "Просрочено"
+    },
+    "detail": {
+      "assignedTo": "Назначено:",
+      "createdBy": "Создано:",
+      "due": "Срок:",
+      "created": "Создано:",
+      "delete": "Удалить",
+      "deleteConfirm": "Удалить эту задачу?",
+      "chat": "Чат",
+      "deliverables": "Результаты ({{count}})",
+      "noMessages": "Нет сообщений. Начните обсуждение.",
+      "typeMsgPh": "Введите сообщение...",
+      "noDeliverables": "Нет отправленных результатов.",
+      "review": "Проверка:",
+      "reviewNotePh": "Заметка к проверке...",
+      "approve": "Одобрить",
+      "revise": "Доработать",
+      "reject": "Отклонить",
+      "submit": "Отправить",
+      "cancel": "Отмена",
+      "titlePh": "Заголовок *",
+      "descPh": "Описание",
+      "contentPh": "Содержание / результаты...",
+      "submitDeliverable": "Отправить результат"
+    },
+    "create": {
+      "title": "Назначить новую задачу",
+      "titleLabel": "Заголовок *",
+      "taskTitlePh": "Название задачи",
+      "descLabel": "Описание",
+      "taskDescPh": "Описание задачи",
+      "assigneeLabel": "Исполнитель *",
+      "selectAssignee": "Выберите исполнителя",
+      "priorityLabel": "Приоритет",
+      "dueDateLabel": "Срок выполнения",
+      "createBtn": "Создать задачу",
+      "cancel": "Отмена"
+    }
+  },
+  "victimReport": {
+    "title": "Заявления жертв и разведка мошенничеств",
+    "subtitle": "Приём • Кластеризация • Экспорт для правоохранительных органов",
+    "submitReport": "Подать",
+    "tabs": {
+      "reports": "Заявления жертв",
+      "intel": "Разведка мошенничеств"
+    },
+    "stats": {
+      "totalReports": "Всего заявлений",
+      "uniqueScammers": "Уникальных мошенников",
+      "totalDamage": "Общий ущерб",
+      "chainsAffected": "Затронутые цепочки"
+    },
+    "form": {
+      "title": "Подать заявление жертвы",
+      "scamType": "Тип мошенничества *",
+      "chain": "Цепочка *",
+      "scammerAddr": "Адрес мошенника *",
+      "scammerAddrPh": "0x… или bc1… или Tron…",
+      "amountLost": "Сумма потерь (USD)",
+      "token": "Токен / Актив",
+      "tokenPh": "ETH, USDT, BTC…",
+      "incidentDate": "Дата инцидента",
+      "victimAddr": "Адрес жертвы (необязательно)",
+      "victimAddrPh": "Ваш адрес кошелька",
+      "description": "Описание мошенничества",
+      "descriptionPh": "Опишите, как произошло мошенничество, какие обещания давались, какие каналы связи использовались…",
+      "txHashes": "Хэши транзакций (по одному на строку или через запятую)",
+      "contactInfo": "Контактная информация (только для следователей)",
+      "yourName": "Ваше имя",
+      "email": "E-mail",
+      "jurisdiction": "Юрисдикция (страна / регион)",
+      "jurisdictionPh": "напр. Россия / Москва",
+      "tags": "Теги (через запятую)",
+      "tagsPh": "romance, crypto, 2024",
+      "linkCase": "Привязать к ID дела",
+      "linkCasePh": "UUID дела (необязательно)",
+      "cancel": "Отмена",
+      "submit": "Подать заявление",
+      "submitting": "Отправка…",
+      "addrRequired": "Адрес мошенника обязателен",
+      "privacyNote": "Контактные данные хранятся надёжно и передаются только следователям, работающим над этим делом."
+    },
+    "report": {
+      "scammerAddr": "Адрес мошенника",
+      "victimAddr": "Адрес жертвы",
+      "description": "Описание",
+      "txHashes": "Хэши транзакций",
+      "analystNotes": "Заметки аналитика",
+      "statusLabel": "Статус:",
+      "delete": "Удалить",
+      "deleteConfirm": "Удалить это заявление жертвы? Действие необратимо."
+    },
+    "status": {
+      "open": "Открыто",
+      "underReview": "На рассмотрении",
+      "escalated": "Эскалировано",
+      "referred": "Передано в ПР",
+      "closed": "Закрыто"
+    },
+    "cluster": {
+      "victims_one": "{{count}} жертва",
+      "victims_few": "{{count}} жертвы",
+      "victims_many": "{{count}} жертв",
+      "victims_other": "{{count}} жертв",
+      "filterReports": "Фильтровать заявления для этого адреса"
+    },
+    "filters": {
+      "byAddrPh": "Фильтр по адресу мошенника…",
+      "allTypes": "Все типы",
+      "allStatuses": "Все статусы",
+      "allChains": "Все цепочки",
+      "clear": "Очистить",
+      "selectAll_one": "Выбрать все ({{count}})",
+      "selectAll_few": "Выбрать все ({{count}})",
+      "selectAll_many": "Выбрать все ({{count}})",
+      "selectAll_other": "Выбрать все ({{count}})",
+      "deselectAll": "Снять выделение",
+      "exportSelected": "Экспорт {{count}} выбран.",
+      "reportCount_one": "{{count}} заявление всего",
+      "reportCount_few": "{{count}} заявления всего",
+      "reportCount_many": "{{count}} заявлений всего",
+      "reportCount_other": "{{count}} заявлений всего",
+      "loading": "Загрузка…"
+    },
+    "empty": {
+      "noReports": "Заявления не найдены",
+      "tryFilters": "Попробуйте изменить фильтры.",
+      "submitFirst": "Подайте первое заявление жертвы, чтобы начать отслеживать мошенническую активность."
+    },
+    "intel": {
+      "clusters": "Кластеры мошенников",
+      "clustersByDamage_one": "{{count}} кластер по ущербу",
+      "clustersByDamage_few": "{{count}} кластера по ущербу",
+      "clustersByDamage_many": "{{count}} кластеров по ущербу",
+      "clustersByDamage_other": "{{count}} кластеров по ущербу",
+      "noClusters": "Пока нет кластеров. Подавайте заявления жертв для построения разведки.",
+      "byScamType": "По типу мошенничества",
+      "byStatus": "По статусу",
+      "topScammers": "Топ мошенников по ущербу",
+      "recentReports": "Недавние заявления",
+      "ongoing": "продолжается"
+    }
+  },
+  "boardCanvas": {
+    "loadFailed": "Ошибка загрузки борда",
+    "backToBoards": "Назад к бордам",
+    "allBoards": "Все борды",
+    "saved": "сохранено · v{{version}}",
+    "saving": "сохранение…",
+    "saveError": "ошибка сохранения",
+    "unsaved": "несохранённые изменения",
+    "addPlaceholder": "Добавить адрес или хэш tx…",
+    "busy": {
+      "autoConnecting": "Авто-подключение…",
+      "expanding": "Расширение {{addr}}…",
+      "fetchingTx": "Получение tx {{hash}}…"
+    },
+    "toolbar": {
+      "entityPin": "Добавить пин сущности crimewall",
+      "selectMode": "Выбрать / переместить (Esc)",
+      "linkMode": "Красная нить: кликните два пина для связи (L)",
+      "zoneMode": "Нарисовать зону расследования (перетаскивание по холсту)",
+      "autoLayout": "Авто-раскладка",
+      "forceLayout": "Раскладка по силам",
+      "timelineLayout": "Хронология (по времени tx)",
+      "gridLayout": "Сетка",
+      "hierarchicalLayout": "Иерархическая (дерево потоков)",
+      "fitView": "Уместить в вид (F)",
+      "undo": "Отменить (Ctrl+Z)",
+      "redo": "Повторить (Ctrl+Shift+Z)",
+      "fiatToggle": "Переключить USD ↔ нативный",
+      "addNote": "Добавить заметку-аннотацию",
+      "legend": "Легенда",
+      "exportPng": "Экспорт холста как PNG-улику",
+      "nexus": "Открыть {{subject}} в графе расследования Nexus",
+      "share": "Поделиться бордом",
+      "comments": "Комментарии и заметки о передаче"
+    },
+    "mode": {
+      "link": "Режим связи: кликните два пина для создания отношения (Esc для выхода)",
+      "zone": "Режим зоны: перетащите по холсту для рисования именованной зоны расследования (Esc для выхода)"
+    },
+    "search": {
+      "placeholder": "Поиск по холсту…",
+      "previous": "Предыдущий",
+      "next": "Следующий"
+    },
+    "cluster": {
+      "namePh": "Название кластера (напр. «Группа подозреваемых кошельков A»)"
+    },
+    "context": {
+      "expand": "Расширить на 1 прыжок",
+      "split": "Разделить транзакцию",
+      "delete": "Удалить",
+      "groupSelection": "Сгруппировать выделение",
+      "ungroup": "Разгруппировать",
+      "deleteZone": "Удалить зону"
+    },
+    "legend": {
+      "title": "Легенда"
+    },
+    "node": {
+      "labelPh": "напр. Депозитный кошелёк жертвы",
+      "notePh": "Свободная заметка аналитика…",
+      "socialPh": "@псевдоним / URL профиля",
+      "attrKey": "ключ",
+      "attrValue": "значение"
+    },
+    "edge": {
+      "labelPh": "напр. общий KYC-селфи"
+    },
+    "zone": {
+      "labelPh": "напр. «Расслоение», «Cash-out», «Фонды жертв»",
+      "nameLabel": "Название зоны",
+      "colorLabel": "Цвет зоны"
+    },
+    "share": {
+      "title": "Поделиться бордом",
+      "public": "Публично",
+      "private": "Приватно",
+      "passwordPh": "Пароль для внешней стороны…",
+      "snapshot": "Снимок (заморожен)",
+      "noExpiry": "Без истечения",
+      "hours": "{{hours}}ч",
+      "create": "Создать ссылку",
+      "created": "Ссылка только для чтения создана",
+      "encrypted": "снимок зашифрован при хранении",
+      "copy": "Копировать",
+      "copied": "Скопировано",
+      "revoke": "Отозвать",
+      "noLinks": "Нет активных ссылок."
+    },
+    "comments": {
+      "title": "Комментарии и заметки о передаче",
+      "resolve": "Решить",
+      "placeholder": "Заметка о передаче для команды…",
+      "add": "Добавить заметку"
+    }
+  },
+  "nexusGraph": {
+    "title": "Граф Nexus",
+    "subtitle": "Силовой граф расследования · перетаскивайте узлы · правый клик для действий · двойной клик для закрепления",
+    "searchPlaceholder": "Адрес или ENS…",
+    "loading": "Построение графа расследования…",
+    "empty": "Введите адрес кошелька выше, чтобы построить граф расследования",
+    "phases": {
+      "intel": "Этап 1 · Разведка адреса",
+      "trace": "Этап 2 · Трассировка транзакций",
+      "nexus": "Этап 3 · Анализ графа Nexus"
+    },
+    "stats": {
+      "nodes": "Узлы",
+      "edges": "Рёбра",
+      "risk": "Риск"
+    },
+    "controls": {
+      "layout": "Раскладка",
+      "flow": "Поток (трассировка средств)",
+      "force": "Силовая физика",
+      "community": "Сообщества",
+      "radial": "Радиальная",
+      "nodeSize": "Метрика размера узла",
+      "risk": "Риск",
+      "degree": "Степень",
+      "volume": "Объём",
+      "uniform": "Однородный",
+      "traceLines": "Линии трассировки",
+      "bundled": "Связанные пары",
+      "traceScope": "Область трассировки",
+      "expand": "Расширить",
+      "trace": "Трассировать",
+      "restore": "Восстановить исходный граф",
+      "expandSelected": "Расширить выбранный кошелёк",
+      "legend": "Переключить легенду на холсте"
+    },
+    "context": {
+      "copyAddress": "Копировать адрес",
+      "fullIntel": "Полная разведка адреса",
+      "expand1hop": "Расширить на 1 прыжок в обе стороны",
+      "deepExpand": "Глубокое расширение на 2 прыжка",
+      "traceIn": "Трассировать только входящие",
+      "traceOut": "Трассировать только исходящие"
+    },
+    "detail": {
+      "risk": "Риск",
+      "degree": "Степень",
+      "volume": "Объём",
+      "expand1hop": "Расширить на 1 прыжок",
+      "expanding": "Расширение…",
+      "deepExpand": "Глубокое расширение",
+      "latestTrace": "Открыть подграф последней трассировки",
+      "valueFlow": "Поток стоимости",
+      "txFlows": "Связанные потоки транзакций",
+      "noTxEdges": "К этому узлу не привязано рёбер транзакций.",
+      "noCorrEdges": "К этому узлу не привязано поведенческих корреляций.",
+      "ownership": "Зацепки кластеров владения",
+      "links": "Сильнейшие поведенческие связи",
+      "paths": "Пути от источника",
+      "pivots": "Очередь пивотов",
+      "bridges": "Кошельки-мосты",
+      "openDetails": "Открыть детали",
+      "noPaths": "Пути не найдены.",
+      "noBridges": "Кошельки-мосты не найдены."
+    },
+    "demix": {
+      "title": "Агент Nexus-демиксинга",
+      "subtitle": "Выполняет демиксинг миксеров, Tornado, мостов, обмена цепочками и AML над текущим графом Nexus, затем накладывает связи-кандидаты на холст.",
+      "runGraph": "Запустить на графе",
+      "runSelected": "Запустить на выбранном",
+      "empty": "Постройте граф Nexus, затем запустите Агент демиксинга по всему графу или по окрестности выбранного кошелька."
+    },
+    "forensics": {
+      "title": "Встроенная локальная криминалистика",
+      "runSeed": "Запустить от источника",
+      "runSelected": "Запустить на выбранном"
+    },
+    "identity": {
+      "title": "Линза идентичности",
+      "buildSeed": "Построить от источника",
+      "buildSelected": "Построить от выбранного",
+      "copyAddress": "Копировать адрес",
+      "unknownWallet": "Неизвестный кошелёк",
+      "resolving": "Разрешение…"
+    }
+  },
+  "sanctions": {
+    "title": "Скрининг санкций",
+    "subtitle": "Проверка по OFAC, ЕС, ООН, UK",
+    "inputPlaceholder": "Адрес…",
+    "screen": "Проверить",
+    "search": "Поиск",
+    "clear": "Очистить",
+    "refresh": "Обновить",
+    "noMatches": "Не найдено.",
+    "matchScore": "{{pct}}% совпадение",
+    "viewDetails": "Подробности →",
+    "copyAddress": "Копировать",
+    "explorer": "Эксплорер",
+    "close": "Закрыть",
+    "listedOn": "с {{date}}",
+    "aka": "он же: {{aliases}}"
+  },
+  "attribution": {
+    "title": "Атрибуция и происхождение",
+    "subtitle": "Атрибуция с provenance",
+    "lookupPlaceholder": "Введите адрес…",
+    "lookup": "Найти",
+    "addAttribution": "Добавить",
+    "noResults": "Не найдено.",
+    "confidence": "доверие",
+    "source": "Источник:",
+    "by": "Кем:"
+  },
+  "attrSubmissions": {
+    "title": "Заявки на атрибуцию",
+    "subtitle": "Цикл роста меток",
+    "tabs": {
+      "pending": "Ожидают",
+      "approved": "Одобрены",
+      "rejected": "Отклонены"
+    },
+    "newSubmission": "Новая заявка",
+    "submit": "Подать",
+    "cancel": "Отмена",
+    "approve": "Одобрить",
+    "reject": "Отклонить",
+    "reviewNotes": "Заметки…",
+    "noSubmissions": "Нет {{status}}."
+  },
+  "regulatory": {
+    "title": "Регуляторная отчётность",
+    "subtitle": "SAR, CTR, Travel Rule, KYV",
+    "tabs": {
+      "sar": "SAR",
+      "ctr": "CTR",
+      "travel": "Travel Rule",
+      "kyv": "KYV"
+    },
+    "export": "Экспорт .md",
+    "generate": "Создать"
+  },
+  "demix": {
+    "title": "Движок AML демиксинга",
+    "subtitle": "Демиксинг",
+    "tabs": {
+      "mixer": "Миксер",
+      "bridge": "Мост",
+      "aml": "AML"
+    },
+    "run": "Выполнить",
+    "noResults": "Нет результатов."
+  },
+  "comply": {
+    "title": "CrypTX Comply — Комплаенс",
+    "subtitle": "Мониторинг GENIUS-Act.",
+    "newProgram": "Новая",
+    "noPrograms": "Нет программ."
+  },
+    "batchD": {
+      "contractForensics": {
+        "title": "Контрактная криминалистика",
+        "subtitle": "Статический анализ смарт-контрактов"
+      },
+      "launderingTrace": {
+        "title": "След отмывания",
+        "subtitle": "Обнаружение расслоения: отслеживание через миксеры, мосты"
+      },
+      "courtReadiness": {
+        "title": "Судебная готовность",
+        "subtitle": "Оценка полноты расследования"
+      },
+      "recoveryOps": {
+        "title": "Заморозка и возврат",
+        "subtitle": "Координация заморозки активов и возврата"
+      },
+      "freezeDesk": {
+        "title": "Стол заморозки",
+        "subtitle": "Управление запросами на заморозку"
+      },
+      "threatLandscape": {
+        "title": "Ландшафт угроз блокчейна",
+        "subtitle": "Ленты разведки угроз в реальном времени"
+      },
+      "nftTron": {
+        "title": "NFT / TON Sentinel",
+        "subtitle": "Обнаружение wash-трейдинга NFT и разведка TON"
+      },
+      "victimPortal": {
+        "title": "Сообщить о мошенничестве",
+        "subtitle": "Публичный портал для жертв"
+      },
+      "aboutAuthor": {
+        "title": "О проекте",
+        "subtitle": "О CrypTX и команде"
+      },
+      "docs": {
+        "title": "Документация",
+        "subtitle": "Освойте CrypTX — руководства, API"
+      },
+      "profile": {
+        "title": "Профиль следователя",
+        "subtitle": "Настройки аккаунта и история"
+      }
+    }
+}

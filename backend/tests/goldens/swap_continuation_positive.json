@@ -1,0 +1,33 @@
+{
+  "continuation_matches": [
+    {
+      "confidence": 0.9,
+      "delay_seconds": 4153,
+      "detail": "Probable continuation on btc: $39,288 out \u2248 $40,849 in within 69 min.",
+      "entry_tx": "0xin1",
+      "entry_usd": 40849.29355819867,
+      "output_chain": "btc",
+      "output_tx": "0xout1",
+      "output_usd": 39287.72761425515,
+      "service": "THORChain"
+    }
+  ],
+  "dead_end": false,
+  "disclaimer": "Service detection uses a seed registry of contracts/labels; deposit addresses rotate. Value/time re-matching yields leads, not proof of the same funds.",
+  "entry_count": 1,
+  "subject": "0xa1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+  "swap_entries": [
+    {
+      "deposit_address": "0xc145990e84155416144c532e31f89b840ca8c2ce",
+      "kyc": false,
+      "note": "Decentralized cross-chain swap; native-asset settlement, no custodial KYC.",
+      "service": "THORChain",
+      "service_type": "cross_chain_swap",
+      "timestamp": 1700000000,
+      "token": "",
+      "tx_hash": "0xin1",
+      "value_usd": 40849.29355819867
+    }
+  ],
+  "verdict": "1 swap entry detected \u2014 continuation re-matched on the output side."
+}

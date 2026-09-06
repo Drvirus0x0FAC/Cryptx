@@ -1,0 +1,262 @@
+{
+  "mobileNav": {
+    "menu": "More",
+    "close": "Close menu",
+    "openFullMenu": "Open full menu",
+    "investigator": "Investigator",
+    "tabs": {
+      "home": "Home",
+      "nexus": "Nexus",
+      "alerts": "Alerts",
+      "cases": "Cases"
+    }
+  },
+  "boot": {
+    "tagline": "Blockchain Cyber Crime Investigation",
+    "threatRadar": "Threat Radar",
+    "systemBootLog": "System Boot Log",
+    "statusReady": "READY",
+    "statusInit": "INIT",
+    "steps": {
+      "kernel": "Initializing secure kernel",
+      "chains": "Loading chain oracles",
+      "aml": "Calibrating AML engine",
+      "evidence": "Mounting evidence vault",
+      "tunnel": "Establishing secure tunnel",
+      "ai": "Loading threat intelligence",
+      "ready": "System ready"
+    },
+    "ok": "[OK]",
+    "pending": "[···]",
+    "bootSequence": "Boot Sequence",
+    "allSystemsNominal": "All systems nominal",
+    "initializing": "Initializing…",
+    "startCrypTX": "Start CrypTX",
+    "readDocs": "Read CrypTX Docs",
+    "secureBoot": "CrypTX Secure Boot",
+    "encryptedSession": "Encrypted Session",
+    "zeroTrust": "Zero-Trust"
+  },
+  "errorBoundary": {
+    "title": "Interface Render Error",
+    "message": "A screen module failed while rendering. The app caught it instead of showing a blank page.",
+    "returnToApp": "Return to App"
+  },
+  "riskBadge": {
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "severe": "Severe",
+    "critical": "Critical"
+  },
+  "general": {
+    "copied": "Copied to clipboard",
+    "copyFailed": "Copy failed"
+  },
+  "shared": {
+    "counterparty": {
+      "title": "Counterparties",
+      "empty": "No counterparties in window.",
+      "noPredictions": "No predictions available.",
+      "rateLimit": "Public explorers rate-limit aggressively. Retry shortly, or add an API key in Settings for higher limits.",
+      "colEntity": "Entity",
+      "colChains": "Chains",
+      "colTx": "Tx",
+      "colNative": "Native",
+      "colUsd": "USD",
+      "sanctioned": "SANCTIONED",
+      "openIntel": "Open address intelligence"
+    },
+    "deepTrace": {
+      "deepBtc": "Deep Bitcoin Trace",
+      "deepSol": "Deep Solana Trace",
+      "btcHint": "UTXO multi-hop (peel-chain)",
+      "solHint": "SPL instruction-level",
+      "run": "Run Deep Trace",
+      "colNodes": "Nodes",
+      "colEdges": "Edges",
+      "colHops": "Hops/Txs",
+      "source": "Source",
+      "target": "Target",
+      "value": "Value"
+    },
+    "deliveryChannels": {
+      "title": "Delivery Channels",
+      "namePh": "Channel name (e.g. SOC Webhook)",
+      "webhook": "Webhook (HTTP POST)",
+      "telegram": "Telegram Bot",
+      "email": "Email (SMTP)",
+      "sse": "Browser SSE only",
+      "empty": "No delivery channels configured. Alerts will only show in-app.",
+      "recent": "Recent Deliveries"
+    },
+    "export": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "fincen": "FinCEN XML",
+      "stix": "STIX 2.1",
+      "misp": "MISP",
+      "failed": "Export failed:"
+    },
+    "feedIngestion": {
+      "title": "Address Intelligence Imports",
+      "newImport": "New Import",
+      "noPending": "No pending rows.",
+      "noImports": "No imports yet."
+    },
+    "feedSync": {
+      "empty": "No feeds synced yet. Click \"Sync Now\".",
+      "acknowledge": "Acknowledge"
+    },
+    "insights": {
+      "title": "Investigator Insights",
+      "refresh": "Refresh insights",
+      "analyzing": "Analyzing behavioral profile…",
+      "cashoutRisk": "Cash-out risk",
+      "riskTrajectory": "Risk trajectory",
+      "vsPopulation": "vs. analyzed population",
+      "addresses": "addresses"
+    },
+    "mixer": {
+      "riskSignals": "Risk Signals"
+    },
+    "nexusIntel": {
+      "members": "Members",
+      "colFrom": "From",
+      "colTo": "To",
+      "colValue": "Value",
+      "colToken": "Token",
+      "valueTimeMatch": "Value-Time Match",
+      "capabilities": "Investigation Capabilities",
+      "noCrossChain": "No cross-chain activity detected in this graph"
+    },
+    "riskBadge": {
+      "clean": "CLEAN",
+      "entity": "ENTITY",
+      "bridgeSwap": "BRIDGE/SWAP",
+      "scam": "SCAM",
+      "mixer": "MIXER",
+      "sanctioned": "SANCTIONED",
+      "error": "ERROR"
+    },
+    "riskGauge": {
+      "clean": "Clean",
+      "low": "Low Risk",
+      "medium": "Medium",
+      "high": "High Risk",
+      "critical": "Critical",
+      "sanctioned": "Sanctioned",
+      "error": "Error"
+    },
+    "riskSignals": {
+      "empty": "No risk signals detected"
+    },
+    "sanctions": {
+      "sanctionedAddress": "SANCTIONED ADDRESS",
+      "indirect": "Indirect OFAC Exposure",
+      "notOnList": "Not on sanctions list",
+      "noInteractions": "no sanctioned-entity interactions detected"
+    },
+    "savedInv": {
+      "title": "Saved Investigations",
+      "namePh": "Investigation name (optional)",
+      "empty": "No saved investigations yet."
+    },
+    "timeTravel": {
+      "title": "Time-Travel (Historical State)",
+      "balanceEvolution": "Balance Evolution",
+      "cumulativeIn": "Cumulative IN",
+      "cumulativeOut": "Cumulative OUT",
+      "balances": "Balances",
+      "counterparties": "Counterparties known at that time:"
+    },
+    "tokenHoldings": {
+      "title": "Token Holdings"
+    },
+    "tonProfile": {
+      "copy": "Copy",
+      "testnet": "testnet",
+      "bounceable": "bounceable",
+      "raw": "raw",
+      "owner": "Owner:",
+      "noJettons": "No jetton (token) balances.",
+      "unverified": "unverified",
+      "noNfts": "No NFTs held by this account.",
+      "noActivity": "No recent on-chain activity.",
+      "tonscan": "TONScan Profile",
+      "contract": "contract:",
+      "sale": "SALE",
+      "sold": "SOLD"
+    },
+    "traceGraph": {
+      "walletDetails": "Wallet Details",
+      "riskLevel": "Risk Level",
+      "riskScore": "Risk Score",
+      "address": "Address",
+      "chain": "Chain",
+      "hop": "Hop",
+      "firstSeen": "First Seen",
+      "lastSeen": "Last Seen",
+      "entityAttr": "Entity Attribution",
+      "riskFlags": "Risk Flags",
+      "flagged": "Flagged as suspicious",
+      "highlightPath": "Highlight fund path (seed → here)",
+      "fullIntel": "Full Address Intel",
+      "explorer": "View on Explorer",
+      "clickDetails": "Click for full details",
+      "minimap": "MINI-MAP",
+      "findPh": "Find address/entity…",
+      "toggleParticles": "Toggle animated value particles",
+      "exportPng": "Export PNG",
+      "transfer": "TRANSFER"
+    },
+    "txTable": {
+      "openDetails": "Open transaction details",
+      "colDir": "Dir",
+      "colTime": "Time",
+      "colHash": "Hash",
+      "colFrom": "From",
+      "colTo": "To",
+      "colValue": "Value",
+      "empty": "No transactions available."
+    },
+    "addToCase": {
+      "linkCase": "Link this board to a case",
+      "noCases": "No cases yet. Create one."
+    },
+    "caseQa": {
+      "title": "Ask About This Case",
+      "subtitle": "AI grounded in case evidence",
+      "placeholder": "Ask about this case…"
+    },
+    "exposure": {
+      "directExposure": "Direct Exposure to Risky Entities",
+      "risky": "Risky",
+      "total": "Total",
+      "noDirectExposure": "No direct exposure to known risky counterparties in available transaction history."
+    },
+    "coverage": {
+      "title": "CrypTX Coverage",
+      "blockchains": "blockchains",
+      "tokens": "tokens",
+      "liveTraceable": "live-traceable",
+      "chains": "Chains",
+      "searchPh": "Search chains or tokens...",
+      "trace": "trace",
+      "liveTraceLegend": "Live trace = real-time fund-flow tracing supported",
+      "catNative": "Native L1/L2",
+      "catStablecoin": "Stablecoins",
+      "catWrapped": "Wrapped Assets",
+      "catLst": "Staked / LST",
+      "catDefi": "DeFi / Gov",
+      "catMeme": "Meme / Risk"
+    },
+    "defiThreat": {
+      "title": "DeFi Threat Detection",
+      "stablecoin": "Stablecoin Actions",
+      "flashLoan": "Flash-Loan Attacks",
+      "rugPull": "Rug Pulls",
+      "mevBots": "MEV Bots"
+    }
+  }
+}

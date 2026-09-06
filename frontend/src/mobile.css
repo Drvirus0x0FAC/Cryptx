@@ -1,0 +1,314 @@
+/*
+ * CrypTX Mobile Responsive Layer
+ *
+ * Complements the responsive media queries in index.css with mobile-specific
+ * components: bottom tab bar, slide-in drawer, and touch optimizations.
+ *
+ * The main responsive breakpoints (topbar, grids, cockpit pages, etc.) are
+ * handled in index.css. This file focuses on mobile-only UI components and
+ * performance optimizations.
+ */
+
+/* ── Bottom tab bar (mobile only) ───────────────────────────────────────────── */
+.cryptx-mobile-nav {
+  display: none;
+}
+
+.cryptx-mobile-drawer {
+  display: none;
+}
+
+.cryptx-mobile-drawer-backdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Show the bottom nav on phones */
+  .cryptx-mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: rgba(10, 10, 15, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 82, 125, 0.2);
+    z-index: 50;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 4px;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .cryptx-mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: rgb(var(--text-muted));
+    font-size: 9px;
+    font-weight: 600;
+    padding: 6px 8px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: color 0.15s;
+    text-decoration: none;
+    position: relative;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .cryptx-mobile-nav-item.active {
+    color: rgb(var(--accent-red));
+  }
+
+  .cryptx-mobile-nav-item:active {
+    opacity: 0.7;
+  }
+
+  .cryptx-mobile-nav-item svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .cryptx-mobile-nav-item span {
+    font-size: 9px;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .cryptx-mobile-nav-badge {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    background: rgb(var(--accent-red));
+    color: white;
+    border-radius: 999px;
+    font-size: 8px;
+    min-width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+    font-weight: 700;
+  }
+
+  /* Slide-in drawer for full nav */
+  .cryptx-mobile-drawer {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -85%;
+    width: 85%;
+    max-width: 320px;
+    height: 100vh;
+    height: 100dvh;
+    background: rgb(var(--bg-primary));
+    border-right: 1px solid rgb(var(--bg-border) / 0.5);
+    z-index: 60;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transition: left 0.25s ease;
+    padding: 16px;
+  }
+
+  .cryptx-mobile-drawer.open {
+    left: 0;
+  }
+
+  .cryptx-mobile-drawer-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 55;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .cryptx-mobile-drawer-backdrop.open {
+    display: block;
+  }
+
+  /* Main content: add bottom padding so the bottom nav doesn't cover content */
+  .app-content {
+    padding-bottom: 68px;
+  }
+
+  /* ── Performance: disable heavy decorative animation on mobile ── */
+  .cyber-ambient {
+    display: none;
+  }
+
+  .home-bg {
+    display: none;
+  }
+
+  /* Disable non-essential CSS animations to save battery */
+  .cyber-orbit,
+  .cyber-flow,
+  .cyber-packet,
+  .cyber-scan,
+  .cyber-ticker,
+  .cyber-hash-console,
+  .cyber-crypto-stack,
+  .cyber-candle-panel,
+  .cyber-case-panel,
+  .cyber-radar-panel,
+  .cyber-hex-chain,
+  .cyber-symbol-cloud {
+    display: none;
+  }
+}
+
+/* ── Light mode mobile nav ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  html.light .cryptx-mobile-nav {
+    background: rgba(255, 255, 255, 0.97);
+    border-top-color: rgb(var(--bg-border));
+  }
+
+  html.light .cryptx-mobile-nav-item {
+    color: rgb(var(--text-muted));
+  }
+
+  html.light .cryptx-mobile-nav-item.active {
+    color: rgb(var(--accent-red));
+  }
+
+  html.light .cryptx-mobile-drawer {
+    background: #ffffff;
+    border-right-color: rgb(var(--bg-border));
+  }
+
+  html.light .cryptx-mobile-drawer-backdrop {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ── Small phone adjustments ────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .cryptx-mobile-nav {
+    height: 56px;
+    padding: 0 2px;
+  }
+
+  .cryptx-mobile-nav-item {
+    font-size: 8px;
+    padding: 4px 6px;
+    gap: 1px;
+  }
+
+  .cryptx-mobile-nav-item svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cryptx-mobile-nav-item span {
+    font-size: 8px;
+  }
+
+  .cryptx-mobile-drawer {
+    max-width: 280px;
+    padding: 12px;
+  }
+
+  .app-content {
+    padding-bottom: 62px;
+  }
+}
+
+/* ── Landscape phone ────────────────────────────────────────────────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .cryptx-mobile-nav {
+    height: 48px;
+  }
+
+  .cryptx-mobile-nav-item svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .cryptx-mobile-nav-item span {
+    display: none;
+  }
+
+  .app-content {
+    padding-bottom: 52px;
+  }
+}
+
+/* ── Touch-friendly: ensure minimum tap targets ─────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a,
+  [role="button"],
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 36px;
+    min-width: 36px;
+  }
+
+  /* Ensure nav links are tappable */
+  .palette-link {
+    min-height: 40px;
+  }
+
+  .nav-expand-btn {
+    min-height: 36px;
+    padding: 0 12px;
+  }
+
+  /* Larger form controls on touch devices */
+  .input,
+  input[type="text"],
+  input[type="search"],
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  select,
+  textarea {
+    font-size: 16px; /* prevents iOS zoom-on-focus */
+  }
+}
+
+/* ── Pause animations when tab hidden (all viewports — perf) ────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Print styles ───────────────────────────────────────────────────────────── */
+@media print {
+  .cryptx-mobile-nav,
+  .cryptx-mobile-drawer,
+  .cryptx-mobile-drawer-backdrop,
+  .app-topbar,
+  .cyber-ambient,
+  .module-island-wrap,
+  .module-palette {
+    display: none !important;
+  }
+
+  .app-content {
+    padding: 0;
+    background: white !important;
+  }
+
+  .card {
+    break-inside: avoid;
+    border: 1px solid #ccc !important;
+    background: white !important;
+    box-shadow: none !important;
+  }
+}

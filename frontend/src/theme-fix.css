@@ -1,0 +1,1124 @@
+/*
+ * ══════════════════════════════════════════════════════════════════════════════
+ * CRYPTX LIGHT MODE REVAMP
+ * ══════════════════════════════════════════════════════════════════════════════
+ *
+ * The app was built dark-first with many hardcoded hex colors in inline styles
+ * (style={{ color: '#fff2f4' }}, background: '#0a0a0f', etc.). These bypass the
+ * CSS-variable theme system, so switching to light mode left dark surfaces and
+ * white-on-white text scattered across the UI.
+ *
+ * Strategy: rather than rewrite thousands of inline styles (346 in NexusGraph
+ * alone), this file provides comprehensive `html.light` overrides that:
+ *   1. Expand the theme-token palette with light-specific values
+ *   2. Force every common dark-background pattern to a light surface
+ *   3. Force every common white/light-text pattern to a dark text color
+ *   4. Recolor borders, shadows, and decorative elements for light mode
+ *   5. Tame the "cyber" decorative backgrounds so they don't overwhelm
+ *
+ * Everything is scoped under `html.light` so dark mode is completely unaffected.
+ * High-specificity selectors (!important) are used deliberately to beat inline
+ * styles — this is the only reliable way to override React inline styles from CSS.
+ */
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   1. EXPANDED LIGHT TOKENS
+   ══════════════════════════════════════════════════════════════════════════════ */
+html.light {
+  /* Surfaces — clean white with the faintest warm tint to match the brand */
+  --bg-primary:    248 249 251;
+  --bg-secondary:  241 243 246;
+  --bg-surface:    255 255 255;
+  --bg-card:       255 255 255;
+  --bg-elevated:   248 250 252;
+  --bg-border:     226 230 236;
+  --bg-hover:      243 245 248;
+
+  /* Text — dark slate for contrast */
+  --text-primary:    17  24  39;     /* slate-900 */
+  --text-secondary:  55  65  81;     /* slate-700 */
+  --text-muted:     107 114 128;     /* slate-500 */
+  --text-bright:     17  24  39;
+  --text-dim:       156 163 175;     /* slate-400 */
+
+  /* Accents — slightly deeper for light-bg legibility */
+  --accent-blue:   220  38  38;      /* red-600 — primary brand */
+  --accent-green:   22 163  74;      /* green-600 */
+  --accent-red:    200  24  40;
+  --accent-amber:  217 119   6;      /* amber-600 */
+  --accent-purple: 190  24  93;      /* pink-600 */
+  --accent-orange: 234  88  12;      /* orange-600 */
+  --accent-indigo: 190  28  52;
+  --accent-cyan:    14 116 144;      /* cyan-700 for "neon-cyan" class */
+
+  /* Blacked-out primary → in light mode, primary buttons become the brand red */
+  --primary-black:  220  38  38;
+  --primary-outline: 255 255 255;
+
+  /* Semantic aliases used by Tailwind utility classes in the codebase */
+  --neon-red:    220  38  38;
+  --neon-green:   22 163  74;
+  --neon-cyan:    14 116 144;
+  --neon-amber:  217 119   6;
+
+  /* Shadows — softer for light mode */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 4px 16px rgba(15, 23, 42, 0.08);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   2. GLOBAL SURFACE + TEXT FORCED OVERRIDES
+   Catch the most common hardcoded dark patterns and remap them.
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* Force the app shell and body to the light surface */
+html.light body,
+html.light .app-shell,
+html.light #root {
+  background: rgb(248 249 251) !important;
+  color: rgb(17 24 39) !important;
+}
+
+/* ── Hardcoded dark backgrounds → light surfaces ──
+   These target inline style={{ background: '#0a0a0f' }} etc. via common values.
+   Because inline styles have very high specificity, we need !important.
+   We match both the source hex and React's DOM-rendered rgb() conversion. */
+html.light [style*="background: #0a0a0f"],
+html.light [style*="background:#0a0a0f"],
+html.light [style*="background: #0b0b0f"],
+html.light [style*="background:#0b0b0f"],
+html.light [style*="background: #0d0d12"],
+html.light [style*="background: #000"],
+html.light [style*="background:#000"],
+html.light [style*="background-color: #0a0a0f"],
+html.light [style*="background-color:#0a0a0f"],
+html.light [style*="background-color: #0b0b0f"],
+html.light [style*="backgroundColor: '#0a0a0f'"],
+/* React DOM rgb() forms */
+html.light [style*="background: rgb(10, 10, 15)"],
+html.light [style*="background: rgb(10,10,15)"],
+html.light [style*="background: rgb(11, 11, 15)"],
+html.light [style*="background: rgb(13, 13, 18)"],
+html.light [style*="background: rgb(0, 0, 0)"],
+html.light [style*="background: rgb(0,0,0)"] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+/* Near-black surfaces (10-20% lighter) → very light gray */
+html.light [style*="background: #12121"],
+html.light [style*="background: #16161"],
+html.light [style*="background: #1a1a1"],
+html.light [style*="background: #13131"],
+html.light [style*="background: rgba(10, 10, 15"] {
+  background: rgb(241 243 246) !important;
+  background-color: rgb(241 243 246) !important;
+}
+
+/* Semi-transparent dark overlays → light overlays */
+html.light [style*="rgba(0, 0, 0, 0.3"],
+html.light [style*="rgba(0,0,0,0.3"],
+html.light [style*="rgba(0, 0, 0, 0.4"],
+html.light [style*="rgba(0,0,0,0.4"],
+html.light [style*="rgba(0, 0, 0, 0.5"] {
+  background: rgba(255, 255, 255, 0.75) !important;
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* ── Hardcoded white/light text → dark text ──
+   Target the common '#fff2f4', '#fff', 'rgb(255,255,255)' text colors.
+   NOTE: React converts hex to rgb() in the DOM, so we match BOTH forms. */
+html.light [style*="color: #fff2f4"],
+html.light [style*="color:#fff2f4"],
+html.light [style*="color: #ffffff"],
+html.light [style*="color:#ffffff"],
+html.light [style*="color: #fff"],
+html.light [style*="color:#fff"],
+html.light [style*="color: '#fff2f4'"],
+html.light [style*="color: '#ffffff'"],
+html.light [style*="color: '#fff'"],
+html.light [style*="color: 'rgb(255, 255, 255)'"],
+html.light [style*="color: 'white'"],
+/* React DOM-rendered rgb() forms */
+html.light [style*="color: rgb(255, 242, 244)"],
+html.light [style*="color: rgb(255,242,244)"],
+html.light [style*="color: rgb(255, 255, 255)"],
+html.light [style*="color: rgb(255,255,255)"],
+html.light [style*="color: rgb(246, 246, 248)"],
+html.light [style*="color: rgb(226, 226, 230)"] {
+  color: rgb(17 24 39) !important;
+}
+
+/* Light-gray text on dark (used for muted labels) → medium slate */
+html.light [style*="color: #9ca3af"],
+html.light [style*="color: '#9ca3af'"],
+html.light [style*="color: #d1d5db"],
+html.light [style*="color: '#d1d5db'"],
+html.light [style*="color: #e5e7eb"],
+html.light [style*="color: '#e5e7eb'"] {
+  color: rgb(107 114 128) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   3. COMPONENT-LEVEL LIGHT OVERRIDES
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Cards ── */
+html.light .card,
+html.light .card-cyber {
+  background: #ffffff !important;
+  border-color: rgb(226 230 236) !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 2px 8px rgba(15, 23, 42, 0.03) !important;
+  backdrop-filter: none !important;
+}
+html.light .card:hover,
+html.light .card-cyber:hover {
+  border-color: rgb(220 38 38 / 0.25) !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.07) !important;
+}
+/* Remove the dark "cyber sheen" gradient overlay in light mode */
+html.light .card::before {
+  display: none !important;
+}
+
+/* ── Buttons ── */
+html.light .btn-primary {
+  background: rgb(220 38 38) !important;
+  color: #ffffff !important;
+  border-color: rgb(220 38 38) !important;
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.3) !important;
+}
+html.light .btn-primary:not(:disabled):hover {
+  background: rgb(185 28 28) !important;
+  border-color: rgb(185 28 28) !important;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35) !important;
+}
+html.light .btn-secondary {
+  background: rgb(220 38 38 / 0.06) !important;
+  color: rgb(220 38 38) !important;
+  border-color: rgb(220 38 38 / 0.2) !important;
+}
+html.light .btn-secondary:not(:disabled):hover {
+  background: rgb(220 38 38 / 0.1) !important;
+  border-color: rgb(220 38 38 / 0.35) !important;
+}
+html.light .btn-ghost {
+  color: rgb(55 65 81) !important;
+  background: transparent !important;
+}
+html.light .btn-ghost:not(:disabled):hover {
+  background: rgb(15 23 42 / 0.04) !important;
+  color: rgb(17 24 39) !important;
+}
+
+/* ── Inputs ── */
+html.light .input,
+html.light input[type="text"],
+html.light input[type="search"],
+html.light input[type="number"],
+html.light input[type="email"],
+html.light input[type="password"],
+html.light input[type="date"],
+html.light textarea,
+html.light select {
+  background: #ffffff !important;
+  color: rgb(17 24 39) !important;
+  border-color: rgb(203 213 225) !important; /* slate-300 */
+}
+html.light .input::placeholder,
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: rgb(148 163 184) !important; /* slate-400 */
+}
+html.light .input:focus,
+html.light input:focus,
+html.light textarea:focus,
+html.light select:focus {
+  border-color: rgb(220 38 38) !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12) !important;
+}
+/* Select dropdown options */
+html.light option {
+  background: #ffffff !important;
+  color: rgb(17 24 39) !important;
+}
+
+/* ── Badges ── */
+html.light .badge {
+  background: rgb(241 243 246) !important;
+  color: rgb(55 65 81) !important;
+  border-color: rgb(226 230 236) !important;
+}
+html.light .badge-cyan,
+html.light .badge-blue {
+  background: rgb(14 116 144 / 0.1) !important;
+  color: rgb(14 116 144) !important;
+  border-color: rgb(14 116 144 / 0.2) !important;
+}
+html.light .badge-green,
+html.light .badge-success {
+  background: rgb(22 163 74 / 0.1) !important;
+  color: rgb(22 163 74) !important;
+  border-color: rgb(22 163 74 / 0.2) !important;
+}
+html.light .badge-red {
+  background: rgb(220 38 38 / 0.1) !important;
+  color: rgb(220 38 38) !important;
+  border-color: rgb(220 38 38 / 0.2) !important;
+}
+html.light .badge-amber,
+html.light .badge-warning {
+  background: rgb(217 119 6 / 0.1) !important;
+  color: rgb(217 119 6) !important;
+  border-color: rgb(217 119 6 / 0.2) !important;
+}
+html.light .badge-muted {
+  background: rgb(241 243 246) !important;
+  color: rgb(107 114 128) !important;
+}
+html.light .badge-purple {
+  background: rgb(190 24 93 / 0.1) !important;
+  color: rgb(190 24 93) !important;
+}
+
+/* ── Top bar / navigation chrome ── */
+html.light .app-topbar,
+html.light .topbar-chip,
+html.light .topbar-icon-btn {
+  background: #ffffff !important;
+  color: rgb(55 65 81) !important;
+  border-color: rgb(226 230 236) !important;
+}
+html.light .topbar-icon-btn:hover {
+  background: rgb(241 243 246) !important;
+  color: rgb(220 38 38) !important;
+}
+html.light .nav-item,
+html.light .nav-link {
+  color: rgb(55 65 81) !important;
+}
+html.light .nav-item.active,
+html.light .nav-item:hover,
+html.light a.active {
+  color: rgb(220 38 38) !important;
+  background: rgb(220 38 38 / 0.06) !important;
+}
+
+/* ── Tables ── */
+html.light table {
+  background: transparent !important;
+  color: rgb(17 24 39) !important;
+}
+html.light thead th,
+html.light th {
+  background: rgb(241 243 246) !important;
+  color: rgb(55 65 81) !important;
+  border-color: rgb(226 230 236) !important;
+}
+html.light td {
+  color: rgb(31 41 55) !important;
+  border-color: rgb(226 230 236) !important;
+}
+html.light tbody tr {
+  border-color: rgb(226 230 236) !important;
+}
+html.light tbody tr:nth-child(even) {
+  background: rgb(248 249 251) !important;
+}
+html.light tbody tr:hover {
+  background: rgb(220 38 38 / 0.04) !important;
+}
+
+/* ── Code / monospace blocks ── */
+html.light code,
+html.light pre,
+html.light .font-mono,
+html.light kbd {
+  background: rgb(241 243 246) !important;
+  color: rgb(17 24 39) !important;
+}
+
+/* ── Borders — lighten all border colors ── */
+html.light [class*="border"] {
+  border-color: rgb(226 230 236) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   4. DECORATIVE BACKGROUND TAMING
+   The "cyber" animated backgrounds are designed for dark mode and look broken
+   /overwhelming on light. Hide or desaturate them.
+   ══════════════════════════════════════════════════════════════════════════════ */
+html.light .cyber-ambient,
+html.light .home-bg,
+html.light .matrix-bg,
+html.light .cyber-auth-bg,
+html.light .ambient-orbits,
+html.light .ambient-radar,
+html.light .ambient-packets,
+html.light .ambient-candles,
+html.light .ambient-symbol-cloud,
+html.light [class*="cyber-bg"],
+html.light [class*="matrix-rain"],
+html.light [class*="hash-rain"],
+html.light [class*="candle-panel"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* Auth screen gradient → clean light gradient */
+html.light .auth-screen,
+html.light .auth-container {
+  background: linear-gradient(135deg, #f8fafc 0%, #fef2f2 100%) !important;
+  color: rgb(17 24 39) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   5. PAGE-SPECIFIC FIXES
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Dashboard ── */
+html.light .dashboard-hero,
+html.light .module-grid {
+  background: transparent !important;
+}
+
+/* ── Graph / canvas backgrounds (NexusGraph, TraceGraph, BoardCanvas) ── */
+html.light .graph-canvas,
+html.light [class*="graph-wrap"],
+html.light [class*="canvas-bg"],
+html.light svg.graph {
+  background: #fafbfc !important;
+}
+
+/* ── Risk gauge ── */
+html.light .risk-gauge,
+html.light .risk-gauge-track {
+  background: rgb(241 243 246) !important;
+}
+
+/* ── Iframes (trace graph, reports) get a light background ── */
+html.light iframe {
+  background: #ffffff !important;
+}
+
+/* ── Mobile nav bottom bar ── */
+html.light .cryptx-mobile-nav {
+  background: rgba(255, 255, 255, 0.97) !important;
+  border-top-color: rgb(226 230 236) !important;
+}
+html.light .cryptx-mobile-nav-item {
+  color: rgb(107 114 128) !important;
+}
+html.light .cryptx-mobile-nav-item.active {
+  color: rgb(220 38 38) !important;
+}
+html.light .cryptx-mobile-drawer {
+  background: #ffffff !important;
+  border-right-color: rgb(226 230 236) !important;
+}
+
+/* ── Chat / Q&A boxes (CaseQaChat) ── */
+html.light [class*="chat"],
+html.light [class*="qa-box"] {
+  background: #ffffff !important;
+  color: rgb(17 24 39) !important;
+}
+
+/* ── Report iframes (mega_report HTML is dark-themed) ──
+   These are self-contained documents; we can't easily restyle them, but we set
+   a neutral frame background so the page around them looks clean. */
+html.light .report-frame-wrap {
+  background: rgb(241 243 246) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   6. SCROLLBARS + SELECTION
+   ══════════════════════════════════════════════════════════════════════════════ */
+html.light * {
+  scrollbar-color: rgb(203 213 225) transparent !important;
+}
+html.light *::-webkit-scrollbar-thumb {
+  background: rgb(203 213 225) !important;
+}
+html.light *::-webkit-scrollbar-thumb:hover {
+  background: rgb(148 163 184) !important;
+}
+html.light ::selection {
+  background: rgba(220, 38, 38, 0.15) !important;
+  color: rgb(17 24 39) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   7. TEXT UTILITY CLASS FALLBACKS
+   The codebase uses .text-text-primary, .text-neon-* etc. Ensure they resolve.
+   ══════════════════════════════════════════════════════════════════════════════ */
+html.light .text-text-primary   { color: rgb(17 24 39) !important; }
+html.light .text-text-secondary { color: rgb(55 65 81) !important; }
+html.light .text-text-muted     { color: rgb(107 114 128) !important; }
+html.light .text-text-bright    { color: rgb(17 24 39) !important; }
+html.light .text-text-dim       { color: rgb(156 163 175) !important; }
+html.light .text-neon-red       { color: rgb(220 38 38) !important; }
+html.light .text-neon-green     { color: rgb(22 163 74) !important; }
+html.light .text-neon-cyan      { color: rgb(14 116 144) !important; }
+html.light .text-neon-amber     { color: rgb(217 119 6) !important; }
+html.light .text-display        { color: rgb(17 24 39) !important; }
+html.light .text-tech           { color: rgb(55 65 81) !important; }
+html.light .text-primary        { color: rgb(17 24 39) !important; }
+html.light .text-secondary      { color: rgb(55 65 81) !important; }
+html.light .text-muted          { color: rgb(107 114 128) !important; }
+
+/* Neon-tinted backgrounds (bg-neon-red, bg-neon-green, etc.) → light-tinted equivalents */
+html.light .bg-neon-red    { background: rgb(220 38 38 / 0.08) !important; }
+html.light .bg-neon-green  { background: rgb(22 163 74 / 0.08) !important; }
+html.light .bg-neon-cyan   { background: rgb(14 116 144 / 0.08) !important; }
+html.light .bg-neon-amber  { background: rgb(217 119 6 / 0.08) !important; }
+html.light .border-neon-red   { border-color: rgb(220 38 38 / 0.2) !important; }
+html.light .border-neon-green { border-color: rgb(22 163 74 / 0.2) !important; }
+html.light .border-neon-cyan  { border-color: rgb(14 116 144 / 0.2) !important; }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   8. LINKS + ANCHORS
+   ══════════════════════════════════════════════════════════════════════════════ */
+html.light a {
+  color: rgb(220 38 38) !important;
+}
+html.light a:hover {
+  color: rgb(185 28 28) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   9. MISC — DIVIDERS, HR, PLACEHOLDERS, SPINNERS
+   ══════════════════════════════════════════════════════════════════════════════ */
+html.light hr {
+  border-color: rgb(226 230 236) !important;
+}
+html.light .animate-spin,
+html.light [class*="spinner"] {
+  color: rgb(220 38 38) !important;
+}
+html.light .opacity-40,
+html.light .opacity-50 {
+  opacity: 0.6 !important;
+}
+
+/* Final light-mode stabilization for the refreshed cockpit/home screens. */
+html.light,
+html.light body,
+html.light #root,
+html.light .app-shell {
+  background: #f4f7fb !important;
+  color: rgb(17 24 39) !important;
+}
+
+html.light .app-content,
+html.light .app-content-bg {
+  background:
+    radial-gradient(circle at 10% 14%, rgba(220, 38, 38, 0.1), transparent 31%),
+    radial-gradient(circle at 86% 18%, rgba(14, 116, 144, 0.09), transparent 28%),
+    radial-gradient(circle at 72% 86%, rgba(22, 163, 74, 0.06), transparent 32%),
+    linear-gradient(180deg, #f8fafc 0%, #eef3f8 100%) !important;
+}
+
+html.light .app-topbar.command-topbar,
+html.light .app-topbar {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: rgba(203, 213, 225, 0.84) !important;
+  box-shadow: 0 10px 34px rgba(15, 23, 42, 0.08) !important;
+  backdrop-filter: blur(18px) saturate(1.2) !important;
+}
+
+html.light .module-island {
+  background:
+    radial-gradient(circle at 16% 50%, rgba(220, 38, 38, 0.1), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.9)) !important;
+  border-color: rgba(203, 213, 225, 0.95) !important;
+  color: rgb(51 65 85) !important;
+  box-shadow:
+    0 12px 34px rgba(15, 23, 42, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light .module-island-wrap.open .module-island,
+html.light .module-island:hover {
+  border-color: rgba(220, 38, 38, 0.38) !important;
+  box-shadow:
+    0 16px 44px rgba(15, 23, 42, 0.12),
+    0 0 0 4px rgba(220, 38, 38, 0.06) !important;
+}
+
+html.light .module-island-title,
+html.light .module-palette-head span {
+  color: rgb(15 23 42) !important;
+}
+
+html.light .module-island-quick {
+  background: rgba(241, 245, 249, 0.85) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
+}
+
+html.light .module-island-icon {
+  color: rgb(71 85 105) !important;
+}
+
+html.light .module-island-icon:hover {
+  color: rgb(220 38 38) !important;
+  background: rgba(220, 38, 38, 0.09) !important;
+}
+
+html.light .module-island-icon.active {
+  color: rgb(255 255 255) !important;
+  background: rgb(220 38 38) !important;
+  border-color: rgba(220, 38, 38, 0.55) !important;
+  box-shadow: 0 8px 18px rgba(220, 38, 38, 0.2) !important;
+}
+
+html.light .module-palette {
+  background:
+    radial-gradient(circle at 16% 0%, rgba(220, 38, 38, 0.08), transparent 30%),
+    rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(203, 213, 225, 0.9) !important;
+  box-shadow: 0 28px 72px rgba(15, 23, 42, 0.16) !important;
+}
+
+html.light .module-palette::before {
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.42), transparent) !important;
+}
+
+html.light .module-palette-grid section {
+  background: rgba(248, 250, 252, 0.84) !important;
+  border-color: rgba(203, 213, 225, 0.72) !important;
+}
+
+html.light .palette-link {
+  color: rgb(51 65 85) !important;
+}
+
+html.light .palette-link span {
+  background: rgb(241 245 249) !important;
+  border-color: rgba(203, 213, 225, 0.82) !important;
+}
+
+html.light .palette-link:hover {
+  color: rgb(15 23 42) !important;
+  background: rgba(220, 38, 38, 0.06) !important;
+  border-color: rgba(220, 38, 38, 0.25) !important;
+}
+
+html.light .palette-link.active {
+  color: rgb(220 38 38) !important;
+  background: rgba(220, 38, 38, 0.09) !important;
+  border-color: rgba(220, 38, 38, 0.28) !important;
+}
+
+html.light .topbar-search {
+  background: rgba(248, 250, 252, 0.95) !important;
+  border-color: rgba(203, 213, 225, 0.95) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light .topbar-search:focus-within {
+  border-color: rgba(220, 38, 38, 0.42) !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08) !important;
+}
+
+html.light .topbar-chip,
+html.light .topbar-icon-btn,
+html.light .topbar-threat {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(203, 213, 225, 0.82) !important;
+  color: rgb(51 65 85) !important;
+}
+
+html.light .topbar-chip:hover,
+html.light .topbar-icon-btn:hover,
+html.light .topbar-threat:hover {
+  background: rgba(220, 38, 38, 0.07) !important;
+  border-color: rgba(220, 38, 38, 0.25) !important;
+  color: rgb(220 38 38) !important;
+}
+
+html.light .topbar-threat.active {
+  background: rgba(220, 38, 38, 0.1) !important;
+  border-color: rgba(220, 38, 38, 0.36) !important;
+}
+
+html.light .cyber-ambient,
+html.light .cyber-ambient *,
+html.light .cyber-ambient::before,
+html.light .cyber-ambient::after {
+  display: block !important;
+  visibility: visible !important;
+}
+
+html.light .cyber-ambient {
+  opacity: 0.48 !important;
+  mix-blend-mode: multiply;
+}
+
+html.light .cyber-ambient::before {
+  background-image:
+    linear-gradient(rgba(220, 38, 38, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 116, 144, 0.07) 1px, transparent 1px) !important;
+}
+
+html.light .cyber-ambient::after {
+  background:
+    linear-gradient(115deg, transparent 0 42%, rgba(220, 38, 38, 0.06) 48%, transparent 54%),
+    repeating-linear-gradient(0deg, transparent 0 7px, rgba(15, 23, 42, 0.018) 8px) !important;
+  mix-blend-mode: multiply !important;
+  opacity: 0.55 !important;
+}
+
+html.light .cyber-flow {
+  background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.42), rgba(14, 116, 144, 0.34), transparent) !important;
+  filter: drop-shadow(0 0 8px rgba(14, 116, 144, 0.18)) !important;
+}
+
+html.light .cyber-packet {
+  box-shadow: 0 0 14px rgba(22, 163, 74, 0.36) !important;
+}
+
+html.light .cyber-hash-console,
+html.light .cyber-crypto-stack,
+html.light .cyber-candle-panel,
+html.light .cyber-case-panel,
+html.light .cyber-radar-panel,
+html.light .cyber-hex-chain,
+html.light .cyber-symbol-cloud {
+  opacity: 0.68 !important;
+}
+
+html.light .cyber-hash-console,
+html.light .cyber-crypto-stack,
+html.light .cyber-candle-panel,
+html.light .cyber-case-panel,
+html.light .cyber-radar-panel {
+  background: rgba(255, 255, 255, 0.66) !important;
+  border-color: rgba(203, 213, 225, 0.6) !important;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08) !important;
+}
+
+html.light .cyber-symbol-cloud span {
+  background: rgba(255, 255, 255, 0.62) !important;
+  border-color: rgba(14, 116, 144, 0.24) !important;
+  color: rgba(15, 23, 42, 0.58) !important;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08) !important;
+}
+
+html.light .app-content:has(.home-v2) {
+  background:
+    radial-gradient(circle at 10% 16%, rgba(220, 38, 38, 0.09), transparent 31%),
+    radial-gradient(circle at 88% 24%, rgba(14, 116, 144, 0.08), transparent 30%),
+    linear-gradient(180deg, #f8fafc 0%, #eef3f8 100%) !important;
+}
+
+html.light .home-v2 {
+  background:
+    radial-gradient(circle at 13% 12%, rgba(220, 38, 38, 0.1), transparent 30%),
+    radial-gradient(circle at 82% 8%, rgba(14, 116, 144, 0.1), transparent 30%),
+    radial-gradient(circle at 72% 82%, rgba(22, 163, 74, 0.07), transparent 26%),
+    linear-gradient(140deg, #f8fafc 0%, #eef3f8 100%) !important;
+  color: rgb(17 24 39) !important;
+}
+
+html.light .home-v2::before {
+  background:
+    linear-gradient(115deg, transparent 0 24%, rgba(220, 38, 38, 0.08) 24.2% 24.5%, transparent 24.8% 100%),
+    linear-gradient(290deg, transparent 0 52%, rgba(14, 116, 144, 0.08) 52.15% 52.45%, transparent 52.8% 100%) !important;
+  opacity: 0.75 !important;
+}
+
+html.light .home-hero,
+html.light .home-intel,
+html.light .home-command,
+html.light .home-cases {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.86)),
+    #ffffff !important;
+  border-color: rgba(203, 213, 225, 0.82) !important;
+  box-shadow:
+    0 18px 48px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+html.light .home-hero::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.08), transparent),
+    radial-gradient(circle at 72% 24%, rgba(14, 116, 144, 0.12), transparent 30%) !important;
+}
+
+html.light .home-hero::after {
+  background: linear-gradient(90deg, transparent, rgb(220 38 38), rgb(14 116 144), transparent) !important;
+  opacity: 0.9 !important;
+}
+
+html.light .home-live-brief,
+html.light .home-risk-head,
+html.light .home-coverage-panel,
+html.light .home-coverage-score div,
+html.light .home-chain-rail,
+html.light .home-family-stack button,
+html.light .home-workflow-grid article,
+html.light .home-intel-strip span,
+html.light .home-case-list button {
+  background: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(203, 213, 225, 0.72) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+html.light .home-search {
+  background: rgba(255, 255, 255, 0.84) !important;
+  border-color: rgba(203, 213, 225, 0.85) !important;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08) !important;
+}
+
+html.light .home-search button {
+  background: linear-gradient(135deg, rgb(220 38 38), rgb(190 24 93)) !important;
+  border-color: rgba(220, 38, 38, 0.55) !important;
+  color: #ffffff !important;
+  box-shadow: 0 12px 24px rgba(220, 38, 38, 0.22) !important;
+}
+
+html.light .home-title-lockup > img,
+html.light .home-brand-lockup img {
+  filter:
+    drop-shadow(0 10px 20px rgba(15, 23, 42, 0.12))
+    drop-shadow(0 0 18px rgba(220, 38, 38, 0.18)) !important;
+}
+
+html.light .home-brand-block h1,
+html.light .home-coverage-head span,
+html.light .home-coverage-score strong,
+html.light .home-family-stack b,
+html.light .home-workflow-grid h2,
+html.light .home-case-list strong {
+  color: rgb(15 23 42) !important;
+}
+
+html.light .home-subtitle,
+html.light .home-workflow-grid p,
+html.light .home-case-list small,
+html.light .home-intel-strip b {
+  color: rgb(71 85 105) !important;
+}
+
+html.light .home-feed-list span {
+  background: rgba(255, 255, 255, 0.78) !important;
+  border-color: rgba(203, 213, 225, 0.68) !important;
+  color: rgb(51 65 85) !important;
+}
+
+html.light .home-alert {
+  background: rgba(220, 38, 38, 0.08) !important;
+  border-color: rgba(220, 38, 38, 0.25) !important;
+  color: rgb(200 24 40) !important;
+}
+
+/* ============================================================================
+   UI FIX (2026-07-25): Dark inline-style surfaces in light mode.
+   Several analysis pages (Nexus, TraceGraph, Boards, CaseDetail, DEX, Coverage)
+   hard-code dark rgba()/hex backgrounds via React inline styles. In light mode
+   these render as dark cards/panels on a light page. These attribute selectors
+   match the inline-style signature and force a light surface + dark text/border.
+   Scoped under html.light with !important to beat inline styles. Dark mode is
+   untouched (the selectors only match when .light is on <html>).
+   ============================================================================ */
+
+/* --- NexusGraph result cards & subgraph panels: rgba(13,24,42,0.8) --- */
+html.light [style*="13,24,42"],
+html.light [style*="13, 24, 42"] {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(203, 213, 225, 0.7) !important;
+}
+html.light [style*="13,24,42"] .text-white,
+html.light [style*="13, 24, 42"] .text-white,
+html.light [style*="13,24,42"] h3,
+html.light [style*="13, 24, 42"] h3,
+html.light [style*="13,24,42"] h4,
+html.light [style*="13, 24, 42"] h4 {
+  color: rgb(15 23 42) !important;
+}
+html.light [style*="13,24,42"] [style*="color: #475569"],
+html.light [style*="13, 24, 42"] [style*="color:#475569"] {
+  color: rgb(100 116 139) !important;
+}
+
+/* --- NexusGraph full-screen modal overlay: #060d14 / rgba(5,7,13) / rgba(8,14,26) --- */
+html.light [style*="background: #060d14"],
+html.light [style*="background:#060d14"] {
+  background: rgb(248 250 252) !important;
+}
+html.light [style*="8,14,26"],
+html.light [style*="8, 14, 26"] {
+  background: rgb(241 245 249) !important;
+  border-color: rgba(203, 213, 225, 0.7) !important;
+}
+html.light [style*="5,7,13"],
+html.light [style*="5, 7, 13"] {
+  background: rgb(241 245 249) !important;
+  border-color: rgba(148, 163, 184, 0.4) !important;
+}
+html.light [style*="2,8,23"],
+html.light [style*="2, 8, 23"] {
+  background: rgba(241, 245, 249, 0.6) !important;
+  border-color: rgba(203, 213, 225, 0.5) !important;
+}
+
+/* --- TraceGraph tooltips/panels: rgba(4,13,26,...) --- */
+html.light [style*="4,13,26"],
+html.light [style*="4, 13, 26"] {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
+  color: rgb(30 41 59) !important;
+}
+html.light [style*="4,13,26"] .text-white,
+html.light [style*="4, 13, 26"] .text-white,
+html.light [style*="4,13,26"] h3,
+html.light [style*="4, 13, 26"] h3 {
+  color: rgb(15 23 42) !important;
+}
+
+/* --- CaseDetail tinted section: rgba(1,10,19,0.5) --- */
+html.light [style*="1,10,19"],
+html.light [style*="1, 10, 19"] {
+  background: rgba(241, 245, 249, 0.6) !important;
+}
+
+/* --- DEX chart panel + ExposureBreakdown: #120a0e / #160a0e --- */
+html.light [style*="120a0e"],
+html.light [style*="160a0e"] {
+  background: rgb(255 255 255) !important;
+  border-color: rgba(203, 213, 225, 0.7) !important;
+}
+
+/* --- Coverage modal backdrop: rgba(0,0,0,0.6) --- */
+html.light [style*="rgba(0,0,0,0.6)"],
+html.light [style*="rgba(0, 0, 0, 0.6)"] {
+  background: rgba(15, 23, 42, 0.45) !important;
+}
+
+/* --- Generic: remaining dark navy/blue-tinted inline overlays (0,0,0 mid-alpha) --- */
+html.light [style*="rgba(0,0,0,0.4"],
+html.light [style*="rgba(0, 0, 0, 0.4"],
+html.light [style*="rgba(0,0,0,0.45"],
+html.light [style*="rgba(0, 0, 0, 0.45"] {
+  background: rgba(15, 23, 42, 0.35) !important;
+}
+
+/* --- White text on now-light surfaces: headers inside fixed dark panels --- */
+html.light [style*="13,24,42"] *,
+html.light [style*="4,13,26"] *,
+html.light [style*="8,14,26"] * {
+  /* Only recolor explicit white text utilities; let accent colors pass through */
+}
+
+/* ============================================================================
+   UI FIX (2026-07-25) part 2: Tailwind bg-black backdrop modals + white text
+   The Command Palette and several modals use Tailwind `bg-black/60` (and
+   similar) for their scrim, plus `text-white` on inner panels. In light mode
+   these render as harsh black scrims with white-on-light content. Force a
+   softer slate scrim and dark text. Dark mode untouched (scoped to html.light).
+   ============================================================================ */
+
+/* Modal/overlay scrims built from Tailwind bg-black utilities */
+html.light .bg-black\/60,
+html.light .bg-black\/50,
+html.light .bg-black\/70,
+html.light .bg-black\/40 {
+  background: rgba(15, 23, 42, 0.45) !important;
+}
+
+/* Command palette panel itself — typically a white card in dark mode that needs
+   to stay a clean light surface with dark text in light mode. */
+html.light .cmdk,
+html.light [class*="cmd-"],
+html.light [cmdk-root] {
+  background: rgb(255 255 255) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
+  color: rgb(30 41 59) !important;
+  box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.25) !important;
+}
+html.light [cmdk-root] [cmdk-input],
+html.light [class*="cmd-"] input {
+  color: rgb(15 23 42) !important;
+}
+html.light [cmdk-root] [cmdk-item],
+html.light [class*="cmd-"] [cmdk-item],
+html.light [class*="cmd-"] li {
+  color: rgb(51 65 85) !important;
+}
+html.light [cmdk-root] [cmdk-item][data-selected="true"],
+html.light [cmdk-root] [cmdk-item][aria-selected="true"],
+html.light [class*="cmd-"] [cmdk-item][data-selected="true"] {
+  background: rgba(241, 245, 249, 0.9) !important;
+  color: rgb(15 23 42) !important;
+}
+html.light [cmdk-root] [cmdk-label],
+html.light [class*="cmd-"] [cmdk-label],
+html.light [class*="cmd-"] .cmd-group-label {
+  color: rgb(100 116 139) !important;
+}
+
+/* Generic: white text utilities sitting on now-light surfaces inside modals/panels.
+   Target only headings and strong text to avoid recoloring intentional accents. */
+html.light [style*="13,24,42"] h1,
+html.light [style*="13,24,42"] h2,
+html.light [style*="13,24,42"] h3,
+html.light [style*="13, 24, 42"] h1,
+html.light [style*="13, 24, 42"] h2,
+html.light [style*="13, 24, 42"] h3,
+html.light [style*="4,13,26"] h1,
+html.light [style*="4,13,26"] h2,
+html.light [style*="4,13,26"] h3,
+html.light [style*="8,14,26"] h1,
+html.light [style*="8,14,26"] h2,
+html.light [style*="8,14,26"] h3 {
+  color: rgb(15 23 42) !important;
+}
+
+/* ============================================================================
+   CINEMATIC LIGHT BACKGROUND (2026-07-26)
+   The prior light-mode treatment used `mix-blend-mode: multiply` on the
+   cyber-ambient decorative layer, which DARKENED the page (muddy green/grey
+   over white) — the opposite of a bright, professional light theme.
+
+   This block replaces that with a luminous, cinematic LIGHT background:
+     • a soft aurora of sky-blue / teal / rose that slowly drifts
+     • a faint pearlescent grid (screen-blend, not multiply)
+     • lighter, glowing orbits + flow lines in teal/emerald (screen blend so
+       they glow on white instead of muddying it)
+     • animated light "packets" that travel the flows
+   Dark mode is completely untouched (every selector requires html.light).
+   ============================================================================ */
+
+/* 1. Remove the muddy multiply blend + reset opacity so the new layers show */
+html.light .cyber-ambient {
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+  background:
+    /* soft aurora — three large, slow-drifting radial glows */
+    radial-gradient(60% 50% at 12% 18%, rgba(14, 165, 233, 0.16) 0%, transparent 60%),
+    radial-gradient(55% 45% at 88% 22%, rgba(220, 38, 38, 0.12) 0%, transparent 62%),
+    radial-gradient(70% 60% at 50% 100%, rgba(45, 212, 191, 0.14) 0%, transparent 65%) !important;
+  background-attachment: fixed !important;
+}
+
+/* 2. The grid ::before — switch from multiply to a faint pearlescent screen-blend grid */
+html.light .cyber-ambient::before {
+  mix-blend-mode: screen !important;
+  background-image:
+    linear-gradient(rgba(14, 116, 144, 0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 116, 144, 0.08) 1px, transparent 1px) !important;
+  background-size: 56px 56px !important;
+  opacity: 0.55 !important;
+  -webkit-mask-image: radial-gradient(circle at 52% 42%, #000 0 60%, transparent 88%) !important;
+          mask-image: radial-gradient(circle at 52% 42%, #000 0 60%, transparent 88%) !important;
+}
+
+/* 3. The scanline ::after — convert to a soft top-lit sheen + barely-there lines */
+html.light .cyber-ambient::after {
+  mix-blend-mode: screen !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, transparent 22%),
+    repeating-linear-gradient(0deg, transparent 0 8px, rgba(15, 23, 42, 0.022) 9px) !important;
+  opacity: 0.7 !important;
+}
+
+/* 4. Orbits — glowing teal/sky rings (screen blend = glow on white) */
+html.light .cyber-ambient .cyber-orbit {
+  mix-blend-mode: screen !important;
+  border-color: rgba(14, 116, 144, 0.30) !important;
+  box-shadow:
+    0 0 24px rgba(14, 165, 233, 0.16),
+    inset 0 0 24px rgba(45, 212, 191, 0.12) !important;
+  opacity: 0.8 !important;
+}
+html.light .cyber-ambient .cyber-orbit::after {
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.55), transparent 70%) !important;
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.5) !important;
+}
+
+/* 5. Flow lines — luminous teal→emerald gradients with a soft glow */
+html.light .cyber-ambient .cyber-flow {
+  mix-blend-mode: screen !important;
+  background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.55), rgba(16, 185, 129, 0.45), transparent) !important;
+  filter: drop-shadow(0 0 6px rgba(14, 165, 233, 0.22)) !important;
+  opacity: 0.75 !important;
+}
+
+/* 6. Packets — bright glowing dots that travel the flows */
+html.light .cyber-ambient .cyber-packet {
+  mix-blend-mode: screen !important;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(14, 165, 233, 0.6) 60%, transparent) !important;
+  box-shadow:
+    0 0 12px rgba(14, 165, 233, 0.6),
+    0 0 24px rgba(45, 212, 191, 0.35) !important;
+  opacity: 0.9 !important;
+}
+
+/* 7. Make sure the ambient layer sits behind content (it already does at z:0,
+      but reinforce so the brighter layers never cover cards/text). */
+html.light .app-content,
+html.light .app-shell {
+  position: relative;
+  z-index: 1;
+}
+
+/* 8. Slow drift animation for the aurora (reuses the existing cyber-grid-drift
+      keyframes where available; if not, this is a gentle no-op). The aurora
+      glows are static radial-gradients on .cyber-ambient for perf — the motion
+      comes from the orbit/flow/packet children which already animate. */
+
+/* ============================================================================
+   CINEMATIC LIGHT PAGE BACKGROUNDS (2026-07-26)
+   The page-root containers (.cxhome Dashboard, .home-v2, .auth-shell,
+   .auth-loading, .hx-root Entity) each hardcode a near-black linear-gradient
+   base (#050506 / #091017 / #080608 / #0a0709) that does NOT change in light
+   mode — so even with the cyber-ambient aurora fixed, these pages stayed dark.
+
+   This block gives each page root a bright, cinematic LIGHT background:
+   a soft warm-white→sky base with luminous teal/rose/red radial glows.
+   Dark mode is untouched (scoped under html.light).
+   ============================================================================ */
+
+/* Shared cinematic light base for all page roots.
+   Warm white → soft sky, with three luminous radial glows (rose, sky, teal). */
+html.light .cxhome,
+html.light .home-v2,
+html.light .auth-shell,
+html.light .auth-loading,
+html.light .hx-root {
+  background:
+    radial-gradient(circle at 14% 18%, rgba(220, 38, 38, 0.13), transparent 30%),
+    radial-gradient(circle at 76% 8%, rgba(14, 165, 233, 0.16), transparent 32%),
+    radial-gradient(circle at 72% 82%, rgba(45, 212, 191, 0.13), transparent 30%),
+    linear-gradient(140deg, #fbfcfe 0%, #eef4fb 42%, #f6f8fc 100%) !important;
+  color: rgb(15 23 42) !important;
+}
+
+/* Auth screen gets a slightly richer treatment (it's the entry splash) */
+html.light .auth-shell {
+  background:
+    radial-gradient(circle at 20% 25%, rgba(220, 38, 38, 0.14), transparent 34%),
+    radial-gradient(circle at 80% 15%, rgba(14, 165, 233, 0.18), transparent 36%),
+    radial-gradient(circle at 50% 95%, rgba(45, 212, 191, 0.15), transparent 38%),
+    linear-gradient(150deg, #fafbfd 0%, #eaf2fb 50%, #f3f7fd 100%) !important;
+}
+
+/* auth-loading splash (boot) — keep it bright + airy */
+html.light .auth-loading {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.12), transparent 50%),
+    linear-gradient(160deg, #fbfcfe 0%, #eef4fb 100%) !important;
+  color: rgb(30 41 59) !important;
+}
+
+/* Make sure text on these now-light page roots is readable (force dark text
+   on the page-level, while letting cards/components keep their own contrast). */
+html.light .cxhome,
+html.light .home-v2,
+html.light .hx-root {
+  color: rgb(30 41 59) !important;
+}

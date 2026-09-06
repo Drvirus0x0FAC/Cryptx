@@ -1,0 +1,33 @@
+{
+  "palette": {
+    "placeholder": "Pega una dirección / hash de TX, o escribe un nombre de módulo…",
+    "title": "Comando",
+    "hintEnter": "Intro",
+    "hintEsc": "ESC",
+    "sectionModules": "Módulos",
+    "sectionActions": "Acciones",
+    "sectionEntities": "Entidades",
+    "investigatePrefix": "Investigar",
+    "empty": "Sin coincidencias. Pega una dirección BTC / EVM / TRON / SOL, un hash de transacción, un nombre ENS, o busca una entidad («Binance», «Lazarus») o un nombre de módulo.",
+    "open": "Abrir paleta de comando",
+    "footerNavigate": "navegar",
+    "footerOpen": "abrir",
+    "footerAutoDetect": "detecta automáticamente la cadena según el formato"
+  },
+  "actions": {
+    "auto": { "label": "Auto-investigar", "hint": "pipeline completo en un clic" },
+    "intel": { "label": "Inteligencia de dirección", "hint": "informe OSINT completo" },
+    "nexus": { "label": "Grafo Nexus", "hint": "grafo de relaciones" },
+    "holistic": { "label": "Trazado holístico", "hint": "trazado multi-cadena" },
+    "forensics": { "label": "Análisis forense", "hint": "algoritmos locales" },
+    "trace": { "label": "Rastreador de fondos", "hint": "flujo multi-salto" },
+    "txlens": { "label": "Lupa TX", "hint": "investigación de transacción" },
+    "txdetail": { "label": "Detalle TX", "hint": "vista de transacción en bruto" },
+    "txdetailBtc": { "label": "Detalle TX (BTC)", "hint": "vista de transacción en bruto" },
+    "perpdex": { "label": "Inteligencia DEX Perpétuo", "hint": "análisis de cuenta Hyperliquid" }
+  },
+  "entities": {
+    "loading": "Buscando entidades…",
+    "none": "Sin entidades coincidentes."
+  }
+}

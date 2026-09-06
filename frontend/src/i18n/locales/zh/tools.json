@@ -1,0 +1,1512 @@
+{
+  "perpDex": {
+    "title": "永续 DEX 情报 — Hyperliquid",
+    "subtitle": "覆盖 2026 年真实交易量所在：永续 DEX 月交易流超 2000 亿美元。确定性检测器可识别洗盘交易、故意亏损洗钱、过桥投放以及 HIP-3 窄市场滥用 — 每条判定都是带计算依据的线索。",
+    "inputPlaceholder": "Hyperliquid 账户（0x… EVM 地址）",
+    "analyze": "分析",
+    "loading": "正在从 Hyperliquid 公共 API 拉取成交、账本与状态…",
+    "stats": {
+      "accountValue": "账户价值",
+      "tradedVolume": "成交量",
+      "fillsRoundTrips": "{{fills}} 笔成交 · {{rounds}} 个往返",
+      "netClosedPnl": "净已平仓盈亏",
+      "fees": "手续费 ${{amount}}",
+      "depositsWithdrawals": "存入 / 提取",
+      "in": "入",
+      "out": "出"
+    },
+    "detectors": {
+      "title": "滥用检测器",
+      "basis": "依据：{{basis}}",
+      "partialData": "部分数据：{{errors}}"
+    },
+    "volumeByMarket": {
+      "title": "按市场成交量",
+      "colMarket": "市场",
+      "colVolume": "成交量",
+      "colPnl": "盈亏",
+      "colFills": "成交",
+      "noFills": "无成交。"
+    },
+    "openPositions": {
+      "title": "持仓",
+      "none": "无。",
+      "row": "{{coin}} · 仓位 {{size}} · 开仓价 {{entry}} · 价值 ${{value}} · 未实现盈亏 ${{upnl}} · {{lev}}x"
+    },
+    "pivots": {
+      "title": "链上跳转（同一 EOA 在 Arbitrum 上结算 USDC）"
+    }
+  },
+  "entity": {
+    "title": "实体调查",
+    "subtitle": "将一组地址视为单一实体 — 聚类、汇总资金流、查找外部对手方",
+    "inputLabel": "同一控制下的地址",
+    "inputPlaceholder": "粘贴地址（每行一个，或以逗号分隔）\n0x1234...\n0x5678...\nbc1q...",
+    "chainPlaceholder": "链（eth、btc 等，可选）",
+    "submit": "调查实体",
+    "errors": {
+      "minTwo": "请输入至少 2 个地址以作为一个实体处理。",
+      "failed": "调查失败"
+    },
+    "stats": {
+      "addresses": "地址",
+      "totalIn": "总流入",
+      "totalOut": "总流出",
+      "clusters": "聚类"
+    },
+    "clusters": {
+      "title": "检测到的同控聚类（{{count}}）",
+      "disclaimer": "聚类归属是“同控线索”，并非所有权的证据。",
+      "clusterN": "聚类 {{n}}",
+      "members": "{{count}} 个成员 · 置信度 {{conf}}%"
+    },
+    "counterparties": {
+      "title": "外部对手方（前 20）",
+      "colAddress": "地址",
+      "colType": "类型",
+      "colIn": "流入",
+      "colOut": "流出",
+      "colTxs": "交易数"
+    }
+  },
+  "dex": {
+    "title": "DEX 分析",
+    "subtitle": "链上 DEX 交易分析：代币流、流动性池、兑换路径以及各主要 DEX 的对手方敞口。",
+    "inputPlaceholder": "ETH / BSC 地址…",
+    "analyze": "分析",
+    "loading": "正在通过 TheGraph 获取 DEX 活动…",
+    "empty": "输入 ETH 或 BSC 地址以查看 DEX 兑换活动。",
+    "lookupFailed": "DEX 查询失败",
+    "noSwaps": "未找到该地址的 DEX 兑换。",
+    "noSwapsHint": "此查询通过 TheGraph 访问 Uniswap v2/v3 (ETH) 和 PancakeSwap (BSC)。在设置中配置 THEGRAPH_API_KEY 可获得更高速率限额。",
+    "stats": {
+      "totalSwaps": "总兑换数",
+      "buys": "买入",
+      "sells": "卖出",
+      "uniquePairs": "独立交易对"
+    },
+    "washTrading": {
+      "title": "⚠ 检测到可能的洗盘交易"
+    },
+    "chart": {
+      "title": "热门兑换对 - 买入 vs 卖出",
+      "buys": "买入",
+      "sells": "卖出"
+    },
+    "table": {
+      "historyTitle": "兑换历史（{{count}}）",
+      "showing": "显示 {{count}} 笔兑换中的 50 笔。",
+      "colDir": "方向",
+      "colTime": "时间",
+      "colPair": "交易对",
+      "colAmounts": "数量",
+      "colDex": "DEX",
+      "colUsd": "USD"
+    }
+  },
+  "autoInvestigate": {
+    "title": "自动调查",
+    "subtitle": "一键：情报 → 风险 → 取证 → 威胁情报 → 归因 → 报告草稿。全本地引擎，监管链可选。",
+    "inputLabel": "目标地址",
+    "inputPlaceholder": "BTC / ETH / TRX / SOL 地址…",
+    "caseLabel": "案件 ID（监管，可选）",
+    "casePlaceholder": "将报告登记入库",
+    "run": "调查",
+    "failed": "自动调查失败",
+    "empty": "粘贴一个地址，让完整的本地流水线端到端运行。",
+    "stats": {
+      "risk": "风险",
+      "threat": "威胁",
+      "role": "角色",
+      "courtDefensible": "经得起法庭推敲",
+      "courtDefensibleSub": "归因",
+      "txs": "交易数",
+      "yes": "是",
+      "no": "否",
+      "motifs": "{{count}} 个动机"
+    },
+    "package": {
+      "title": "调查包",
+      "custody": "已登记至监管链：",
+      "reportHtml": "报告 (HTML)",
+      "reportMd": "摘要 (MD)"
+    },
+    "exitVasp": {
+      "title": "出口 VASP - 在此送达法律程序",
+      "none": "在 2 跳内未到达任何交易所充值点 - 资金可能仍在链上。",
+      "unavailable": "Exit-VASP 追踪不可用：{{error}}",
+      "hop": "第 {{n}} 跳",
+      "kyvDirectory": "✓ KYV 目录",
+      "inspect": "检查充值地址",
+      "cashoutIndicators": "套现指标"
+    },
+    "continue": {
+      "title": "继续调查",
+      "addressIntel": "地址情报",
+      "nexusGraph": "Nexus 关系图",
+      "holisticTrace": "全息追踪",
+      "forensics": "取证"
+    }
+  },
+  "walletMonitor": {
+    "title": "钱包监控",
+    "subtitle": "监控加密钱包的新交易，并直接在交易详情中打开警报。",
+    "stats": {
+      "watching": "监控中",
+      "active": "活跃",
+      "unread": "未读",
+      "notifications": "通知",
+      "poll": "90秒",
+      "pollSub": "后台扫描器"
+    },
+    "add": {
+      "placeholder": "一个或多个钱包地址，以逗号或换行分隔...",
+      "labelPlaceholder": "可选标签",
+      "button": "监控",
+      "baseline": "将当前交易作为基线，使警报仅在未来活动时触发"
+    },
+    "rules": {
+      "title": "警报规则",
+      "hint": "例如“当任何受监控钱包向混币器发送 >10 时警报” - 规则在每次后台扫描时自动运行。",
+      "ruleName": "规则名称",
+      "ruleNamePlaceholder": "“Mixer out > 10”",
+      "address": "地址（留空 = 全部）",
+      "addressPlaceholder": "任意受监控地址",
+      "direction": "方向",
+      "minValue": "最小值",
+      "counterparty": "对手方",
+      "addRule": "添加规则",
+      "colRule": "规则",
+      "colScope": "范围",
+      "colDirection": "方向",
+      "colMinValue": "最小值",
+      "colCounterparty": "对手方",
+      "colStatus": "状态",
+      "allWatches": "全部",
+      "enabled": "已启用",
+      "disabled": "已禁用"
+    },
+    "watchlist": {
+      "title": "监控列表",
+      "scanNow": "立即扫描",
+      "filterPlaceholder": "筛选受监控钱包...",
+      "colStatus": "状态",
+      "colAddress": "地址",
+      "colChain": "链",
+      "colLabel": "标签",
+      "colLastChecked": "上次检查",
+      "colActions": "操作",
+      "active": "活跃",
+      "paused": "已暂停",
+      "empty": "暂无受监控钱包。"
+    },
+    "notifications": {
+      "title": "交易通知",
+      "ruleBadge": "规则：{{name}}",
+      "new": "新",
+      "openDetails": "打开交易详情",
+      "empty": "暂无交易通知。"
+    }
+  },
+  "fundTracer": {
+    "title": "资金流追踪器",
+    "subtitle": "多跳资金追踪 · 模式检测 · 风险图谱",
+    "completedIn": "于 {{seconds}}秒 完成",
+    "controls": {
+      "seedAddress": "种子地址",
+      "inputPlaceholder": "BTC / ETH / TRX / SOL 地址…",
+      "hops": "跳数 (1-5)",
+      "mode": "模式",
+      "modeLinear": "线性",
+      "modeWide": "广度",
+      "direction": "方向",
+      "dirOutflows": "流出",
+      "dirInflows": "流入",
+      "dirBoth": "双向",
+      "trace": "追踪",
+      "tracing": "追踪中…",
+      "traceTitle": "快速多跳追踪",
+      "deepAnalyze": "深度分析",
+      "analyzing": "分析中…",
+      "deepTitle": "带实时进度的深度分析：取证动机、套现、跨链、聚类、风险、剥链、分层、驻留",
+      "exportTitle": "导出 JSON"
+    },
+    "modeHintLinear": "线性 - 每跳最大的单一资金流。",
+    "modeHintWide": "广度 - 每跳前 3 个对手方（最多 20 个节点）。点击图谱中的节点查看详情。",
+    "errors": {
+      "traceFailed": "追踪失败",
+      "deepTimeout": "深度分析超时 — 对于活跃地址可能需要 1–3 分钟。请尝试减少跳数，或使用普通追踪进行快速的首轮扫描。"
+    },
+    "progress": {
+      "starting": "正在启动深度分析",
+      "connecting": "连接中…",
+      "following": "正在跨 {{hops}} 跳追踪资金并运行 8 轮分析。非常活跃的钱包将在时间预算内返回部分追踪。",
+      "runningDeep": "正在运行深度分析…",
+      "tracingFlows": "正在追踪资金流…",
+      "deepHint": "追踪 {{hops}} 跳后运行 5 个引擎 + 3 个算法。可能需要 30-90 秒。",
+      "traceHint": "跨 {{hops}} 跳查询区块链 API。可能需要 15-60 秒。"
+    },
+    "stats": {
+      "wallets": "钱包",
+      "transfers": "转账",
+      "flagged": "已标记",
+      "patterns": "模式",
+      "tlEvents": "TL 事件"
+    },
+    "warnings": {
+      "title": "追踪器备注",
+      "hidden": "+{{count}} 条额外备注已隐藏"
+    },
+    "chips": {
+      "walletClusters": "钱包聚类",
+      "crosschain": "跨链",
+      "crosschainValue": "{{bridges}} 个桥 · {{matches}} 笔价值匹配",
+      "peelChains": "剥链",
+      "layering": "分层",
+      "rapidWallets": "快速钱包",
+      "primaryCashout": "主要套现"
+    },
+    "patterns": {
+      "title": "模式警报（{{count}}）",
+      "colSeverity": "严重性",
+      "colPattern": "模式",
+      "colConfidence": "置信度",
+      "colDescription": "描述",
+      "docs": {
+        "sanctioned_exposure": "资金经过 OFAC/Chainalysis 制裁地址",
+        "mixer_exposure": "资金流中检测到与混币器或滚筒交互",
+        "scam_exposure": "对手方被社区诈骗数据库标记",
+        "bridge_swap_exposure": "跨链桥或 DEX 兑换活动 - 潜在分层",
+        "peel_chain": "连续的单输出交易 - 经典的 UTXO 剥链",
+        "fan_out": "资金从单一来源分散到多个接收方 - 扩散模式",
+        "fan_in": "多个输入汇聚到一个地址 - 聚合/合并",
+        "pass_through": "钱包接收并发送几乎所有资金而不留存",
+        "round_amounts": "可疑的整数交易金额 - 结构化指标",
+        "rapid_movement": "资金在收到后非常快地被转走 - 无停留时间",
+        "high_volume_low_balance": "交易量大但剩余余额极小"
+      }
+    },
+    "empty": {
+      "title": "输入加密地址以追踪资金流",
+      "hint": "追踪器跨区块链跳数跟踪资金，检测混币器、制裁地址、桥接分层和行为模式。"
+    }
+  },
+  "evidenceVault": {
+    "title": "证据保险库",
+    "subtitle": "不可变的工件存储，带 SHA-256 哈希 + 防篡改监管链",
+    "casePlaceholder": "案件 ID (UUID)",
+    "load": "加载",
+    "saveArtifact": "保存工件",
+    "deleteConfirm": "删除此证据工件？",
+    "summary": {
+      "artifacts": "工件数",
+      "avgQuality": "平均质量",
+      "byType": "按类型"
+    },
+    "filterPlaceholder": "按标题、地址、类型、标签筛选…",
+    "emptyWithCase": "未找到证据工件。请使用上方按钮保存您的第一个工件。",
+    "emptyNoCase": "输入案件 ID 以查看或添加证据",
+    "card": {
+      "notesPlaceholder": "分析师备注…",
+      "tagsPlaceholder": "标签（逗号分隔）",
+      "saving": "保存中…",
+      "save": "保存",
+      "cancel": "取消",
+      "annotate": "标注",
+      "export": "导出",
+      "auditLog": "审计日志",
+      "hide": "隐藏",
+      "delete": "删除"
+    },
+    "dialog": {
+      "title": "保存证据",
+      "type": "类型",
+      "subjectAddress": "目标地址",
+      "subjectPlaceholder": "0x…",
+      "titleField": "标题 *",
+      "titlePlaceholder": "证据标题",
+      "content": "内容（JSON 或纯文本）",
+      "contentPlaceholder": "{\"key\": \"value\"} 或纯文本",
+      "tags": "标签",
+      "tagsPlaceholder": "exchange, structuring, …",
+      "analystNotes": "分析师备注",
+      "notesPlaceholder": "可选备注",
+      "titleRequired": "标题为必填项",
+      "save": "保存证据",
+      "cancel": "取消"
+    },
+    "custody": {
+      "verify": "验证监管链",
+      "verifying": "…",
+      "chainIntact": "✓ 链完整（{{count}} 条记录）",
+      "chainBroken": "✗ 链已断裂 - {{count}} 个问题",
+      "tipValid": "链尖端 {{tip}} · 已于 {{at}} 验证",
+      "tipInvalid": "{{title}}：{{error}}"
+    }
+  },
+  "txLens": {
+    "title": "TX 透镜",
+    "subtitle": "按交易 ID 调查，包含本地价值流图谱、各方归因线索、跳转、追踪与 AI 合成",
+    "inputPlaceholder": "交易哈希 / TXID...",
+    "focusPlaceholder": "可选的 AI 焦点，例如识别可能的资金来源、交易所出口、混币器敞口或同控线索。",
+    "submit": "调查 TX",
+    "options": {
+      "includeAi": "包含 AI 合成",
+      "deepEnrichment": "深度各方补全",
+      "expandTraces": "围绕主要各方扩展追踪",
+      "fullModeHint": "默认启用全质量模式；后端阶段运行时显示进度。"
+    },
+    "errors": {
+      "failed": "TX 透镜失败",
+      "jobFailed": "TX 透镜任务失败",
+      "noResult": "TX 透镜任务已完成但没有结果"
+    },
+    "progress": {
+      "starting": "启动中",
+      "detailFallback": "正在准备后端调查任务。",
+      "stages": {
+        "resolving": "解析交易",
+        "extracting": "提取价值流",
+        "enriching": "补全各方",
+        "labels": "加载本地标签",
+        "expanding": "扩展追踪上下文",
+        "algorithms": "运行本地算法",
+        "ai": "合成 AI 评估",
+        "finalizing": "生成报告"
+      }
+    },
+    "graph": {
+      "findPlaceholder": "查找方地址、角色或风险...",
+      "layoutFlow": "流向车道",
+      "layoutRisk": "风险车道",
+      "layoutRole": "角色车道",
+      "allFlows": "全部流向",
+      "focusOn": "聚焦开",
+      "focusOff": "聚焦关",
+      "labelsOn": "标签开",
+      "labelsOff": "标签关",
+      "minRisk": "最小方风险：",
+      "colSenders": "发送方",
+      "colIntermediates": "中间方",
+      "colMediumRisk": "中等风险",
+      "colRecipients": "接收方",
+      "colLowRisk": "低风险",
+      "legendNative": "原生",
+      "legendToken": "代币",
+      "legendInternal": "内部",
+      "legendHighRisk": "高风险方",
+      "statVisibleParties": "可见方",
+      "statVisibleFlows": "可见流向",
+      "statAssetFilter": "资产过滤",
+      "statSelected": "已选",
+      "statLayout": "布局",
+      "flowContract": "合约：{{addr}}",
+      "flowTimeUnknown": "时间未知"
+    },
+    "profile": {
+      "title": "交易档案",
+      "timeUnavailable": "时间不可用",
+      "explorer": "浏览器",
+      "exportJson": "导出 JSON",
+      "statTxRisk": "TX 风险",
+      "statParties": "各方",
+      "statFlows": "流向",
+      "statAssets": "资产",
+      "statIndicators": "指标",
+      "statTopParty": "最高风险方",
+      "statValue": "价值"
+    },
+    "tabs": {
+      "flowGraph": "流向图谱",
+      "analysis": "分析",
+      "parties": "各方与跳转"
+    },
+    "panels": {
+      "graphTitle": "交易价值流向图谱",
+      "selectedParty": "已选方",
+      "selectPartyHint": "在图谱中选择一个方节点。",
+      "risk": "风险",
+      "role": "角色",
+      "inbound": "入站",
+      "outbound": "出站",
+      "labels": "标签：",
+      "openIntel": "打开地址情报",
+      "traceContext": "追踪上下文",
+      "traced": "已追踪：",
+      "notExpanded": "未扩展",
+      "aiTitle": "AI 交易评估",
+      "laundering": "洗钱指标",
+      "launderingEmpty": "未检测到交易层面的洗钱指标。",
+      "attribution": "归因线索",
+      "nextSteps": "后续步骤",
+      "partyQueue": "各方风险与跳转队列"
+    },
+    "table": {
+      "colPriority": "优先级",
+      "colAddress": "地址",
+      "colRole": "角色",
+      "colRisk": "风险",
+      "colFlow": "流向",
+      "colReasons": "原因"
+    }
+  },
+  "addressIntel": {
+    "title": "地址情报",
+    "subtitle": "全方位地址情报 —— 风险评分、制裁暴露、代币持仓、混币器告警与归因溯源，一次查询全部呈现。",
+    "inputPlaceholder": "加密地址 / ENS 名称…",
+    "lookup": "查询",
+    "trace": "追踪",
+    "ai": "AI",
+    "forensics": "取证",
+    "dex": "DEX",
+    "errors": {
+      "lookupFailed": "查询失败"
+    },
+    "header": {
+      "via": "通过 {{source}}",
+      "copied": "已复制！",
+      "viewOnExplorer": "在浏览器中查看"
+    },
+    "stats": {
+      "balance": "余额",
+      "transactions": "交易数",
+      "txSplit": "{{native}} 笔原生 / {{token}} 笔代币",
+      "firstSeen": "首次出现",
+      "lastActive": "最近活跃",
+      "totalReceived": "总收到："
+    },
+    "tabs": {
+      "overview": "概览",
+      "intel": "情报",
+      "activity": "活动",
+      "network": "网络"
+    },
+    "risk": {
+      "title": "风险评估",
+      "categories": "风险类别",
+      "noneDetected": "未检测到",
+      "indicators": {
+        "mixer": "混币器交互",
+        "scam": "诈骗报告",
+        "bridge": "跨链桥跳转",
+        "swap": "DEX 兑换"
+      },
+      "exposure": "资金敞口",
+      "signals": "风险信号 ({{count}})",
+      "snapshot": "风险快照",
+      "scoring": "评分中…",
+      "unavailable": "风险评分不可用。"
+    },
+    "pivots": {
+      "title": "快速跳转",
+      "openNexus": "打开 Nexus",
+      "holisticTrace": "全息追踪",
+      "fundTracer": "资金追踪器"
+    },
+    "addToCase": {
+      "button": "加入案件",
+      "title": "加入调查案件",
+      "noCases": "暂无案件。",
+      "createOne": "创建一个",
+      "selectCase": "选择案件…",
+      "labelPlaceholder": "标签（可选）",
+      "addAddress": "添加地址",
+      "saving": "保存中…",
+      "added": "✓ 已添加！"
+    },
+    "attribution": {
+      "title": "归因分析",
+      "running": "正在跨情报源执行归因分析…",
+      "failed": "归因分析失败：{{error}}",
+      "retry": "重试",
+      "none": "未找到此地址的公开所有者归因或钱包档案。",
+      "rerun": "重新运行分析",
+      "owner": "所有者",
+      "verified": "已验证",
+      "confidence": "{{pct}}% 置信",
+      "alsoKnownAs": "亦称：{{aliases}}",
+      "balances": "关联钱包余额",
+      "tokenCol": "代币",
+      "priceCol": "价格",
+      "amountCol": "数量",
+      "usdCol": "USD 价值",
+      "moreTokens": "+{{count}} 个更多代币",
+      "scam": "诈骗",
+      "suspicious": "可疑",
+      "defiPositions": "DeFi 持仓"
+    },
+    "scam": {
+      "title": "ScamSearch 报告 ({{count}})",
+      "name": "名称：",
+      "category": "类别：",
+      "date": "日期："
+    },
+    "enrichment": {
+      "title": "公开补全",
+      "subtitle": "开放资讯流 + 免费 API",
+      "publicLabels": "公开标签",
+      "abuseReports": "滥用报告",
+      "ransomwareHits": "勒索软件命中",
+      "chainTvl": "链 TVL · 市场",
+      "ransomwareMatch": "勒索软件数据集匹配",
+      "via": "通过 {{source}}",
+      "labelsTitle": "标签与数据集匹配",
+      "labelCategoryLabel": "标签",
+      "marketContext": "市场背景",
+      "marketContextSub": "· 全球价格，非地址特定",
+      "providerWarnings": "提供商警告：{{warnings}}",
+      "unavailable": "不可用",
+      "optionalProviders": "设置中提供可选提供商：{{providers}}"
+    },
+    "activity": {
+      "title": "活动",
+      "empty": "当前公开数据源未返回任何交易行。",
+      "allTransactions": "全部交易",
+      "recentTransactions": "近期交易"
+    }
+  },
+  "common": {
+    "loading": "加载中…",
+    "error": "出错了。",
+    "retry": "重试",
+    "copy": "复制",
+    "copied": "已复制",
+    "export": "导出",
+    "noData": "无数据",
+    "address": "地址",
+    "amount": "金额",
+    "timestamp": "时间戳"
+  },
+  "scamAtlas": {
+    "title": "骗局网络图谱",
+    "subtitle": "跨受害者基础设施聚类：共享的充值地址、域名、邮箱与昵称将单独的受害者报告折叠为命名的骗局网络 — 以套件指纹和深度伪造 KYC 信号作为线索。",
+    "recluster": "重新聚类",
+    "stats": {
+      "victimReports": "受害者报告",
+      "scamNetworks": "骗局网络",
+      "totalDamage": "总损失",
+      "syntheticKyc": "合成 KYC 标记"
+    },
+    "list": {
+      "victimsDamage": "{{count}} 名受害者 · ${{damage}}",
+      "empty": "暂无网络 — 请先提交受害者报告。",
+      "selectPrompt": "选择一个网络。"
+    },
+    "detail": {
+      "loading": "正在加载网络…",
+      "meta": "{{count}} 份报告 · 损失 ${{damage}} · {{dates}} · 链 {{chains}}",
+      "undated": "未注明日期",
+      "dateRange": "{{from}} → {{to}}",
+      "promote": "提升至归因",
+      "promoted": "{{count}} 个地址已登记为来源可追踪的归因线索。",
+      "basis": "依据：{{basis}}",
+      "addresses": "充值地址 ({{count}})",
+      "intel": "情报",
+      "domains": "域名",
+      "emails": "邮箱",
+      "handles": "昵称",
+      "linkingArtifacts": "关联工件",
+      "memberReports": "成员受害者报告",
+      "colType": "类型",
+      "colScammerAddr": "骗子地址",
+      "colUsd": "USD",
+      "colChain": "链",
+      "colIncident": "事件",
+      "colStatus": "状态"
+    }
+  },
+  "caseManager": {
+    "title": "调查案件",
+    "subtitle": "管理加密网络犯罪调查案件",
+    "newCase": "新建案件",
+    "create": {
+      "title": "新建调查案件",
+      "namePlaceholder": "案件名称（例如 Binance Hack 2024-Q3）",
+      "descPlaceholder": "描述 / 目标（可选）",
+      "submit": "创建案件",
+      "cancel": "取消",
+      "failed": "创建案件失败。请重试。"
+    },
+    "filter": {
+      "all": "全部",
+      "active": "活跃",
+      "closed": "已关闭",
+      "archived": "已归档"
+    },
+    "count_one": "{{count}} 个案件",
+    "count_other": "{{count}} 个案件",
+    "loadFailed": "加载案件失败",
+    "empty": "暂无案件 - 创建您的第一次调查",
+    "card": {
+      "addrCount": "{{count}} 个地址",
+      "updated": "更新于 {{date}}",
+      "maxRisk": "最高风险：{{score}}/100",
+      "open": "打开",
+      "deleteConfirm": "删除案件“{{name}}”？"
+    }
+  },
+  "boardShared": {
+    "errors": {
+      "revoked": "此分享链接已被撤销。",
+      "expired": "此分享链接已过期。",
+      "notFound": "未找到分享链接。",
+      "denied": "访问被拒绝",
+      "unable": "无法打开此看板。"
+    },
+    "opening": "正在打开共享看板…",
+    "password": {
+      "title": "受保护的调查看板",
+      "hint": "此看板以密码保护方式共享。请输入调查员提供的密码。",
+      "placeholder": "密码",
+      "unlock": "解锁"
+    },
+    "header": {
+      "readonlyLive": "只读 · 实时看板",
+      "readonlySnapshot": "只读 · 快照冻结于 {{date}}",
+      "sealTitle": "看板状态的 SHA-256 完整性印章",
+      "stats": "{{nodes}} 个节点 · {{edges}} 条边 · 通过 CrypTX 共享"
+    }
+  },
+  "reportStudio": {
+    "title": "报告工作室",
+    "subtitle": "从案件生成针对受众定制的、CrypTX 品牌的调查报告。",
+    "caseLabel": "案件",
+    "noCases": "未找到案件",
+    "caseMeta": "{{count}} 个地址 · 状态 {{status}}",
+    "reportTypeLabel": "报告类型",
+    "generate": "生成报告",
+    "generating": "生成中...",
+    "errors": {
+      "failed": "报告生成失败。请检查案件是否有数据后再试。"
+    },
+    "preview": {
+      "title": "预览",
+      "regenerate": "重新生成",
+      "print": "打印 / 另存为 PDF",
+      "openTab": "在新标签页打开",
+      "download": "下载 HTML",
+      "downloadBtn": "下载",
+      "exportAs": "导出为：",
+      "building": "正在构建报告…",
+      "empty": "选择一个案件和报告类型，然后生成。"
+    }
+  },
+  "batchScreener": {
+    "title": "批量地址筛查",
+    "subtitle": "并行筛查最多 100 个地址的制裁、混币器和风险信号",
+    "inputLabel": "输入地址",
+    "countLabel": "{{count}} / 100 个地址",
+    "screenBtn": "筛查 {{count}} 个地址",
+    "screening": "筛查中…",
+    "clear": "清除",
+    "exportCsv": "导出 CSV",
+    "errors": {
+      "failed": "筛查失败 - 后端是否在运行？"
+    },
+    "stats": {
+      "total": "总数",
+      "scored": "已评分",
+      "avg": "均值",
+      "max": "最高",
+      "sanctioned": "受制裁",
+      "critHigh": "危急+高",
+      "medium": "中",
+      "clean": "干净"
+    },
+    "filter": {
+      "all": "全部",
+      "sanctioned": "受制裁",
+      "critical": "危急",
+      "high": "高",
+      "medium": "中",
+      "low": "低",
+      "clean": "干净"
+    },
+    "rowsCount": "{{count}} 行",
+    "table": {
+      "score": "评分",
+      "level": "级别",
+      "address": "地址",
+      "chain": "链",
+      "signals": "信号",
+      "actions": "操作",
+      "fullIntel": "完整情报 →"
+    },
+    "empty": "在上方粘贴地址并点击筛查"
+  },
+  "labelIntel": {
+    "title": "本地标签情报",
+    "subtitle": "调查员拥有的归因、风险标签和 CSV 导入，供本地取证引擎使用",
+    "addLabel": {
+      "title": "添加标签",
+      "addressPh": "地址",
+      "chainPh": "链",
+      "labelPh": "标签",
+      "categoryPh": "类别",
+      "riskPh": "风险",
+      "confPh": "置信",
+      "notesPh": "备注",
+      "addBtn": "添加"
+    },
+    "csv": {
+      "title": "CSV 导入",
+      "placeholder": "address,chain,label,category,risk_weight,confidence,source,notes",
+      "importBtn": "导入 CSV"
+    },
+    "attributionImports": {
+      "title": "归因数据库导入",
+      "hint": "从开放标签集扩展来源可追踪的归因数据库。自动去重；每条记录保留其来源。确认的受害者报告也会自动填充此数据库。",
+      "ofacBtn": "导入内置 OFAC SDN 列表",
+      "ofacResult": "已导入 {{imported}} · 跳过 {{skipped}} 个重复（共 {{rows}} 行）",
+      "ofacFailed": "导入失败 - 请检查后端日志。",
+      "duneHint": "Dune / GitHub 标签集：转换为 JSON 并 POST 到 /api/attribution/import，格式为 {items: [{address, category, label, source}]}。"
+    },
+    "vasp": {
+      "title": "VASP 尽职调查档案",
+      "placeholder": "VASP 名称，例如 “Binance”",
+      "buildBtn": "构建档案",
+      "downloadMd": "下载 (MD)",
+      "failed": "档案失败",
+      "countryUnknown": "国家未知",
+      "jurisdictionUnknown": "司法管辖区未知",
+      "risk": "风险：{{level}}",
+      "statAddresses": "地址",
+      "statChains": "链",
+      "statSanctions": "制裁命中",
+      "statHighRisk": "高风险标签"
+    },
+    "labelsTable": {
+      "title": "标签 ({{count}})",
+      "searchPh": "搜索标签...",
+      "empty": "暂无本地标签。",
+      "colAddress": "地址",
+      "colChain": "链",
+      "colLabel": "标签",
+      "colCategory": "类别",
+      "colRisk": "风险",
+      "colSource": "来源"
+    }
+  },
+  "osintSweep": {
+    "title": "OSINT 扫描",
+    "subtitle": "扫描任意地址的社交媒体、论坛、粘贴站点、暗网索引与深度 Reddit（帖子 + 评论）",
+    "inputPlaceholder": "输入任意加密地址…",
+    "sweep": "扫描",
+    "loading": "正在查询 CryptoScamDB、Chainabuse、Ahmia 暗网、Reddit、X、Telegram、BitcoinTalk、GitHub、Pastebin、开放网络…",
+    "errors": {
+      "failed": "扫描失败"
+    },
+    "reddit": {
+      "all": "Reddit：帖子 + 评论",
+      "posts": "Reddit：仅帖子",
+      "comments": "Reddit：仅评论",
+      "off": "Reddit：快速（无深度扫描）"
+    },
+    "deepReddit": {
+      "title": "深度 Reddit 研究",
+      "postsWord": "篇帖子",
+      "commentsWord": "条评论匹配",
+      "showAll": "显示全部",
+      "showReddit": "仅显示 Reddit"
+    },
+    "pivots": {
+      "label": "跳转",
+      "nexus": "在 Nexus 中调查",
+      "addressIntel": "地址情报"
+    },
+    "evidence": {
+      "totalHits": "共 {{count}} 条命中 · 扫描于 {{at}}",
+      "cached": "已缓存",
+      "selectCase": "选择案件…",
+      "fileBtn": "归档至证据保险库",
+      "filedOk": "已归档为证据 {{id}}…（链 {{hash}}…）",
+      "filedFail": "归档失败"
+    },
+    "hits": {
+      "empty": "未找到公开提及。OSINT 无命中本身也是一种调查信号。",
+      "open": "打开"
+    },
+    "sources": {
+      "additional": "额外来源（需要 API 密钥）",
+      "fallback": "已使用回退搜索"
+    }
+  },
+  "predictive": {
+    "title": "预测式 AI",
+    "subtitle": "预犯罪检测 — 混合前驱模式 · 群体异常统计 · 基于历史标签的机器学习",
+    "inputPlaceholder": "待分析未来犯罪活动的地址…",
+    "predict": "预测",
+    "errors": {
+      "prediction": "预测失败",
+      "training": "训练失败"
+    },
+    "model": {
+      "mlModel": "ML 模型",
+      "notTrained": "未训练",
+      "heuristicMode": "启发式 + 异常模式",
+      "samples": "{{count}} 个样本 / {{positives}} 个非法",
+      "featureStore": "特征存储",
+      "profiles": "{{count}} 个档案",
+      "baselineStats": "{{count}} 条基线统计",
+      "predictions": "预测",
+      "logged": "已记录 {{count}} 条",
+      "fullAudit": "完整审计追踪",
+      "retrain": "从历史重新训练",
+      "trainMl": "训练 ML 层",
+      "training": "训练中…",
+      "trainHint": "使用标签 + 制裁 + 诈骗数据",
+      "trainedMsg": "模型已训练：{{samples}} 个样本（{{positives}} 个非法），准确率 {{accuracy}}% [{{engine}}]",
+      "notTrainedMsg": "未训练 — {{reason}}"
+    },
+    "verdict": {
+      "titlePrefix": "综合威胁：",
+      "primaryVector": "主要威胁向量：",
+      "expectedWindow": "预期窗口",
+      "addToMonitor": "→ 加入监控",
+      "traceFunds": "→ 追踪资金",
+      "fullIntel": "→ 完整情报"
+    },
+    "card": {
+      "confidence": "置信度 {{pct}}%",
+      "trend": "趋势：{{trend}}",
+      "layerPrecursors": "前驱",
+      "layerAnomaly": "异常",
+      "layerMl": "ML 模型",
+      "evidence": "证据链 ({{count}})",
+      "recommendedActions": "建议操作"
+    },
+    "history": {
+      "title": "近期预测"
+    },
+    "types": {
+      "laundering": "洗钱 / 套现",
+      "rugpull": "骗局 / Rug-pull",
+      "trajectory": "风险轨迹",
+      "victim": "受害者定向",
+      "launderingBlurb": "资金移动前的准备行为",
+      "rugpullBlurb": "运营者与部署者的预犯罪特征",
+      "trajectoryBlurb": "7/30/90 天的升级预测",
+      "victimBlurb": "粉尘攻击、投毒与抽水器侦察"
+    }
+  },
+  "boards": {
+    "title": "调查看板",
+    "subtitle": "Crimewall 画布 — 固定实体、串联关系、划分区域并交接调查",
+    "newBoard": "新建看板",
+    "stats": {
+      "boards": "个看板",
+      "pins": "个固定",
+      "connections": "条连接",
+      "openNotes": "条交接备注"
+    },
+    "search": "搜索看板…",
+    "sort": {
+      "updated": "最近更新",
+      "created": "最新",
+      "name": "名称 A–Z",
+      "nodes": "最多固定"
+    },
+    "create": {
+      "title": "新建看板",
+      "namePh": "看板名称（例如 Alphapo hot-wallet drain - ETH leg）",
+      "descPh": "描述（可选）",
+      "noCase": "无关联案件",
+      "submit": "创建并打开",
+      "cancel": "取消"
+    },
+    "folders": {
+      "label": "文件夹",
+      "newFolder": "新建文件夹",
+      "allBoards": "全部看板",
+      "namePh": "文件夹名称…",
+      "rename": "重命名",
+      "deleteFolder": "删除文件夹（保留看板）"
+    },
+    "loading": "正在加载看板…",
+    "empty": {
+      "noMatch": "没有看板匹配“{{query}}”。",
+      "noBoards": "暂无看板。创建一个即可开始将地址、实体和证据固定到持久化的 crimewall。",
+      "noBoardsFolder": "此文件夹中暂无看板。创建一个即可开始将地址、实体和证据固定到持久化的 crimewall。"
+    },
+    "groups": {
+      "assigned": "已分配至案件 ({{count}})",
+      "unassigned": "未分配 ({{count}})",
+      "boardsCount": "· {{count}} 个看板"
+    },
+    "card": {
+      "pins": "{{count}} 个固定",
+      "links": "{{count}} 条链接",
+      "updated": "更新于 {{date}}",
+      "duplicate": "复制",
+      "delete": "删除",
+      "deleteConfirm": "删除看板“{{name}}”？"
+    }
+  },
+  "aiAgent": {
+    "title": "AI 调查员",
+    "subtitle": "选择一个案件分配给 AI。它将案件的地址、证据、风险和备注加载到上下文中，然后回答您的问题并执行结构化操作 — 有据可查，附引用。",
+    "loadingCases": "正在加载案件…",
+    "noCases": "暂无案件。在“案件”中创建一个，然后回来分配给 AI。",
+    "caseMeta": "{{addr}} 地址 · {{evidence}} 证据 · {{notes}} 备注",
+    "assignToAi": "分配给 AI",
+    "changeCase": "更换案件",
+    "case": "案件",
+    "assigning": "正在分配案件…",
+    "thinking": "调查员正在思考…",
+    "chatPlaceholder": "询问该案件的地址、证据、洗钱路径、后续步骤…",
+    "runAction": "▶ 执行操作：{{label}}",
+    "unparseable": "模型返回了无法解析的结果。",
+    "sidebar": {
+      "context": "案件上下文",
+      "addresses": "地址",
+      "evidence": "证据",
+      "notes": "备注",
+      "quickActions": "快速操作",
+      "suggestedPrompts": "建议提示"
+    },
+    "status": {
+      "connected": "AI 提供商已连接",
+      "notConfigured": "AI 未配置",
+      "notConfiguredHint": "AI 未配置 — 在设置中添加提供商密钥以启用回答"
+    }
+  },
+  "caseDetail": {
+    "notFound": "未找到案件",
+    "allCases": "全部案件",
+    "created": "创建于 {{date}}",
+    "addressCount": "{{count}} 个地址",
+    "forensicReport": "取证报告",
+    "exportReport": "导出报告",
+    "addAddress": {
+      "title": "添加地址",
+      "addrPh": "0x… / bc1… / T… / r… 任意链",
+      "labelPh": "标签（可选）",
+      "addBtn": "添加"
+    },
+    "addresses": {
+      "title": "目标地址 ({{count}})",
+      "empty": "尚未添加地址。",
+      "unscored": "未评分",
+      "rescan": "重新扫描",
+      "screen": "筛查",
+      "fullIntel": "完整情报",
+      "riskChain": "链",
+      "riskBalance": "余额",
+      "riskTxs": "交易数"
+    },
+    "notes": {
+      "title": "调查员备注 ({{count}})",
+      "placeholder": "添加调查备注…",
+      "addBtn": "添加"
+    },
+    "boards": {
+      "title": "调查看板 ({{count}})",
+      "newBoard": "新看板",
+      "namePh": "看板名称（例如 头脑风暴 — 套现路线）",
+      "createLink": "创建并关联到此案件",
+      "loading": "正在加载看板…",
+      "empty": "尚未有关联此案件的看板。",
+      "emptyHint": "创建一个头脑风暴画布并在此关联。",
+      "pins": "{{count}} 个固定",
+      "links": "{{count}} 条链接",
+      "comments": "{{count}} 条评论"
+    },
+    "taskManagement": "任务管理",
+    "auditLog": "审计日志",
+    "backToCase": "返回案件",
+    "team": {
+      "title": "团队 ({{count}})",
+      "reviewer": "审核员",
+      "fullAccess": "完全访问",
+      "rev": "审核",
+      "full": "完全",
+      "changeRole": "更改角色",
+      "removeFromCase": "从案件中移除",
+      "toggleRole": "切换角色",
+      "remove": "移除",
+      "removeConfirm": "确定移除成员？",
+      "selectMember": "选择要分配的团队成员：",
+      "allAssigned": "所有团队成员已分配。",
+      "allAssignedShort": "所有成员已分配。",
+      "role": "角色：",
+      "assign": "分配",
+      "cancel": "取消"
+    }
+  },
+  "caseTask": {
+    "title": "任务管理",
+    "pageTitle": "{{name}} — 任务管理",
+    "caseNotFound": "案件未找到",
+    "backToCase": "返回案件",
+    "auditLog": "审计日志",
+    "newTask": "新建任务",
+    "tabs": {
+      "tasks": "任务",
+      "audit": "审计"
+    },
+    "stats": {
+      "open": "{{count}} 个待处理",
+      "inProgress": "{{count}} 个进行中",
+      "done": "{{count}} 个已完成",
+      "overdue": "{{count}} 个已逾期",
+      "members": "{{count}} 名成员"
+    },
+    "filters": {
+      "searchPh": "搜索任务...",
+      "allStatus": "所有状态",
+      "allPriority": "所有优先级",
+      "allAssignees": "所有负责人",
+      "clear": "清除筛选"
+    },
+    "status": {
+      "open": "待处理",
+      "in_progress": "进行中",
+      "done": "已完成",
+      "closed": "已关闭"
+    },
+    "priority": {
+      "low": "低",
+      "medium": "中",
+      "high": "高",
+      "urgent": "紧急"
+    },
+    "taskCard": {
+      "assigned": "负责人：",
+      "overdue": "已逾期"
+    },
+    "detail": {
+      "assignedTo": "负责人：",
+      "createdBy": "创建者：",
+      "due": "截止日期：",
+      "created": "创建时间：",
+      "delete": "删除",
+      "deleteConfirm": "确定删除此任务？",
+      "chat": "聊天",
+      "deliverables": "交付物 ({{count}})",
+      "noMessages": "暂无消息，开始对话吧。",
+      "typeMsgPh": "输入消息...",
+      "noDeliverables": "暂无交付物。",
+      "review": "审核：",
+      "reviewNotePh": "审核备注...",
+      "approve": "批准",
+      "revise": "修改",
+      "reject": "拒绝",
+      "submit": "提交",
+      "cancel": "取消",
+      "titlePh": "标题 *",
+      "descPh": "描述",
+      "contentPh": "内容/调查结果...",
+      "submitDeliverable": "提交交付物"
+    },
+    "create": {
+      "title": "分配新任务",
+      "titleLabel": "标题 *",
+      "taskTitlePh": "任务标题",
+      "descLabel": "描述",
+      "taskDescPh": "任务描述",
+      "assigneeLabel": "负责人 *",
+      "selectAssignee": "选择负责人",
+      "priorityLabel": "优先级",
+      "dueDateLabel": "截止日期",
+      "createBtn": "创建任务",
+      "cancel": "取消"
+    }
+  },
+  "victimReport": {
+    "title": "受害者报告与骗局情报",
+    "subtitle": "受理 • 聚类 • 执法导出",
+    "submitReport": "提交报告",
+    "tabs": {
+      "reports": "受害者报告",
+      "intel": "骗局情报"
+    },
+    "stats": {
+      "totalReports": "报告总数",
+      "uniqueScammers": "独立骗子",
+      "totalDamage": "总损失",
+      "chainsAffected": "受影响链"
+    },
+    "form": {
+      "title": "提交受害者报告",
+      "scamType": "骗局类型 *",
+      "chain": "链 *",
+      "scammerAddr": "骗子地址 *",
+      "scammerAddrPh": "0x… 或 bc1… 或 Tron…",
+      "amountLost": "损失金额 (USD)",
+      "token": "代币 / 资产",
+      "tokenPh": "ETH, USDT, BTC…",
+      "incidentDate": "事件日期",
+      "victimAddr": "受害者地址（可选）",
+      "victimAddrPh": "您的钱包地址",
+      "description": "骗局描述",
+      "descriptionPh": "描述骗局如何发生、对方做了哪些承诺、使用的沟通渠道…",
+      "txHashes": "交易哈希（每行一个或逗号分隔）",
+      "contactInfo": "联系信息（仅供调查员使用）",
+      "yourName": "您的姓名",
+      "email": "邮箱",
+      "jurisdiction": "司法管辖区（国家 / 地区）",
+      "jurisdictionPh": "例如 中国 / 上海",
+      "tags": "标签（逗号分隔）",
+      "tagsPh": "romance, crypto, 2024",
+      "linkCase": "关联案件 ID",
+      "linkCasePh": "案件 UUID（可选）",
+      "cancel": "取消",
+      "submit": "提交报告",
+      "submitting": "提交中…",
+      "addrRequired": "骗子地址为必填项",
+      "privacyNote": "联系信息安全存储，仅与处理此案件的调查员共享。"
+    },
+    "report": {
+      "scammerAddr": "骗子地址",
+      "victimAddr": "受害者地址",
+      "description": "描述",
+      "txHashes": "交易哈希",
+      "analystNotes": "分析师备注",
+      "statusLabel": "状态：",
+      "delete": "删除",
+      "deleteConfirm": "删除此受害者报告？此操作不可撤销。"
+    },
+    "status": {
+      "open": "待处理",
+      "underReview": "审查中",
+      "escalated": "已升级",
+      "referred": "已转交执法",
+      "closed": "已关闭"
+    },
+    "cluster": {
+      "victims_one": "{{count}} 名受害者",
+      "victims_other": "{{count}} 名受害者",
+      "filterReports": "筛选此地址的报告"
+    },
+    "filters": {
+      "byAddrPh": "按骗子地址筛选…",
+      "allTypes": "全部类型",
+      "allStatuses": "全部状态",
+      "allChains": "全部链",
+      "clear": "清除",
+      "selectAll": "全选 ({{count}})",
+      "deselectAll": "取消全选",
+      "exportSelected": "导出 {{count}} 条选中",
+      "reportCount_one": "共 {{count}} 份报告",
+      "reportCount_other": "共 {{count}} 份报告",
+      "loading": "加载中…"
+    },
+    "empty": {
+      "noReports": "未找到报告",
+      "tryFilters": "请尝试调整筛选条件。",
+      "submitFirst": "提交第一份受害者报告以开始追踪骗局活动。"
+    },
+    "intel": {
+      "clusters": "骗子聚类",
+      "clustersByDamage_one": "按损失 {{count}} 个聚类",
+      "clustersByDamage_other": "按损失 {{count}} 个聚类",
+      "noClusters": "暂无聚类。提交受害者报告以构建情报。",
+      "byScamType": "按骗局类型",
+      "byStatus": "按状态",
+      "topScammers": "按损失排名的顶级骗子",
+      "recentReports": "近期报告",
+      "ongoing": "进行中"
+    }
+  },
+  "boardCanvas": {
+    "loadFailed": "加载看板失败",
+    "backToBoards": "返回看板",
+    "allBoards": "全部看板",
+    "saved": "已保存 · v{{version}}",
+    "saving": "保存中…",
+    "saveError": "保存失败",
+    "unsaved": "未保存的更改",
+    "addPlaceholder": "添加地址或 TX 哈希…",
+    "busy": {
+      "autoConnecting": "自动连接中…",
+      "expanding": "正在扩展 {{addr}}…",
+      "fetchingTx": "正在获取 TX {{hash}}…"
+    },
+    "toolbar": {
+      "entityPin": "添加 crimewall 实体固定",
+      "selectMode": "选择 / 移动 (Esc)",
+      "linkMode": "红线：点击两个固定以关联 (L)",
+      "zoneMode": "绘制调查区域（在画布上拖动）",
+      "autoLayout": "自动布局",
+      "forceLayout": "力导向布局",
+      "timelineLayout": "时间线（按 TX 时间）",
+      "gridLayout": "网格",
+      "hierarchicalLayout": "层次结构（流程树）",
+      "fitView": "适应视图 (F)",
+      "undo": "撤销 (Ctrl+Z)",
+      "redo": "重做 (Ctrl+Shift+Z)",
+      "fiatToggle": "切换 USD ↔ 原生",
+      "addNote": "添加注释便签",
+      "legend": "图例",
+      "exportPng": "将画布导出为 PNG 证物",
+      "nexus": "在 Nexus 调查图谱中打开 {{subject}}",
+      "share": "分享看板",
+      "comments": "评论与交接备注"
+    },
+    "mode": {
+      "link": "关联模式：点击两个固定以绘制关系（Esc 退出）",
+      "zone": "区域模式：在画布上拖动以绘制命名的调查区域（Esc 退出）"
+    },
+    "search": {
+      "placeholder": "搜索画布…",
+      "previous": "上一个",
+      "next": "下一个"
+    },
+    "cluster": {
+      "namePh": "聚类名称（例如 “可疑钱包组 A”）"
+    },
+    "context": {
+      "expand": "扩展 1 跳",
+      "split": "拆分交易",
+      "delete": "删除",
+      "groupSelection": "组合选中",
+      "ungroup": "取消组合",
+      "deleteZone": "删除区域"
+    },
+    "legend": {
+      "title": "图例"
+    },
+    "node": {
+      "labelPh": "例如 受害者充值钱包",
+      "notePh": "自由文本分析师备注…",
+      "socialPh": "@昵称 / 个人资料 URL",
+      "attrKey": "键",
+      "attrValue": "值"
+    },
+    "edge": {
+      "labelPh": "例如 共享的 KYC 自拍"
+    },
+    "zone": {
+      "labelPh": "例如 “分层”、“套现”、“受害者资金”",
+      "nameLabel": "区域名称",
+      "colorLabel": "区域颜色"
+    },
+    "share": {
+      "title": "分享看板",
+      "public": "公开",
+      "private": "私密",
+      "passwordPh": "外部方密码…",
+      "snapshot": "快照（冻结）",
+      "noExpiry": "不过期",
+      "hours": "{{hours}}小时",
+      "create": "创建分享链接",
+      "created": "只读链接已创建",
+      "encrypted": "快照已静态加密",
+      "copy": "复制",
+      "copied": "已复制",
+      "revoke": "撤销",
+      "noLinks": "没有活跃的分享链接。"
+    },
+    "comments": {
+      "title": "评论与交接备注",
+      "resolve": "解决",
+      "placeholder": "给团队的交接备注…",
+      "add": "添加备注"
+    }
+  },
+  "nexusGraph": {
+    "title": "Nexus 关系图",
+    "subtitle": "力导向调查图谱 · 拖拽节点 · 右键操作 · 双击固定",
+    "searchPlaceholder": "地址或 ENS…",
+    "loading": "正在构建调查图谱…",
+    "empty": "在上方输入钱包地址以构建调查图谱",
+    "phases": {
+      "intel": "阶段 1 · 地址情报",
+      "trace": "阶段 2 · 交易追踪",
+      "nexus": "阶段 3 · Nexus 图谱分析"
+    },
+    "stats": {
+      "nodes": "节点",
+      "edges": "边",
+      "risk": "风险"
+    },
+    "controls": {
+      "layout": "布局",
+      "flow": "流向（资金追踪）",
+      "force": "力导向物理",
+      "community": "社区",
+      "radial": "放射状",
+      "nodeSize": "节点大小指标",
+      "risk": "风险",
+      "degree": "度数",
+      "volume": "交易量",
+      "uniform": "统一",
+      "traceLines": "追踪线",
+      "bundled": "捆绑对",
+      "traceScope": "追踪范围",
+      "expand": "扩展",
+      "trace": "追踪",
+      "restore": "恢复原始图谱",
+      "expandSelected": "扩展选中钱包",
+      "legend": "切换画布上的图例"
+    },
+    "context": {
+      "copyAddress": "复制地址",
+      "fullIntel": "完整地址情报",
+      "expand1hop": "双向扩展 1 跳",
+      "deepExpand": "深度扩展 2 跳",
+      "traceIn": "仅追踪入向",
+      "traceOut": "仅追踪出向"
+    },
+    "detail": {
+      "risk": "风险",
+      "degree": "度数",
+      "volume": "交易量",
+      "expand1hop": "扩展 1 跳",
+      "expanding": "扩展中…",
+      "deepExpand": "深度扩展",
+      "latestTrace": "打开最近追踪子图",
+      "valueFlow": "价值流",
+      "txFlows": "关联的交易流",
+      "noTxEdges": "此节点未附带交易边。",
+      "noCorrEdges": "此节点未附带行为关联。",
+      "ownership": "所有权聚类线索",
+      "links": "最强行为关联",
+      "paths": "来自种子的路径",
+      "pivots": "跳转队列",
+      "bridges": "桥接钱包",
+      "openDetails": "打开详情",
+      "noPaths": "未找到路径。",
+      "noBridges": "未找到桥接钱包。"
+    },
+    "demix": {
+      "title": "Nexus 解混代理",
+      "subtitle": "在当前 Nexus 图谱上运行混币器、Tornado、桥、跨链兑换和 AML 解混，随后将候选关联叠加到画布上。",
+      "runGraph": "在图谱上运行",
+      "runSelected": "在选中项上运行",
+      "empty": "构建一个 Nexus 图谱，然后在整个图谱或选中钱包的邻域上运行解混代理。"
+    },
+    "forensics": {
+      "title": "嵌入式本地取证",
+      "runSeed": "在种子上运行",
+      "runSelected": "在选中项上运行"
+    },
+    "identity": {
+      "title": "身份透镜",
+      "buildSeed": "从种子构建",
+      "buildSelected": "从选中项构建",
+      "copyAddress": "复制地址",
+      "unknownWallet": "未知钱包",
+      "resolving": "解析中…"
+    }
+  },
+  "sanctions": {
+    "title": "制裁筛查",
+    "subtitle": "对照 OFAC、欧盟、联合国、英国制裁名单",
+    "inputPlaceholder": "待筛查地址…",
+    "screen": "筛查",
+    "search": "搜索",
+    "clear": "清除",
+    "refresh": "刷新",
+    "noMatches": "未找到匹配。",
+    "matchScore": "{{pct}}% 匹配",
+    "viewDetails": "查看详情 →",
+    "copyAddress": "复制",
+    "explorer": "浏览器",
+    "close": "关闭",
+    "listedOn": "列入 {{date}}",
+    "aka": "亦称：{{aliases}}"
+  },
+  "attribution": {
+    "title": "归因与来源",
+    "subtitle": "归因附来源",
+    "lookupPlaceholder": "输入地址…",
+    "lookup": "查询",
+    "addAttribution": "添加",
+    "noResults": "未找到。",
+    "confidence": "置信度",
+    "source": "来源：",
+    "by": "操作者："
+  },
+  "attrSubmissions": {
+    "title": "归因提交",
+    "subtitle": "标签增长循环",
+    "tabs": {
+      "pending": "待审核",
+      "approved": "已批准",
+      "rejected": "已拒绝"
+    },
+    "newSubmission": "新提交",
+    "submit": "提交",
+    "cancel": "取消",
+    "approve": "批准",
+    "reject": "拒绝",
+    "reviewNotes": "备注…",
+    "noSubmissions": "无{{status}}。"
+  },
+  "regulatory": {
+    "title": "监管报告",
+    "subtitle": "生成 SAR、CTR、Travel Rule、KYV",
+    "tabs": {
+      "sar": "SAR",
+      "ctr": "CTR",
+      "travel": "Travel Rule",
+      "kyv": "KYV"
+    },
+    "export": "导出 .md",
+    "generate": "生成"
+  },
+  "demix": {
+    "title": "AML 还原引擎",
+    "subtitle": "还原",
+    "tabs": {
+      "mixer": "混币器",
+      "bridge": "跨链桥",
+      "aml": "AML"
+    },
+    "run": "运行",
+    "noResults": "暂无结果。"
+  },
+  "comply": {
+    "title": "CrypTX Comply — 稳定币合规",
+    "subtitle": "GENIUS 法案监控。",
+    "newProgram": "新建",
+    "noPrograms": "暂无计划。"
+  },
+    "batchD": {
+      "contractForensics": {
+        "title": "合约取证",
+        "subtitle": "智能合约静态分析：检测蜜罐、重入、隐藏铸币"
+      },
+      "launderingTrace": {
+        "title": "洗钱追踪",
+        "subtitle": "分层检测：通过混币器、跨链桥追踪资金"
+      },
+      "courtReadiness": {
+        "title": "法庭就绪",
+        "subtitle": "评估调查完整性以供法律诉讼"
+      },
+      "recoveryOps": {
+        "title": "冻结与追回",
+        "subtitle": "协调资产冻结和追回操作"
+      },
+      "freezeDesk": {
+        "title": "冻结台",
+        "subtitle": "管理冻结请求并跟踪状态"
+      },
+      "threatLandscape": {
+        "title": "区块链威胁态势",
+        "subtitle": "实时威胁情报流"
+      },
+      "nftTron": {
+        "title": "NFT / TON 哨兵",
+        "subtitle": "NFT 洗盘交易检测和 TON 链上情报"
+      },
+      "victimPortal": {
+        "title": "举报加密欺诈",
+        "subtitle": "面向公众的受害者举报门户"
+      },
+      "aboutAuthor": {
+        "title": "关于",
+        "subtitle": "关于 CrypTX 和团队"
+      },
+      "docs": {
+        "title": "文档",
+        "subtitle": "掌握 CrypTX — 用户指南、API 参考"
+      },
+      "profile": {
+        "title": "调查员资料",
+        "subtitle": "账户设置和活动历史"
+      }
+    }
+}

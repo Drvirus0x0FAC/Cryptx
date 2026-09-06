@@ -1,0 +1,345 @@
+/**
+ * settings-cockpit.css — "Command Cockpit" redesign of the Settings page.
+ *
+ * A single, non-scrolling control panel: a dense grid of glass panels with
+ * monospace section headers, status-dot API-key rows, toggle switches and
+ * segmented controls. Scoped under `.cxset`. Theme-aware via the app token
+ * system, with cockpit cyan/green accents layered on top.
+ */
+
+.cxset {
+  --cx-cyan:  56 224 255;
+  --cx-green: 70 240 160;
+  --cx-red:  255 82 125;
+  --cx-amber:255 176 32;
+
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px;
+  overflow: hidden;                 /* single page — no scroll */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* soft cockpit glow backdrop */
+.cxset::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(560px circle at 12% 0%,  rgb(var(--cx-cyan) / 0.06), transparent 60%),
+    radial-gradient(600px circle at 100% 40%, rgb(var(--cx-green) / 0.05), transparent 60%);
+}
+.cxset > * { position: relative; z-index: 1; }
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.cxset-head { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.cxset-head-icon {
+  width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+  color: rgb(var(--cx-cyan)); border: 1px solid rgb(var(--cx-cyan) / 0.28);
+  background: rgb(var(--cx-cyan) / 0.06); box-shadow: 0 0 22px rgb(var(--cx-cyan) / 0.14);
+}
+.cxset-head h1 { margin: 0; font-size: 22px; font-weight: 800; color: rgb(var(--text-bright)); font-family: 'Roboto', sans-serif; letter-spacing: -0.01em; }
+.cxset-head p { margin: 3px 0 0; font-size: 11.5px; color: rgb(var(--text-secondary)); }
+.cxset-head-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+.cxset-envchip {
+  font-family: 'Roboto Mono', monospace; font-size: 9px; letter-spacing: 0.06em;
+  padding: 6px 11px; border-radius: 20px; color: rgb(var(--text-muted));
+  border: 1px solid rgb(var(--bg-border) / 0.6); background: rgb(var(--bg-surface) / 0.5);
+  max-width: 340px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.cxset-save {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 10px;
+  font-family: 'Roboto', sans-serif; font-weight: 700; font-size: 13px; cursor: pointer;
+  color: #05131a; border: none;
+  background: linear-gradient(135deg, rgb(var(--cx-cyan)), rgb(var(--cx-green)));
+  box-shadow: 0 6px 20px rgb(var(--cx-cyan) / 0.25); transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+}
+.cxset-save:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 10px 26px rgb(var(--cx-cyan) / 0.4); }
+.cxset-save:disabled { opacity: 0.4; cursor: not-allowed; filter: grayscale(0.4); }
+.cxset-saved { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: rgb(var(--cx-green)); font-family: 'Roboto Mono', monospace; }
+.cxset-saveerr { font-size: 11px; color: rgb(var(--cx-red)); max-width: 260px; }
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.cxset-grid {
+  flex: 1; min-height: 0;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "keys   ai       tools"
+    "keys   work     tools";
+  gap: 12px;
+}
+.cxset-area-keys  { grid-area: keys; }
+.cxset-area-ai    { grid-area: ai; }
+.cxset-area-work  { grid-area: work; }
+.cxset-area-tools { grid-area: tools; }
+
+/* ── Panel ───────────────────────────────────────────────────────────────── */
+.cxpanel {
+  display: flex; flex-direction: column; min-height: 0;
+  border: 1px solid rgb(var(--cx-cyan) / 0.14); border-radius: 14px;
+  background: rgb(var(--bg-card) / 0.55); backdrop-filter: blur(8px);
+  padding: 14px 15px; overflow: hidden;
+}
+.cxpanel-title {
+  flex-shrink: 0; display: flex; align-items: center; gap: 7px;
+  font-family: 'Roboto Mono', monospace; font-size: 9px; letter-spacing: 0.2em;
+  color: rgb(var(--cx-green)); margin-bottom: 11px; text-transform: uppercase;
+}
+.cxpanel-title .cxc { color: rgb(var(--cx-cyan)); }
+.cxpanel-title small { margin-left: auto; letter-spacing: 0.04em; color: rgb(var(--text-muted)); }
+.cxpanel-body { flex: 1; min-height: 0; }
+/* only the key list may scroll internally if a very small viewport forces it */
+.cxpanel-body.scrollable { overflow-y: auto; }
+.cxpanel-body.scrollable::-webkit-scrollbar { width: 5px; }
+
+/* ── API key rows ────────────────────────────────────────────────────────── */
+.cxkeys { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; }
+.cxkey {
+  display: flex; align-items: center; gap: 10px; padding: 8px 6px; border-radius: 8px;
+  border-bottom: 1px solid rgb(var(--cx-cyan) / 0.06); cursor: pointer; transition: background 0.15s;
+}
+.cxkey:hover { background: rgb(var(--cx-cyan) / 0.05); }
+.cxkey-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cxkey-dot.set     { background: rgb(var(--cx-green)); box-shadow: 0 0 8px rgb(var(--cx-green)); }
+.cxkey-dot.pending { background: rgb(var(--cx-amber)); box-shadow: 0 0 8px rgb(var(--cx-amber)); }
+.cxkey-dot.unset   { background: rgb(var(--text-muted) / 0.5); }
+.cxkey-main { flex: 1; min-width: 0; }
+.cxkey-label { font-size: 12px; color: rgb(var(--text-primary)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cxkey-env { font-family: 'Roboto Mono', monospace; font-size: 9px; color: rgb(var(--text-muted)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cxkey-status {
+  font-family: 'Roboto Mono', monospace; font-size: 8.5px; padding: 3px 8px; border-radius: 20px; flex-shrink: 0;
+}
+.cxkey-status.set     { background: rgb(var(--cx-green) / 0.12); color: rgb(var(--cx-green)); }
+.cxkey-status.pending { background: rgb(var(--cx-amber) / 0.14); color: rgb(var(--cx-amber)); }
+.cxkey-status.unset   { background: rgb(var(--bg-elevated) / 0.7); color: rgb(var(--text-muted)); }
+
+.cxkeys-groups { display: flex; flex-direction: column; gap: 4px; height: 100%; }
+.cxkeys-subhead { font-family: 'Roboto Mono', monospace; font-size: 8px; letter-spacing: 0.14em; color: rgb(var(--text-muted)); margin: 8px 2px 2px; text-transform: uppercase; }
+
+/* ── Rows: settings (label + control) ────────────────────────────────────── */
+.cxrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgb(var(--cx-cyan) / 0.06); }
+.cxrow:last-child { border-bottom: none; }
+.cxrow-label { font-size: 12.5px; color: rgb(var(--text-primary)); }
+.cxrow-sub { font-size: 10px; color: rgb(var(--text-muted)); margin-top: 1px; }
+
+/* segmented control */
+.cxseg { display: inline-flex; gap: 3px; padding: 3px; border: 1px solid rgb(var(--cx-cyan) / 0.16); border-radius: 8px; background: rgb(var(--bg-surface) / 0.5); }
+.cxseg button {
+  padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; background: transparent;
+  font-family: 'Roboto Mono', monospace; font-size: 9.5px; letter-spacing: 0.03em; color: rgb(var(--text-muted));
+  transition: background 0.15s, color 0.15s;
+}
+.cxseg button.active { background: rgb(var(--cx-cyan) / 0.14); color: rgb(var(--cx-cyan)); }
+
+/* toggle switch */
+.cxtoggle { width: 40px; height: 21px; border-radius: 20px; position: relative; cursor: pointer; border: none; flex-shrink: 0; transition: background 0.2s; background: rgb(var(--bg-elevated)); }
+.cxtoggle.on { background: rgb(var(--cx-green) / 0.35); }
+.cxtoggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 17px; height: 17px; border-radius: 50%; background: rgb(var(--text-muted)); transition: transform 0.2s, background 0.2s; }
+.cxtoggle.on::after { transform: translateX(19px); background: rgb(var(--cx-green)); }
+
+/* stepper */
+.cxstep { display: inline-flex; align-items: center; gap: 8px; }
+.cxstep button { width: 24px; height: 24px; border-radius: 6px; border: 1px solid rgb(var(--cx-cyan) / 0.2); background: rgb(var(--bg-surface) / 0.6); color: rgb(var(--cx-cyan)); cursor: pointer; font-size: 14px; line-height: 1; display: grid; place-items: center; }
+.cxstep button:hover { background: rgb(var(--cx-cyan) / 0.1); }
+.cxstep-val { font-family: 'Roboto Mono', monospace; font-size: 13px; color: rgb(var(--text-bright)); min-width: 30px; text-align: center; }
+
+/* range slider */
+.cxrange { display: flex; align-items: center; gap: 10px; }
+.cxrange input[type="range"] { -webkit-appearance: none; appearance: none; width: 120px; height: 4px; border-radius: 3px; background: rgb(var(--cx-cyan) / 0.18); outline: none; }
+.cxrange input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: rgb(var(--cx-cyan)); cursor: pointer; box-shadow: 0 0 8px rgb(var(--cx-cyan) / 0.5); }
+.cxrange-val { font-family: 'Roboto Mono', monospace; font-size: 12px; color: rgb(var(--cx-cyan)); min-width: 42px; text-align: right; }
+
+/* select */
+.cxselect {
+  font-family: 'Roboto Mono', monospace; font-size: 11px; padding: 6px 10px; border-radius: 8px;
+  color: rgb(var(--text-primary)); background: rgb(var(--bg-surface) / 0.7);
+  border: 1px solid rgb(var(--cx-cyan) / 0.18); outline: none; cursor: pointer;
+}
+.cxselect:focus { border-color: rgb(var(--cx-cyan) / 0.5); }
+.cxselect.w-full { width: 100%; }
+
+/* ── Responsive: prevent clipping on smaller viewports ───────────────────── */
+@media (max-width: 1200px) {
+  .cxset-grid {
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "keys   ai"
+      "keys   tools"
+      "work   tools";
+  }
+}
+
+@media (max-width: 1024px) {
+  .cxset {
+    position: relative;
+    inset: auto;
+    overflow: auto;
+    height: auto;
+    min-height: calc(100vh - var(--topbar-h));
+  }
+  .cxset-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "keys   ai"
+      "work   tools";
+  }
+  .cxpanel {
+    overflow: visible;
+  }
+  .cxpanel-body.scrollable {
+    overflow-y: auto;
+    max-height: 300px;
+  }
+  .cxkeys {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cxset {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  .cxset-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .cxset-head {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .cxset-head h1 {
+    font-size: 18px;
+  }
+  .cxset-head p {
+    font-size: 10px;
+  }
+  .cxset-head-right {
+    margin-left: 0;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .cxset-envchip {
+    max-width: 100%;
+    font-size: 8px;
+  }
+  .cxpanel {
+    padding: 10px 12px;
+  }
+  .cxpanel-body {
+    overflow: visible;
+  }
+  .cxpanel-body.scrollable {
+    max-height: none;
+    overflow: visible;
+  }
+  .cxkeys {
+    grid-template-columns: 1fr;
+  }
+  .cxkey-label {
+    font-size: 11px;
+  }
+  .cxrow {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .cxrow-label {
+    font-size: 11.5px;
+  }
+  .cxrange {
+    flex-wrap: wrap;
+  }
+  .cxrange input[type="range"] {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cxset-head h1 {
+    font-size: 16px;
+  }
+  .cxset-head p {
+    font-size: 9px;
+  }
+  .cxpanel-title {
+    font-size: 8px;
+  }
+  .cxseg {
+    flex-wrap: wrap;
+  }
+  .cxseg button {
+    font-size: 8.5px;
+    padding: 3px 8px;
+  }
+}
+
+/* ── AI runtime panel ────────────────────────────────────────────────────── */
+.cxai-status { font-size: 10px; color: rgb(var(--text-secondary)); line-height: 1.5; margin-bottom: 10px; }
+.cxai-status b { color: rgb(var(--text-bright)); font-family: 'Roboto Mono', monospace; }
+.cxai-status .ok { color: rgb(var(--cx-green)); }
+.cxai-status .off { color: rgb(var(--text-muted)); }
+.cxai-field { margin-top: 8px; }
+.cxai-field label { display: block; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: rgb(var(--text-muted)); margin-bottom: 4px; font-family: 'Roboto Mono', monospace; }
+.cxinput {
+  width: 100%; font-family: 'Roboto Mono', monospace; font-size: 11px; padding: 7px 10px; border-radius: 8px;
+  color: rgb(var(--text-primary)); background: rgb(var(--bg-surface) / 0.7);
+  border: 1px solid rgb(var(--cx-cyan) / 0.18); outline: none;
+}
+.cxinput:focus { border-color: rgb(var(--cx-cyan) / 0.5); box-shadow: 0 0 0 3px rgb(var(--cx-cyan) / 0.08); }
+.cxinput::placeholder { color: rgb(var(--text-muted)); }
+.cxtest {
+  margin-top: 10px; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 8px; border-radius: 8px; cursor: pointer; font-size: 11.5px; font-weight: 600;
+  color: rgb(var(--cx-cyan)); background: rgb(var(--cx-cyan) / 0.08); border: 1px solid rgb(var(--cx-cyan) / 0.25);
+  transition: background 0.15s;
+}
+.cxtest:hover:not(:disabled) { background: rgb(var(--cx-cyan) / 0.16); }
+.cxtest:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Key editor modal (portaled) ─────────────────────────────────────────── */
+.cxmodal-back { position: fixed; inset: 0; z-index: 9998; display: grid; place-items: center; padding: 20px; background: rgb(0 0 0 / 0.6); backdrop-filter: blur(4px); animation: cxset-fade 0.2s ease; }
+@keyframes cxset-fade { from { opacity: 0; } to { opacity: 1; } }
+.cxmodal {
+  width: 100%; max-width: 460px; border-radius: 16px; padding: 22px;
+  background: rgb(var(--bg-elevated)); border: 1px solid rgb(var(--cx-cyan) / 0.22);
+  box-shadow: 0 30px 80px rgb(0 0 0 / 0.5); animation: cxset-pop 0.22s cubic-bezier(0.22,1,0.36,1);
+}
+@keyframes cxset-pop { from { opacity: 0; transform: scale(0.94) translateY(10px); } to { opacity: 1; transform: none; } }
+.cxmodal-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.cxmodal-head .ic { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; color: rgb(var(--cx-cyan)); background: rgb(var(--cx-cyan) / 0.1); border: 1px solid rgb(var(--cx-cyan) / 0.22); flex-shrink: 0; }
+.cxmodal-head h3 { margin: 0; font-size: 15px; color: rgb(var(--text-bright)); font-family: 'Roboto', sans-serif; font-weight: 700; }
+.cxmodal-head .env { font-family: 'Roboto Mono', monospace; font-size: 10px; color: rgb(var(--text-muted)); margin-top: 2px; }
+.cxmodal-head .x { margin-left: auto; color: rgb(var(--text-muted)); cursor: pointer; background: none; border: none; }
+.cxmodal-hint { font-size: 12px; line-height: 1.55; color: rgb(var(--text-secondary)); margin: 0 0 14px; }
+.cxmodal-inputwrap { position: relative; }
+.cxmodal-inputwrap .eye { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgb(var(--text-muted)); cursor: pointer; }
+.cxmodal-actions { display: flex; align-items: center; gap: 10px; margin-top: 16px; }
+.cxmodal-apply { flex: 1; padding: 10px; border-radius: 9px; border: none; cursor: pointer; font-weight: 700; font-size: 13px; color: #05131a; background: linear-gradient(135deg, rgb(var(--cx-cyan)), rgb(var(--cx-green))); }
+.cxmodal-clear { padding: 10px 16px; border-radius: 9px; cursor: pointer; font-size: 12px; color: rgb(var(--cx-red)); background: rgb(var(--cx-red) / 0.08); border: 1px solid rgb(var(--cx-red) / 0.25); }
+.cxmodal-link { display: inline-block; margin-top: 10px; font-size: 11px; color: rgb(var(--cx-cyan)); text-decoration: none; }
+.cxmodal-link:hover { text-decoration: underline; }
+
+/* ── Responsive fallback: allow the page to scroll on small screens ──────── */
+@media (max-width: 1100px) {
+  .cxset { position: relative; overflow-y: auto; }
+  .cxset-grid { grid-template-columns: 1fr 1fr; grid-template-rows: none; grid-template-areas: "keys keys" "ai work" "tools tools"; }
+  .cxset-area-keys { min-height: 320px; }
+}
+@media (max-width: 720px) {
+  .cxset-grid { grid-template-columns: 1fr; grid-template-areas: "keys" "ai" "tools" "work"; }
+  .cxkeys { grid-template-columns: 1fr; }
+  .cxset-envchip { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cxset *, .cxset *::before, .cxset *::after { animation-duration: 0.001s !important; }
+}

@@ -1,0 +1,192 @@
+{
+  "mobileNav": {
+    "menu": "Más",
+    "close": "Cerrar menú",
+    "openFullMenu": "Abrir menú completo",
+    "investigator": "Investigador",
+    "tabs": {
+      "home": "Inicio",
+      "nexus": "Nexus",
+      "alerts": "Alertas",
+      "cases": "Casos"
+    }
+  },
+  "boot": {
+    "tagline": "Investigación de ciberdelincuencia blockchain",
+    "threatRadar": "Radar de amenazas",
+    "systemBootLog": "Registro de arranque del sistema",
+    "statusReady": "LISTO",
+    "statusInit": "INIT",
+    "steps": {
+      "kernel": "Inicializando núcleo seguro",
+      "chains": "Cargando oráculos de cadena",
+      "aml": "Calibrando motor AML",
+      "evidence": "Montando caja fuerte de evidencia",
+      "tunnel": "Estableciendo túnel seguro",
+      "ai": "Cargando inteligencia de amenazas",
+      "ready": "Sistema listo"
+    },
+    "ok": "[OK]",
+    "pending": "[···]",
+    "bootSequence": "Secuencia de arranque",
+    "allSystemsNominal": "Todos los sistemas nominales",
+    "initializing": "Inicializando…",
+    "startCrypTX": "Iniciar CrypTX",
+    "readDocs": "Leer la doc de CrypTX",
+    "secureBoot": "Arranque seguro CrypTX",
+    "encryptedSession": "Sesión cifrada",
+    "zeroTrust": "Zero-Trust"
+  },
+  "errorBoundary": {
+    "title": "Error de renderizado de interfaz",
+    "message": "Un módulo de pantalla falló al renderizar. La app lo capturó en lugar de mostrar una página en blanco.",
+    "returnToApp": "Volver a la app"
+  },
+  "riskBadge": {
+    "low": "Bajo",
+    "medium": "Medio",
+    "high": "Alto",
+    "severe": "Grave",
+    "critical": "Crítico"
+  },
+  "general": {
+    "copied": "Copiado al portapapeles",
+    "copyFailed": "Fallo al copiar"
+  },
+  "shared": {
+    "counterparty": {
+      "title": "Contrapartes",
+      "empty": "Sin contrapartes.",
+      "noPredictions": "Sin predicciones.",
+      "colEntity": "Entidad",
+      "colChains": "Cadenas",
+      "colTx": "Tx",
+      "colNative": "Nativo",
+      "colUsd": "USD",
+      "sanctioned": "SANCIONADO",
+      "openIntel": "Inteligencia"
+    },
+    "deepTrace": {
+      "deepBtc": "Trazado Bitcoin",
+      "deepSol": "Trazado Solana",
+      "run": "Ejecutar",
+      "colNodes": "Nodos",
+      "colEdges": "Enlaces",
+      "colHops": "Saltos/Txs",
+      "source": "Origen",
+      "target": "Destino",
+      "value": "Valor"
+    },
+    "deliveryChannels": {
+      "title": "Canales de entrega",
+      "empty": "Sin canales.",
+      "recent": "Entregas recientes"
+    },
+    "export": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "fincen": "FinCEN XML",
+      "stix": "STIX 2.1",
+      "misp": "MISP",
+      "failed": "Error:"
+    },
+    "insights": {
+      "title": "Insights",
+      "analyzing": "Analizando…",
+      "cashoutRisk": "Riesgo cash-out",
+      "refresh": "Actualizar",
+      "riskTrajectory": "Trayectoria de riesgo",
+      "vsPopulation": "vs. población analizada",
+      "addresses": "direcciones"
+    },
+    "mixer": {
+      "riskSignals": "Señales de riesgo"
+    },
+    "riskBadge": {
+      "clean": "LIMPIO",
+      "entity": "ENTIDAD",
+      "bridgeSwap": "PUENTE/SWAP",
+      "scam": "ESTAFA",
+      "mixer": "MEZCLADOR",
+      "sanctioned": "SANCIONADO",
+      "error": "ERROR"
+    },
+    "riskGauge": {
+      "clean": "Limpio",
+      "low": "Bajo",
+      "medium": "Medio",
+      "high": "Alto",
+      "critical": "Crítico",
+      "sanctioned": "Sancionado",
+      "error": "Error"
+    },
+    "riskSignals": {
+      "empty": "Sin señales"
+    },
+    "sanctions": {
+      "sanctionedAddress": "DIRECCIÓN SANCIONADA",
+      "indirect": "Exposición OFAC",
+      "notOnList": "No en lista",
+      "noInteractions": "sin interacciones"
+    },
+    "savedInv": {
+      "title": "Investigaciones guardadas",
+      "empty": "Ninguna."
+    },
+    "timeTravel": {
+      "title": "Viaje temporal",
+      "balanceEvolution": "Evolución saldo",
+      "cumulativeIn": "Entradas",
+      "cumulativeOut": "Salidas",
+      "balances": "Saldos",
+      "counterparties": "Contrapartes:"
+    },
+    "tokenHoldings": {
+      "title": "Tenencias"
+    },
+    "txTable": {
+      "openDetails": "Detalles transacción",
+      "colDir": "Dir",
+      "colTime": "Hora",
+      "colHash": "Hash",
+      "colFrom": "De",
+      "colTo": "A",
+      "colValue": "Valor",
+      "empty": "Sin transacciones."
+    },
+    "exposure": {
+      "directExposure": "Exposición directa",
+      "risky": "Arriesgado",
+      "total": "Total",
+      "noDirectExposure": "Sin exposición directa a contrapartes riesgosas conocidas."
+    },
+    "coverage": {
+      "title": "Cobertura CrypTX",
+      "blockchains": "blockchains",
+      "tokens": "tokens",
+      "liveTraceable": "trazables en vivo",
+      "chains": "Cadenas",
+      "searchPh": "Buscar cadenas o tokens...",
+      "trace": "traza",
+      "liveTraceLegend": "Traza en vivo = seguimiento de flujos en tiempo real",
+      "catNative": "Nativo L1/L2",
+      "catStablecoin": "Stablecoins",
+      "catWrapped": "Activos envueltos",
+      "catLst": "Staked / LST",
+      "catDefi": "DeFi / Gov",
+      "catMeme": "Meme / Riesgo"
+    },
+    "caseQa": {
+      "title": "Preguntar caso",
+      "subtitle": "IA basada en evidencia",
+      "placeholder": "Pregunta…"
+    },
+    "defiThreat": {
+      "title": "Detección Amenazas DeFi",
+      "stablecoin": "Stablecoin",
+      "flashLoan": "Flash-Loan",
+      "rugPull": "Rug Pulls",
+      "mevBots": "MEV"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="200" height="240" fill="none">
+  <defs>
+    <linearGradient id="cx-metal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#c2ccdd"></stop>
+      <stop offset="1" stop-color="#6c7688"></stop>
+    </linearGradient>
+    <radialGradient id="cx-glow" cx="0.5" cy="0.55" r="0.55">
+      <stop stop-color="#FF527D" stop-opacity="0.28"></stop>
+      <stop offset="1" stop-color="#FF527D" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  
+  <path d="M32 52 V38 a18 18 0 0 1 36 0 V52" stroke="url(#cx-metal)" stroke-width="5" fill="none"></path>
+  <ellipse cx="50" cy="30" rx="7" ry="5" fill="none" stroke="#565660" stroke-width="2"></ellipse>
+  
+  <rect x="22" y="52" width="56" height="48" rx="8" fill="#141418" stroke="url(#cx-metal)" stroke-width="3"></rect>
+  <rect x="26" y="56" width="48" height="40" rx="5" fill="none" stroke="#2a2a30" stroke-width="1"></rect>
+  <rect x="22" y="52" width="56" height="48" rx="8" fill="url(#cx-glow)"></rect>
+  
+  <g stroke="#3a3a42" stroke-width="1.3" fill="none">
+    <path d="M28 60 h8 v6"></path>
+    <path d="M72 60 h-8 v8"></path>
+    <path d="M28 92 h10 v-5"></path>
+    <path d="M72 92 h-9"></path>
+  </g>
+  <g fill="#565660">
+    <circle cx="28" cy="60" r="1.5"></circle>
+    <circle cx="72" cy="60" r="1.5"></circle>
+    <circle cx="28" cy="92" r="1.5"></circle>
+    <circle cx="72" cy="92" r="1.5"></circle>
+  </g>
+  
+  <g stroke-linejoin="round">
+    <polygon points="50,58 50,74 37,77" fill="#6c7688"></polygon>
+    <polygon points="50,58 63,77 50,74" fill="#b8c2d4"></polygon>
+    <polygon points="37,80 50,76 50,96" fill="#FF527D"></polygon>
+    <polygon points="50,76 63,80 50,96" fill="#96A1B5"></polygon>
+    <line x1="37" y1="77" x2="63" y2="77" stroke="#0d0d10" stroke-width="0.8" opacity="0.5"></line>
+  </g>
+  
+  <line x1="22" y1="76" x2="78" y2="76" stroke="#FF527D" stroke-width="0.9" opacity="0.3"></line>
+</svg>

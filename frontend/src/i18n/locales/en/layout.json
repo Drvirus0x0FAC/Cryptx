@@ -1,0 +1,56 @@
+{
+  "topbar": {
+    "searchPlaceholder": "Search address, hash, ENS, case…",
+    "searchKbdHint": "Ctrl K",
+    "searchKbdEnter": "Enter",
+    "threatLandscape": "Threat Landscape",
+    "threatLandscapeTitle": "Blockchain Threat Landscape - live crypto & blockchain security feeds",
+    "settings": "Settings",
+    "logout": "Logout",
+    "logoutTitle": "Logout and revoke session",
+    "profile": "Profile",
+    "userProfile": "User profile",
+    "densityCompact": "Compact Density",
+    "densityComfortable": "Comfortable Density",
+    "themeLight": "Light Mode",
+    "themeDark": "Dark Mode",
+    "language": "Language"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "newBadge": "{{count}} new",
+    "empty": "No notifications yet",
+    "taskReply": "{{name}} replied on \"{{task}}\"",
+    "taskAssigned": "You were assigned a new task",
+    "tooltip": "Notifications"
+  },
+  "island": {
+    "missionModules": "Mission Modules",
+    "toolsCount_one": "{{count}} tools",
+    "toolsCount_other": "{{count}} tools"
+  },
+  "ambient": {
+    "txBridgeHop": "TRX bridge hop",
+    "mixerExposure": "mixer exposure",
+    "ofacClear": "OFAC clear",
+    "btcClusterRisk": "cluster risk",
+    "ethBridgePath": "bridge path",
+    "xmrMixerWatch": "mixer watch",
+    "amlTrace": "AML TRACE",
+    "amlCaseScore": "case score {{score}}",
+    "chainSwap": "CHAIN SWAP",
+    "chainSwapPath": "ETH to BASE",
+    "walletLink": "WALLET LINK",
+    "hopsCount_one": "{{count}} hop",
+    "hopsCount_other": "{{count}} hops",
+    "ticker": {
+      "txTrace": "TX TRACE",
+      "amlScreen": "AML SCREEN",
+      "chainSwap": "CHAIN SWAP",
+      "mixerWatch": "MIXER WATCH",
+      "riskNode": "RISK NODE",
+      "caseVault": "CASE VAULT"
+    }
+  }
+}

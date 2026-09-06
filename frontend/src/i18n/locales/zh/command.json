@@ -1,0 +1,33 @@
+{
+  "palette": {
+    "placeholder": "粘贴地址 / TX 哈希，或输入模块名…",
+    "title": "命令",
+    "hintEnter": "回车",
+    "hintEsc": "ESC",
+    "sectionModules": "模块",
+    "sectionActions": "操作",
+    "sectionEntities": "实体",
+    "investigatePrefix": "调查",
+    "empty": "无匹配。请粘贴 BTC / EVM / TRON / SOL 地址、交易哈希、ENS 名称，或搜索实体（“Binance”、“Lazarus”）或模块名。",
+    "open": "打开命令面板",
+    "footerNavigate": "导航",
+    "footerOpen": "打开",
+    "footerAutoDetect": "根据格式自动识别链"
+  },
+  "actions": {
+    "auto": { "label": "自动调查", "hint": "一键完整流水线" },
+    "intel": { "label": "地址情报", "hint": "完整 OSINT 报告" },
+    "nexus": { "label": "Nexus 关系图", "hint": "关系图" },
+    "holistic": { "label": "全息追踪", "hint": "跨链追踪" },
+    "forensics": { "label": "取证分析", "hint": "本地算法" },
+    "trace": { "label": "资金追踪器", "hint": "多跳资金流" },
+    "txlens": { "label": "TX 透镜", "hint": "交易调查" },
+    "txdetail": { "label": "交易详情", "hint": "原始交易视图" },
+    "txdetailBtc": { "label": "交易详情（BTC）", "hint": "原始交易视图" },
+    "perpdex": { "label": "永续 DEX 情报", "hint": "Hyperliquid 账户分析" }
+  },
+  "entities": {
+    "loading": "正在搜索实体…",
+    "none": "无匹配实体。"
+  }
+}

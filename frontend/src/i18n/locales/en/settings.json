@@ -1,0 +1,114 @@
+{
+  "title": "Settings",
+  "subtitle": "API key management · data-source & tool configuration",
+  "head": {
+    "syncEnv": "SYNC {{count}} .env",
+    "saved": "Saved",
+    "saveFailed": "Save failed",
+    "saveButton": "Save",
+    "saveButtonCount": "Save ({{count}})",
+    "saving": "Saving…"
+  },
+  "status": {
+    "configured": "CONFIGURED",
+    "pending": "PENDING",
+    "notSet": "NOT SET",
+    "set": "set",
+    "off": "OFF"
+  },
+  "keys": {
+    "configuredCount": "{{count}}/{{total}} configured",
+    "groups": {
+      "chainData": "Chain data",
+      "attributionRisk": "Attribution & risk",
+      "osint": "OSINT"
+    }
+  },
+  "editor": {
+    "configured": "configured",
+    "placeholderReplace": "Enter a new value to replace the stored one",
+    "placeholderGeneric": "Enter {{label}}",
+    "getKey": "Get an API key",
+    "apply": "Apply",
+    "cancel": "Cancel"
+  },
+  "ai": {
+    "provider": "Provider",
+    "providerNone": "none",
+    "model": "Model",
+    "modelNone": "none",
+    "modelPlaceholder": "Enter model id",
+    "baseUrl": "Base URL",
+    "baseUrlPlaceholder": "https://your-gateway.example/v1",
+    "apiKey": "API Key",
+    "apiKeySet": "set",
+    "apiKeyPending": "pending",
+    "apiKeyPlaceholder": "{{label}} API key",
+    "apiKeyConfiguredPlaceholder": "Configured — enter a new value to replace",
+    "keyConfigured": "configured",
+    "keyNotConfigured": "not configured",
+    "saveToActivate": "save to activate {{label}}",
+    "testProvider": "Test AI Provider",
+    "testing": "Testing…",
+    "testOk": "Connection successful",
+    "testFailed": "AI provider test failed",
+    "liveLabel": "Live",
+    "statusOnline": "Online",
+    "statusOffline": "Offline",
+    "activeProvider": "Active provider"
+  },
+  "panels": {
+    "dataSourceKeys": "Data-Source API Keys",
+    "aiRuntime": "AI Runtime",
+    "toolFeatures": "Tool Features",
+    "workspace": "Workspace"
+  },
+  "fields": {
+    "deepseekKey": { "label": "DeepSeek API Key", "hint": "Strong default for investigation briefs, hypotheses, and structured JSON synthesis." },
+    "claudeKey": { "label": "Claude API Key", "hint": "Native Claude connector for careful narrative reporting and evidence-grounded reasoning." },
+    "geminiKey": { "label": "Gemini API Key", "hint": "Google Gemini connector for long-context analysis and report generation." },
+    "openaiKey": { "label": "OpenAI API Key", "hint": "OpenAI chat-completions compatible connector for general AI investigation features." },
+    "codexKey": { "label": "Codex / OpenAI API Key", "hint": "Use an OpenAI-compatible API key and model for Codex-style workflows inside CrypTX." },
+    "tonApiKey": { "label": "TON API Key", "hint": "TON Access key — powers the TON profile enrichment on Address Intel." },
+    "trongridKey": { "label": "TronGrid API Key", "hint": "TronGrid key — powers Tron address and transaction lookups." },
+    "etherscanKey": { "label": "Etherscan API Key", "hint": "Etherscan key — powers EVM address and transaction enrichment." },
+    "blockstreamKey": { "label": "Blockstream API Key", "hint": "Blockstream / esplora key — powers Bitcoin address and transaction enrichment." }
+  },
+  "rows": {
+    "apiTimeout": { "label": "Request timeout", "sub": "Max wait per API call" },
+    "defaultHops": { "label": "Default trace depth", "sub": "Fund Tracer hops" },
+    "traceMode": { "label": "Trace mode" },
+    "monitorRefresh": { "label": "Monitor refresh", "sub": "Wallet Monitor polling" },
+    "riskThreshold": { "label": "Risk alert threshold", "sub": "Flag at / above" },
+    "batchSize": { "label": "Batch size", "sub": "Addresses per screen" },
+    "autoEnrich": { "label": "Auto public enrichment", "sub": "On every address lookup" },
+    "confirmDelete": { "label": "Confirm before delete" },
+    "resultRows": { "label": "Result rows", "sub": "Default rows in result tables" },
+    "liveThreatFeed": { "label": "Live threat feed", "sub": "Threat Landscape ticker" },
+    "animations": { "label": "Interface animations", "sub": "Decorative motion across the app" },
+    "theme": "Theme",
+    "density": "Density",
+    "defaultChain": "Default chain",
+    "language": "Language"
+  },
+  "segmented": {
+    "dark": "DARK",
+    "light": "LIGHT",
+    "comfortable": "COMFORTABLE",
+    "compact": "COMPACT",
+    "linear": "LINEAR",
+    "wide": "WIDE"
+  },
+  "chains": {
+    "auto": "AUTO",
+    "btc": "BTC",
+    "eth": "ETH",
+    "bsc": "BSC",
+    "polygon": "POLYGON",
+    "arbitrum": "ARBITRUM",
+    "optimism": "OPTIMISM",
+    "base": "BASE",
+    "tron": "TRON",
+    "solana": "SOLANA"
+  }
+}

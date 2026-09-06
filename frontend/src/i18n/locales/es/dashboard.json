@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "Solución de investigación de ciberdelincuencia blockchain CrypTX",
+    "subtitle": "Rastrea fondos ilícitos, conecta la atribución, puntúa el riesgo y preserva la evidencia entre cadenas sin perder el hilo de la investigación."
+  },
+  "pills": {
+    "evidencePipelineArmed": "Pipeline de evidencia armado",
+    "systemsOnline": "En línea",
+    "chainsSupported": "{{count}} cadenas soportadas",
+    "aiTriageReady": "Triaje IA listo"
+  },
+  "search": {
+    "placeholder": "Introduce dirección de billetera, dominio ENS, hash TX, entidad o pista de caso…",
+    "button": "Investigar",
+    "try": "Probar"
+  },
+  "liveBrief": {
+    "title": "Resumen de inteligencia en vivo",
+    "radarLabel": "Radar de triaje en vivo",
+    "prioritySignals_one": "señal prioritaria",
+    "prioritySignals_other": "señales prioritarias"
+  },
+  "panels": {
+    "portfolioRisk": "Riesgo del portafolio",
+    "coverageMatrix": "Matriz de cobertura",
+    "openMatrix": "Abrir matriz",
+    "liveIntelWire": "Hilo de inteligencia en vivo",
+    "threatLandscape": "Panorama de amenazas",
+    "threatFeedIdle": "Feed de amenazas inactivo — abre el Panorama para sincronizar RSS.",
+    "marketPulse": "Pulso del mercado",
+    "marketPulseHint": "Valoraciones USD para trazar + congelar",
+    "operationsDeck": "Centro de operaciones",
+    "live": "en vivo",
+    "valueFrozen": "valor congelado / incautado",
+    "autoQueued": "congelaciones en cola",
+    "scamNetworks": "redes de estafa mapeadas",
+    "unreadMonitor": "alertas no leídas",
+    "newActivity": "nueva actividad",
+    "monitorsQuiet": "Monitores en silencio — sin alertas.",
+    "caseRiskDist": "Distribución de riesgo de casos",
+    "activeInvestigations": "Investigaciones activas",
+    "viewAll": "Ver todo",
+    "noCases": "Sin casos",
+    "createCase": "Crear caso",
+    "highRiskAlert": "{{count}} investigación(es) de alto riesgo requieren revisión",
+    "noHighRisk": "Sin cola de revisión de alto riesgo.",
+    "intelWire": "HILO DE INFO",
+    "stablecoins": "stablecoins",
+    "liveTraceable": "trazable en vivo",
+    "addressesCount": "{{count}} direcciones"
+  },
+  "stats": {
+    "activeCases": "Casos activos",
+    "highRisk": "Riesgo alto",
+    "totalCases": "Total de casos",
+    "addresses": "Direcciones",
+    "chains": "cadenas",
+    "liveTrace": "traza en vivo",
+    "tokens": "tokens"
+  },
+  "families": {
+    "evm": "Redes EVM",
+    "utxo": "Cadenas UTXO",
+    "solana": "Solana VM",
+    "tron": "Stack Tron",
+    "cosmos": "Cosmos IBC",
+    "others": "Vías especializadas"
+  },
+  "ticker": {
+    "risk": "riesgo",
+    "frozenSeized": "congelados/ decomisados hasta la fecha",
+    "syntheticKyc": "marcas KYC sintéticas",
+    "trackedAssets": "activos rastreados"
+  }
+}

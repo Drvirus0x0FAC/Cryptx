@@ -1,0 +1,56 @@
+{
+  "topbar": {
+    "searchPlaceholder": "Buscar dirección, hash, ENS, caso…",
+    "searchKbdHint": "Ctrl K",
+    "searchKbdEnter": "Intro",
+    "threatLandscape": "Panorama de amenazas",
+    "threatLandscapeTitle": "Panorama de amenazas blockchain — feeds de seguridad cripto y blockchain en vivo",
+    "settings": "Ajustes",
+    "logout": "Cerrar sesión",
+    "logoutTitle": "Cerrar sesión y revocar la sesión",
+    "profile": "Perfil",
+    "userProfile": "Perfil de usuario",
+    "densityCompact": "Densidad compacta",
+    "densityComfortable": "Densidad cómoda",
+    "themeLight": "Modo claro",
+    "themeDark": "Modo oscuro",
+    "language": "Idioma"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "markAllRead": "Marcar todo como leído",
+    "newBadge": "{{count}} nuevas",
+    "empty": "Aún no hay notificaciones",
+    "taskReply": "{{name}} respondió en \"{{task}}\"",
+    "taskAssigned": "Se te ha asignado una nueva tarea",
+    "tooltip": "Notificaciones"
+  },
+  "island": {
+    "missionModules": "Módulos de misión",
+    "toolsCount_one": "{{count}} herramienta",
+    "toolsCount_other": "{{count}} herramientas"
+  },
+  "ambient": {
+    "txBridgeHop": "salto de puente TRX",
+    "mixerExposure": "exposición a mixer",
+    "ofacClear": "OFAC OK",
+    "btcClusterRisk": "riesgo de clúster",
+    "ethBridgePath": "ruta de puente",
+    "xmrMixerWatch": "vigilancia de mixer",
+    "amlTrace": "TRAZA AML",
+    "amlCaseScore": "puntuación de caso {{score}}",
+    "chainSwap": "INTERCAMBIO DE CADENA",
+    "chainSwapPath": "ETH a BASE",
+    "walletLink": "ENLACE DE BILLETERA",
+    "hopsCount_one": "{{count}} salto",
+    "hopsCount_other": "{{count}} saltos",
+    "ticker": {
+      "txTrace": "TRAZA TX",
+      "amlScreen": "CRIBADO AML",
+      "chainSwap": "INTERCAMBIO CADENA",
+      "mixerWatch": "VIGILANCIA MIXER",
+      "riskNode": "NODO DE RIESGO",
+      "caseVault": "CAJA FUERTE DE CASOS"
+    }
+  }
+}

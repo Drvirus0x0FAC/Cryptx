@@ -1,0 +1,40 @@
+# Build artifacts & caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# Virtual envs (never bake into image)
+venv/
+.venv/
+env/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Local data & secrets (mounted at runtime, never in image)
+.env
+*.db
+*.db-wal
+*.db-shm
+cryptoosint.db
+.auth_secret
+.uat_token.txt
+
+# Git / IDE / OS
+.git/
+.gitignore
+.vscode/
+.idea/
+.DS_Store
+graphify-out/
+*.log
+
+# Docs & research (not needed in runtime image)
+*.md
+docs/
+.claude/
+.qwen/
+.zcode/

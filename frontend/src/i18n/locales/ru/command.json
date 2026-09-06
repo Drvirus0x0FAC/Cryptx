@@ -1,0 +1,33 @@
+{
+  "palette": {
+    "placeholder": "Вставьте адрес / хэш TX или введите имя модуля…",
+    "title": "Команда",
+    "hintEnter": "Enter",
+    "hintEsc": "ESC",
+    "sectionModules": "Модули",
+    "sectionActions": "Действия",
+    "sectionEntities": "Сущности",
+    "investigatePrefix": "Расследовать",
+    "empty": "Нет совпадений. Вставьте адрес BTC / EVM / TRON / SOL, хэш транзакции, имя ENS, либо найдите сущность («Binance», «Lazarus») или имя модуля.",
+    "open": "Открыть палитру команд",
+    "footerNavigate": "переход",
+    "footerOpen": "открыть",
+    "footerAutoDetect": "авто-определение цепочки по формату"
+  },
+  "actions": {
+    "auto": { "label": "Авто-расследование", "hint": "полный конвейер в один клик" },
+    "intel": { "label": "Анализ адреса", "hint": "полный OSINT-отчёт" },
+    "nexus": { "label": "Граф Nexus", "hint": "граф связей" },
+    "holistic": { "label": "Холистическая трассировка", "hint": "кросс-чейн трассировка" },
+    "forensics": { "label": "Криминалистический анализ", "hint": "локальные алгоритмы" },
+    "trace": { "label": "Трассировщик средств", "hint": "многопрыжковый поток" },
+    "txlens": { "label": "Линза TX", "hint": "расследование транзакции" },
+    "txdetail": { "label": "Детали TX", "hint": "сырой вид транзакции" },
+    "txdetailBtc": { "label": "Детали TX (BTC)", "hint": "сырой вид транзакции" },
+    "perpdex": { "label": "Разведка Perp DEX", "hint": "анализ аккаунта Hyperliquid" }
+  },
+  "entities": {
+    "loading": "Поиск сущностей…",
+    "none": "Нет совпадающих сущностей."
+  }
+}

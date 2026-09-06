@@ -1,0 +1,9 @@
+{
+  "risk_score": 81,
+  "rules": [
+    "blacklist",
+    "pausable",
+    "upgradeable_proxy"
+  ],
+  "verdict": "CRITICAL \u2014 multiple owner-abuse / honeypot indicators"
+}

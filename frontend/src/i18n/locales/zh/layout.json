@@ -1,0 +1,56 @@
+{
+  "topbar": {
+    "searchPlaceholder": "搜索地址、哈希、ENS、案件…",
+    "searchKbdHint": "Ctrl K",
+    "searchKbdEnter": "回车",
+    "threatLandscape": "威胁态势",
+    "threatLandscapeTitle": "区块链威胁态势 — 实时加密与区块链安全资讯流",
+    "settings": "设置",
+    "logout": "退出登录",
+    "logoutTitle": "退出并撤销会话",
+    "profile": "个人资料",
+    "userProfile": "用户资料",
+    "densityCompact": "紧凑密度",
+    "densityComfortable": "舒适密度",
+    "themeLight": "浅色模式",
+    "themeDark": "深色模式",
+    "language": "语言"
+  },
+  "notifications": {
+    "title": "通知",
+    "markAllRead": "全部标记为已读",
+    "newBadge": "{{count}} 条新通知",
+    "empty": "暂无通知",
+    "taskReply": "{{name}} 回复了「{{task}}」",
+    "taskAssigned": "您被分配了新任务",
+    "tooltip": "通知"
+  },
+  "island": {
+    "missionModules": "任务模块",
+    "toolsCount_one": "{{count}} 个工具",
+    "toolsCount_other": "{{count}} 个工具"
+  },
+  "ambient": {
+    "txBridgeHop": "TRX 跨链跳转",
+    "mixerExposure": "混币器敞口",
+    "ofacClear": "OFAC 通过",
+    "btcClusterRisk": "集群风险",
+    "ethBridgePath": "跨链路径",
+    "xmrMixerWatch": "混币器监控",
+    "amlTrace": "AML 追踪",
+    "amlCaseScore": "案件评分 {{score}}",
+    "chainSwap": "链上兑换",
+    "chainSwapPath": "ETH 至 BASE",
+    "walletLink": "钱包关联",
+    "hopsCount_one": "{{count}} 跳",
+    "hopsCount_other": "{{count}} 跳",
+    "ticker": {
+      "txTrace": "TX 追踪",
+      "amlScreen": "AML 筛查",
+      "chainSwap": "链上兑换",
+      "mixerWatch": "混币监控",
+      "riskNode": "风险节点",
+      "caseVault": "案件库"
+    }
+  }
+}

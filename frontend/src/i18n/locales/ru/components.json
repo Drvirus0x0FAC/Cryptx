@@ -1,0 +1,192 @@
+{
+  "mobileNav": {
+    "menu": "Ещё",
+    "close": "Закрыть меню",
+    "openFullMenu": "Открыть полное меню",
+    "investigator": "Следователь",
+    "tabs": {
+      "home": "Главная",
+      "nexus": "Nexus",
+      "alerts": "Оповещения",
+      "cases": "Дела"
+    }
+  },
+  "boot": {
+    "tagline": "Расследование киберпреступлений в блокчейне",
+    "threatRadar": "Радар угроз",
+    "systemBootLog": "Журнал загрузки системы",
+    "statusReady": "ГОТОВО",
+    "statusInit": "ИНИЦ",
+    "steps": {
+      "kernel": "Инициализация защищённого ядра",
+      "chains": "Загрузка оракулов цепочек",
+      "aml": "Калибровка движка AML",
+      "evidence": "Монтирование хранилища доказательств",
+      "tunnel": "Установка защищённого туннеля",
+      "ai": "Загрузка данных об угрозах",
+      "ready": "Система готова"
+    },
+    "ok": "[OK]",
+    "pending": "[···]",
+    "bootSequence": "Последовательность загрузки",
+    "allSystemsNominal": "Все системы в норме",
+    "initializing": "Инициализация…",
+    "startCrypTX": "Запустить CrypTX",
+    "readDocs": "Читать документацию CrypTX",
+    "secureBoot": "Безопасная загрузка CrypTX",
+    "encryptedSession": "Зашифрованный сеанс",
+    "zeroTrust": "Zero-Trust"
+  },
+  "errorBoundary": {
+    "title": "Ошибка отрисовки интерфейса",
+    "message": "Модуль экрана завершился ошибкой при отрисовке. Приложение перехватило её вместо показа пустой страницы.",
+    "returnToApp": "Вернуться в приложение"
+  },
+  "riskBadge": {
+    "low": "Низкий",
+    "medium": "Средний",
+    "high": "Высокий",
+    "severe": "Тяжёлый",
+    "critical": "Критический"
+  },
+  "general": {
+    "copied": "Скопировано в буфер обмена",
+    "copyFailed": "Не удалось скопировать"
+  },
+  "shared": {
+    "counterparty": {
+      "title": "Контрагенты",
+      "empty": "Нет контрагентов.",
+      "noPredictions": "Нет прогнозов.",
+      "colEntity": "Сущность",
+      "colChains": "Цепочки",
+      "colTx": "Tx",
+      "colNative": "Нативный",
+      "colUsd": "USD",
+      "sanctioned": "САНКЦИИ",
+      "openIntel": "Разведка"
+    },
+    "deepTrace": {
+      "deepBtc": "Глубокая Bitcoin",
+      "deepSol": "Глубокая Solana",
+      "run": "Запустить",
+      "colNodes": "Узлы",
+      "colEdges": "Рёбра",
+      "colHops": "Прыжки/Tx",
+      "source": "Источник",
+      "target": "Цель",
+      "value": "Значение"
+    },
+    "deliveryChannels": {
+      "title": "Каналы доставки",
+      "empty": "Нет каналов.",
+      "recent": "Недавние"
+    },
+    "export": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "fincen": "FinCEN XML",
+      "stix": "STIX 2.1",
+      "misp": "MISP",
+      "failed": "Ошибка:"
+    },
+    "insights": {
+      "title": "Insights",
+      "analyzing": "Анализ…",
+      "cashoutRisk": "Риск cash-out",
+      "refresh": "Обновить",
+      "riskTrajectory": "Траектория риска",
+      "vsPopulation": "сравн. с анализируемой совокупностью",
+      "addresses": "адресов"
+    },
+    "mixer": {
+      "riskSignals": "Сигналы риска"
+    },
+    "riskBadge": {
+      "clean": "ЧИСТО",
+      "entity": "СУЩНОСТЬ",
+      "bridgeSwap": "МОСТ/SWAP",
+      "scam": "МОШЕННИЧЕСТВО",
+      "mixer": "МИКСЕР",
+      "sanctioned": "САНКЦИИ",
+      "error": "ОШИБКА"
+    },
+    "riskGauge": {
+      "clean": "Чисто",
+      "low": "Низкий",
+      "medium": "Средний",
+      "high": "Высокий",
+      "critical": "Критический",
+      "sanctioned": "Санкции",
+      "error": "Ошибка"
+    },
+    "riskSignals": {
+      "empty": "Сигналы не обнаружены"
+    },
+    "sanctions": {
+      "sanctionedAddress": "АДРЕС ПОД САНКЦИЯМИ",
+      "indirect": "Косвенная OFAC",
+      "notOnList": "Не в списке",
+      "noInteractions": "нет взаимодействий"
+    },
+    "savedInv": {
+      "title": "Сохранённые",
+      "empty": "Нет."
+    },
+    "timeTravel": {
+      "title": "Путешествие во времени",
+      "balanceEvolution": "Эволюция баланса",
+      "cumulativeIn": "Ввод",
+      "cumulativeOut": "Вывод",
+      "balances": "Балансы",
+      "counterparties": "Контрагенты:"
+    },
+    "tokenHoldings": {
+      "title": "Балансы токенов"
+    },
+    "txTable": {
+      "openDetails": "Детали транзакции",
+      "colDir": "Напр",
+      "colTime": "Время",
+      "colHash": "Хэш",
+      "colFrom": "Из",
+      "colTo": "В",
+      "colValue": "Значение",
+      "empty": "Нет транзакций."
+    },
+    "exposure": {
+      "directExposure": "Прямая экспозиция",
+      "risky": "Рисковые",
+      "total": "Всего",
+      "noDirectExposure": "Прямой экспозиции на известные рисковые контрагенты не обнаружено."
+    },
+    "coverage": {
+      "title": "Покрытие CrypTX",
+      "blockchains": "блокчейнов",
+      "tokens": "токенов",
+      "liveTraceable": "с live-трассировкой",
+      "chains": "Цепочки",
+      "searchPh": "Поиск цепочек или токенов...",
+      "trace": "трасс",
+      "liveTraceLegend": "Live-трасс = поддержка отслеживания в реальном времени",
+      "catNative": "Нативные L1/L2",
+      "catStablecoin": "Стейблкоины",
+      "catWrapped": "Обёрнутые активы",
+      "catLst": "Стейкинг / LST",
+      "catDefi": "DeFi / Gov",
+      "catMeme": "Meme / Риск"
+    },
+    "caseQa": {
+      "title": "Спросить о деле",
+      "subtitle": "ИИ на основе доказательств",
+      "placeholder": "Вопрос…"
+    },
+    "defiThreat": {
+      "title": "DeFi Угрозы",
+      "stablecoin": "Stablecoin",
+      "flashLoan": "Flash-Loan",
+      "rugPull": "Rug Pulls",
+      "mevBots": "MEV"
+    }
+  }
+}

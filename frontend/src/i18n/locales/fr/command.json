@@ -1,0 +1,33 @@
+{
+  "palette": {
+    "placeholder": "Collez une adresse / hash de TX, ou saisissez un nom de module…",
+    "title": "Commande",
+    "hintEnter": "Entrée",
+    "hintEsc": "ÉCHAP",
+    "sectionModules": "Modules",
+    "sectionActions": "Actions",
+    "sectionEntities": "Entités",
+    "investigatePrefix": "Investiguer",
+    "empty": "Aucune correspondance. Collez une adresse BTC / EVM / TRON / SOL, un hash de transaction, un nom ENS, ou recherchez une entité (« Binance », « Lazarus ») ou un nom de module.",
+    "open": "Ouvrir la palette de commande",
+    "footerNavigate": "naviguer",
+    "footerOpen": "ouvrir",
+    "footerAutoDetect": "détecte automatiquement la chaîne selon le format"
+  },
+  "actions": {
+    "auto": { "label": "Auto-Investigation", "hint": "pipeline complet en un clic" },
+    "intel": { "label": "Renseignement d'adresse", "hint": "rapport OSINT complet" },
+    "nexus": { "label": "Graphe Nexus", "hint": "graphe de relations" },
+    "holistic": { "label": "Traçage holistique", "hint": "traçage multi-chaînes" },
+    "forensics": { "label": "Analyse forensique", "hint": "algorithmes locaux" },
+    "trace": { "label": "Traceur de fonds", "hint": "flux multi-sauts" },
+    "txlens": { "label": "Objectif TX", "hint": "investigation de transaction" },
+    "txdetail": { "label": "Détail TX", "hint": "vue brute de transaction" },
+    "txdetailBtc": { "label": "Détail TX (BTC)", "hint": "vue brute de transaction" },
+    "perpdex": { "label": "Renseignement DEX Perpétuel", "hint": "analyse de compte Hyperliquid" }
+  },
+  "entities": {
+    "loading": "Recherche d'entités…",
+    "none": "Aucune entité correspondante."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "flagged_malicious": 1,
+  "infinite_approvals": 1,
+  "live_approvals": 1,
+  "verdict": "CRITICAL \u2014 live approvals to flagged-malicious spenders"
+}

@@ -1,0 +1,286 @@
+/**
+ * Nexus Progress Cinema
+ * ────────────────────────────────────────────────────────────────────────────
+ * The cinematic run screen shown while a Nexus investigation is building.
+ * All decorative motion lives here so it can be switched off in one place for
+ * `prefers-reduced-motion`. Colours come from the theme tokens (--accent-*),
+ * so the sequence reads correctly in both the dark and light shells.
+ */
+
+.nxc {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Hug the content instead of stretching edge-to-edge: the panel is a centred
+     console, not a full-bleed band. The cap matches the inner content grid. */
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgb(var(--bg-border) / 0.45);
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgb(var(--accent-blue) / 0.10), transparent 62%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgb(var(--accent-purple) / 0.08), transparent 60%),
+    rgb(var(--bg-secondary) / 0.92);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 24px 64px rgb(0 0 0 / 0.35);
+}
+.nxc--done {
+  border-color: rgb(var(--accent-green) / 0.4);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 0 48px rgb(var(--accent-green) / 0.12);
+}
+.nxc--error {
+  border-color: rgb(var(--accent-red) / 0.4);
+}
+
+/* ── Backdrop layers ──────────────────────────────────────────────────────── */
+.nxc-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+.nxc-grid {
+  position: absolute;
+  inset: -40px;
+  background-image:
+    linear-gradient(rgb(var(--accent-blue) / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--accent-blue) / 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 78% 72% at 50% 45%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 72% at 50% 45%, #000 20%, transparent 78%);
+  animation: nxc-grid-drift 22s linear infinite;
+}
+@keyframes nxc-grid-drift {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 44px 44px, 44px 44px; }
+}
+
+.nxc-scan {
+  position: absolute;
+  left: 0; right: 0;
+  height: 180px;
+  background: linear-gradient(180deg, transparent, rgb(var(--accent-blue) / 0.10) 45%, rgb(var(--accent-blue) / 0.16) 50%, transparent);
+  animation: nxc-scan 6.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes nxc-scan {
+  0%   { top: -180px; opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.nxc-particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: rgb(var(--accent-blue) / 0.85);
+  box-shadow: 0 0 6px rgb(var(--accent-blue) / 0.7);
+  animation: nxc-particle var(--dur, 14s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: 0;
+}
+@keyframes nxc-particle {
+  0%   { transform: translate3d(0, 40px, 0) scale(0.6); opacity: 0; }
+  14%  { opacity: 0.9; }
+  86%  { opacity: 0.55; }
+  100% { transform: translate3d(var(--dx, 20px), -260px, 0) scale(1.1); opacity: 0; }
+}
+
+/* ── Hero radial ──────────────────────────────────────────────────────────── */
+.nxc-ticks   { animation: nxc-spin 48s linear infinite; transform-origin: 50% 50%; }
+.nxc-orbit   { animation: nxc-spin 9s linear infinite;  transform-origin: 50% 50%; }
+.nxc-orbit-r { animation: nxc-spin-r 14s linear infinite; transform-origin: 50% 50%; }
+@keyframes nxc-spin   { to { transform: rotate(360deg); } }
+@keyframes nxc-spin-r { to { transform: rotate(-360deg); } }
+
+.nxc-halo {
+  animation: nxc-halo 2.6s ease-out infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes nxc-halo {
+  0%   { transform: scale(0.94); opacity: 0.55; }
+  70%  { transform: scale(1.12); opacity: 0; }
+  100% { transform: scale(1.12); opacity: 0; }
+}
+
+/* ── Bars ─────────────────────────────────────────────────────────────────── */
+.nxc-shimmer {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.28), transparent);
+  animation: nxc-shimmer 1.6s linear infinite;
+}
+@keyframes nxc-shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+.nxc-eq span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: rgb(var(--accent-blue) / 0.75);
+  animation: nxc-eq 1.1s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes nxc-eq {
+  0%, 100% { height: 20%; opacity: 0.45; }
+  50%      { height: 100%; opacity: 1; }
+}
+
+/* ── Telemetry feed ───────────────────────────────────────────────────────── */
+.nxc-log-line { animation: nxc-log-in 0.34s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes nxc-log-in {
+  from { opacity: 0; transform: translateY(6px); filter: blur(2px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+
+.nxc-caret { animation: nxc-blink 1.05s steps(1) infinite; }
+@keyframes nxc-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* ── Completion beat ──────────────────────────────────────────────────────── */
+.nxc-flash { animation: nxc-flash 1.1s ease-out both; }
+@keyframes nxc-flash {
+  0%   { box-shadow: inset 0 0 0 0 rgb(var(--accent-green) / 0.55), 0 0 0 rgb(var(--accent-green) / 0); }
+  22%  { box-shadow: inset 0 0 90px 0 rgb(var(--accent-green) / 0.28), 0 0 70px rgb(var(--accent-green) / 0.35); }
+  100% { box-shadow: inset 0 0 0 0 rgb(var(--accent-green) / 0), 0 0 0 rgb(var(--accent-green) / 0); }
+}
+
+.nxc-sweep {
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 38%, rgb(var(--accent-green) / 0.22) 50%, transparent 62%);
+  animation: nxc-sweep 1.05s ease-out both;
+  pointer-events: none;
+}
+@keyframes nxc-sweep {
+  from { transform: translateX(-110%); }
+  to   { transform: translateX(110%); }
+}
+
+.nxc-rise { animation: nxc-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--delay, 0s); }
+@keyframes nxc-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Collapsed summary strip ──────────────────────────────────────────────── */
+.nxc-strip { animation: nxc-strip-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes nxc-strip-in {
+  from { opacity: 0; transform: translateY(-8px) scaleY(0.9); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Reduced motion: keep the graphics, drop the movement ─────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .nxc-grid, .nxc-scan, .nxc-particle, .nxc-ticks, .nxc-orbit, .nxc-orbit-r,
+  .nxc-halo, .nxc-shimmer, .nxc-eq span, .nxc-log-line, .nxc-caret,
+  .nxc-flash, .nxc-sweep, .nxc-rise, .nxc-strip {
+    animation: none !important;
+  }
+  .nxc-particle, .nxc-scan, .nxc-sweep { display: none; }
+  .nxc-eq span { height: 60%; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Nexus Launch Console — the input screen.
+   Shares the `.nxc` shell and backdrop so the launch and run screens read as
+   one continuous sequence; everything below is specific to the console.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* Constellation: a slow-breathing wallet graph drawn behind the header. */
+.nxl-net-edge {
+  stroke-dasharray: 5 9;
+  animation: nxl-edge-flow 3.4s linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes nxl-edge-flow { to { stroke-dashoffset: -28; } }
+
+.nxl-net-node {
+  animation: nxl-node-pulse 3.6s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  transform-origin: center;
+}
+@keyframes nxl-node-pulse {
+  0%, 100% { opacity: 0.35; r: var(--r, 3); }
+  50%      { opacity: 1;    r: calc(var(--r, 3) * 1.45); }
+}
+
+/* Crest — the launch glyph, with two counter-rotating rings. */
+.nxl-crest-ring   { animation: nxc-spin 11s linear infinite; transform-origin: 50% 50%; }
+.nxl-crest-ring-r { animation: nxc-spin-r 17s linear infinite; transform-origin: 50% 50%; }
+
+/* Primary address field — a focus sweep fires as the operator commits. */
+.nxl-field {
+  position: relative;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.nxl-field:focus-within {
+  border-color: rgb(var(--accent-blue) / 0.6) !important;
+  box-shadow: 0 0 0 4px rgb(var(--accent-blue) / 0.10), 0 0 34px rgb(var(--accent-blue) / 0.18);
+}
+.nxl-field input,
+.nxl-field textarea,
+.nxl-field select { background: transparent; border: none; outline: none; width: 100%; }
+.nxl-field input::placeholder,
+.nxl-field textarea::placeholder { color: rgb(var(--text-muted)); opacity: 0.75; }
+
+/* Launch button — idle glow plus a sweep on hover. */
+.nxl-launch { position: relative; overflow: hidden; transition: transform 0.16s, box-shadow 0.22s, filter 0.22s; }
+.nxl-launch::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 36%, rgb(255 255 255 / 0.3) 50%, transparent 64%);
+  transform: translateX(-120%);
+}
+.nxl-launch:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.08); }
+.nxl-launch:hover:not(:disabled)::after { animation: nxc-sweep 0.75s ease-out; }
+.nxl-launch:active:not(:disabled) { transform: scale(0.985); }
+.nxl-launch:disabled { opacity: 0.42; cursor: not-allowed; }
+
+/* Depth stepper segments. */
+.nxl-seg {
+  flex: 1;
+  height: 100%;
+  border-radius: 2px;
+  background: rgb(var(--bg-border) / 0.4);
+  transition: background 0.25s, box-shadow 0.25s;
+}
+.nxl-seg[data-on='true'] {
+  background: rgb(var(--accent-blue));
+  box-shadow: 0 0 9px rgb(var(--accent-blue) / 0.6);
+}
+
+/* AI synthesis switch. */
+.nxl-switch {
+  position: relative;
+  width: 40px; height: 22px;
+  border-radius: 999px;
+  background: rgb(var(--bg-border) / 0.5);
+  transition: background 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nxl-switch[data-on='true'] {
+  background: rgb(var(--accent-blue) / 0.85);
+  box-shadow: 0 0 16px rgb(var(--accent-blue) / 0.45);
+}
+.nxl-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: rgb(var(--text-bright));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nxl-switch[data-on='true']::after { transform: translateX(18px); }
+
+/* Supported-chain ticker. */
+.nxl-marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.nxl-marquee > div { display: flex; width: max-content; animation: nxl-marquee 42s linear infinite; }
+@keyframes nxl-marquee { to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .nxl-net-edge, .nxl-net-node, .nxl-crest-ring, .nxl-crest-ring-r,
+  .nxl-marquee > div, .nxl-launch::after { animation: none !important; }
+  .nxl-launch:hover:not(:disabled) { transform: none; }
+}

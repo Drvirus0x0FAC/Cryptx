@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "CrypTX 区块链网络犯罪调查解决方案",
+    "subtitle": "跨链追踪非法资金、串联归因、评估风险并保全证据，不丢失任何调查线索。"
+  },
+  "pills": {
+    "evidencePipelineArmed": "证据流水线已就绪",
+    "systemsOnline": "系统在线",
+    "chainsSupported": "支持 {{count}} 条链",
+    "aiTriageReady": "AI 分诊就绪"
+  },
+  "search": {
+    "placeholder": "输入钱包地址、ENS 域名、TX 哈希、实体或案件线索…",
+    "button": "调查",
+    "try": "试试"
+  },
+  "liveBrief": {
+    "title": "实时情报简报",
+    "radarLabel": "实时分诊雷达",
+    "prioritySignals_one": "条优先信号",
+    "prioritySignals_other": "条优先信号"
+  },
+  "panels": {
+    "portfolioRisk": "投资组合风险",
+    "coverageMatrix": "覆盖矩阵",
+    "openMatrix": "打开矩阵",
+    "liveIntelWire": "实时情报线",
+    "threatLandscape": "威胁态势",
+    "threatFeedIdle": "威胁资讯流空闲 — 打开威胁态势以同步 RSS 源。",
+    "marketPulse": "市场脉搏",
+    "marketPulseHint": "USD 实时估值支持追踪 + 冻结包",
+    "operationsDeck": "作战甲板",
+    "live": "实时",
+    "valueFrozen": "已冻结 / 没收",
+    "autoQueued": "自动排队冻结",
+    "scamNetworks": "已映射骗局网络",
+    "unreadMonitor": "未读监控提醒",
+    "newActivity": "新活动",
+    "monitorsQuiet": "监控安静 — 无未读提醒。",
+    "caseRiskDist": "案件风险分布",
+    "activeInvestigations": "活跃调查",
+    "viewAll": "查看全部",
+    "noCases": "暂无案件",
+    "createCase": "创建案件",
+    "highRiskAlert": "{{count}} 项高风险调查需要审查",
+    "noHighRisk": "无高风险案件审查队列。",
+    "intelWire": "情报线",
+    "stablecoins": "稳定币",
+    "liveTraceable": "可实时追踪",
+    "addressesCount": "{{count}} 个地址"
+  },
+  "stats": {
+    "activeCases": "活跃案件",
+    "highRisk": "高风险",
+    "totalCases": "案件总数",
+    "addresses": "地址",
+    "chains": "条链",
+    "liveTrace": "实时追踪",
+    "tokens": "个代币"
+  },
+  "families": {
+    "evm": "EVM 网络",
+    "utxo": "UTXO 链",
+    "solana": "Solana VM",
+    "tron": "Tron 栈",
+    "cosmos": "Cosmos IBC",
+    "others": "专用轨道"
+  },
+  "ticker": {
+    "risk": "风险",
+    "frozenSeized": "截至目前的冻结/扣押",
+    "syntheticKyc": "合成KYC标记",
+    "trackedAssets": "追踪资产"
+  }
+}

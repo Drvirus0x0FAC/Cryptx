@@ -1,0 +1,87 @@
+{
+  "brand": {
+    "tagline": "Investigación de Blockchain",
+    "followTheFlow": "Sigue el flujo"
+  },
+  "status": {
+    "online": "En línea",
+    "offline": "Sin conexión",
+    "sync": "Sincronizando",
+    "syncing": "Sincronizando…",
+    "loading": "Cargando…",
+    "loadingModule": "Cargando módulo…",
+    "verifyingSession": "Verificando sesión segura…",
+    "ready": "Listo",
+    "error": "Error",
+    "none": "Ninguno",
+    "unknown": "Desconocido",
+    "all": "Todo"
+  },
+  "actions": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "apply": "Aplicar",
+    "retry": "Reintentar",
+    "reset": "Restablecer",
+    "submit": "Enviar",
+    "search": "Buscar",
+    "clear": "Limpiar",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "refresh": "Actualizar",
+    "export": "Exportar",
+    "download": "Descargar",
+    "open": "Abrir",
+    "expand": "Expandir",
+    "collapse": "Contraer",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "back": "Atrás",
+    "continue": "Continuar",
+    "confirm": "Confirmar",
+    "delete": "Eliminar",
+    "remove": "Quitar",
+    "edit": "Editar",
+    "view": "Ver",
+    "details": "Detalles",
+    "loadMore": "Cargar más",
+    "viewAll": "Ver todo",
+    "showMore": "Mostrar más",
+    "showLess": "Mostrar menos",
+    "tryAgain": "Intentar de nuevo"
+  },
+  "units": {
+    "tools_one": "{{count}} herramienta",
+    "tools_other": "{{count}} herramientas",
+    "hops_one": "{{count}} salto",
+    "hops_other": "{{count}} saltos",
+    "results_one": "{{count}} resultado",
+    "results_other": "{{count}} resultados",
+    "items_one": "{{count}} elemento",
+    "items_other": "{{count}} elementos",
+    "seconds_one": "{{count}} s",
+    "seconds_other": "{{count}} s"
+  },
+  "errors": {
+    "generic": "Algo salió mal.",
+    "network": "Error de red. Comprueba tu conexión e inténtalo de nuevo.",
+    "notFound": "No encontrado.",
+    "unauthorized": "No estás autorizado para realizar esta acción.",
+    "timeout": "La solicitud caducó. Inténtalo de nuevo.",
+    "serverError": "Error del servidor. Inténtalo más tarde."
+  },
+  "empty": {
+    "noData": "Sin datos disponibles",
+    "noResults": "No se encontraron resultados",
+    "nothingHere": "Aquí no hay nada todavía"
+  },
+  "time": {
+    "now": "ahora",
+    "ago": "hace",
+    "inFuture": "en"
+  },
+  "misc": {
+    "language": "Idioma"
+  }
+}

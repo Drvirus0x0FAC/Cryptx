@@ -1,0 +1,30 @@
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.6.0
+aiohttp>=3.9.0
+python-multipart>=0.0.9
+python-dotenv>=1.0.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+# OpenSea live NFT lookup (full DOM scrape). After installing, run:
+#   playwright install chromium
+playwright>=1.44.0
+# MCP server (exposes engines to AI agents) — optional, only needed to run mcp_server.py
+fastmcp>=2.0.0
+# (auth uses the bundled SQLite database — no external DB driver required)
+# Optional: at-rest encryption of shared board snapshots (falls back to PBKDF2-gating without it)
+cryptography>=42.0.0
+# Enterprise SSO (OIDC: Google / Microsoft Entra / Okta / Keycloak). Lazy-imported
+# so the app runs without it; install to enable SSO login.
+authlib>=1.3.0
+httpx>=0.27.0
+# RFC-3161 trusted timestamping for court-admissible evidence (lazy-imported;
+# install to enable TSA timestamping on daubert notarizations + evidence exports).
+rfc3161ng>=2.1.0
+# Optional: stealth engine for the deep Reddit OSINT scraper (Cloudflare/bot bypass).
+# Without it the scraper falls back to plain HTTP (Reddit may bot-block). After install run:
+#   scrapling install
+# scrapling>=0.2.9
+# Test & benchmark harness (Daubert measured-error-rate pipeline)
+pytest>=8.0.0

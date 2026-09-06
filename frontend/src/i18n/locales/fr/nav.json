@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "core": "Principal",
+    "investigation": "Investigation",
+    "intelligence": "Renseignement",
+    "compliance": "Conformité",
+    "advanced": "Forensics avancés"
+  },
+  "items": {
+    "dashboard": "Tableau de bord",
+    "boards": "Tableaux",
+    "nexus": "Graphe Nexus",
+    "trace": "Traceur de fonds",
+    "intel": "Renseignement d'adresse",
+    "nftTron": "NFT / TON",
+    "auto": "Auto-Investigation",
+    "entity": "Investigation d'entité",
+    "txLens": "Objectif TX",
+    "dex": "Analyse DEX",
+    "perpDex": "DEX Perpétuel",
+    "monitor": "Surveillance",
+    "evidence": "Preuves",
+    "predictive": "IA prédictive",
+    "aiAgent": "Agent IA",
+    "osint": "Balayage OSINT",
+    "cases": "Affaires",
+    "batch": "Screening en lot",
+    "labels": "Étiquettes",
+    "victimReports": "Signalements victimes",
+    "scamAtlas": "Atlas des arnaques",
+    "reports": "Studio de rapports",
+    "sanctions": "Sanctions",
+    "attribution": "Attribution",
+    "submissions": "Soumissions",
+    "regulatory": "Réglementaire",
+    "demix": "Dé-mixage AML",
+    "comply": "Suite Conformité",
+    "contractForensics": "Forensics de contrat",
+    "laundering": "Traçage de blanchiment",
+    "courtReadiness": "Préparation judiciaire",
+    "recovery": "Gel & Récupération",
+    "freezeDesk": "Bureau de gel",
+    "team": "Équipe"
+  },
+  "quick": {
+    "workspace": "Espace de travail",
+    "openPalette": "Ouvrir la palette de modules"
+  }
+}

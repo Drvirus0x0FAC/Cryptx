@@ -1,0 +1,34 @@
+{
+  "deposits_analyzed": 2,
+  "disclaimer": "Probabilistic leads only. Confirm with funding-source and timing evidence before attribution.",
+  "high_confidence_links": 1,
+  "links": [
+    {
+      "anonymity_set": 1,
+      "best_confidence": 0.68,
+      "candidate_count": 1,
+      "candidates": [
+        {
+          "confidence": 0.68,
+          "deposit_time": 1700036645,
+          "deposit_tx": "0xdT1",
+          "depositor": "0xbe06a0bd6f44722676f7d7ed4720da81b5ce233e",
+          "reasons": [
+            "Same 100.0 ETH denomination",
+            "Deposit precedes withdrawal by 3355s",
+            "Same relayer used for deposit and withdrawal",
+            "Within 86400s timing window",
+            "Small anonymity set (1 candidate deposits)"
+          ],
+          "time_gap_seconds": 3355
+        }
+      ],
+      "denomination": 100.0,
+      "recipient": "0x0da5bcab3f1188eb52e2b6a7c6553662671a2e2b",
+      "withdrawal_tx": "0xw1"
+    }
+  ],
+  "method": "tornado_cash_demix",
+  "pool": "ethereum",
+  "withdrawals_analyzed": 1
+}

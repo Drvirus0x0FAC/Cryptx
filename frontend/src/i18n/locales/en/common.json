@@ -1,0 +1,87 @@
+{
+  "brand": {
+    "tagline": "Blockchain Investigation",
+    "followTheFlow": "Follow the Flow"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "sync": "Sync",
+    "syncing": "Syncing…",
+    "loading": "Loading…",
+    "loadingModule": "Loading module…",
+    "verifyingSession": "Verifying secure session…",
+    "ready": "Ready",
+    "error": "Error",
+    "none": "None",
+    "unknown": "Unknown",
+    "all": "All"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "apply": "Apply",
+    "retry": "Retry",
+    "reset": "Reset",
+    "submit": "Submit",
+    "search": "Search",
+    "clear": "Clear",
+    "copy": "Copy",
+    "copied": "Copied",
+    "refresh": "Refresh",
+    "export": "Export",
+    "download": "Download",
+    "open": "Open",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "next": "Next",
+    "previous": "Previous",
+    "back": "Back",
+    "continue": "Continue",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "remove": "Remove",
+    "edit": "Edit",
+    "view": "View",
+    "details": "Details",
+    "loadMore": "Load more",
+    "viewAll": "View all",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "tryAgain": "Try again"
+  },
+  "units": {
+    "tools_one": "{{count}} tool",
+    "tools_other": "{{count}} tools",
+    "hops_one": "{{count}} hop",
+    "hops_other": "{{count}} hops",
+    "results_one": "{{count}} result",
+    "results_other": "{{count}} results",
+    "items_one": "{{count}} item",
+    "items_other": "{{count}} items",
+    "seconds_one": "{{count}}s",
+    "seconds_other": "{{count}}s"
+  },
+  "errors": {
+    "generic": "Something went wrong.",
+    "network": "Network error. Check your connection and try again.",
+    "notFound": "Not found.",
+    "unauthorized": "You are not authorized to perform this action.",
+    "timeout": "The request timed out. Please try again.",
+    "serverError": "Server error. Please try again later."
+  },
+  "empty": {
+    "noData": "No data available",
+    "noResults": "No results found",
+    "nothingHere": "Nothing here yet"
+  },
+  "time": {
+    "now": "now",
+    "ago": "ago",
+    "inFuture": "in"
+  },
+  "misc": {
+    "language": "Language"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "topbar": {
+    "searchPlaceholder": "Rechercher adresse, hash, ENS, affaire…",
+    "searchKbdHint": "Ctrl K",
+    "searchKbdEnter": "Entrée",
+    "threatLandscape": "Paysage des menaces",
+    "threatLandscapeTitle": "Paysage des menaces blockchain — flux de sécurité crypto & blockchain en direct",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "logoutTitle": "Déconnexion et révocation de la session",
+    "profile": "Profil",
+    "userProfile": "Profil utilisateur",
+    "densityCompact": "Densité compacte",
+    "densityComfortable": "Densité confortable",
+    "themeLight": "Mode clair",
+    "themeDark": "Mode sombre",
+    "language": "Langue"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Tout marquer comme lu",
+    "newBadge": "{{count}} nouvelles",
+    "empty": "Aucune notification pour le moment",
+    "taskReply": "{{name}} a répondu sur « {{task}} »",
+    "taskAssigned": "Une nouvelle tâche vous a été assignée",
+    "tooltip": "Notifications"
+  },
+  "island": {
+    "missionModules": "Modules de mission",
+    "toolsCount_one": "{{count}} outil",
+    "toolsCount_other": "{{count}} outils"
+  },
+  "ambient": {
+    "txBridgeHop": "saut de pont TRX",
+    "mixerExposure": "exposition mixer",
+    "ofacClear": "OFAC OK",
+    "btcClusterRisk": "risque de cluster",
+    "ethBridgePath": "chemin de pont",
+    "xmrMixerWatch": "veille mixer",
+    "amlTrace": "TRACE AML",
+    "amlCaseScore": "score d'affaire {{score}}",
+    "chainSwap": "ÉCHANGE DE CHAÎNE",
+    "chainSwapPath": "ETH vers BASE",
+    "walletLink": "LIEN PORTEFEUILLE",
+    "hopsCount_one": "{{count}} saut",
+    "hopsCount_other": "{{count}} sauts",
+    "ticker": {
+      "txTrace": "TRACE TX",
+      "amlScreen": "SCREENING AML",
+      "chainSwap": "ÉCHANGE CHAÎNE",
+      "mixerWatch": "VEILLE MIXER",
+      "riskNode": "NŒUD DE RISQUE",
+      "caseVault": "COFFRE AFFAIRES"
+    }
+  }
+}

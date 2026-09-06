@@ -1,0 +1,114 @@
+{
+  "title": "设置",
+  "subtitle": "API 密钥管理 · 数据源与工具配置",
+  "head": {
+    "syncEnv": "同步 {{count}} 个 .env",
+    "saved": "已保存",
+    "saveFailed": "保存失败",
+    "saveButton": "保存",
+    "saveButtonCount": "保存 ({{count}})",
+    "saving": "保存中…"
+  },
+  "status": {
+    "configured": "已配置",
+    "pending": "待定",
+    "notSet": "未设置",
+    "set": "已设置",
+    "off": "关闭"
+  },
+  "keys": {
+    "configuredCount": "已配置 {{count}}/{{total}}",
+    "groups": {
+      "chainData": "链上数据",
+      "attributionRisk": "归因与风险",
+      "osint": "OSINT"
+    }
+  },
+  "editor": {
+    "configured": "已配置",
+    "placeholderReplace": "输入新值以替换已存储的值",
+    "placeholderGeneric": "输入 {{label}}",
+    "getKey": "获取 API 密钥",
+    "apply": "应用",
+    "cancel": "取消"
+  },
+  "ai": {
+    "provider": "提供商",
+    "providerNone": "无",
+    "model": "模型",
+    "modelNone": "无",
+    "modelPlaceholder": "输入模型 ID",
+    "baseUrl": "基础 URL",
+    "baseUrlPlaceholder": "https://your-gateway.example/v1",
+    "apiKey": "API 密钥",
+    "apiKeySet": "已设置",
+    "apiKeyPending": "待定",
+    "apiKeyPlaceholder": "{{label}} API 密钥",
+    "apiKeyConfiguredPlaceholder": "已配置 — 输入新值以替换",
+    "keyConfigured": "已配置",
+    "keyNotConfigured": "未配置",
+    "saveToActivate": "保存以激活 {{label}}",
+    "testProvider": "测试 AI 提供商",
+    "testing": "测试中…",
+    "testOk": "连接成功",
+    "testFailed": "AI 提供商测试失败",
+    "liveLabel": "实时",
+    "statusOnline": "在线",
+    "statusOffline": "离线",
+    "activeProvider": "当前提供商"
+  },
+  "panels": {
+    "dataSourceKeys": "数据源 API 密钥",
+    "aiRuntime": "AI 运行时",
+    "toolFeatures": "工具功能",
+    "workspace": "工作区"
+  },
+  "fields": {
+    "deepseekKey": { "label": "DeepSeek API 密钥", "hint": "适用于调查简报、假设与结构化 JSON 合成的稳健默认选择。" },
+    "claudeKey": { "label": "Claude API 密钥", "hint": "原生 Claude 连接器，适合严谨的叙事式报告与基于证据的推理。" },
+    "geminiKey": { "label": "Gemini API 密钥", "hint": "Google Gemini 连接器，用于长上下文分析与报告生成。" },
+    "openaiKey": { "label": "OpenAI API 密钥", "hint": "兼容 OpenAI chat-completions 的连接器，用于通用 AI 调查功能。" },
+    "codexKey": { "label": "Codex / OpenAI API 密钥", "hint": "在 CrypTX 中使用兼容 OpenAI 的密钥和模型以进行 Codex 式工作流。" },
+    "tonApiKey": { "label": "TON API 密钥", "hint": "TON 访问密钥 — 为地址情报中的 TON 档案补全提供支持。" },
+    "trongridKey": { "label": "TronGrid API 密钥", "hint": "TronGrid 密钥 — 支持 Tron 地址与交易查询。" },
+    "etherscanKey": { "label": "Etherscan API 密钥", "hint": "Etherscan 密钥 — 支持 EVM 地址与交易补全。" },
+    "blockstreamKey": { "label": "Blockstream API 密钥", "hint": "Blockstream / esplora 密钥 — 支持比特币地址与交易补全。" }
+  },
+  "rows": {
+    "apiTimeout": { "label": "请求超时", "sub": "每次 API 调用最长等待" },
+    "defaultHops": { "label": "默认追踪深度", "sub": "资金追踪器跳数" },
+    "traceMode": { "label": "追踪模式" },
+    "monitorRefresh": { "label": "监控刷新", "sub": "钱包监控轮询" },
+    "riskThreshold": { "label": "风险告警阈值", "sub": "在 / 高于该值时标记" },
+    "batchSize": { "label": "批量大小", "sub": "每屏地址数" },
+    "autoEnrich": { "label": "自动公开补全", "sub": "每次地址查询时" },
+    "confirmDelete": { "label": "删除前确认" },
+    "resultRows": { "label": "结果行数", "sub": "结果表格的默认行数" },
+    "liveThreatFeed": { "label": "实时威胁资讯流", "sub": "威胁态势滚动条" },
+    "animations": { "label": "界面动画", "sub": "全应用的装饰性动效" },
+    "theme": "主题",
+    "density": "密度",
+    "defaultChain": "默认链",
+    "language": "语言"
+  },
+  "segmented": {
+    "dark": "深色",
+    "light": "浅色",
+    "comfortable": "舒适",
+    "compact": "紧凑",
+    "linear": "线性",
+    "wide": "广度"
+  },
+  "chains": {
+    "auto": "自动",
+    "btc": "BTC",
+    "eth": "ETH",
+    "bsc": "BSC",
+    "polygon": "POLYGON",
+    "arbitrum": "ARBITRUM",
+    "optimism": "OPTIMISM",
+    "base": "BASE",
+    "tron": "TRON",
+    "solana": "SOLANA"
+  }
+}

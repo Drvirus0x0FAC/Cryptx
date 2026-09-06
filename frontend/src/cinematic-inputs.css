@@ -1,0 +1,3798 @@
+/**
+ * Cinematic Input Stages — v2 "Full Theatrical"
+ * Every top-nav module gets a unique animated input stage.
+ * Markup contract: each page wraps its form in `.cinematic-<name>` containing
+ * an aria-hidden `.cine-fx` layer with four generic spans (.fx-a .fx-b .fx-c .fx-d).
+ * Each design styles those layers (plus ::before/::after = up to 12 FX layers).
+ */
+
+/* ═══ BASE ═══════════════════════════════════════════════════════════════ */
+[class*="cinematic-"] {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+[class*="cinematic-"] > :not(.cine-fx) { position: relative; z-index: 2; }
+[class*="cinematic-"] > .card {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.cine-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.cine-fx span { position: absolute; display: block; }
+.cine-fx span::before, .cine-fx span::after { position: absolute; display: block; }
+
+/* Staggered rise of form controls inside every stage */
+[class*="cinematic-"] :is(form, > .card) > * { animation: cine-child-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+[class*="cinematic-"] :is(form, > .card) > *:nth-child(1) { animation-delay: 0.05s; }
+[class*="cinematic-"] :is(form, > .card) > *:nth-child(2) { animation-delay: 0.12s; }
+[class*="cinematic-"] :is(form, > .card) > *:nth-child(3) { animation-delay: 0.19s; }
+[class*="cinematic-"] :is(form, > .card) > *:nth-child(4) { animation-delay: 0.26s; }
+[class*="cinematic-"] :is(form, > .card) > *:nth-child(5) { animation-delay: 0.33s; }
+@keyframes cine-child-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+[class*="cinematic-"] .input { transition: border-color .25s, box-shadow .3s, transform .25s, background .3s; }
+[class*="cinematic-"] .input:focus { transform: translateY(-1px); }
+[class*="cinematic-"] :is(.btn-primary, .btn-secondary, .btn-ghost) { transition: box-shadow .25s, transform .2s, filter .25s; }
+[class*="cinematic-"] :is(.btn-primary):hover { transform: translateY(-1px); filter: brightness(1.15); }
+
+/* ═══ CORE ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Address Intel — "Holographic Scanner" ─────────────────────────── */
+.cinematic-intel {
+  padding: 18px;
+  border-radius: 14px;
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(0,212,255,0.10), transparent 60%),
+    linear-gradient(160deg, rgba(2,14,26,0.9), rgba(8,4,30,0.9));
+  border: 1px solid rgba(0,212,255,0.25);
+  animation: cine-intel-boot 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-intel-boot {
+  0%   { opacity: 0; transform: scaleY(0.6); filter: brightness(3) saturate(0); }
+  60%  { opacity: 1; transform: scaleY(1.02); }
+  100% { opacity: 1; transform: scaleY(1); filter: brightness(1); }
+}
+.cinematic-intel::before { /* rotating holo-frame */
+  content: '';
+  position: absolute; inset: -60%;
+  background: conic-gradient(from 0deg, transparent 0 70deg, rgba(0,212,255,0.25) 90deg, transparent 110deg, transparent 250deg, rgba(123,47,255,0.22) 270deg, transparent 290deg);
+  animation: cine-intel-spin 7s linear infinite;
+  z-index: 0;
+}
+@keyframes cine-intel-spin { to { transform: rotate(360deg); } }
+.cinematic-intel::after { /* inner mask to keep frame on edges only */
+  content: '';
+  position: absolute; inset: 2px;
+  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(2,14,26,0.96), rgba(8,4,30,0.96));
+  z-index: 0;
+}
+.cinematic-intel .cine-fx { z-index: 1; }
+.cinematic-intel .fx-a { /* scan beam sweeping down */
+  left: 6px; right: 6px; height: 34px; top: -40px;
+  background: linear-gradient(180deg, transparent, rgba(0,212,255,0.16), rgba(0,212,255,0.34) 92%, rgba(180,246,255,0.7) 100%);
+  animation: cine-intel-sweep 3.4s ease-in-out infinite;
+}
+@keyframes cine-intel-sweep {
+  0%, 12% { top: -40px; opacity: 0; }
+  20% { opacity: 1; }
+  55% { top: 100%; opacity: 1; }
+  62%, 100% { top: 100%; opacity: 0; }
+}
+.cinematic-intel .fx-b::before, .cinematic-intel .fx-b::after,
+.cinematic-intel .fx-c::before, .cinematic-intel .fx-c::after { /* corner brackets */
+  content: '';
+  width: 16px; height: 16px;
+  border: 2px solid rgba(0,224,255,0.85);
+  animation: cine-intel-corner 2.2s ease-in-out infinite;
+}
+.cinematic-intel .fx-b::before { top: 7px; left: 7px; border-right: 0; border-bottom: 0; }
+.cinematic-intel .fx-b::after  { top: 7px; right: 7px; border-left: 0; border-bottom: 0; }
+.cinematic-intel .fx-c::before { bottom: 7px; left: 7px; border-right: 0; border-top: 0; }
+.cinematic-intel .fx-c::after  { bottom: 7px; right: 7px; border-left: 0; border-top: 0; }
+.cinematic-intel .fx-b, .cinematic-intel .fx-c { inset: 0; }
+@keyframes cine-intel-corner { 0%,100% { opacity: 0.45; } 50% { opacity: 1; } }
+.cinematic-intel .fx-d { /* drifting holo grid */
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(0,212,255,0.05) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(0deg, rgba(0,212,255,0.05) 0 1px, transparent 1px 26px);
+  animation: cine-intel-grid 9s linear infinite;
+  opacity: 0.7;
+}
+@keyframes cine-intel-grid { to { background-position: 26px 26px, 26px 26px; } }
+.cinematic-intel .input {
+  background: rgba(0,18,36,0.82);
+  border: 1px solid rgba(0,212,255,0.35);
+  border-radius: 9px;
+  caret-color: #00e0ff;
+}
+.cinematic-intel .input:focus {
+  border-color: #00e0ff;
+  box-shadow: 0 0 0 1px rgba(0,224,255,0.5), 0 0 28px rgba(0,212,255,0.28), inset 0 0 18px rgba(0,212,255,0.07);
+  letter-spacing: 0.02em;
+}
+.cinematic-intel:focus-within .fx-a { animation-duration: 1.6s; }
+.cinematic-intel .btn-primary { box-shadow: 0 0 18px rgba(0,212,255,0.25); }
+
+/* ── 2. Fund Tracer — "Neural Pipeline" ───────────────────────────────── */
+.cinematic-trace {
+  padding: 18px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(30,4,12,0.92), rgba(16,2,8,0.94));
+  border: 1px solid rgba(255,59,107,0.28);
+  animation: cine-trace-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-trace-enter {
+  from { opacity: 0; transform: translateX(-28px); filter: blur(6px); }
+  to   { opacity: 1; transform: translateX(0); filter: blur(0); }
+}
+.cinematic-trace .fx-a { /* triple particle streams */
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 40%, rgba(255,59,107,0.9) 50%, transparent 60% 100%),
+    linear-gradient(90deg, transparent 0 40%, rgba(255,122,24,0.8) 50%, transparent 60% 100%),
+    linear-gradient(90deg, transparent 0 40%, rgba(255,59,107,0.7) 50%, transparent 60% 100%);
+  background-repeat: no-repeat;
+  background-size: 200% 2px, 200% 2px, 200% 2px;
+  background-position: -100% 22%, -140% 50%, -120% 78%;
+  animation: cine-trace-streams 2.6s linear infinite;
+  opacity: 0.55;
+}
+@keyframes cine-trace-streams {
+  to { background-position: 200% 22%, 160% 50%, 180% 78%; }
+}
+.cinematic-trace .fx-b { /* pulsing pipeline nodes */
+  top: 50%; left: 0; width: 5px; height: 5px; border-radius: 50%;
+  background: #ff3b6b;
+  box-shadow: 12% 0 0 #ff3b6b, 25vw 0 0 #ff7a18, 45vw 0 0 #ff3b6b, 65vw 0 0 #ff7a18, 85vw 0 0 #ff3b6b;
+  opacity: 0.5;
+  animation: cine-trace-nodes 1.4s ease-in-out infinite alternate;
+}
+@keyframes cine-trace-nodes { from { opacity: 0.25; } to { opacity: 0.8; } }
+.cinematic-trace .fx-c { /* top energy rail */
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #ff3b6b, #ff7a18, #ff3b6b, transparent);
+  background-size: 200% 100%;
+  animation: cine-trace-rail 2s linear infinite;
+}
+@keyframes cine-trace-rail { to { background-position: -200% 0; } }
+.cinematic-trace .fx-d { /* ember glow */
+  bottom: -40px; left: 20%; width: 60%; height: 80px;
+  background: radial-gradient(ellipse, rgba(255,90,60,0.22), transparent 70%);
+  animation: cine-trace-ember 3s ease-in-out infinite alternate;
+}
+@keyframes cine-trace-ember { from { opacity: 0.4; transform: scaleX(0.9); } to { opacity: 1; transform: scaleX(1.1); } }
+.cinematic-trace .input {
+  background: rgba(46,8,20,0.7);
+  border: 1px solid rgba(255,59,107,0.3);
+  border-radius: 9px;
+  caret-color: #ff3b6b;
+}
+.cinematic-trace .input:focus {
+  border-color: #ff3b6b;
+  box-shadow: 0 0 24px rgba(255,59,107,0.22), inset 0 -2px 0 rgba(255,122,24,0.6);
+}
+.cinematic-trace:focus-within .fx-a { animation-duration: 1.1s; opacity: 0.9; }
+.cinematic-trace .btn-primary { box-shadow: 0 0 18px rgba(255,59,107,0.3); }
+
+/* ── 3. DEX Analysis — "CRT Trading Terminal" ─────────────────────────── */
+.cinematic-dex {
+  padding: 30px 16px 18px;
+  border-radius: 6px;
+  background: #070d09;
+  border: 1px solid #1a3a2a;
+  font-family: 'Roboto Mono', monospace;
+  animation: cine-dex-poweron 0.55s cubic-bezier(0.19, 1, 0.22, 1) both;
+  box-shadow: inset 0 0 60px rgba(20,80,50,0.25);
+}
+@keyframes cine-dex-poweron {
+  0%   { opacity: 0; transform: scaleY(0.015); filter: brightness(6); }
+  55%  { opacity: 1; transform: scaleY(1.03); filter: brightness(1.6); }
+  100% { transform: scaleY(1); filter: brightness(1); }
+}
+.cinematic-dex::before {
+  content: '█ DEX MARKET TERMINAL — LIVE FEED';
+  position: absolute; top: 0; left: 0; right: 0; z-index: 3;
+  padding: 4px 10px;
+  background: #0b160f;
+  border-bottom: 1px solid #1a3a2a;
+  color: #34d399;
+  font-size: 9px; letter-spacing: 0.18em;
+  animation: cine-dex-header 4s steps(2) infinite;
+}
+@keyframes cine-dex-header { 0%,92% { opacity: 1; } 96% { opacity: 0.55; } 100% { opacity: 1; } }
+.cinematic-dex .fx-a { /* CRT scanlines + roll bar */
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px);
+}
+.cinematic-dex .fx-a::after {
+  content: '';
+  left: 0; right: 0; height: 46px; top: -50px;
+  background: linear-gradient(180deg, transparent, rgba(52,211,153,0.07), transparent);
+  animation: cine-dex-roll 5s linear infinite;
+}
+@keyframes cine-dex-roll { to { top: 110%; } }
+.cinematic-dex .fx-b { /* candlestick sparkline */
+  bottom: 6px; left: 12px; right: 12px; height: 22px;
+  background:
+    linear-gradient(90deg,
+      transparent 0 2%, #16a34a 2% 3.2%, transparent 3.2% 8%, #dc2626 8% 9.2%, transparent 9.2% 14%,
+      #16a34a 14% 15.2%, transparent 15.2% 20%, #16a34a 20% 21.2%, transparent 21.2% 26%,
+      #dc2626 26% 27.2%, transparent 27.2% 32%, #16a34a 32% 33.2%, transparent 33.2% 38%,
+      #dc2626 38% 39.2%, transparent 39.2% 44%, #16a34a 44% 45.2%, transparent 45.2% 50%);
+  background-size: 200% 100%;
+  opacity: 0.5;
+  animation: cine-dex-candles 9s linear infinite;
+}
+@keyframes cine-dex-candles { to { background-position: -200% 0; } }
+.cinematic-dex .fx-c::before { /* blinking block cursor */
+  content: '▮';
+  top: 3px; right: 10px;
+  color: #34d399; font-size: 10px;
+  animation: cine-dex-blink 1s steps(1) infinite;
+  z-index: 3;
+}
+.cinematic-dex .fx-c { inset: 0; z-index: 3; }
+@keyframes cine-dex-blink { 50% { opacity: 0; } }
+.cinematic-dex .fx-d { /* phosphor vignette */
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(6,20,12,0.85) 100%);
+}
+.cinematic-dex .input {
+  background: #0a1410;
+  border: 1px solid #1e4a32;
+  border-radius: 3px;
+  color: #4ade80;
+  font-family: 'Roboto Mono', monospace;
+  caret-color: #34d399;
+  text-shadow: 0 0 6px rgba(52,211,153,0.5);
+}
+.cinematic-dex .input::placeholder { color: #1d5c3c; text-shadow: none; }
+.cinematic-dex .input:focus {
+  border-color: #34d399;
+  box-shadow: 0 0 14px rgba(52,211,153,0.2), inset 0 0 10px rgba(52,211,153,0.06);
+  background: #0c1a13;
+}
+.cinematic-dex .btn-primary {
+  border-radius: 3px;
+  box-shadow: 0 0 14px rgba(52,211,153,0.25);
+}
+
+/* ── 4. Nexus Graph — "Constellation" ─────────────────────────────────── */
+.cinematic-nexus {
+  padding: 20px;
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 25% 15%, rgba(110,60,255,0.14), transparent 55%),
+    radial-gradient(ellipse at 80% 90%, rgba(60,120,255,0.10), transparent 55%),
+    linear-gradient(180deg, #0a0618, #060412);
+  border: 1px solid rgba(124,77,255,0.28);
+  animation: cine-nexus-warp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-nexus-warp {
+  from { opacity: 0; transform: scale(1.07); filter: blur(10px); }
+  to   { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+.cinematic-nexus .fx-a { /* starfield near */
+  width: 2px; height: 2px; top: 20%; left: 12%;
+  border-radius: 50%;
+  background: #cbb6ff;
+  box-shadow:
+    8vw 3px 0 #9d7bff, 16vw 26px 0 #7fb0ff, 24vw -8px 0 #cbb6ff, 33vw 30px 0 #9d7bff,
+    42vw 6px 0 #e0d4ff, 52vw 22px 0 #7fb0ff, 63vw -6px 0 #cbb6ff, 74vw 18px 0 #9d7bff, 84vw 2px 0 #e0d4ff;
+  animation: cine-nexus-twinkle 2.4s ease-in-out infinite alternate;
+}
+.cinematic-nexus .fx-b { /* starfield far */
+  width: 1px; height: 1px; top: 65%; left: 6%;
+  border-radius: 50%;
+  background: #8f7bd8;
+  box-shadow:
+    7vw -14px 0 #8f7bd8, 15vw 8px 0 #6a5acd, 26vw -20px 0 #8f7bd8, 37vw 4px 0 #6a8fd8,
+    49vw -10px 0 #8f7bd8, 60vw 10px 0 #6a5acd, 72vw -16px 0 #8f7bd8, 86vw 6px 0 #6a8fd8;
+  animation: cine-nexus-twinkle 3.6s ease-in-out infinite alternate-reverse;
+  opacity: 0.7;
+}
+@keyframes cine-nexus-twinkle { from { opacity: 0.35; } to { opacity: 1; } }
+.cinematic-nexus .fx-c { /* orbiting node */
+  top: 50%; right: 9%; width: 74px; height: 74px; margin-top: -37px;
+  border: 1px dashed rgba(157,123,255,0.4);
+  border-radius: 50%;
+  animation: cine-nexus-orbit 10s linear infinite;
+}
+.cinematic-nexus .fx-c::before {
+  content: '';
+  top: -4px; left: 50%; width: 8px; height: 8px; margin-left: -4px;
+  border-radius: 50%;
+  background: #b18cff;
+  box-shadow: 0 0 12px #9d7bff;
+}
+@keyframes cine-nexus-orbit { to { transform: rotate(360deg); } }
+.cinematic-nexus .fx-d { /* constellation link shimmer */
+  inset: 0;
+  background:
+    linear-gradient(23deg, transparent 46%, rgba(157,123,255,0.16) 50%, transparent 54%),
+    linear-gradient(-31deg, transparent 47%, rgba(127,176,255,0.12) 50%, transparent 53%);
+  animation: cine-nexus-links 5s ease-in-out infinite alternate;
+}
+@keyframes cine-nexus-links { from { opacity: 0.3; } to { opacity: 1; } }
+.cinematic-nexus .input {
+  background: rgba(16,10,36,0.75);
+  border: 1px solid rgba(157,123,255,0.35);
+  border-radius: 10px;
+  caret-color: #b18cff;
+}
+.cinematic-nexus .input:focus {
+  border-color: #b18cff;
+  box-shadow: 0 0 30px rgba(157,123,255,0.3), 0 0 4px rgba(224,212,255,0.6);
+}
+.cinematic-nexus:focus-within .fx-c { animation-duration: 3.5s; }
+.cinematic-nexus .btn-primary { box-shadow: 0 0 20px rgba(157,123,255,0.35); }
+
+/* ── 5. NFT / TRON — "Hologram Projector" ─────────────────────────────── */
+.cinematic-nft {
+  padding: 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #120716, #0a0410);
+  border: 1px solid rgba(255,64,182,0.25);
+  animation: cine-nft-project 0.75s ease-out both;
+}
+@keyframes cine-nft-project {
+  0%   { opacity: 0; transform: translateY(16px); filter: hue-rotate(40deg) brightness(2); }
+  40%  { opacity: 0.7; }
+  55%  { opacity: 0.4; }
+  70%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0); filter: none; }
+}
+.cinematic-nft .fx-a { /* projector beam cone */
+  bottom: 0; left: 50%; width: 260px; height: 100%; margin-left: -130px;
+  background: linear-gradient(0deg, rgba(255,64,182,0.20), rgba(64,224,255,0.06) 60%, transparent);
+  clip-path: polygon(42% 100%, 58% 100%, 92% 0%, 8% 0%);
+  animation: cine-nft-flicker 2.8s steps(6) infinite;
+}
+@keyframes cine-nft-flicker {
+  0%,100% { opacity: 0.85; } 30% { opacity: 0.55; } 34% { opacity: 0.9; }
+  62% { opacity: 0.6; } 66% { opacity: 1; }
+}
+.cinematic-nft .fx-b { /* rising shimmer motes */
+  width: 3px; height: 3px; bottom: -6px; left: 30%;
+  border-radius: 50%;
+  background: rgba(255,150,220,0.9);
+  box-shadow: 8vw -10px 0 rgba(120,220,255,0.8), 16vw 4px 0 rgba(255,150,220,0.7), 26vw -6px 0 rgba(120,220,255,0.7), 36vw 2px 0 rgba(255,150,220,0.8);
+  animation: cine-nft-rise 4s linear infinite;
+}
+@keyframes cine-nft-rise {
+  from { transform: translateY(0); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  to   { transform: translateY(-120px); opacity: 0; }
+}
+.cinematic-nft .fx-c { /* chromatic aberration edges */
+  inset: 0; border-radius: 14px;
+  border: 1px solid rgba(64,224,255,0.35);
+  transform: translate(1.5px, -1px);
+  animation: cine-nft-chroma 3.4s ease-in-out infinite alternate;
+}
+.cinematic-nft .fx-c::after {
+  content: ''; inset: 0; border-radius: 14px;
+  border: 1px solid rgba(255,64,182,0.35);
+  transform: translate(-3px, 2px);
+}
+@keyframes cine-nft-chroma { from { transform: translate(1.5px,-1px); } to { transform: translate(-1.5px,1px); } }
+.cinematic-nft .fx-d { /* platform glow */
+  bottom: 2px; left: 50%; width: 190px; height: 12px; margin-left: -95px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,64,182,0.5), transparent 70%);
+  animation: cine-nft-plate 2s ease-in-out infinite alternate;
+}
+@keyframes cine-nft-plate { from { opacity: 0.5; transform: scaleX(0.85); } to { opacity: 1; transform: scaleX(1.05); } }
+.cinematic-nft .input {
+  background: rgba(30,8,32,0.75);
+  border: 1px solid rgba(255,64,182,0.35);
+  border-radius: 10px;
+  caret-color: #ff40b6;
+}
+.cinematic-nft .input:focus {
+  border-color: #ff40b6;
+  box-shadow: 0 0 24px rgba(255,64,182,0.28), -2px 0 0 rgba(64,224,255,0.5), 2px 0 0 rgba(255,64,182,0.5);
+}
+.cinematic-nft .btn-primary { box-shadow: 0 0 18px rgba(255,64,182,0.35); }
+
+/* ── 6. Boards — "Blueprint Drafting Table" ───────────────────────────── */
+.cinematic-boards {
+  padding: 20px;
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(0deg, rgba(64,140,255,0.07) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(90deg, rgba(64,140,255,0.07) 0 1px, transparent 1px 22px),
+    linear-gradient(180deg, #071224, #05101f);
+  border: 1px dashed rgba(90,160,255,0.4);
+  animation: cine-boards-draw 0.8s ease-out both;
+}
+@keyframes cine-boards-draw {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+.cinematic-boards .fx-a { /* sliding crosshair */
+  top: 0; bottom: 0; left: 18%; width: 1px;
+  background: rgba(120,190,255,0.35);
+  animation: cine-boards-cross-x 7s ease-in-out infinite alternate;
+}
+.cinematic-boards .fx-a::after {
+  content: ''; left: -30px; top: 30%; width: 61px; height: 1px;
+  background: rgba(120,190,255,0.35);
+}
+@keyframes cine-boards-cross-x { from { left: 12%; } to { left: 84%; } }
+.cinematic-boards .fx-b::before { /* title block */
+  content: 'CASEBOARD // REV 2.0 — SCALE 1:1';
+  bottom: 6px; right: 10px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.2em;
+  color: rgba(120,190,255,0.55);
+  border: 1px solid rgba(120,190,255,0.3);
+  padding: 2px 7px;
+}
+.cinematic-boards .fx-b { inset: 0; }
+.cinematic-boards .fx-c { /* dash-offset marching border */
+  inset: 4px; border-radius: 7px;
+  background:
+    linear-gradient(90deg, rgba(120,190,255,0.6) 50%, transparent 0) repeat-x,
+    linear-gradient(90deg, rgba(120,190,255,0.6) 50%, transparent 0) repeat-x bottom,
+    linear-gradient(0deg, rgba(120,190,255,0.6) 50%, transparent 0) repeat-y,
+    linear-gradient(0deg, rgba(120,190,255,0.6) 50%, transparent 0) repeat-y right;
+  background-size: 12px 1px, 12px 1px, 1px 12px, 1px 12px;
+  animation: cine-boards-march 1.2s linear infinite;
+  opacity: 0.45;
+}
+@keyframes cine-boards-march {
+  to { background-position: 12px 0, -12px 100%, 0 -12px, 100% 12px; }
+}
+.cinematic-boards .fx-d { /* compass arc */
+  top: -30px; right: -30px; width: 110px; height: 110px;
+  border: 1px solid rgba(120,190,255,0.25);
+  border-radius: 50%;
+  animation: cine-boards-compass 14s linear infinite;
+}
+.cinematic-boards .fx-d::before {
+  content: ''; top: 50%; left: -6px; right: -6px; height: 1px;
+  background: rgba(120,190,255,0.3);
+}
+@keyframes cine-boards-compass { to { transform: rotate(360deg); } }
+.cinematic-boards .input {
+  background: rgba(8,22,44,0.8);
+  border: 1px solid rgba(90,160,255,0.4);
+  border-radius: 4px;
+  caret-color: #78beff;
+}
+.cinematic-boards .input::placeholder { color: rgba(90,160,255,0.35); }
+.cinematic-boards .input:focus {
+  border-color: #78beff;
+  border-style: solid;
+  box-shadow: 0 0 0 3px rgba(90,160,255,0.15), 0 0 18px rgba(90,160,255,0.2);
+}
+.cinematic-boards .btn-primary { box-shadow: 0 0 16px rgba(90,160,255,0.3); }
+
+/* ═══ INVESTIGATION ══════════════════════════════════════════════════════ */
+
+/* ── 7. Auto Investigate — "Launch Console" ───────────────────────────── */
+.cinematic-auto {
+  padding: 24px 18px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #150f02, #0d0a02);
+  border: 1px solid rgba(255,180,40,0.3);
+  animation: cine-auto-slam 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes cine-auto-slam {
+  0%  { opacity: 0; transform: translateY(-26px) scale(1.04); }
+  70% { opacity: 1; transform: translateY(3px) scale(0.995); }
+  100%{ opacity: 1; transform: translateY(0) scale(1); }
+}
+.cinematic-auto .fx-a { /* hazard chevrons top & bottom */
+  top: 0; left: 0; right: 0; height: 7px;
+  background: repeating-linear-gradient(-45deg, rgba(255,180,40,0.75) 0 10px, rgba(10,8,2,0.9) 10px 20px);
+  animation: cine-auto-chevrons 1.1s linear infinite;
+}
+.cinematic-auto .fx-b {
+  bottom: 0; left: 0; right: 0; height: 7px;
+  background: repeating-linear-gradient(45deg, rgba(255,180,40,0.75) 0 10px, rgba(10,8,2,0.9) 10px 20px);
+  animation: cine-auto-chevrons 1.1s linear infinite reverse;
+}
+@keyframes cine-auto-chevrons { to { background-position: 28.28px 0; } }
+.cinematic-auto .fx-c { /* countdown ring */
+  top: 50%; right: 14px; width: 54px; height: 54px; margin-top: -27px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(255,180,40,0.85) 0deg 96deg, rgba(255,180,40,0.12) 96deg 360deg);
+  -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
+          mask: radial-gradient(circle, transparent 58%, #000 60%);
+  animation: cine-auto-count 4s linear infinite;
+  opacity: 0.5;
+}
+@keyframes cine-auto-count { to { transform: rotate(360deg); } }
+.cinematic-auto .fx-d { /* status LEDs */
+  top: 12px; right: 16px; width: 6px; height: 6px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: -14px 0 0 #eab308, -28px 0 0 #ef4444;
+  animation: cine-auto-leds 1.6s steps(1) infinite;
+}
+@keyframes cine-auto-leds { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+.cinematic-auto .input {
+  background: rgba(34,24,4,0.75);
+  border: 1px solid rgba(255,180,40,0.35);
+  border-radius: 8px;
+  caret-color: #ffb428;
+}
+.cinematic-auto .input:focus {
+  border-color: #ffb428;
+  box-shadow: 0 0 22px rgba(255,180,40,0.25), inset 0 0 12px rgba(255,180,40,0.06);
+}
+.cinematic-auto .btn-primary {
+  position: relative;
+  box-shadow: 0 0 20px rgba(255,180,40,0.3);
+  animation: cine-auto-armed 1.8s ease-in-out infinite alternate;
+}
+@keyframes cine-auto-armed { from { box-shadow: 0 0 12px rgba(255,180,40,0.2); } to { box-shadow: 0 0 26px rgba(255,180,40,0.5); } }
+.cinematic-auto:focus-within .fx-a,
+.cinematic-auto:focus-within .fx-b { animation-duration: 0.4s; }
+
+/* ── 8. Entity Investigation — "Classified Dossier" ───────────────────── */
+.cinematic-entity {
+  padding: 26px 20px 20px;
+  border-radius: 4px 14px 4px 4px;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 27px, rgba(210,190,140,0.06) 27px 28px),
+    linear-gradient(180deg, #17130a, #100d06);
+  border: 1px solid rgba(210,180,120,0.28);
+  animation: cine-entity-open 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: top center;
+}
+@keyframes cine-entity-open {
+  from { opacity: 0; transform: perspective(700px) rotateX(-28deg); }
+  to   { opacity: 1; transform: perspective(700px) rotateX(0); }
+}
+.cinematic-entity .fx-a::before { /* folder tab */
+  content: 'DOSSIER № 7741';
+  top: 0; left: 14px;
+  padding: 2px 14px;
+  background: rgba(210,180,120,0.14);
+  border: 1px solid rgba(210,180,120,0.3);
+  border-bottom: none;
+  border-radius: 5px 5px 0 0;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.25em;
+  color: rgba(230,205,150,0.8);
+}
+.cinematic-entity .fx-a { inset: 0; }
+.cinematic-entity .fx-b::before { /* stamp */
+  content: 'CLASSIFIED';
+  top: 10px; right: 18px;
+  padding: 3px 10px;
+  border: 2px solid rgba(220,60,60,0.75);
+  border-radius: 3px;
+  color: rgba(220,60,60,0.85);
+  font-weight: 800; font-size: 11px; letter-spacing: 0.3em;
+  transform: rotate(-8deg);
+  animation: cine-entity-stamp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s both;
+}
+.cinematic-entity .fx-b { inset: 0; }
+@keyframes cine-entity-stamp {
+  from { opacity: 0; transform: rotate(-8deg) scale(2.6); }
+  to   { opacity: 1; transform: rotate(-8deg) scale(1); }
+}
+.cinematic-entity .fx-c { /* fingerprint watermark */
+  bottom: -26px; left: -20px; width: 130px; height: 130px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle at 40% 45%, transparent 0 4px, rgba(210,180,120,0.10) 4px 5px);
+  animation: cine-entity-print 16s linear infinite;
+  opacity: 0.8;
+}
+@keyframes cine-entity-print { to { transform: rotate(360deg); } }
+.cinematic-entity .fx-d { /* redaction bars shimmer */
+  top: 34%; right: 8%; width: 90px; height: 7px;
+  background: rgba(210,180,120,0.14);
+  box-shadow: -18px 16px 0 rgba(210,180,120,0.10), 10px 32px 0 rgba(210,180,120,0.12);
+  animation: cine-entity-redact 3.2s ease-in-out infinite alternate;
+}
+@keyframes cine-entity-redact { from { opacity: 0.4; } to { opacity: 1; } }
+.cinematic-entity .input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(210,180,120,0.45);
+  border-radius: 0;
+  font-family: 'Roboto Mono', monospace;
+  caret-color: #e6cd96;
+}
+.cinematic-entity .input:focus {
+  border-bottom-color: #e6cd96;
+  box-shadow: 0 8px 16px -10px rgba(230,205,150,0.45);
+  background: rgba(210,180,120,0.04);
+}
+.cinematic-entity .btn-primary { border-radius: 3px; box-shadow: 0 0 14px rgba(210,180,120,0.25); }
+
+/* ── 9. TX Lens — "Microscope" ────────────────────────────────────────── */
+.cinematic-txlens {
+  padding: 22px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 50%, #0c1420 0%, #060a12 70%);
+  border: 1px solid rgba(88,166,255,0.3);
+  animation: cine-txlens-focus 0.9s ease-out both;
+}
+@keyframes cine-txlens-focus {
+  from { opacity: 0; filter: blur(14px); transform: scale(1.05); }
+  55%  { filter: blur(3px); }
+  to   { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+.cinematic-txlens .fx-a { /* lens vignette */
+  inset: -2px;
+  background: radial-gradient(circle at 50% 50%, transparent 46%, rgba(2,6,14,0.9) 92%);
+}
+.cinematic-txlens .fx-b { /* rotating reticle */
+  top: 50%; left: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px;
+  border: 1px dashed rgba(88,166,255,0.35);
+  border-radius: 50%;
+  animation: cine-txlens-reticle 18s linear infinite;
+}
+.cinematic-txlens .fx-b::before {
+  content: ''; top: 50%; left: -10px; right: -10px; height: 1px;
+  background: rgba(88,166,255,0.3);
+}
+.cinematic-txlens .fx-b::after {
+  content: ''; left: 50%; top: -10px; bottom: -10px; width: 1px;
+  background: rgba(88,166,255,0.3);
+}
+@keyframes cine-txlens-reticle { to { transform: rotate(360deg); } }
+.cinematic-txlens .fx-c { /* breathing focus ring */
+  top: 50%; left: 50%; width: 190px; height: 190px; margin: -95px 0 0 -95px;
+  border: 1px solid rgba(88,166,255,0.25);
+  border-radius: 50%;
+  animation: cine-txlens-breathe 3s ease-in-out infinite alternate;
+}
+@keyframes cine-txlens-breathe {
+  from { transform: scale(0.94); opacity: 0.4; }
+  to   { transform: scale(1.04); opacity: 0.9; }
+}
+.cinematic-txlens .fx-d { /* drifting specimen motes */
+  top: 30%; left: 20%; width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(120,200,255,0.5);
+  box-shadow: 18vw 30px 0 rgba(120,200,255,0.35), 34vw -12px 0 rgba(120,200,255,0.45), 48vw 22px 0 rgba(120,200,255,0.3);
+  filter: blur(1px);
+  animation: cine-txlens-drift 7s ease-in-out infinite alternate;
+}
+@keyframes cine-txlens-drift { from { transform: translate(0,0); } to { transform: translate(14px,-10px); } }
+.cinematic-txlens .input {
+  background: rgba(10,20,36,0.8);
+  border: 1px solid rgba(88,166,255,0.35);
+  border-radius: 999px;
+  padding-left: 18px;
+  caret-color: #58a6ff;
+}
+.cinematic-txlens .input:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 4px rgba(88,166,255,0.12), 0 0 26px rgba(88,166,255,0.25);
+}
+.cinematic-txlens:focus-within .fx-b { animation-duration: 5s; }
+.cinematic-txlens:focus-within .fx-a { background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(2,6,14,0.9) 100%); }
+.cinematic-txlens .btn-primary { border-radius: 999px; box-shadow: 0 0 18px rgba(88,166,255,0.3); }
+
+/* ── 10. Perp DEX — "Leverage Gauge" ──────────────────────────────────── */
+.cinematic-perpdex {
+  padding: 18px;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #051307 0%, #0a0505 55%, #130505 100%);
+  border: 1px solid rgba(150,150,160,0.2);
+  animation: cine-perp-enter 0.6s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+@keyframes cine-perp-enter {
+  from { opacity: 0; transform: rotate(-1.5deg) translateY(12px); }
+  to   { opacity: 1; transform: rotate(0) translateY(0); }
+}
+.cinematic-perpdex .fx-a { /* gauge arc */
+  top: -46px; right: 18px; width: 120px; height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(from 220deg, #22c55e 0 45deg, #eab308 45deg 75deg, #ef4444 75deg 100deg, transparent 100deg);
+  -webkit-mask: radial-gradient(circle, transparent 62%, #000 64%);
+          mask: radial-gradient(circle, transparent 62%, #000 64%);
+  opacity: 0.6;
+}
+.cinematic-perpdex .fx-b { /* needle */
+  top: 14px; right: 76px; width: 2px; height: 34px;
+  background: linear-gradient(180deg, #fff, rgba(255,255,255,0.1));
+  transform-origin: bottom center;
+  animation: cine-perp-needle 3.4s ease-in-out infinite alternate;
+}
+@keyframes cine-perp-needle {
+  0%   { transform: rotate(-52deg); }
+  45%  { transform: rotate(10deg); }
+  60%  { transform: rotate(-4deg); }
+  100% { transform: rotate(48deg); }
+}
+.cinematic-perpdex .fx-c { /* long/short pressure bar */
+  bottom: 8px; left: 16px; right: 16px; height: 3px;
+  background: linear-gradient(90deg, #22c55e 0 50%, #ef4444 50% 100%);
+  background-size: 240% 100%;
+  background-position: 42% 0;
+  animation: cine-perp-pressure 5s ease-in-out infinite alternate;
+  border-radius: 2px;
+  opacity: 0.7;
+}
+@keyframes cine-perp-pressure {
+  from { background-position: 30% 0; }
+  to   { background-position: 66% 0; }
+}
+.cinematic-perpdex .fx-d::before { /* funding readout */
+  content: 'FUNDING +0.0132% · OI 84.2M · MARK 63,918';
+  top: 8px; left: 16px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.14em;
+  color: rgba(160,220,180,0.6);
+  animation: cine-perp-tick 2s steps(2) infinite;
+}
+.cinematic-perpdex .fx-d { inset: 0; }
+@keyframes cine-perp-tick { 50% { opacity: 0.5; } }
+.cinematic-perpdex .input {
+  background: rgba(8,14,10,0.8);
+  border: 1px solid rgba(34,197,94,0.3);
+  border-radius: 8px;
+  font-family: 'Roboto Mono', monospace;
+  caret-color: #22c55e;
+}
+.cinematic-perpdex .input:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 20px rgba(34,197,94,0.2), inset 0 0 10px rgba(34,197,94,0.05);
+}
+.cinematic-perpdex .btn-primary { box-shadow: 0 0 16px rgba(34,197,94,0.3); }
+
+/* ── 11. Wallet Monitor — "Sentinel Radar" ────────────────────────────── */
+.cinematic-monitor {
+  padding: 20px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 82% 50%, rgba(20,60,40,0.5) 0%, #04100a 55%);
+  border: 1px solid rgba(45,212,150,0.3);
+  animation: cine-monitor-ripple-in 0.7s ease-out both;
+}
+@keyframes cine-monitor-ripple-in {
+  from { opacity: 0; transform: scale(0.96); box-shadow: 0 0 0 24px rgba(45,212,150,0.12); }
+  to   { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(45,212,150,0); }
+}
+.cinematic-monitor .fx-a { /* radar rings */
+  top: 50%; right: 26px; width: 120px; height: 120px; margin-top: -60px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle, transparent 0 18px, rgba(45,212,150,0.22) 18px 19px);
+  border: 1px solid rgba(45,212,150,0.3);
+  opacity: 0.75;
+}
+.cinematic-monitor .fx-b { /* rotating sweep */
+  top: 50%; right: 26px; width: 120px; height: 120px; margin-top: -60px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(45,212,150,0.5), transparent 70deg);
+  animation: cine-monitor-sweep 3s linear infinite;
+}
+@keyframes cine-monitor-sweep { to { transform: rotate(360deg); } }
+.cinematic-monitor .fx-c { /* contact blips */
+  top: 50%; right: 26px; width: 120px; height: 120px; margin-top: -60px;
+}
+.cinematic-monitor .fx-c::before {
+  content: ''; top: 26%; left: 60%; width: 5px; height: 5px; border-radius: 50%;
+  background: #2dd496;
+  box-shadow: 0 0 8px #2dd496;
+  animation: cine-monitor-blip 3s ease-out infinite;
+}
+.cinematic-monitor .fx-c::after {
+  content: ''; top: 64%; left: 30%; width: 4px; height: 4px; border-radius: 50%;
+  background: #ffd166;
+  box-shadow: 0 0 8px #ffd166;
+  animation: cine-monitor-blip 3s ease-out 1.4s infinite;
+}
+@keyframes cine-monitor-blip { 0% { opacity: 0; } 12% { opacity: 1; } 55% { opacity: 0.15; } 100% { opacity: 0; } }
+.cinematic-monitor .fx-d { /* alert strip */
+  top: 0; left: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, #2dd496, transparent 60%);
+  animation: cine-monitor-strip 2.4s ease-in-out infinite alternate;
+}
+@keyframes cine-monitor-strip { from { opacity: 0.35; } to { opacity: 1; } }
+.cinematic-monitor .input {
+  background: rgba(6,22,15,0.8);
+  border: 1px solid rgba(45,212,150,0.35);
+  border-radius: 9px;
+  caret-color: #2dd496;
+}
+.cinematic-monitor .input:focus {
+  border-color: #2dd496;
+  box-shadow: 0 0 22px rgba(45,212,150,0.22);
+}
+.cinematic-monitor:focus-within .fx-b { animation-duration: 1.2s; }
+.cinematic-monitor .btn-primary { box-shadow: 0 0 16px rgba(45,212,150,0.3); }
+
+/* ── 12. Evidence Vault — "Vault Door" ────────────────────────────────── */
+.cinematic-evidence {
+  padding: 20px;
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 5px),
+    linear-gradient(180deg, #14161c, #0b0d12);
+  border: 1px solid rgba(170,180,200,0.28);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), inset 0 -8px 22px rgba(0,0,0,0.5);
+  animation: cine-vault-shut 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-vault-shut {
+  0%  { opacity: 0; transform: translateX(46px); }
+  75% { opacity: 1; transform: translateX(-3px); }
+  100%{ transform: translateX(0); }
+}
+.cinematic-evidence .fx-a { /* rivet rows */
+  inset: 6px;
+  background:
+    radial-gradient(circle 2.5px, rgba(200,210,230,0.5) 100%, transparent) 0 0 / 46px 100% no-repeat,
+    radial-gradient(circle 2.5px, rgba(200,210,230,0.5) 100%, transparent) 100% 0 / 46px 100% no-repeat;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: repeat-y;
+  background-position: 2px 8px, calc(100% - 2px) 8px;
+  opacity: 0.6;
+}
+.cinematic-evidence .fx-b { /* rotating lock wheel */
+  top: 50%; right: 18px; width: 58px; height: 58px; margin-top: -29px;
+  border: 3px solid rgba(200,210,230,0.4);
+  border-radius: 50%;
+  animation: cine-vault-wheel 9s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+.cinematic-evidence .fx-b::before {
+  content: ''; top: 50%; left: 4px; right: 4px; height: 3px; margin-top: -1.5px;
+  background: rgba(200,210,230,0.4);
+}
+.cinematic-evidence .fx-b::after {
+  content: ''; left: 50%; top: 4px; bottom: 4px; width: 3px; margin-left: -1.5px;
+  background: rgba(200,210,230,0.4);
+}
+@keyframes cine-vault-wheel {
+  0%, 18% { transform: rotate(0); }
+  38%, 55% { transform: rotate(140deg); }
+  75%, 100% { transform: rotate(360deg); }
+}
+.cinematic-evidence .fx-c::before { /* sealed tape */
+  content: 'EVIDENCE — CHAIN OF CUSTODY SEALED';
+  top: 50%; left: -60px; right: -60px;
+  padding: 3px 0;
+  background: rgba(255,196,0,0.10);
+  border-top: 1px dashed rgba(255,196,0,0.5);
+  border-bottom: 1px dashed rgba(255,196,0,0.5);
+  color: rgba(255,196,0,0.55);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.4em; text-align: center;
+  transform: rotate(-3deg);
+  animation: cine-vault-tape 4s ease-in-out infinite alternate;
+}
+.cinematic-evidence .fx-c { inset: 0; }
+@keyframes cine-vault-tape { from { opacity: 0.5; } to { opacity: 1; } }
+.cinematic-evidence .fx-d { /* laser tripwire */
+  left: 8%; right: 8%; bottom: 12px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,60,60,0.8), transparent);
+  animation: cine-vault-laser 2.2s steps(2) infinite;
+}
+@keyframes cine-vault-laser { 50% { opacity: 0.2; } }
+.cinematic-evidence .input {
+  background: rgba(16,18,26,0.85);
+  border: 1px solid rgba(170,180,200,0.35);
+  border-radius: 6px;
+  caret-color: #cdd6e6;
+}
+.cinematic-evidence .input:focus {
+  border-color: #ffc400;
+  box-shadow: 0 0 18px rgba(255,196,0,0.18), inset 0 0 8px rgba(255,196,0,0.05);
+}
+.cinematic-evidence:focus-within .fx-b { animation-duration: 2.5s; }
+.cinematic-evidence .btn-primary { box-shadow: 0 0 14px rgba(255,196,0,0.25); }
+
+/* ═══ INTELLIGENCE ═══════════════════════════════════════════════════════ */
+
+/* ── 13. Predictive Intel — "Oracle Neural Wave" ──────────────────────── */
+.cinematic-predictive {
+  padding: 20px;
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(190,80,255,0.14), transparent 55%),
+    linear-gradient(180deg, #10061c, #090412);
+  border: 1px solid rgba(190,80,255,0.3);
+  animation: cine-pred-premonition 1s ease-out both;
+}
+@keyframes cine-pred-premonition {
+  0%   { opacity: 0; }
+  25%  { opacity: 0.7; }
+  35%  { opacity: 0.25; }
+  55%  { opacity: 0.9; }
+  65%  { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+.cinematic-predictive .fx-a { /* EEG wave */
+  top: 46%; left: 0; right: 0; height: 24px;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0 8px, rgba(217,120,255,0.7) 8px 9px, transparent 9px 22px,
+      rgba(217,120,255,0.35) 22px 23px, transparent 23px 42px);
+  -webkit-mask: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent);
+          mask: linear-gradient(90deg, transparent, #000 20%, #000 80%, transparent);
+  transform: skewY(-4deg);
+  animation: cine-pred-wave 2.2s linear infinite;
+  opacity: 0.5;
+}
+@keyframes cine-pred-wave { to { background-position: 84px 0; } }
+.cinematic-predictive .fx-b { /* synapse nodes */
+  top: 24%; left: 12%; width: 6px; height: 6px; border-radius: 50%;
+  background: #d978ff;
+  box-shadow: 0 0 12px #d978ff, 22vw 26px 0 #9d5cff, 44vw -8px 0 #ff7ad9, 66vw 20px 0 #9d5cff, 82vw 0 0 #d978ff;
+  animation: cine-pred-synapse 1.8s ease-in-out infinite alternate;
+}
+@keyframes cine-pred-synapse { from { opacity: 0.3; } to { opacity: 1; } }
+.cinematic-predictive .fx-c { /* probability aura */
+  top: 50%; left: 50%; width: 340px; height: 140px; margin: -70px 0 0 -170px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(190,80,255,0.14), transparent 70%);
+  animation: cine-pred-aura 4s ease-in-out infinite alternate;
+}
+@keyframes cine-pred-aura { from { transform: scale(0.9); opacity: 0.5; } to { transform: scale(1.08); opacity: 1; } }
+.cinematic-predictive .fx-d::before { /* precog readout */
+  content: 'T+72H FORECAST · CONFIDENCE 87.4%';
+  bottom: 8px; right: 12px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.2em;
+  color: rgba(217,120,255,0.6);
+  animation: cine-pred-readout 3s steps(3) infinite;
+}
+.cinematic-predictive .fx-d { inset: 0; }
+@keyframes cine-pred-readout { 0%,100% { opacity: 0.9; } 50% { opacity: 0.4; } }
+.cinematic-predictive .input {
+  background: rgba(26,10,42,0.75);
+  border: 1px solid rgba(190,80,255,0.35);
+  border-radius: 12px;
+  caret-color: #d978ff;
+}
+.cinematic-predictive .input:focus {
+  border-color: #d978ff;
+  box-shadow: 0 0 30px rgba(190,80,255,0.3), 0 0 4px rgba(255,180,255,0.5);
+}
+.cinematic-predictive:focus-within .fx-a { opacity: 0.9; animation-duration: 0.9s; }
+.cinematic-predictive .btn-primary { box-shadow: 0 0 20px rgba(190,80,255,0.35); }
+
+/* ── 14. AI Agent — "Reactor Core" ────────────────────────────────────── */
+.cinematic-ai {
+  padding: 20px;
+  border-radius: 16px;
+  background: radial-gradient(circle at 50% 55%, rgba(0,180,255,0.10) 0%, #04101c 60%);
+  border: 1px solid rgba(0,180,255,0.3);
+  animation: cine-ai-spinup 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-ai-spinup {
+  from { opacity: 0; transform: scale(0.92) rotate(-2deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+.cinematic-ai .fx-a { /* breathing core */
+  top: 50%; left: 50%; width: 220px; height: 90px; margin: -45px 0 0 -110px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0,200,255,0.22), transparent 70%);
+  animation: cine-ai-core 2.6s ease-in-out infinite alternate;
+}
+@keyframes cine-ai-core { from { transform: scale(0.85); opacity: 0.6; } to { transform: scale(1.1); opacity: 1; } }
+.cinematic-ai .fx-b { /* data rain */
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 0 30%, rgba(0,200,255,0.5) 50%, transparent 70% 100%) 8% -100% / 1px 60% no-repeat,
+    linear-gradient(180deg, transparent 0 30%, rgba(0,200,255,0.35) 50%, transparent 70% 100%) 28% -140% / 1px 50% no-repeat,
+    linear-gradient(180deg, transparent 0 30%, rgba(120,220,255,0.4) 50%, transparent 70% 100%) 72% -120% / 1px 55% no-repeat,
+    linear-gradient(180deg, transparent 0 30%, rgba(0,200,255,0.45) 50%, transparent 70% 100%) 92% -160% / 1px 45% no-repeat;
+  animation: cine-ai-rain 3s linear infinite;
+}
+@keyframes cine-ai-rain {
+  to { background-position: 8% 200%, 28% 240%, 72% 220%, 92% 260%; }
+}
+.cinematic-ai .fx-c { /* rotating hex ring */
+  top: 50%; left: 50%; width: 130px; height: 130px; margin: -65px 0 0 -65px;
+  border: 1px dashed rgba(0,200,255,0.35);
+  border-radius: 50%;
+  animation: cine-ai-ring 12s linear infinite;
+}
+.cinematic-ai .fx-c::before {
+  content: ''; inset: 14px;
+  border: 1px dotted rgba(0,200,255,0.3);
+  border-radius: 50%;
+  animation: cine-ai-ring 8s linear infinite reverse;
+}
+@keyframes cine-ai-ring { to { transform: rotate(360deg); } }
+.cinematic-ai .fx-d { /* spark ticks */
+  top: 12px; left: 14px; width: 4px; height: 4px; border-radius: 50%;
+  background: #00c8ff;
+  box-shadow: 10px 4px 0 rgba(0,200,255,0.5), 20px -2px 0 rgba(0,200,255,0.3);
+  animation: cine-ai-spark 1.2s steps(2) infinite;
+}
+@keyframes cine-ai-spark { 50% { opacity: 0.3; } }
+.cinematic-ai .input {
+  background: rgba(4,22,36,0.8);
+  border: 1px solid rgba(0,180,255,0.35);
+  border-radius: 12px;
+  caret-color: #00c8ff;
+}
+.cinematic-ai .input:focus {
+  border-color: #00c8ff;
+  box-shadow: 0 0 28px rgba(0,200,255,0.28), inset 0 0 14px rgba(0,200,255,0.06);
+}
+.cinematic-ai:focus-within .fx-a { animation-duration: 1s; }
+.cinematic-ai .btn-primary { box-shadow: 0 0 20px rgba(0,200,255,0.35); }
+
+/* ── 15. OSINT Sweep — "Satellite Uplink" ─────────────────────────────── */
+.cinematic-osint {
+  padding: 20px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle 2px at 12% 30%, rgba(120,200,255,0.4) 98%, transparent),
+    radial-gradient(circle 2px at 30% 68%, rgba(120,200,255,0.3) 98%, transparent),
+    radial-gradient(circle 2px at 55% 25%, rgba(120,200,255,0.35) 98%, transparent),
+    radial-gradient(circle 2px at 78% 60%, rgba(120,200,255,0.3) 98%, transparent),
+    radial-gradient(circle 2px at 90% 35%, rgba(120,200,255,0.4) 98%, transparent),
+    linear-gradient(180deg, #041018, #030a10);
+  border: 1px solid rgba(80,180,240,0.3);
+  animation: cine-osint-deorbit 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-osint-deorbit {
+  from { opacity: 0; transform: translate(30px, -22px) rotate(2deg); }
+  to   { opacity: 1; transform: translate(0, 0) rotate(0); }
+}
+.cinematic-osint .fx-a { /* orbit path + satellite */
+  top: 50%; left: 50%; width: 82%; height: 130%; margin-top: -65%;
+  transform: translateX(-50%) rotate(-14deg);
+  border: 1px dashed rgba(80,180,240,0.28);
+  border-radius: 50%;
+}
+.cinematic-osint .fx-b { /* satellite traveling */
+  top: 50%; left: 50%; width: 82%; height: 130%; margin-top: -65%;
+  transform: translateX(-50%) rotate(-14deg);
+  animation: cine-osint-sat 9s linear infinite;
+}
+.cinematic-osint .fx-b::before {
+  content: '▪'; top: -5px; left: 50%;
+  color: #7ac8ff; font-size: 9px;
+  text-shadow: 0 0 8px #7ac8ff;
+}
+@keyframes cine-osint-sat { to { transform: translateX(-50%) rotate(346deg); } }
+.cinematic-osint .fx-c { /* ping ripples */
+  top: 32%; left: 24%; width: 10px; height: 10px;
+  border: 1px solid rgba(120,220,255,0.8);
+  border-radius: 50%;
+  animation: cine-osint-ping 2.6s ease-out infinite;
+}
+.cinematic-osint .fx-c::after {
+  content: ''; inset: -1px;
+  border: 1px solid rgba(120,220,255,0.6);
+  border-radius: 50%;
+  animation: cine-osint-ping 2.6s ease-out 0.5s infinite;
+}
+@keyframes cine-osint-ping {
+  from { transform: scale(0.4); opacity: 1; }
+  to   { transform: scale(4.5); opacity: 0; }
+}
+.cinematic-osint .fx-d::before { /* coordinates readout */
+  content: 'UPLINK 14.2 GHz · SWEEP GRID 7 · SIGINT/OSINT FUSION';
+  bottom: 7px; left: 12px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.16em;
+  color: rgba(122,200,255,0.55);
+  animation: cine-osint-type 4s steps(8) infinite;
+}
+.cinematic-osint .fx-d { inset: 0; }
+@keyframes cine-osint-type { 0%,88% { opacity: 1; } 94% { opacity: 0.35; } 100% { opacity: 1; } }
+.cinematic-osint .input {
+  background: rgba(6,20,32,0.8);
+  border: 1px solid rgba(80,180,240,0.35);
+  border-radius: 9px;
+  caret-color: #7ac8ff;
+}
+.cinematic-osint .input:focus {
+  border-color: #7ac8ff;
+  box-shadow: 0 0 24px rgba(122,200,255,0.25);
+}
+.cinematic-osint:focus-within .fx-b { animation-duration: 3s; }
+.cinematic-osint .btn-primary { box-shadow: 0 0 16px rgba(122,200,255,0.3); }
+
+/* ── 16. Case Manager — "Corkboard & Red String" ──────────────────────── */
+.cinematic-cases {
+  padding: 20px;
+  border-radius: 8px;
+  background:
+    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%),
+    repeating-radial-gradient(circle at 30% 40%, rgba(120,80,40,0.06) 0 3px, transparent 3px 6px),
+    linear-gradient(180deg, #171009, #100b06);
+  border: 1px solid rgba(150,105,60,0.35);
+  animation: cine-cases-pin 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes cine-cases-pin {
+  from { opacity: 0; transform: scale(1.35) rotate(2deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+.cinematic-cases .fx-a { /* red string web */
+  inset: 0;
+  background:
+    linear-gradient(19deg, transparent 48.8%, rgba(220,60,60,0.55) 49.6%, rgba(220,60,60,0.55) 50%, transparent 50.8%),
+    linear-gradient(-33deg, transparent 48.8%, rgba(220,60,60,0.45) 49.6%, rgba(220,60,60,0.45) 50%, transparent 50.8%),
+    linear-gradient(64deg, transparent 48.8%, rgba(220,60,60,0.4) 49.6%, rgba(220,60,60,0.4) 50%, transparent 50.8%);
+  animation: cine-cases-string 5s ease-in-out infinite alternate;
+}
+@keyframes cine-cases-string { from { opacity: 0.5; } to { opacity: 1; } }
+.cinematic-cases .fx-b { /* push pins */
+  top: 18%; left: 12%; width: 8px; height: 8px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8f8f, #c22525 65%);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.7), 30vw 22px 0 0 #c22525, 58vw -6px 0 0 #c22525, 76vw 30px 0 0 #c22525;
+  animation: cine-cases-pinpulse 2.8s ease-in-out infinite alternate;
+}
+@keyframes cine-cases-pinpulse { from { filter: brightness(0.85); } to { filter: brightness(1.25); } }
+.cinematic-cases .fx-c { /* polaroid cards */
+  top: 12px; right: 14px; width: 44px; height: 34px;
+  background: rgba(235,225,200,0.10);
+  border: 1px solid rgba(235,225,200,0.25);
+  transform: rotate(6deg);
+  animation: cine-cases-sway 4s ease-in-out infinite alternate;
+}
+.cinematic-cases .fx-c::before {
+  content: ''; top: 46px; left: -70px; width: 40px; height: 30px;
+  background: rgba(235,225,200,0.08);
+  border: 1px solid rgba(235,225,200,0.2);
+  transform: rotate(-5deg);
+}
+@keyframes cine-cases-sway { from { transform: rotate(4.5deg); } to { transform: rotate(7.5deg); } }
+.cinematic-cases .fx-d::before { /* case tag */
+  content: 'ACTIVE CASE FILES';
+  top: 8px; left: 14px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.3em;
+  color: rgba(224,190,130,0.6);
+  border-bottom: 1px solid rgba(224,190,130,0.35);
+  padding-bottom: 2px;
+}
+.cinematic-cases .fx-d { inset: 0; }
+.cinematic-cases .input {
+  background: rgba(30,22,12,0.8);
+  border: 1px solid rgba(150,105,60,0.4);
+  border-radius: 5px;
+  caret-color: #e0be82;
+}
+.cinematic-cases .input:focus {
+  border-color: #dc3c3c;
+  box-shadow: 0 0 18px rgba(220,60,60,0.2);
+}
+.cinematic-cases .btn-primary { box-shadow: 0 0 14px rgba(220,60,60,0.25); }
+
+/* ── 17. Batch Screener — "Assembly Line" ─────────────────────────────── */
+.cinematic-batch {
+  padding: 20px 18px 26px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0c0f14, #080a0e);
+  border: 1px solid rgba(150,160,180,0.25);
+  animation: cine-batch-convey 0.6s ease-out both;
+}
+@keyframes cine-batch-convey {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.cinematic-batch .fx-a { /* conveyor belt */
+  bottom: 0; left: 0; right: 0; height: 12px;
+  background: repeating-linear-gradient(90deg, rgba(150,160,180,0.28) 0 14px, rgba(20,24,30,0.9) 14px 28px);
+  border-top: 1px solid rgba(150,160,180,0.35);
+  animation: cine-batch-belt 1s linear infinite;
+}
+@keyframes cine-batch-belt { to { background-position: 28px 0; } }
+.cinematic-batch .fx-b { /* passing packages */
+  bottom: 13px; left: -30px; width: 18px; height: 12px;
+  background: rgba(255,196,0,0.5);
+  border: 1px solid rgba(255,196,0,0.7);
+  border-radius: 2px;
+  box-shadow: -70px 0 0 rgba(90,160,255,0.4), -150px 0 0 rgba(45,212,150,0.4);
+  animation: cine-batch-boxes 4.5s linear infinite;
+}
+@keyframes cine-batch-boxes { to { transform: translateX(calc(100vw)); } }
+.cinematic-batch .fx-c { /* scanner gate */
+  bottom: 8px; left: 55%; width: 2px; height: 30px;
+  background: linear-gradient(180deg, transparent, #ff4d4d);
+  box-shadow: 0 0 10px rgba(255,77,77,0.7);
+  animation: cine-batch-gate 4.5s steps(2) infinite;
+}
+@keyframes cine-batch-gate { 0%,52% { opacity: 0.35; } 56%,64% { opacity: 1; } 68%,100% { opacity: 0.35; } }
+.cinematic-batch .fx-d::before { /* throughput counter */
+  content: 'QUEUE THROUGHPUT · 4,096 ADDR/MIN';
+  top: 8px; right: 12px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.18em;
+  color: rgba(170,185,210,0.55);
+}
+.cinematic-batch .fx-d { inset: 0; }
+.cinematic-batch .input, .cinematic-batch textarea.input {
+  background: rgba(14,18,26,0.85);
+  border: 1px solid rgba(150,160,180,0.35);
+  border-radius: 7px;
+  caret-color: #ffc400;
+}
+.cinematic-batch .input:focus {
+  border-color: #ffc400;
+  box-shadow: 0 0 18px rgba(255,196,0,0.18);
+}
+.cinematic-batch:focus-within .fx-a { animation-duration: 0.4s; }
+.cinematic-batch .btn-primary { box-shadow: 0 0 14px rgba(255,196,0,0.25); }
+
+/* ── 18. Label Intel — "Archive Tape Deck" ────────────────────────────── */
+.cinematic-labels {
+  padding: 20px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0a0d0a, #070907);
+  border: 1px solid rgba(140,200,140,0.28);
+  animation: cine-labels-load 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-labels-load {
+  from { opacity: 0; transform: translateY(-14px) scaleY(0.9); }
+  to   { opacity: 1; transform: translateY(0) scaleY(1); }
+}
+.cinematic-labels .fx-a { /* punch-tape hole columns */
+  top: 0; bottom: 0; left: 10px; width: 10px;
+  background: radial-gradient(circle 2.5px, rgba(140,200,140,0.5) 98%, transparent) 50% 0 / 10px 16px repeat-y;
+  animation: cine-labels-tape 1.6s linear infinite;
+}
+.cinematic-labels .fx-b {
+  top: 0; bottom: 0; right: 10px; width: 10px;
+  background: radial-gradient(circle 2.5px, rgba(140,200,140,0.5) 98%, transparent) 50% 8px / 10px 16px repeat-y;
+  animation: cine-labels-tape 1.6s linear infinite reverse;
+}
+@keyframes cine-labels-tape { to { background-position: 50% 16px; } }
+.cinematic-labels .fx-c { /* tape reels */
+  top: 12px; right: 34px; width: 30px; height: 30px;
+  border: 2px solid rgba(140,200,140,0.4);
+  border-radius: 50%;
+  animation: cine-labels-reel 3s linear infinite;
+}
+.cinematic-labels .fx-c::before {
+  content: ''; top: 50%; left: 2px; right: 2px; height: 2px; margin-top: -1px;
+  background: rgba(140,200,140,0.4);
+}
+.cinematic-labels .fx-c::after {
+  content: ''; top: 50%; left: -46px; width: 30px; height: 30px; margin-top: -15px;
+  border: 2px solid rgba(140,200,140,0.3);
+  border-radius: 50%;
+}
+@keyframes cine-labels-reel { to { transform: rotate(360deg); } }
+.cinematic-labels .fx-d { /* barcode scan */
+  bottom: 10px; left: 30px; width: 90px; height: 18px;
+  background: repeating-linear-gradient(90deg, rgba(140,200,140,0.5) 0 2px, transparent 2px 5px, rgba(140,200,140,0.35) 5px 6px, transparent 6px 10px);
+  overflow: hidden;
+}
+.cinematic-labels .fx-d::after {
+  content: ''; top: -2px; bottom: -2px; left: -10px; width: 8px;
+  background: rgba(255,90,90,0.75);
+  filter: blur(1px);
+  animation: cine-labels-scan 2.4s ease-in-out infinite;
+}
+@keyframes cine-labels-scan { 0% { left: -10px; } 50% { left: 100%; } 100% { left: -10px; } }
+.cinematic-labels .input {
+  background: rgba(10,16,10,0.85);
+  border: 1px solid rgba(140,200,140,0.35);
+  border-radius: 6px;
+  font-family: 'Roboto Mono', monospace;
+  caret-color: #8cc88c;
+}
+.cinematic-labels .input:focus {
+  border-color: #8cc88c;
+  box-shadow: 0 0 18px rgba(140,200,140,0.2);
+}
+.cinematic-labels .btn-primary { box-shadow: 0 0 14px rgba(140,200,140,0.25); }
+
+/* ── 19. Victim Reports — "Beacon" (calm, reassuring) ─────────────────── */
+.cinematic-victim {
+  padding: 22px;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(20,40,50,0.5) 0%, rgba(8,18,26,0.9) 70%),
+    linear-gradient(180deg, #0a1620, #071018);
+  border: 1px solid rgba(100,190,210,0.3);
+  animation: cine-victim-dawn 1.1s ease-out both;
+}
+@keyframes cine-victim-dawn {
+  from { opacity: 0; transform: translateY(10px); filter: brightness(0.6); }
+  to   { opacity: 1; transform: translateY(0); filter: brightness(1); }
+}
+.cinematic-victim .fx-a { /* lighthouse beam */
+  top: -40%; left: 50%; width: 480px; height: 200%; margin-left: -240px;
+  background: conic-gradient(from 165deg at 50% 20%, transparent 0deg, rgba(160,220,235,0.10) 12deg, rgba(160,220,235,0.16) 15deg, rgba(160,220,235,0.10) 18deg, transparent 30deg);
+  animation: cine-victim-beam 9s ease-in-out infinite alternate;
+}
+@keyframes cine-victim-beam { from { transform: rotate(-16deg); } to { transform: rotate(16deg); } }
+.cinematic-victim .fx-b { /* slow pulse rings */
+  top: 18px; left: 50%; width: 14px; height: 14px; margin-left: -7px;
+  border: 1px solid rgba(140,215,230,0.7);
+  border-radius: 50%;
+  animation: cine-victim-pulse 4s ease-out infinite;
+}
+.cinematic-victim .fx-b::after {
+  content: ''; inset: -1px;
+  border: 1px solid rgba(140,215,230,0.5);
+  border-radius: 50%;
+  animation: cine-victim-pulse 4s ease-out 1.3s infinite;
+}
+@keyframes cine-victim-pulse {
+  from { transform: scale(0.6); opacity: 0.9; }
+  to   { transform: scale(3.6); opacity: 0; }
+}
+.cinematic-victim .fx-c { /* calm horizon */
+  bottom: 0; left: 0; right: 0; height: 44px;
+  background: linear-gradient(180deg, transparent, rgba(100,190,210,0.10));
+}
+.cinematic-victim .fx-d { /* gentle stars */
+  top: 14%; left: 10%; width: 2px; height: 2px; border-radius: 50%;
+  background: rgba(200,235,245,0.8);
+  box-shadow: 20vw 10px 0 rgba(200,235,245,0.5), 45vw -4px 0 rgba(200,235,245,0.6), 70vw 14px 0 rgba(200,235,245,0.45);
+  animation: cine-victim-stars 5s ease-in-out infinite alternate;
+}
+@keyframes cine-victim-stars { from { opacity: 0.4; } to { opacity: 1; } }
+.cinematic-victim .input, .cinematic-victim textarea.input {
+  background: rgba(12,26,36,0.8);
+  border: 1px solid rgba(100,190,210,0.35);
+  border-radius: 12px;
+  caret-color: #8cd7e6;
+}
+.cinematic-victim .input:focus {
+  border-color: #8cd7e6;
+  box-shadow: 0 0 0 4px rgba(140,215,230,0.10), 0 0 22px rgba(140,215,230,0.18);
+}
+.cinematic-victim .btn-primary { box-shadow: 0 0 16px rgba(140,215,230,0.25); }
+
+/* ── 20. Scam Atlas — "Spider Web" ────────────────────────────────────── */
+.cinematic-scam {
+  padding: 20px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #120808, #0b0505);
+  border: 1px solid rgba(255,90,60,0.3);
+  animation: cine-scam-spin 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-scam-spin {
+  from { opacity: 0; transform: scale(0.4) rotate(-120deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+.cinematic-scam .fx-a { /* radial web */
+  top: -70px; right: -70px; width: 240px; height: 240px;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle, transparent 0 22px, rgba(255,120,90,0.20) 22px 23px),
+    repeating-conic-gradient(from 0deg, rgba(255,120,90,0.18) 0deg 1.5deg, transparent 1.5deg 30deg);
+  animation: cine-scam-web 20s linear infinite;
+}
+@keyframes cine-scam-web { to { transform: rotate(360deg); } }
+.cinematic-scam .fx-b { /* crawling spider */
+  top: 0; right: 90px; width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #1c0d0d;
+  border: 1px solid rgba(255,120,90,0.7);
+  box-shadow: 0 0 8px rgba(255,90,60,0.6);
+  animation: cine-scam-spider 6s ease-in-out infinite alternate;
+}
+.cinematic-scam .fx-b::before {
+  content: ''; top: -22px; left: 50%; width: 1px; height: 22px;
+  background: rgba(255,120,90,0.4);
+}
+@keyframes cine-scam-spider { from { transform: translateY(6px); } to { transform: translateY(42px); } }
+.cinematic-scam .fx-c { /* trapped nodes blinking */
+  top: 26%; right: 40px; width: 5px; height: 5px; border-radius: 50%;
+  background: #ff5a3c;
+  box-shadow: -34px 28px 0 #ff5a3c, -70px -6px 0 #ff8a3c, 18px 52px 0 #ff5a3c;
+  animation: cine-scam-victims 1.6s steps(2) infinite;
+}
+@keyframes cine-scam-victims { 50% { opacity: 0.25; } }
+.cinematic-scam .fx-d { /* danger shimmer sweep */
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,90,60,0.08) 50%, transparent 60%);
+  background-size: 250% 100%;
+  animation: cine-scam-sweep 4s ease-in-out infinite;
+}
+@keyframes cine-scam-sweep { from { background-position: 120% 0; } to { background-position: -130% 0; } }
+.cinematic-scam .input {
+  background: rgba(28,10,8,0.8);
+  border: 1px solid rgba(255,90,60,0.35);
+  border-radius: 8px;
+  caret-color: #ff5a3c;
+}
+.cinematic-scam .input:focus {
+  border-color: #ff5a3c;
+  box-shadow: 0 0 22px rgba(255,90,60,0.25);
+}
+.cinematic-scam .btn-primary { box-shadow: 0 0 16px rgba(255,90,60,0.3); }
+
+/* ── 21. Report Studio — "Print Room" ─────────────────────────────────── */
+.cinematic-reports {
+  padding: 26px 20px 20px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0e0e12, #09090c);
+  border: 1px solid rgba(200,200,215,0.22);
+  animation: cine-reports-feed 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-reports-feed {
+  from { opacity: 0; transform: translateY(-30px); clip-path: inset(0 0 100% 0); }
+  to   { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+}
+.cinematic-reports .fx-a { /* film strip / sprockets */
+  top: 0; left: 0; right: 0; height: 14px;
+  background:
+    radial-gradient(circle 2.6px at 8px 7px, rgba(220,220,235,0.4) 98%, transparent) 0 0 / 22px 14px repeat-x,
+    rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(200,200,215,0.2);
+  animation: cine-reports-strip 1.4s linear infinite;
+}
+@keyframes cine-reports-strip { to { background-position: 22px 0, 0 0; } }
+.cinematic-reports .fx-b { /* sheet stack */
+  bottom: 14px; right: 16px; width: 52px; height: 64px;
+  background: rgba(240,240,250,0.06);
+  border: 1px solid rgba(240,240,250,0.22);
+  border-radius: 2px;
+  animation: cine-reports-shuffle 3.4s ease-in-out infinite alternate;
+}
+.cinematic-reports .fx-b::before {
+  content: ''; inset: 5px -9px -5px 9px;
+  background: rgba(240,240,250,0.04);
+  border: 1px solid rgba(240,240,250,0.15);
+  border-radius: 2px;
+}
+.cinematic-reports .fx-b::after {
+  content: ''; top: 10px; left: 8px; width: 30px; height: 2px;
+  background: rgba(240,240,250,0.3);
+  box-shadow: 0 7px 0 rgba(240,240,250,0.22), 0 14px 0 rgba(240,240,250,0.16), 0 21px 0 rgba(240,240,250,0.12);
+}
+@keyframes cine-reports-shuffle { from { transform: rotate(-1.5deg); } to { transform: rotate(1.5deg); } }
+.cinematic-reports .fx-c { /* typewriter caret line */
+  bottom: 22px; left: 20px; width: 120px; height: 1px;
+  background: rgba(220,220,235,0.35);
+}
+.cinematic-reports .fx-c::after {
+  content: ''; top: -9px; left: 0; width: 6px; height: 9px;
+  background: rgba(220,220,235,0.75);
+  animation: cine-reports-caret 3s steps(12) infinite;
+}
+@keyframes cine-reports-caret { from { left: 0; } to { left: 114px; } }
+.cinematic-reports .fx-d { /* ink stamp glow */
+  top: 20px; right: 18px; width: 36px; height: 36px;
+  border: 2px solid rgba(90,160,255,0.5);
+  border-radius: 50%;
+  animation: cine-reports-seal 4s ease-in-out infinite alternate;
+}
+@keyframes cine-reports-seal { from { opacity: 0.35; transform: rotate(-6deg); } to { opacity: 0.9; transform: rotate(6deg); } }
+.cinematic-reports .input, .cinematic-reports textarea.input {
+  background: rgba(18,18,24,0.85);
+  border: 1px solid rgba(200,200,215,0.3);
+  border-radius: 5px;
+  caret-color: #dcdceb;
+}
+.cinematic-reports .input:focus {
+  border-color: #5aa0ff;
+  box-shadow: 0 0 18px rgba(90,160,255,0.18);
+}
+.cinematic-reports .btn-primary { box-shadow: 0 0 14px rgba(90,160,255,0.25); }
+
+/* ═══ COMPLIANCE ═════════════════════════════════════════════════════════ */
+
+/* ── 22. Sanctions Screener — "Border Checkpoint" ─────────────────────── */
+.cinematic-sanctions {
+  padding: 24px 18px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #120a0a, #0c0606);
+  border: 1px solid rgba(255,80,80,0.3);
+  animation: cine-sanctions-barrier 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: left center;
+}
+@keyframes cine-sanctions-barrier {
+  from { opacity: 0; transform: rotate(-4deg) translateY(-10px); }
+  to   { opacity: 1; transform: rotate(0) translateY(0); }
+}
+.cinematic-sanctions .fx-a { /* barrier stripes */
+  top: 0; left: 0; right: 0; height: 8px;
+  background: repeating-linear-gradient(-45deg, rgba(255,80,80,0.7) 0 12px, rgba(20,8,8,0.9) 12px 24px);
+  animation: cine-sanctions-stripes 1.4s linear infinite;
+}
+.cinematic-sanctions .fx-b {
+  bottom: 0; left: 0; right: 0; height: 8px;
+  background: repeating-linear-gradient(45deg, rgba(255,80,80,0.7) 0 12px, rgba(20,8,8,0.9) 12px 24px);
+  animation: cine-sanctions-stripes 1.4s linear infinite reverse;
+}
+@keyframes cine-sanctions-stripes { to { background-position: 33.94px 0; } }
+.cinematic-sanctions .fx-c { /* spotlight sweep */
+  top: -60%; left: 30%; width: 240px; height: 220%;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 0deg, rgba(255,220,180,0.07) 8deg, rgba(255,220,180,0.12) 12deg, rgba(255,220,180,0.07) 16deg, transparent 24deg);
+  animation: cine-sanctions-spot 7s ease-in-out infinite alternate;
+}
+@keyframes cine-sanctions-spot { from { transform: rotate(-18deg); } to { transform: rotate(18deg); } }
+.cinematic-sanctions .fx-d::before { /* OFAC stamp ring */
+  content: 'OFAC · EU · UN · UK HMT';
+  top: 50%; right: 16px; margin-top: -14px;
+  padding: 6px 10px;
+  border: 2px double rgba(255,80,80,0.6);
+  border-radius: 50px;
+  color: rgba(255,120,120,0.75);
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.22em;
+  transform: rotate(4deg);
+  animation: cine-sanctions-stamp 5s ease-in-out infinite alternate;
+}
+.cinematic-sanctions .fx-d { inset: 0; }
+@keyframes cine-sanctions-stamp { from { opacity: 0.5; } to { opacity: 1; } }
+.cinematic-sanctions .input {
+  background: rgba(28,10,10,0.8);
+  border: 1px solid rgba(255,80,80,0.35);
+  border-radius: 7px;
+  caret-color: #ff5050;
+}
+.cinematic-sanctions .input:focus {
+  border-color: #ff5050;
+  box-shadow: 0 0 22px rgba(255,80,80,0.22);
+}
+.cinematic-sanctions:focus-within :is(.fx-a, .fx-b) { animation-duration: 0.5s; }
+.cinematic-sanctions .btn-primary { box-shadow: 0 0 16px rgba(255,80,80,0.3); }
+
+/* ── 23. Attribution Lookup — "Fingerprint Match" ─────────────────────── */
+.cinematic-attribution {
+  padding: 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #0a1112, #060c0d);
+  border: 1px solid rgba(64,224,208,0.3);
+  animation: cine-attr-reveal 0.9s ease-out both;
+}
+@keyframes cine-attr-reveal {
+  from { opacity: 0; clip-path: inset(0 0 100% 0); }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+.cinematic-attribution .fx-a { /* fingerprint ridges */
+  top: -34px; right: -22px; width: 160px; height: 160px;
+  border-radius: 50%;
+  background: repeating-radial-gradient(circle at 52% 48%, transparent 0 5px, rgba(64,224,208,0.20) 5px 6.5px);
+  -webkit-mask: radial-gradient(circle, #000 55%, transparent 75%);
+          mask: radial-gradient(circle, #000 55%, transparent 75%);
+  animation: cine-attr-ridges 22s linear infinite;
+}
+@keyframes cine-attr-ridges { to { transform: rotate(-360deg); } }
+.cinematic-attribution .fx-b { /* match scan bar */
+  top: -10px; right: -22px; width: 160px; height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(64,224,208,0.9), transparent);
+  box-shadow: 0 0 12px rgba(64,224,208,0.6);
+  animation: cine-attr-scan 2.4s ease-in-out infinite alternate;
+}
+@keyframes cine-attr-scan { from { top: -10px; } to { top: 120px; } }
+.cinematic-attribution .fx-c { /* minutiae match points */
+  top: 22px; right: 30px; width: 4px; height: 4px; border-radius: 50%;
+  background: #ffd166;
+  box-shadow: 0 0 6px #ffd166, 34px 40px 0 #ffd166, 60px 14px 0 #ffd166, 18px 72px 0 #ffd166;
+  animation: cine-attr-points 2s steps(2) infinite;
+}
+@keyframes cine-attr-points { 50% { opacity: 0.3; } }
+.cinematic-attribution .fx-d::before { /* match readout */
+  content: 'IDENT MATCH 96.71% · 14 MINUTIAE LOCKED';
+  bottom: 8px; left: 12px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.16em;
+  color: rgba(64,224,208,0.6);
+  animation: cine-attr-readout 2.6s steps(4) infinite;
+}
+.cinematic-attribution .fx-d { inset: 0; }
+@keyframes cine-attr-readout { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
+.cinematic-attribution .input {
+  background: rgba(8,22,22,0.8);
+  border: 1px solid rgba(64,224,208,0.35);
+  border-radius: 9px;
+  caret-color: #40e0d0;
+}
+.cinematic-attribution .input:focus {
+  border-color: #40e0d0;
+  box-shadow: 0 0 22px rgba(64,224,208,0.22);
+}
+.cinematic-attribution:focus-within .fx-b { animation-duration: 1s; }
+.cinematic-attribution .btn-primary { box-shadow: 0 0 16px rgba(64,224,208,0.3); }
+
+/* ── 24. Attribution Submissions — "Intake Tube" ──────────────────────── */
+.cinematic-submissions {
+  padding: 20px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0d0a14, #08060e);
+  border: 1px solid rgba(160,120,255,0.3);
+  animation: cine-subs-drop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes cine-subs-drop {
+  from { opacity: 0; transform: translateY(-36px); }
+  60%  { transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.cinematic-submissions .fx-a { /* pneumatic tube */
+  top: 0; bottom: 0; right: 34px; width: 22px;
+  border-left: 1px solid rgba(160,120,255,0.3);
+  border-right: 1px solid rgba(160,120,255,0.3);
+  background: rgba(160,120,255,0.05);
+}
+.cinematic-submissions .fx-b { /* falling docs */
+  top: -22px; right: 38px; width: 14px; height: 16px;
+  background: rgba(220,205,255,0.35);
+  border: 1px solid rgba(220,205,255,0.5);
+  border-radius: 2px;
+  animation: cine-subs-fall 2.2s cubic-bezier(0.5, 0, 0.9, 0.4) infinite;
+}
+.cinematic-submissions .fx-b::before {
+  content: ''; top: 3px; left: 2px; width: 8px; height: 1px;
+  background: rgba(90,70,140,0.8);
+  box-shadow: 0 3px 0 rgba(90,70,140,0.8), 0 6px 0 rgba(90,70,140,0.6);
+}
+@keyframes cine-subs-fall {
+  0%  { transform: translateY(0) rotate(0); opacity: 0; }
+  12% { opacity: 1; }
+  85% { opacity: 1; }
+  100%{ transform: translateY(110px) rotate(9deg); opacity: 0; }
+}
+.cinematic-submissions .fx-c { /* intake tray glow */
+  bottom: 8px; right: 24px; width: 42px; height: 8px;
+  border: 1px solid rgba(160,120,255,0.5);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  animation: cine-subs-tray 2.2s ease-in-out infinite;
+}
+@keyframes cine-subs-tray {
+  0%, 70% { box-shadow: 0 0 0 rgba(160,120,255,0); }
+  82%     { box-shadow: 0 0 16px rgba(160,120,255,0.6); }
+  100%    { box-shadow: 0 0 0 rgba(160,120,255,0); }
+}
+.cinematic-submissions .fx-d::before { /* queue ticket */
+  content: 'INTAKE QUEUE · TICKET #A-2311';
+  top: 8px; left: 12px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.2em;
+  color: rgba(190,160,255,0.6);
+}
+.cinematic-submissions .fx-d { inset: 0; }
+.cinematic-submissions .input, .cinematic-submissions textarea.input {
+  background: rgba(18,12,30,0.8);
+  border: 1px solid rgba(160,120,255,0.35);
+  border-radius: 8px;
+  caret-color: #a078ff;
+}
+.cinematic-submissions .input:focus {
+  border-color: #a078ff;
+  box-shadow: 0 0 20px rgba(160,120,255,0.22);
+}
+.cinematic-submissions .btn-primary { box-shadow: 0 0 16px rgba(160,120,255,0.3); }
+
+/* ── 25. Regulatory Reports — "Official Ledger" ───────────────────────── */
+.cinematic-regulatory {
+  padding: 22px 20px 20px 34px;
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, transparent 24px, rgba(220,80,80,0.35) 24px 25px, transparent 25px),
+    repeating-linear-gradient(0deg, transparent 0 26px, rgba(200,190,160,0.09) 26px 27px),
+    linear-gradient(180deg, #131108, #0d0b06);
+  border: 1px solid rgba(200,190,160,0.3);
+  animation: cine-reg-unroll 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: top center;
+}
+@keyframes cine-reg-unroll {
+  from { opacity: 0; transform: scaleY(0.1); }
+  to   { opacity: 1; transform: scaleY(1); }
+}
+.cinematic-regulatory .fx-a { /* wax seal */
+  bottom: 12px; right: 16px; width: 44px; height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #d05050, #7a1f1f 70%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6), inset 0 0 0 3px rgba(255,255,255,0.08);
+  animation: cine-reg-seal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s both;
+}
+.cinematic-regulatory .fx-a::before {
+  content: '§'; inset: 0;
+  display: grid; place-items: center;
+  color: rgba(255,220,220,0.7);
+  font-size: 18px; font-weight: 700;
+}
+@keyframes cine-reg-seal {
+  from { opacity: 0; transform: scale(2.4); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.cinematic-regulatory .fx-b { /* seal sheen */
+  bottom: 12px; right: 16px; width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.22) 50%, transparent 60%);
+  background-size: 250% 100%;
+  animation: cine-reg-sheen 3.6s ease-in-out infinite;
+}
+@keyframes cine-reg-sheen { from { background-position: 130% 0; } to { background-position: -140% 0; } }
+.cinematic-regulatory .fx-c { /* quill underline scribble */
+  bottom: 26px; left: 36px; width: 130px; height: 2px;
+  background: rgba(220,205,160,0.7);
+  transform-origin: left center;
+  animation: cine-reg-ink 4s ease-in-out infinite;
+}
+@keyframes cine-reg-ink {
+  0%   { transform: scaleX(0); opacity: 0.9; }
+  55%  { transform: scaleX(1); opacity: 0.9; }
+  92%  { transform: scaleX(1); opacity: 0.9; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+.cinematic-regulatory .fx-d::before { /* filing header */
+  content: 'FORM SAR-X · JURISDICTION: MULTI · FILING READY';
+  top: 6px; left: 36px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.18em;
+  color: rgba(220,205,160,0.6);
+}
+.cinematic-regulatory .fx-d { inset: 0; }
+.cinematic-regulatory .input, .cinematic-regulatory select.input {
+  background: rgba(24,20,10,0.8);
+  border: 1px solid rgba(200,190,160,0.35);
+  border-radius: 4px;
+  caret-color: #dccda0;
+}
+.cinematic-regulatory .input:focus {
+  border-color: #dccda0;
+  box-shadow: 0 0 16px rgba(220,205,160,0.18);
+}
+.cinematic-regulatory .btn-primary { border-radius: 4px; box-shadow: 0 0 14px rgba(220,205,160,0.22); }
+
+/* ── 26. Demix Lab — "Centrifuge" ─────────────────────────────────────── */
+.cinematic-demix {
+  padding: 20px;
+  border-radius: 16px;
+  background: radial-gradient(circle at 50% 50%, #140b1e 0%, #0a0612 70%);
+  border: 1px solid rgba(190,110,255,0.3);
+  animation: cine-demix-spinup 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-demix-spinup {
+  from { opacity: 0; transform: rotate(180deg) scale(0.5); }
+  to   { opacity: 1; transform: rotate(0) scale(1); }
+}
+.cinematic-demix .fx-a { /* main swirl */
+  top: 50%; left: 50%; width: 260px; height: 260px; margin: -130px 0 0 -130px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(190,110,255,0.16), rgba(90,160,255,0.13), rgba(45,212,150,0.10), rgba(190,110,255,0.16));
+  -webkit-mask: radial-gradient(circle, transparent 30%, #000 32%, #000 60%, transparent 62%);
+          mask: radial-gradient(circle, transparent 30%, #000 32%, #000 60%, transparent 62%);
+  animation: cine-demix-swirl 7s linear infinite;
+}
+@keyframes cine-demix-swirl { to { transform: rotate(360deg); } }
+.cinematic-demix .fx-b { /* counter ring */
+  top: 50%; left: 50%; width: 180px; height: 180px; margin: -90px 0 0 -90px;
+  border: 1px dashed rgba(190,110,255,0.35);
+  border-radius: 50%;
+  animation: cine-demix-counter 5s linear infinite reverse;
+}
+@keyframes cine-demix-counter { to { transform: rotate(360deg); } }
+.cinematic-demix .fx-c { /* separating particles */
+  top: 50%; left: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: #be6eff;
+  box-shadow: 0 0 8px #be6eff;
+  animation: cine-demix-separate 3.2s ease-in-out infinite;
+}
+.cinematic-demix .fx-c::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: #5aa0ff;
+  box-shadow: 0 0 8px #5aa0ff;
+  animation: cine-demix-separate 3.2s ease-in-out 1.1s infinite reverse;
+}
+@keyframes cine-demix-separate {
+  0%   { transform: translate(0,0); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: translate(88px,-34px); opacity: 0; }
+}
+.cinematic-demix .fx-d::before { /* purity meter */
+  content: 'DEMIX PURITY 91.3% · 4 SOURCE CLUSTERS ISOLATED';
+  bottom: 8px; left: 12px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.16em;
+  color: rgba(190,110,255,0.6);
+  animation: cine-demix-meter 3s steps(3) infinite;
+}
+.cinematic-demix .fx-d { inset: 0; }
+@keyframes cine-demix-meter { 50% { opacity: 0.5; } }
+.cinematic-demix .input {
+  background: rgba(22,12,34,0.8);
+  border: 1px solid rgba(190,110,255,0.35);
+  border-radius: 10px;
+  caret-color: #be6eff;
+}
+.cinematic-demix .input:focus {
+  border-color: #be6eff;
+  box-shadow: 0 0 24px rgba(190,110,255,0.25);
+}
+.cinematic-demix:focus-within .fx-a { animation-duration: 2.5s; }
+.cinematic-demix .btn-primary { box-shadow: 0 0 18px rgba(190,110,255,0.3); }
+
+/* ── 27. Compliance Suite — "Hall of Governance" ──────────────────────── */
+.cinematic-comply {
+  padding: 22px 34px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #0e1014, #090b0e);
+  border: 1px solid rgba(200,210,225,0.22);
+  animation: cine-comply-descend 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-comply-descend {
+  from { opacity: 0; transform: translateY(-18px); filter: brightness(1.8); }
+  to   { opacity: 1; transform: translateY(0); filter: brightness(1); }
+}
+.cinematic-comply .fx-a { /* marble pillars */
+  top: 0; bottom: 0; left: 8px; width: 12px;
+  background: linear-gradient(90deg, rgba(210,220,235,0.16), rgba(210,220,235,0.05));
+  border-left: 1px solid rgba(210,220,235,0.3);
+  border-right: 1px solid rgba(210,220,235,0.2);
+  box-shadow: inset 3px 0 0 rgba(210,220,235,0.06);
+}
+.cinematic-comply .fx-b {
+  top: 0; bottom: 0; right: 8px; width: 12px;
+  background: linear-gradient(-90deg, rgba(210,220,235,0.16), rgba(210,220,235,0.05));
+  border-left: 1px solid rgba(210,220,235,0.2);
+  border-right: 1px solid rgba(210,220,235,0.3);
+}
+.cinematic-comply .fx-c { /* tilting balance beam */
+  top: 12px; left: 50%; width: 90px; height: 2px; margin-left: -45px;
+  background: rgba(255,210,110,0.6);
+  transform-origin: center;
+  animation: cine-comply-balance 5s ease-in-out infinite alternate;
+}
+.cinematic-comply .fx-c::before {
+  content: ''; left: -4px; top: 4px; width: 10px; height: 10px;
+  border: 1px solid rgba(255,210,110,0.6);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+}
+.cinematic-comply .fx-c::after {
+  content: ''; right: -4px; top: 4px; width: 10px; height: 10px;
+  border: 1px solid rgba(255,210,110,0.6);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+}
+@keyframes cine-comply-balance { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+.cinematic-comply .fx-d { /* checklist ticks */
+  bottom: 10px; right: 30px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 9px; letter-spacing: 0.3em;
+  color: rgba(45,212,150,0.7);
+}
+.cinematic-comply .fx-d::before {
+  content: '✓ KYC   ✓ AML   ✓ TRAVEL RULE';
+  animation: cine-comply-checks 6s steps(3) infinite;
+}
+@keyframes cine-comply-checks { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+.cinematic-comply .input, .cinematic-comply select.input {
+  background: rgba(16,20,26,0.85);
+  border: 1px solid rgba(200,210,225,0.3);
+  border-radius: 6px;
+  caret-color: #ffd26e;
+}
+.cinematic-comply .input:focus {
+  border-color: #ffd26e;
+  box-shadow: 0 0 18px rgba(255,210,110,0.18);
+}
+.cinematic-comply .btn-primary { box-shadow: 0 0 14px rgba(255,210,110,0.25); }
+
+/* ═══ ADVANCED ═══════════════════════════════════════════════════════════ */
+
+/* ── 28. Contract Forensics — "Bytecode Autopsy" ──────────────────────── */
+.cinematic-contract {
+  padding: 20px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #070b12, #05080d);
+  border: 1px solid rgba(130,170,255,0.28);
+  font-family: 'Roboto Mono', monospace;
+  animation: cine-contract-glitch 0.7s steps(8) both;
+}
+@keyframes cine-contract-glitch {
+  0%   { opacity: 0; transform: translateX(-8px); clip-path: inset(0 0 80% 0); }
+  25%  { opacity: 1; transform: translateX(5px); clip-path: inset(30% 0 20% 0); }
+  50%  { transform: translateX(-3px); clip-path: inset(10% 0 45% 0); }
+  75%  { transform: translateX(2px); clip-path: inset(60% 0 0 0); }
+  100% { transform: translateX(0); clip-path: inset(0 0 0 0); }
+}
+.cinematic-contract .fx-a::before { /* hex rain col 1 */
+  content: '60 80 60 40 52 34 80 15 61 00 57 f3 5b 60 20 35 60 e0 1c 63 a9 05 9c bb 14 61 00 62 57';
+  top: 0; right: 8px; width: 26px;
+  color: rgba(130,170,255,0.30);
+  font-size: 8px; line-height: 1.7; word-break: break-all;
+  animation: cine-contract-rain 7s linear infinite;
+}
+.cinematic-contract .fx-a { inset: 0; }
+.cinematic-contract .fx-b::before { /* hex rain col 2 */
+  content: 'ca fe ba be 00 60 0a 5f 5f 60 01 80 63 23 b8 72 dd 55 91 60 00 52 60 20 60 00 f3 5b fe';
+  top: -40px; right: 44px; width: 26px;
+  color: rgba(190,110,255,0.22);
+  font-size: 8px; line-height: 1.7; word-break: break-all;
+  animation: cine-contract-rain 9s linear infinite reverse;
+}
+.cinematic-contract .fx-b { inset: 0; }
+@keyframes cine-contract-rain { from { transform: translateY(-30%); } to { transform: translateY(30%); } }
+.cinematic-contract .fx-c { /* disasm scan bracket */
+  left: 8px; right: 90px; top: 18%; height: 14px;
+  border: 1px solid rgba(130,170,255,0.5);
+  border-left-width: 3px;
+  animation: cine-contract-step 5s steps(6) infinite;
+  opacity: 0.55;
+}
+@keyframes cine-contract-step { from { top: 12%; } to { top: 78%; } }
+.cinematic-contract .fx-d::before { /* opcode alert */
+  content: 'DELEGATECALL @ 0x1f2a — FLAGGED';
+  bottom: 8px; left: 12px;
+  font-size: 8px; letter-spacing: 0.14em;
+  color: rgba(255,120,120,0.75);
+  animation: cine-contract-alert 1.8s steps(2) infinite;
+}
+.cinematic-contract .fx-d { inset: 0; }
+@keyframes cine-contract-alert { 50% { opacity: 0.35; } }
+.cinematic-contract .input {
+  background: rgba(10,16,28,0.85);
+  border: 1px solid rgba(130,170,255,0.35);
+  border-radius: 4px;
+  font-family: 'Roboto Mono', monospace;
+  caret-color: #82aaff;
+}
+.cinematic-contract .input:focus {
+  border-color: #82aaff;
+  box-shadow: 0 0 18px rgba(130,170,255,0.2), inset 0 0 8px rgba(130,170,255,0.05);
+}
+.cinematic-contract .btn-primary { border-radius: 4px; box-shadow: 0 0 14px rgba(130,170,255,0.28); }
+
+/* ── 29. Laundering Trace — "Fluid Dynamics" ──────────────────────────── */
+.cinematic-laundering {
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #04121a, #030d14);
+  border: 1px solid rgba(60,180,220,0.3);
+  animation: cine-launder-pour 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes cine-launder-pour {
+  from { opacity: 0; transform: translateY(-14px); }
+  55%  { transform: translateY(3px); }
+  75%  { transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.cinematic-laundering .fx-a { /* rotating liquid wave 1 */
+  bottom: -128px; left: 50%; width: 320px; height: 160px; margin-left: -160px;
+  background: rgba(60,180,220,0.13);
+  border-radius: 42% 58% 55% 45%;
+  animation: cine-launder-wave 9s linear infinite;
+}
+.cinematic-laundering .fx-b { /* wave 2 counter */
+  bottom: -134px; left: 50%; width: 340px; height: 170px; margin-left: -170px;
+  background: rgba(90,140,255,0.09);
+  border-radius: 55% 45% 42% 58%;
+  animation: cine-launder-wave 13s linear infinite reverse;
+}
+@keyframes cine-launder-wave { to { transform: rotate(360deg); } }
+.cinematic-laundering .fx-c { /* rising bubbles */
+  bottom: 0; left: 20%; width: 5px; height: 5px; border-radius: 50%;
+  border: 1px solid rgba(120,210,240,0.6);
+  box-shadow: 14vw 8px 0 -1px rgba(120,210,240,0.4), 32vw -4px 0 0 rgba(120,210,240,0.5), 55vw 6px 0 -1px rgba(120,210,240,0.35), 70vw 0 0 0 rgba(120,210,240,0.45);
+  animation: cine-launder-bubbles 5s ease-in infinite;
+}
+@keyframes cine-launder-bubbles {
+  from { transform: translateY(6px); opacity: 0; }
+  20%  { opacity: 1; }
+  85%  { opacity: 0.7; }
+  to   { transform: translateY(-90px); opacity: 0; }
+}
+.cinematic-laundering .fx-d { /* dye dispersion tint */
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 80%, rgba(90,140,255,0.12), transparent 55%);
+  animation: cine-launder-dye 6s ease-in-out infinite alternate;
+}
+@keyframes cine-launder-dye { from { opacity: 0.4; filter: hue-rotate(0deg); } to { opacity: 1; filter: hue-rotate(40deg); } }
+.cinematic-laundering .input {
+  background: rgba(6,22,32,0.75);
+  border: 1px solid rgba(60,180,220,0.35);
+  border-radius: 12px;
+  caret-color: #3cb4dc;
+}
+.cinematic-laundering .input:focus {
+  border-color: #3cb4dc;
+  box-shadow: 0 0 22px rgba(60,180,220,0.22), inset 0 -3px 10px rgba(60,180,220,0.08);
+}
+.cinematic-laundering .btn-primary { box-shadow: 0 0 16px rgba(60,180,220,0.3); }
+
+/* ── 30. Court Readiness — "Tribunal" ─────────────────────────────────── */
+.cinematic-court {
+  padding: 24px 30px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #12100a, #0b0a06);
+  border: 1px solid rgba(212,180,110,0.3);
+  animation: cine-court-lights 1.1s ease-out both;
+}
+@keyframes cine-court-lights {
+  from { opacity: 0; filter: brightness(0.2); }
+  60%  { filter: brightness(1.3); }
+  to   { opacity: 1; filter: brightness(1); }
+}
+.cinematic-court .fx-a { /* spotlight cone */
+  top: -10px; left: 50%; width: 340px; height: 130%; margin-left: -170px;
+  background: conic-gradient(from 180deg at 50% 0%, transparent 0deg, rgba(255,230,170,0.06) 14deg, rgba(255,230,170,0.12) 20deg, rgba(255,230,170,0.06) 26deg, transparent 40deg);
+  animation: cine-court-spot 8s ease-in-out infinite alternate;
+}
+@keyframes cine-court-spot { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+.cinematic-court .fx-b { /* column silhouettes */
+  top: 6px; bottom: 6px; left: 10px; width: 9px;
+  background: repeating-linear-gradient(90deg, rgba(212,180,110,0.22) 0 2px, rgba(212,180,110,0.06) 2px 4px);
+  border-radius: 2px;
+  box-shadow: 0 -4px 0 1px rgba(212,180,110,0.25), 0 4px 0 1px rgba(212,180,110,0.25);
+}
+.cinematic-court::after {
+  content: '';
+  position: absolute; top: 6px; bottom: 6px; right: 10px; width: 9px; z-index: 0;
+  background: repeating-linear-gradient(90deg, rgba(212,180,110,0.22) 0 2px, rgba(212,180,110,0.06) 2px 4px);
+  border-radius: 2px;
+  box-shadow: 0 -4px 0 1px rgba(212,180,110,0.25), 0 4px 0 1px rgba(212,180,110,0.25);
+}
+.cinematic-court .fx-c { /* gavel strike shockwave */
+  top: 50%; right: 40px; width: 12px; height: 12px; margin-top: -6px;
+  border: 2px solid rgba(255,210,120,0.8);
+  border-radius: 50%;
+  animation: cine-court-gavel 3.6s ease-out infinite;
+}
+@keyframes cine-court-gavel {
+  0%, 55% { transform: scale(0.2); opacity: 0; }
+  60%     { transform: scale(0.4); opacity: 1; }
+  90%,100%{ transform: scale(3.4); opacity: 0; }
+}
+.cinematic-court .fx-d::before { /* scales emblem */
+  content: '⚖';
+  bottom: 6px; right: 16px;
+  font-size: 30px;
+  color: rgba(212,180,110,0.22);
+  animation: cine-court-emblem 5s ease-in-out infinite alternate;
+}
+.cinematic-court .fx-d { inset: 0; }
+@keyframes cine-court-emblem { from { opacity: 0.4; } to { opacity: 1; } }
+.cinematic-court .input, .cinematic-court select.input {
+  background: rgba(24,20,12,0.85);
+  border: 1px solid rgba(212,180,110,0.35);
+  border-radius: 5px;
+  caret-color: #d4b46e;
+}
+.cinematic-court .input:focus {
+  border-color: #d4b46e;
+  box-shadow: 0 0 18px rgba(212,180,110,0.2);
+}
+.cinematic-court .btn-primary { border-radius: 5px; box-shadow: 0 0 14px rgba(212,180,110,0.25); }
+
+/* ── 31. Recovery Ops — "Cryo Chamber" ────────────────────────────────── */
+.cinematic-recovery {
+  padding: 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #0a1420, #071019);
+  border: 1px solid rgba(160,220,255,0.35);
+  animation: cine-cryo-defrost 1.1s ease-out both;
+}
+@keyframes cine-cryo-defrost {
+  from { opacity: 0; filter: blur(10px) brightness(2.2) saturate(0.3); }
+  to   { opacity: 1; filter: blur(0) brightness(1) saturate(1); }
+}
+.cinematic-recovery .fx-a { /* creeping frost corners */
+  top: -30px; left: -30px; width: 130px; height: 130px;
+  background:
+    radial-gradient(circle at 0 0, rgba(200,235,255,0.20), transparent 65%),
+    repeating-conic-gradient(from 0deg at 0 0, rgba(200,235,255,0.10) 0deg 4deg, transparent 4deg 22deg);
+  border-radius: 50%;
+  animation: cine-cryo-frost 6s ease-in-out infinite alternate;
+}
+.cinematic-recovery .fx-a::after {
+  content: ''; top: auto; left: auto; right: -160px; bottom: -160px; width: 130px; height: 130px;
+  background: radial-gradient(circle at 100% 100%, rgba(200,235,255,0.16), transparent 65%);
+}
+@keyframes cine-cryo-frost { from { transform: scale(0.9); opacity: 0.6; } to { transform: scale(1.08); opacity: 1; } }
+.cinematic-recovery .fx-b { /* falling snow */
+  top: -8px; left: 12%; width: 3px; height: 3px; border-radius: 50%;
+  background: rgba(220,240,255,0.8);
+  box-shadow: 16vw 20px 0 rgba(220,240,255,0.5), 34vw 6px 0 rgba(220,240,255,0.65), 52vw 26px 0 rgba(220,240,255,0.45), 72vw 12px 0 rgba(220,240,255,0.6);
+  animation: cine-cryo-snow 6s linear infinite;
+}
+@keyframes cine-cryo-snow {
+  from { transform: translateY(-10px); opacity: 0; }
+  15%  { opacity: 1; }
+  90%  { opacity: 1; }
+  to   { transform: translateY(120px); opacity: 0; }
+}
+.cinematic-recovery .fx-c { /* ice crack flash */
+  top: 20%; left: 30%; width: 90px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220,245,255,0.9), transparent);
+  transform: rotate(24deg);
+  animation: cine-cryo-crack 5s steps(2) infinite;
+}
+.cinematic-recovery .fx-c::after {
+  content: ''; top: 0; left: 40px; width: 50px; height: 1px;
+  background: inherit;
+  transform: rotate(-38deg);
+}
+@keyframes cine-cryo-crack { 0%,88% { opacity: 0; } 92%,96% { opacity: 1; } 100% { opacity: 0; } }
+.cinematic-recovery .fx-d { /* cold mist */
+  bottom: 0; left: 0; right: 0; height: 50px;
+  background: linear-gradient(180deg, transparent, rgba(180,225,255,0.10));
+  filter: blur(6px);
+  animation: cine-cryo-mist 7s ease-in-out infinite alternate;
+}
+@keyframes cine-cryo-mist { from { opacity: 0.4; transform: translateX(-8px); } to { opacity: 1; transform: translateX(8px); } }
+.cinematic-recovery .input {
+  background: rgba(14,26,40,0.65);
+  border: 1px solid rgba(160,220,255,0.4);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  caret-color: #a0dcff;
+}
+.cinematic-recovery .input:focus {
+  border-color: #a0dcff;
+  box-shadow: 0 0 24px rgba(160,220,255,0.25), inset 0 0 14px rgba(200,235,255,0.06);
+}
+.cinematic-recovery .btn-primary { box-shadow: 0 0 16px rgba(160,220,255,0.3); }
+
+/* ── 32. Freeze Desk — "Emergency Broadcast" ──────────────────────────── */
+.cinematic-freeze {
+  padding: 26px 18px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #160606, #0d0404);
+  border: 1px solid rgba(255,60,60,0.4);
+  animation: cine-freeze-alarm 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes cine-freeze-alarm {
+  0%   { opacity: 0; transform: translateX(0); }
+  20%  { opacity: 1; transform: translateX(-7px); }
+  40%  { transform: translateX(6px); }
+  60%  { transform: translateX(-4px); }
+  80%  { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+.cinematic-freeze .fx-a { /* rotating beacon */
+  top: 50%; left: 50%; width: 400px; height: 400px; margin: -200px 0 0 -200px;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(255,60,60,0.13) 30deg, transparent 60deg, transparent 180deg, rgba(255,60,60,0.13) 210deg, transparent 240deg);
+  animation: cine-freeze-beacon 3s linear infinite;
+}
+@keyframes cine-freeze-beacon { to { transform: rotate(360deg); } }
+.cinematic-freeze .fx-b { /* alert bars */
+  top: 0; left: 0; right: 0; height: 5px;
+  background: #ff3c3c;
+  animation: cine-freeze-bars 1s steps(1) infinite;
+}
+.cinematic-freeze .fx-c {
+  bottom: 0; left: 0; right: 0; height: 5px;
+  background: #ff3c3c;
+  animation: cine-freeze-bars 1s steps(1) 0.5s infinite;
+}
+@keyframes cine-freeze-bars { 50% { opacity: 0.25; } }
+.cinematic-freeze .fx-d::before { /* protocol marquee */
+  content: '⚠ EMERGENCY FREEZE PROTOCOL — EXCHANGE CONTACT CHANNELS ARMED — T+00:00 RESPONSE WINDOW OPEN ⚠';
+  top: 9px; left: 0;
+  white-space: nowrap;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 8px; letter-spacing: 0.24em;
+  color: rgba(255,120,120,0.7);
+  animation: cine-freeze-marquee 14s linear infinite;
+}
+.cinematic-freeze .fx-d { inset: 0; }
+@keyframes cine-freeze-marquee {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(-100%); }
+}
+.cinematic-freeze .input {
+  background: rgba(34,8,8,0.8);
+  border: 1px solid rgba(255,60,60,0.4);
+  border-radius: 7px;
+  caret-color: #ff3c3c;
+}
+.cinematic-freeze .input:focus {
+  border-color: #ff3c3c;
+  box-shadow: 0 0 26px rgba(255,60,60,0.3), inset 0 0 12px rgba(255,60,60,0.06);
+}
+.cinematic-freeze .btn-primary {
+  animation: cine-freeze-armed 1.2s ease-in-out infinite alternate;
+}
+@keyframes cine-freeze-armed { from { box-shadow: 0 0 10px rgba(255,60,60,0.3); } to { box-shadow: 0 0 26px rgba(255,60,60,0.65); } }
+
+/* ═══ ACCESSIBILITY & THEME GUARDS ═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  [class*="cinematic-"],
+  [class*="cinematic-"] *,
+  [class*="cinematic-"] *::before,
+  [class*="cinematic-"] *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ========================================================================== */
+/* v4.1 — VISIBLE DATA-DECK CORRECTION                                        */
+/* The first v4 pass was structurally correct, but its deck sat too close to  */
+/* the stage background at very wide resolutions. These rules deliberately    */
+/* raise contrast and visual density so the non-form field reads as a working */
+/* intelligence instrument rather than unused space.                          */
+/* ========================================================================== */
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > .cine-fx {
+  z-index: 2 !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Visible section title for the animated half of the cockpit. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > .cine-fx::before {
+  content: 'LIVE SIGNAL TOPOLOGY';
+  position: absolute;
+  top: 7.15rem;
+  left: calc(var(--cine-pad) + 1rem);
+  z-index: 5;
+  padding: .45rem .7rem;
+  border: 1px solid rgba(var(--cine-a), .4);
+  border-radius: .35rem;
+  background: rgba(2, 7, 12, .88);
+  color: rgba(240, 250, 255, .88);
+  font: 800 .58rem/1 'Roboto Mono', monospace;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  box-shadow: 0 0 24px rgba(var(--cine-a), .2), inset 0 0 18px rgba(var(--cine-a), .08);
+}
+
+/* Illuminated readiness cluster gives the visual field a second anchored
+   information panel instead of leaving the upper-right quadrant empty. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > .cine-fx::after {
+  content: '●  SOURCE GRID   ONLINE\A●  CHAIN ORACLES  SYNCED\A●  RISK ENGINE    ARMED';
+  position: absolute;
+  left: calc(var(--cine-pad) + 1rem);
+  bottom: calc(var(--cine-pad) + 1rem);
+  z-index: 5;
+  width: min(18rem, 30%);
+  padding: .78rem .9rem;
+  white-space: pre;
+  border: 1px solid rgba(var(--cine-a), .36);
+  border-radius: .65rem;
+  background:
+    linear-gradient(135deg, rgba(var(--cine-a),.13), transparent 58%),
+    rgba(2, 7, 12, .9);
+  color: rgba(var(--cine-a), .9);
+  font: 700 .55rem/1.8 'Roboto Mono', monospace;
+  letter-spacing: .09em;
+  box-shadow: 0 14px 34px rgba(0,0,0,.35), inset 0 0 25px rgba(var(--cine-a), .06);
+}
+
+/* High-contrast topology canvas. The node points and connecting paths are
+   baked into the deck surface, so they remain visible regardless of the
+   original per-module particle animation. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-b {
+  z-index: 3 !important;
+  opacity: 1 !important;
+  border: 1px solid rgba(var(--cine-a), .62) !important;
+  background:
+    radial-gradient(circle at 12% 22%, rgb(var(--cine-a)) 0 4px, rgba(var(--cine-a),.24) 5px 18px, transparent 19px),
+    radial-gradient(circle at 33% 38%, rgb(var(--cine-b)) 0 5px, rgba(var(--cine-b),.22) 6px 20px, transparent 21px),
+    radial-gradient(circle at 54% 17%, #f3fbff 0 3px, rgba(var(--cine-a),.3) 4px 15px, transparent 16px),
+    radial-gradient(circle at 74% 44%, rgb(var(--cine-a)) 0 6px, rgba(var(--cine-a),.25) 7px 23px, transparent 24px),
+    radial-gradient(circle at 89% 25%, rgb(var(--cine-b)) 0 4px, rgba(var(--cine-b),.22) 5px 17px, transparent 18px),
+    radial-gradient(circle at 19% 73%, #e9faff 0 3px, rgba(var(--cine-a),.24) 4px 15px, transparent 16px),
+    radial-gradient(circle at 46% 66%, rgb(var(--cine-a)) 0 5px, rgba(var(--cine-a),.24) 6px 19px, transparent 20px),
+    radial-gradient(circle at 68% 82%, rgb(var(--cine-b)) 0 4px, rgba(var(--cine-b),.24) 5px 18px, transparent 19px),
+    radial-gradient(circle at 91% 70%, #f4fbff 0 3px, rgba(var(--cine-a),.24) 4px 15px, transparent 16px),
+    linear-gradient(28deg, transparent 0 34%, rgba(var(--cine-a),.32) 34.2% 34.55%, transparent 34.8% 100%),
+    linear-gradient(151deg, transparent 0 43%, rgba(var(--cine-b),.3) 43.2% 43.55%, transparent 43.8% 100%),
+    linear-gradient(76deg, transparent 0 56%, rgba(var(--cine-a),.25) 56.2% 56.5%, transparent 56.8% 100%),
+    repeating-linear-gradient(0deg, rgba(var(--cine-a),.055) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(90deg, rgba(var(--cine-a),.055) 0 1px, transparent 1px 28px),
+    radial-gradient(circle at 50% 48%, rgba(var(--cine-a),.18), transparent 48%),
+    rgba(3, 10, 18, .94) !important;
+  box-shadow:
+    0 0 0 1px rgba(var(--cine-a),.08),
+    0 0 46px rgba(var(--cine-a),.18),
+    inset 0 0 72px rgba(var(--cine-a),.11) !important;
+}
+
+/* Central command core and rotating acquisition sweep. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-b::before {
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  width: clamp(12rem, 20vw, 20rem);
+  height: clamp(12rem, 20vw, 20rem);
+  margin: 0;
+  translate: -50% -50%;
+  border: 1px solid rgba(var(--cine-a), .7);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgb(var(--cine-a)) 0 5px, rgba(var(--cine-a),.22) 6px 16px, transparent 17px),
+    repeating-radial-gradient(circle, transparent 0 27px, rgba(var(--cine-a),.2) 28px 29px),
+    conic-gradient(from 0deg, rgba(var(--cine-a),.45), transparent 18% 48%, rgba(var(--cine-b),.32) 50%, transparent 70%);
+  box-shadow:
+    0 0 42px rgba(var(--cine-a), .24),
+    inset 0 0 45px rgba(var(--cine-a), .16);
+  animation: cine-v41-core 10s linear infinite !important;
+}
+
+/* Bright signal waveform in the lower half of the topology window. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-b::after {
+  left: 5%;
+  right: 5%;
+  bottom: 7%;
+  height: 25%;
+  opacity: 1;
+  background:
+    linear-gradient(154deg, transparent 0 8%, rgba(var(--cine-a),.95) 8.4% 9.2%, transparent 9.6% 23%, rgba(var(--cine-a),.88) 23.4% 24.2%, transparent 24.6% 38%, rgba(var(--cine-b),.9) 38.4% 39.2%, transparent 39.6% 55%, rgba(var(--cine-a),.95) 55.4% 56.2%, transparent 56.6% 72%, rgba(var(--cine-b),.9) 72.4% 73.2%, transparent 73.6%),
+    repeating-linear-gradient(90deg, rgba(var(--cine-a),.15) 0 1px, transparent 1px 6%);
+  border-bottom: 1px solid rgba(var(--cine-a), .65);
+  filter: drop-shadow(0 0 10px rgba(var(--cine-a), .75));
+}
+
+/* The metrics rack is now a real illuminated panel rather than a hairline. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-c {
+  z-index: 4 !important;
+  opacity: 1 !important;
+  border-color: rgba(var(--cine-a), .5) !important;
+  background:
+    linear-gradient(90deg, rgba(var(--cine-a),.78) 0 8%, transparent 8% 11%, rgba(var(--cine-b),.66) 11% 24%, transparent 24% 27%, rgba(var(--cine-a),.88) 27% 45%, transparent 45% 48%, rgba(var(--cine-b),.72) 48% 73%, transparent 73% 76%, rgba(var(--cine-a),.68) 76% 91%, transparent 91%),
+    linear-gradient(135deg, rgba(var(--cine-a),.1), transparent),
+    rgba(2,7,12,.96) !important;
+  background-size: 100% 7px, auto, auto !important;
+  background-position: left calc(100% - .85rem), center, center !important;
+  background-repeat: no-repeat !important;
+  box-shadow: 0 0 30px rgba(var(--cine-a),.14), inset 0 0 24px rgba(var(--cine-a),.08) !important;
+}
+
+/* Keep the form above the now-prominent animation layer. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > :not(.cine-fx) {
+  z-index: 6;
+  border-color: rgba(var(--cine-a), .48) !important;
+  box-shadow:
+    -22px 26px 70px rgba(0,0,0,.5),
+    0 0 34px rgba(var(--cine-a),.1),
+    inset 0 1px 0 rgba(255,255,255,.07),
+    inset 0 0 42px rgba(var(--cine-a),.045) !important;
+}
+
+/* Move visual-deck captions with left-console layouts. */
+:is(.cinematic-intel, .cinematic-auto, .cinematic-osint, .cinematic-labels, .cinematic-cases) > .cine-fx::before,
+:is(.cinematic-intel, .cinematic-auto, .cinematic-osint, .cinematic-labels, .cinematic-cases) > .cine-fx::after {
+  left: calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad) + 1rem);
+}
+
+/* Bottom-deck screens use the full-width topology field above their controls. */
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) > .cine-fx::before {
+  top: 6.7rem;
+}
+
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) > .cine-fx::after {
+  left: calc(var(--cine-pad) + 1.3rem);
+  bottom: 49%;
+}
+
+@keyframes cine-v41-core {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-height: 760px) and (min-width: 901px) {
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) > .cine-fx::before { top: 5.85rem; }
+
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) > .cine-fx::after {
+    bottom: calc(var(--cine-pad) + .35rem);
+    transform: scale(.86);
+    transform-origin: bottom left;
+  }
+}
+
+@media (max-width: 900px) {
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) > .cine-fx::before,
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) > .cine-fx::after {
+    display: none;
+  }
+}
+
+/* The generic span reset above intentionally has element-level specificity.
+   Pin the v4.1 instrument geometry with explicit insets so legacy one-pixel
+   star particles cannot collapse the new full-size data deck. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-a {
+  inset: 4.55rem var(--cine-pad) auto var(--cine-pad) !important;
+  width: auto !important;
+  height: 1px !important;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-b {
+  inset: 6.4rem calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad)) 7.2rem var(--cine-pad) !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+:is(
+  .cinematic-intel, .cinematic-auto, .cinematic-osint,
+  .cinematic-labels, .cinematic-cases
+) .fx-b {
+  inset: 6.4rem var(--cine-pad) 7.2rem calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad)) !important;
+}
+
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) .fx-b {
+  inset: 5.9rem var(--cine-pad) 47% var(--cine-pad) !important;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-b::before {
+  inset: 50% auto auto 50% !important;
+  width: clamp(12rem, 20vw, 20rem) !important;
+  height: clamp(12rem, 20vw, 20rem) !important;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-b::after {
+  inset: auto 5% 7% 5% !important;
+  width: auto !important;
+  height: 25% !important;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-c {
+  inset: auto calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad)) var(--cine-pad) var(--cine-pad) !important;
+  width: auto !important;
+  height: 5.35rem !important;
+}
+
+:is(
+  .cinematic-intel, .cinematic-auto, .cinematic-osint,
+  .cinematic-labels, .cinematic-cases
+) .fx-c {
+  inset: auto var(--cine-pad) var(--cine-pad) calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad)) !important;
+}
+
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) .fx-c {
+  inset: 6.7rem calc(var(--cine-pad) + 1rem) auto auto !important;
+  width: min(28%, 23rem) !important;
+  height: calc(41% - 2rem) !important;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-c::before {
+  inset: .8rem 1rem auto 1rem !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-d {
+  inset: 7.3rem auto 7.5rem calc(50% - var(--cine-console) / 2 - var(--cine-gap) / 2 - 1.1rem) !important;
+  width: .32rem !important;
+  height: auto !important;
+}
+
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) .fx-d {
+  inset: calc(53% - .2rem) var(--cine-pad) auto var(--cine-pad) !important;
+  width: auto !important;
+  height: .3rem !important;
+}
+
+@media (max-height: 760px) and (min-width: 901px) {
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) .fx-a { inset: 3.9rem var(--cine-pad) auto var(--cine-pad) !important; }
+
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) .fx-b {
+    top: 5.25rem !important;
+    bottom: 5.65rem !important;
+  }
+
+  :is(
+    .cinematic-intel, .cinematic-auto, .cinematic-osint,
+    .cinematic-labels, .cinematic-cases
+  ) .fx-b {
+    top: 5.25rem !important;
+    bottom: 5.65rem !important;
+  }
+}
+
+@media (max-width: 900px) {
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) .fx-b {
+    inset: 4.4rem 1rem auto 1rem !important;
+    width: auto !important;
+    height: 8rem !important;
+  }
+}
+/* Light theme: soften stage backdrops so text stays legible */
+html.light [class*="cinematic-"] { filter: none; }
+html.light [class*="cinematic-"] .input { color: inherit; }
+
+/* ========================================================================== */
+/* v3 — FULL-VIEWPORT MISSION STAGES                                           */
+/* Every top-menu input experience now occupies the available application      */
+/* viewport. Existing per-module FX remain intact; this layer changes the       */
+/* composition so the controls no longer read as small centered forms.          */
+/* ========================================================================== */
+
+.app-content:has([class*="cinematic-"]) > :not(.cyber-ambient) {
+  width: 100%;
+  max-width: none !important;
+  margin-inline: 0 !important;
+}
+
+.mission-launch-stage {
+  display: block !important;
+}
+
+.mission-launch-stage > .card + .card {
+  max-width: 1180px;
+  margin: 1rem auto 0;
+}
+
+[class*="cinematic-"] {
+  width: 100%;
+  min-height: calc(100dvh - var(--topbar-h, 64px) - 3rem);
+  padding: clamp(4.5rem, 7vw, 7.5rem) !important;
+  border-radius: 22px !important;
+  display: grid;
+  align-items: center;
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+[class*="cinematic-"] > :not(.cine-fx) {
+  width: min(1240px, 100%);
+  margin-inline: auto;
+}
+
+[class*="cinematic-"] > form,
+[class*="cinematic-"] > .card {
+  padding: clamp(1rem, 2vw, 2rem) !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  background: rgba(8, 8, 13, .64) !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,.34) !important;
+  backdrop-filter: blur(22px) saturate(135%);
+}
+
+[class*="cinematic-"] .input {
+  min-height: 52px;
+  font-size: .9rem;
+}
+
+[class*="cinematic-"] :is(.btn-primary, .btn-secondary, .btn-ghost) {
+  min-height: 52px;
+  padding-inline: 1.25rem;
+}
+
+/* Left-biased targeting / intelligence bays. */
+.cinematic-intel,
+.cinematic-ai,
+.cinematic-osint,
+.cinematic-auto,
+.cinematic-labels,
+.cinematic-scam {
+  align-items: center;
+  background-position: center !important;
+}
+
+.cinematic-intel > form,
+.cinematic-ai > :not(.cine-fx),
+.cinematic-osint > :not(.cine-fx),
+.cinematic-auto > :not(.cine-fx),
+.cinematic-labels > :not(.cine-fx),
+.cinematic-scam > :not(.cine-fx) {
+  width: min(760px, 58%);
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Right-side operator consoles with the animation occupying the left field. */
+.cinematic-dex > form,
+.cinematic-txlens > .card,
+.cinematic-nft > :not(.cine-fx),
+.cinematic-attribution > :not(.cine-fx),
+.cinematic-sanctions > :not(.cine-fx),
+.cinematic-contract > :not(.cine-fx),
+.cinematic-court > :not(.cine-fx),
+.cinematic-recovery > :not(.cine-fx),
+.cinematic-freeze > :not(.cine-fx) {
+  width: min(780px, 56%);
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* Pipeline modules use a broad command rail docked to the lower third. */
+.cinematic-trace,
+.cinematic-monitor,
+.cinematic-laundering,
+.cinematic-demix,
+.cinematic-regulatory,
+.cinematic-comply {
+  align-items: end;
+}
+
+.cinematic-trace > form,
+.cinematic-monitor > :not(.cine-fx),
+.cinematic-laundering > :not(.cine-fx),
+.cinematic-demix > :not(.cine-fx),
+.cinematic-regulatory > :not(.cine-fx),
+.cinematic-comply > :not(.cine-fx) {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+/* Graph and entity workspaces become split command centres. */
+.cinematic-nexus > .card,
+.cinematic-entity > :not(.cine-fx),
+.cinematic-boards > :not(.cine-fx),
+.cinematic-evidence > :not(.cine-fx),
+.cinematic-cases > :not(.cine-fx),
+.cinematic-submissions > :not(.cine-fx) {
+  width: min(900px, 64%);
+  margin-left: auto;
+  margin-right: 0;
+  border-radius: 28px 5px 28px 5px !important;
+}
+
+/* Studio / analytical modules use a wide floating workbench. */
+.cinematic-batch > :not(.cine-fx),
+.cinematic-reports > :not(.cine-fx),
+.cinematic-victim > :not(.cine-fx),
+.cinematic-perpdex > :not(.cine-fx),
+.cinematic-predictive > :not(.cine-fx) {
+  width: min(1120px, 88%);
+  margin-inline: auto;
+}
+
+/* Stronger, screen-scale ambient geometry. */
+[class*="cinematic-"] .cine-fx {
+  border-radius: 22px;
+  transform: scale(1.02);
+}
+
+[class*="cinematic-"]::selection {
+  background: rgba(255,64,82,.35);
+}
+
+@media (max-width: 1100px) {
+  [class*="cinematic-"] {
+    min-height: calc(100dvh - var(--topbar-h, 64px) - 2rem);
+    padding: 5rem clamp(1.5rem, 5vw, 3.5rem) 3.5rem !important;
+    align-items: center;
+  }
+
+  [class*="cinematic-"] > :not(.cine-fx),
+  [class*="cinematic-"] > form,
+  [class*="cinematic-"] > .card {
+    width: min(820px, 100%) !important;
+    margin-inline: 0 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-content:has([class*="cinematic-"]) > :not(.cyber-ambient) {
+    padding: .75rem !important;
+  }
+
+  [class*="cinematic-"] {
+    min-height: calc(100dvh - var(--topbar-h, 64px) - 1.5rem);
+    padding: 4rem 1rem 2rem !important;
+    border-radius: 14px !important;
+  }
+
+  [class*="cinematic-"] > form,
+  [class*="cinematic-"] > .card {
+    padding: .8rem !important;
+  }
+
+  [class*="cinematic-"] :is(.grid, .flex) {
+    max-width: 100%;
+  }
+}
+
+/* ========================================================================== */
+/* v4 — CINEMATIC COCKPITS                                                     */
+/* The v3 treatment made the canvas larger but left the controls floating in   */
+/* unused space. v4 composes every launch screen as a dense, viewport-sized    */
+/* operator cockpit: animated visual deck + substantial input console.         */
+/* ========================================================================== */
+
+/* The chat composer, board statistics, and populated scam atlas are embedded
+   controls, not launch screens. Keep those three cinematic accents compact. */
+.cinematic-ai,
+.cinematic-boards,
+.cinematic-scam {
+  width: 100%;
+  min-height: 0;
+  padding: 1rem !important;
+  display: block;
+}
+
+.cinematic-ai > :not(.cine-fx),
+.cinematic-boards > :not(.cine-fx),
+.cinematic-scam > :not(.cine-fx) {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Desktop launch pages own exactly the remaining application viewport. The
+   page itself becomes the overflow owner once analysis results are appended,
+   while the clean input state has no browser/page scrollbar. */
+@media (min-width: 901px) {
+  .app-content:has(:is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  )) {
+    overflow: hidden;
+  }
+
+  .app-content:has(:is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  )) > :not(.cyber-ambient) {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: clamp(.7rem, 1.15vw, 1.25rem) !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex !important;
+    flex-direction: column;
+    gap: clamp(.55rem, .85vw, .9rem);
+  }
+
+  .app-content:has(:is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  )) > :not(.cyber-ambient) > * {
+    margin-top: 0 !important;
+    flex: 0 0 auto;
+  }
+}
+
+/* Shared cockpit contract. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) {
+  --cine-a: 0, 220, 255;
+  --cine-b: 123, 79, 255;
+  --cine-label: "CRYPTX / LIVE INVESTIGATION DECK";
+  --cine-status: "SIGNAL LOCKED  •  SOURCES READY  •  ENCRYPTED SESSION";
+  --cine-console: 44%;
+  --cine-pad: clamp(1.15rem, 1.65vw, 2rem);
+  --cine-gap: clamp(1.25rem, 2.4vw, 3.25rem);
+  position: relative;
+  flex: 1 0 clamp(34rem, calc(100dvh - var(--topbar-h, 72px) - 7.2rem), 58rem);
+  width: 100%;
+  height: clamp(34rem, calc(100dvh - var(--topbar-h, 72px) - 7.2rem), 58rem);
+  min-height: 34rem !important;
+  padding: var(--cine-pad) !important;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(27rem, var(--cine-console));
+  gap: var(--cine-gap);
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(var(--cine-a), .32) !important;
+  border-radius: clamp(1rem, 1.35vw, 1.55rem) !important;
+  background:
+    linear-gradient(rgba(var(--cine-a), .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--cine-a), .035) 1px, transparent 1px),
+    radial-gradient(circle at 24% 42%, rgba(var(--cine-a), .19), transparent 26%),
+    radial-gradient(circle at 78% 72%, rgba(var(--cine-b), .14), transparent 31%),
+    linear-gradient(135deg, #070a11 0%, #090814 48%, #05070c 100%) !important;
+  background-size: 32px 32px, 32px 32px, auto, auto, auto !important;
+  box-shadow:
+    0 26px 80px rgba(0, 0, 0, .46),
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 0 90px rgba(var(--cine-a), .045) !important;
+}
+
+/* Animated perimeter, corner gates, and module identity. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+)::before {
+  content: '';
+  position: absolute;
+  inset: .72rem;
+  z-index: 1;
+  pointer-events: none;
+  border: 1px solid rgba(var(--cine-a), .12);
+  border-radius: .85rem;
+  clip-path: polygon(0 0, 25% 0, 25% 1px, 75% 1px, 75% 0, 100% 0, 100% 35%, calc(100% - 1px) 35%, calc(100% - 1px) 65%, 100% 65%, 100% 100%, 72% 100%, 72% calc(100% - 1px), 28% calc(100% - 1px), 28% 100%, 0 100%, 0 65%, 1px 65%, 1px 35%, 0 35%);
+  box-shadow: inset 0 0 42px rgba(var(--cine-a), .045);
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+)::after {
+  content: var(--cine-label);
+  position: absolute;
+  top: 1.55rem;
+  left: var(--cine-pad);
+  z-index: 4;
+  padding: .42rem .72rem .38rem;
+  border-left: 3px solid rgb(var(--cine-a));
+  background: linear-gradient(90deg, rgba(var(--cine-a), .15), transparent);
+  color: rgba(235,248,255,.9);
+  font: 800 clamp(.58rem, .55vw, .7rem)/1 'Roboto Mono', monospace;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(var(--cine-a), .65);
+}
+
+/* Reset the old small-stage particle geometry and rebuild it as a functional
+   visualization deck that deliberately fills the non-form half of the screen. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > .cine-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform: none;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > .cine-fx > span,
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > .cine-fx > span::before,
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > .cine-fx > span::after {
+  content: '';
+  position: absolute;
+  display: block;
+  inset: auto;
+  margin: 0;
+  transform: none;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+/* Top telemetry rail. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-a {
+  top: 4.55rem;
+  left: var(--cine-pad);
+  right: var(--cine-pad);
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--cine-a),.7), rgba(var(--cine-b),.35) 42%, transparent 80%);
+  box-shadow: 0 0 16px rgba(var(--cine-a),.45);
+  animation: cine-v4-rail 4.8s ease-in-out infinite;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-a::before {
+  content: var(--cine-status);
+  top: -.42rem;
+  right: 0;
+  padding-left: .75rem;
+  background: #070a10;
+  color: rgba(var(--cine-a),.66);
+  font: 700 .52rem/1 'Roboto Mono', monospace;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-a::after {
+  top: -2px;
+  left: 0;
+  width: 18%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, rgb(var(--cine-a)), transparent);
+  filter: blur(.5px);
+  animation: cine-v4-signal 3.4s linear infinite;
+}
+
+/* Main live visualization window. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-b {
+  top: 6.4rem;
+  bottom: 7.2rem;
+  left: var(--cine-pad);
+  right: calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad));
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(var(--cine-a),.24);
+  border-radius: 1.15rem 3.2rem 1.15rem 1.15rem;
+  background:
+    linear-gradient(90deg, transparent 49.5%, rgba(var(--cine-a),.08) 50%, transparent 50.5%),
+    linear-gradient(transparent 49.5%, rgba(var(--cine-a),.08) 50%, transparent 50.5%),
+    repeating-radial-gradient(circle at 50% 50%, transparent 0 45px, rgba(var(--cine-a),.08) 46px 47px),
+    radial-gradient(circle at 50% 50%, rgba(var(--cine-a),.14), transparent 48%),
+    rgba(2,7,12,.58);
+  overflow: hidden;
+  box-shadow: inset 0 0 54px rgba(var(--cine-a),.065), 0 18px 44px rgba(0,0,0,.25);
+  animation: cine-v4-deck-in .7s cubic-bezier(.2,.8,.2,1) both;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-b::before {
+  inset: 11%;
+  border: 1px dashed rgba(var(--cine-a),.38);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 8%, rgb(var(--cine-a)) 0 3px, transparent 4px),
+    radial-gradient(circle at 84% 65%, rgb(var(--cine-b)) 0 4px, transparent 5px),
+    radial-gradient(circle at 18% 68%, rgba(255,255,255,.82) 0 2px, transparent 3px),
+    conic-gradient(from 30deg, transparent 0 12%, rgba(var(--cine-a),.22) 13%, transparent 14% 42%, rgba(var(--cine-b),.2) 43%, transparent 44%);
+  box-shadow: inset 0 0 42px rgba(var(--cine-a),.08), 0 0 32px rgba(var(--cine-a),.07);
+  animation: cine-v4-orbit 16s linear infinite;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-b::after {
+  left: 7%;
+  right: 7%;
+  bottom: 8%;
+  height: 31%;
+  background:
+    linear-gradient(152deg, transparent 0 8%, rgba(var(--cine-a),.75) 8.4% 9%, transparent 9.4% 24%, rgba(var(--cine-a),.7) 24.4% 25%, transparent 25.4% 43%, rgba(var(--cine-b),.75) 43.4% 44%, transparent 44.4% 61%, rgba(var(--cine-a),.8) 61.4% 62%, transparent 62.4%),
+    repeating-linear-gradient(90deg, rgba(var(--cine-a),.12) 0 1px, transparent 1px 11%);
+  border-bottom: 1px solid rgba(var(--cine-a),.34);
+  filter: drop-shadow(0 0 8px rgba(var(--cine-a),.35));
+  animation: cine-v4-wave 4s ease-in-out infinite alternate;
+}
+
+/* Lower metrics rack. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-c {
+  left: var(--cine-pad);
+  right: calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad));
+  bottom: var(--cine-pad);
+  width: auto;
+  height: 5.35rem;
+  border: 1px solid rgba(var(--cine-a),.18);
+  border-radius: .8rem;
+  background:
+    linear-gradient(90deg, rgba(var(--cine-a),.5) 0 8%, transparent 8% 11%, rgba(var(--cine-b),.42) 11% 24%, transparent 24% 27%, rgba(var(--cine-a),.62) 27% 45%, transparent 45% 48%, rgba(var(--cine-b),.55) 48% 73%, transparent 73% 76%, rgba(var(--cine-a),.4) 76% 91%, transparent 91%),
+    rgba(3,8,13,.7);
+  background-size: 100% 5px, auto;
+  background-position: left calc(100% - 1rem), center;
+  background-repeat: no-repeat;
+  box-shadow: inset 0 0 26px rgba(var(--cine-a),.04);
+  animation: cine-v4-bars 2.8s ease-in-out infinite alternate;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-c::before {
+  content: '01  INGEST       02  RESOLVE       03  CORRELATE       04  VERIFY';
+  top: .8rem;
+  left: 1rem;
+  right: 1rem;
+  color: rgba(226,240,247,.58);
+  font: 700 clamp(.48rem, .5vw, .62rem)/1.3 'Roboto Mono', monospace;
+  letter-spacing: .09em;
+  word-spacing: .45em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .fx-d {
+  top: 7.3rem;
+  left: calc(50% - var(--cine-console) / 2 - var(--cine-gap) / 2 - 1.1rem);
+  width: .32rem;
+  height: calc(100% - 14.8rem);
+  border-radius: 999px;
+  background: repeating-linear-gradient(180deg, rgba(var(--cine-a),.82) 0 8px, transparent 8px 15px);
+  box-shadow: 0 0 18px rgba(var(--cine-a),.35);
+  animation: cine-v4-pulse 2.2s steps(2) infinite;
+}
+
+/* The real input controls are a large, readable operator console. */
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > :not(.cine-fx) {
+  position: relative;
+  z-index: 3;
+  grid-column: 2;
+  width: 100% !important;
+  max-width: none !important;
+  max-height: calc(100% - 7rem);
+  margin: 2.6rem 0 0 !important;
+  padding: clamp(1.15rem, 1.5vw, 1.75rem) !important;
+  align-self: center;
+  overflow: auto;
+  border: 1px solid rgba(var(--cine-a),.3) !important;
+  border-radius: 1.35rem .35rem 1.35rem .35rem !important;
+  background:
+    linear-gradient(145deg, rgba(var(--cine-a),.075), transparent 34%),
+    linear-gradient(180deg, rgba(13,17,25,.93), rgba(6,9,15,.92)) !important;
+  box-shadow:
+    -18px 22px 65px rgba(0,0,0,.42),
+    0 0 0 1px rgba(255,255,255,.025),
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 0 40px rgba(var(--cine-a),.035) !important;
+  backdrop-filter: blur(24px) saturate(140%);
+  animation: cine-v4-console-in .62s cubic-bezier(.2,.8,.2,1) both !important;
+  scrollbar-width: none;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) > :not(.cine-fx)::-webkit-scrollbar {
+  display: none;
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) .input {
+  min-height: clamp(2.65rem, 4.4vh, 3.15rem);
+  border-color: rgba(var(--cine-a),.28);
+  background: rgba(2,7,12,.76);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+:is(
+  .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+  .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+  .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+  .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+  .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+  .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+  .cinematic-demix, .cinematic-reports, .cinematic-victim,
+  .cinematic-contract, .cinematic-laundering, .cinematic-court,
+  .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+) :is(.btn-primary, .btn-secondary, .btn-ghost) {
+  min-height: clamp(2.65rem, 4.4vh, 3.15rem);
+  border-radius: .72rem;
+}
+
+/* Left-console layouts: target acquisition and registry work. */
+:is(.cinematic-intel, .cinematic-auto, .cinematic-osint, .cinematic-labels, .cinematic-cases) {
+  grid-template-columns: minmax(27rem, var(--cine-console)) minmax(0, 1fr);
+}
+
+:is(.cinematic-intel, .cinematic-auto, .cinematic-osint, .cinematic-labels, .cinematic-cases) > :not(.cine-fx) {
+  grid-column: 1;
+}
+
+:is(.cinematic-intel, .cinematic-auto, .cinematic-osint, .cinematic-labels, .cinematic-cases) .fx-b {
+  left: calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad));
+  right: var(--cine-pad);
+  border-radius: 3.2rem 1.15rem 1.15rem 1.15rem;
+}
+
+:is(.cinematic-intel, .cinematic-auto, .cinematic-osint, .cinematic-labels, .cinematic-cases) .fx-c {
+  left: calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad));
+  right: var(--cine-pad);
+}
+
+:is(.cinematic-intel, .cinematic-auto, .cinematic-osint, .cinematic-labels, .cinematic-cases) .fx-d {
+  left: calc(var(--cine-console) + var(--cine-gap) / 2 + .55rem);
+}
+
+/* Bottom command-deck layouts: a wide control rail beneath the visual field. */
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) {
+  --cine-console: 100%;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(12rem, 1fr) auto;
+  align-items: end;
+}
+
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) > :not(.cine-fx) {
+  grid-column: 1;
+  grid-row: 2;
+  width: 100% !important;
+  max-height: 43%;
+  margin-top: 0 !important;
+}
+
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) .fx-b {
+  top: 5.9rem;
+  left: var(--cine-pad);
+  right: var(--cine-pad);
+  bottom: 47%;
+  border-radius: 1.15rem 4rem 1.15rem 1.15rem;
+}
+
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) .fx-c {
+  top: 6.7rem;
+  left: auto;
+  right: calc(var(--cine-pad) + 1rem);
+  bottom: auto;
+  width: min(28%, 23rem);
+  height: calc(41% - 2rem);
+  background-size: 5px 100%, auto;
+  background-position: calc(100% - 1rem) top, center;
+}
+
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) .fx-c::before {
+  content: 'PIPELINE\A 01 / INGEST\A 02 / RESOLVE\A 03 / VERIFY';
+  white-space: pre;
+  line-height: 2.25;
+}
+
+:is(
+  .cinematic-trace, .cinematic-monitor, .cinematic-laundering,
+  .cinematic-regulatory, .cinematic-batch, .cinematic-perpdex,
+  .cinematic-predictive, .cinematic-victim
+) .fx-d {
+  top: calc(53% - .2rem);
+  left: var(--cine-pad);
+  right: var(--cine-pad);
+  width: auto;
+  height: .3rem;
+  background: repeating-linear-gradient(90deg, rgba(var(--cine-a),.8) 0 11px, transparent 11px 20px);
+}
+
+/* Dense full-workbench layouts for complex multi-field modules. */
+:is(.cinematic-demix, .cinematic-reports, .cinematic-comply) {
+  --cine-console: 64%;
+  grid-template-columns: minmax(15rem, 1fr) minmax(34rem, var(--cine-console));
+}
+
+:is(.cinematic-demix, .cinematic-reports, .cinematic-comply) .fx-b {
+  right: calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad));
+}
+
+:is(.cinematic-demix, .cinematic-reports, .cinematic-comply) .fx-c {
+  right: calc(var(--cine-console) + var(--cine-gap) + var(--cine-pad));
+}
+
+/* Per-module identity and color system — every screen keeps a distinct mood. */
+.cinematic-intel       { --cine-a: 0,224,255;   --cine-b: 126,72,255;  --cine-label: "ADDRESS INTEL / HOLOGRAPHIC SCANNER"; }
+.cinematic-trace       { --cine-a: 255,59,107;  --cine-b: 255,126,40;  --cine-label: "FUND TRACER / NEURAL PIPELINE"; }
+.cinematic-dex         { --cine-a: 52,211,153;  --cine-b: 132,204,22;  --cine-label: "DEX ANALYSIS / LIVE MARKET TERMINAL"; }
+.cinematic-nexus       { --cine-a: 157,123,255; --cine-b: 82,145,255;  --cine-label: "NEXUS GRAPH / CONSTELLATION ARRAY"; }
+.cinematic-nft         { --cine-a: 255,64,182;  --cine-b: 0,229,255;   --cine-label: "NFT + TRON / HOLOGRAM SENTINEL"; }
+.cinematic-auto        { --cine-a: 255,180,40;  --cine-b: 255,73,73;   --cine-label: "AUTO INVESTIGATE / RAPID RESPONSE"; }
+.cinematic-entity      { --cine-a: 227,191,120; --cine-b: 128,168,194; --cine-label: "ENTITY INVESTIGATION / DOSSIER ROOM"; }
+.cinematic-txlens      { --cine-a: 0,240,190;   --cine-b: 0,145,255;   --cine-label: "TX LENS / FORENSIC OPTICS"; }
+.cinematic-perpdex     { --cine-a: 255,88,88;   --cine-b: 255,194,64;  --cine-label: "PERP DEX / LIQUIDATION PRESSURE"; }
+.cinematic-monitor     { --cine-a: 0,232,166;   --cine-b: 40,132,255;  --cine-label: "WALLET MONITOR / RADAR WATCH"; }
+.cinematic-evidence    { --cine-a: 246,190,75;  --cine-b: 180,92,255;  --cine-label: "EVIDENCE VAULT / SEALED CHAIN"; }
+.cinematic-predictive  { --cine-a: 137,92,255;  --cine-b: 255,75,190;  --cine-label: "PREDICTIVE INTEL / SIGNAL FORECAST"; }
+.cinematic-osint       { --cine-a: 45,180,255;  --cine-b: 0,240,180;   --cine-label: "OSINT SWEEP / DEEP SIGNAL ARRAY"; }
+.cinematic-cases       { --cine-a: 255,82,96;   --cine-b: 255,190,84;  --cine-label: "CASE MANAGER / INVESTIGATION WALL"; }
+.cinematic-batch       { --cine-a: 80,210,255;  --cine-b: 255,178,52;  --cine-label: "BATCH SCREENER / HIGH-THROUGHPUT GATE"; }
+.cinematic-labels      { --cine-a: 112,220,148; --cine-b: 249,205,88;  --cine-label: "LABEL INTEL / REGISTRY TERMINAL"; }
+.cinematic-attribution { --cine-a: 64,196,255;  --cine-b: 255,94,160;  --cine-label: "ATTRIBUTION / IDENTITY RESOLUTION"; }
+.cinematic-submissions { --cine-a: 64,222,182;  --cine-b: 108,130,255; --cine-label: "ATTRIBUTION SUBMISSION / TRUST GATE"; }
+.cinematic-sanctions   { --cine-a: 255,72,72;   --cine-b: 255,177,45;  --cine-label: "SANCTIONS / WATCHLIST INTERCEPT"; }
+.cinematic-regulatory  { --cine-a: 255,188,64;  --cine-b: 60,196,255;  --cine-label: "REGULATORY REPORTS / FILING DESK"; }
+.cinematic-demix       { --cine-a: 180,102,255; --cine-b: 0,222,204;   --cine-label: "DEMIX LAB / ENTROPY SEPARATOR"; }
+.cinematic-reports     { --cine-a: 240,196,72;  --cine-b: 78,142,255;  --cine-label: "REPORT STUDIO / EVIDENCE COMPOSITOR"; }
+.cinematic-victim      { --cine-a: 255,105,120; --cine-b: 255,191,71;  --cine-label: "VICTIM REPORTS / INTAKE COMMAND"; }
+.cinematic-contract    { --cine-a: 0,221,188;   --cine-b: 120,92,255;  --cine-label: "CONTRACT FORENSICS / BYTECODE SCANNER"; }
+.cinematic-laundering  { --cine-a: 255,86,130;  --cine-b: 178,85,255;  --cine-label: "LAUNDERING TRACE / TYPOLOGY ENGINE"; }
+.cinematic-court       { --cine-a: 228,190,90;  --cine-b: 84,158,255;  --cine-label: "COURT READINESS / EXHIBIT BUILDER"; }
+.cinematic-recovery    { --cine-a: 76,224,157;  --cine-b: 50,152,255;  --cine-label: "RECOVERY OPS / ASSET INTERCEPT"; }
+.cinematic-comply      { --cine-a: 0,205,168;   --cine-b: 94,148,255;  --cine-label: "COMPLIANCE SUITE / CONTROL MATRIX"; }
+.cinematic-freeze      { --cine-a: 94,190,255;  --cine-b: 164,100,255; --cine-label: "FREEZE DESK / RESPONSE CHANNEL"; }
+
+/* Distinct silhouette details keep the 29 full-screen launch stages from
+   feeling like color swaps of one template. */
+:is(.cinematic-nexus, .cinematic-entity, .cinematic-evidence, .cinematic-submissions) .fx-b {
+  clip-path: polygon(0 0, 88% 0, 100% 14%, 100% 100%, 10% 100%, 0 88%);
+}
+
+:is(.cinematic-dex, .cinematic-perpdex, .cinematic-contract) .fx-b {
+  border-radius: .25rem;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, transparent 0 7%, rgba(var(--cine-a),.14) 7% 7.3%, transparent 7.3% 14%),
+    linear-gradient(170deg, transparent 0 26%, rgba(var(--cine-a),.18) 26.5% 27%, transparent 27.5% 48%, rgba(var(--cine-b),.18) 48.5% 49%, transparent 49.5%),
+    rgba(2,9,7,.72);
+}
+
+:is(.cinematic-court, .cinematic-reports, .cinematic-regulatory) .fx-b {
+  border-radius: .35rem 2.8rem .35rem 2.8rem;
+  box-shadow: inset 0 0 0 8px rgba(var(--cine-a),.025), inset 0 0 54px rgba(var(--cine-a),.07);
+}
+
+:is(.cinematic-nft, .cinematic-predictive, .cinematic-demix) .fx-b::before {
+  border-style: solid;
+  border-radius: 28% 72% 60% 40% / 42% 38% 62% 58%;
+  animation: cine-v4-morph 8s ease-in-out infinite alternate, cine-v4-orbit 18s linear infinite;
+}
+
+:is(.cinematic-auto, .cinematic-sanctions, .cinematic-freeze) .fx-b {
+  clip-path: polygon(4% 0, 96% 0, 100% 8%, 100% 92%, 96% 100%, 4% 100%, 0 92%, 0 8%);
+}
+
+@keyframes cine-v4-console-in {
+  from { opacity: 0; transform: translateX(34px) scale(.975); filter: blur(8px); }
+  to { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+}
+@keyframes cine-v4-deck-in {
+  from { opacity: 0; transform: scale(.94); filter: blur(8px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+@keyframes cine-v4-orbit { to { transform: rotate(360deg); } }
+@keyframes cine-v4-signal { from { transform: translateX(-100%); } to { transform: translateX(560%); } }
+@keyframes cine-v4-rail { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes cine-v4-wave { from { transform: translateY(5px); opacity: .48; } to { transform: translateY(-5px); opacity: 1; } }
+@keyframes cine-v4-bars { from { filter: brightness(.75); } to { filter: brightness(1.45); } }
+@keyframes cine-v4-pulse { 50% { opacity: .35; } }
+@keyframes cine-v4-morph { from { border-radius: 28% 72% 60% 40% / 42% 38% 62% 58%; } to { border-radius: 64% 36% 35% 65% / 58% 66% 34% 42%; } }
+
+@media (max-height: 760px) and (min-width: 901px) {
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) {
+    flex-basis: calc(100dvh - var(--topbar-h, 72px) - 6.1rem);
+    height: calc(100dvh - var(--topbar-h, 72px) - 6.1rem);
+    min-height: 30rem !important;
+    --cine-pad: .9rem;
+  }
+
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) .fx-a { top: 3.9rem; }
+
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) .fx-b { top: 5.25rem; bottom: 5.65rem; }
+
+  :is(
+    .cinematic-intel, .cinematic-auto, .cinematic-osint, .cinematic-labels,
+    .cinematic-cases, .cinematic-dex, .cinematic-nexus, .cinematic-nft,
+    .cinematic-entity, .cinematic-txlens, .cinematic-evidence,
+    .cinematic-attribution, .cinematic-submissions, .cinematic-sanctions,
+    .cinematic-contract, .cinematic-court, .cinematic-recovery,
+    .cinematic-freeze, .cinematic-demix, .cinematic-reports, .cinematic-comply
+  ) .fx-c { height: 4rem; }
+
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) > :not(.cine-fx) {
+    max-height: calc(100% - 5.2rem);
+    margin-top: 2.1rem !important;
+    padding: .95rem !important;
+  }
+}
+
+@media (max-width: 900px) {
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) {
+    height: auto;
+    min-height: 32rem !important;
+    padding: 4.8rem 1rem 1rem !important;
+    display: block;
+  }
+
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) > :not(.cine-fx) {
+    width: 100% !important;
+    max-height: none;
+    margin: 0 !important;
+    padding: 1rem !important;
+  }
+
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) .fx-b {
+    top: 4.4rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: auto;
+    height: 8rem;
+    opacity: .62;
+  }
+
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) :is(.fx-c, .fx-d) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ),
+  :is(
+    .cinematic-intel, .cinematic-trace, .cinematic-dex, .cinematic-nexus,
+    .cinematic-nft, .cinematic-auto, .cinematic-entity, .cinematic-txlens,
+    .cinematic-perpdex, .cinematic-monitor, .cinematic-evidence,
+    .cinematic-predictive, .cinematic-osint, .cinematic-cases,
+    .cinematic-batch, .cinematic-labels, .cinematic-attribution,
+    .cinematic-submissions, .cinematic-sanctions, .cinematic-regulatory,
+    .cinematic-demix, .cinematic-reports, .cinematic-victim,
+    .cinematic-contract, .cinematic-laundering, .cinematic-court,
+    .cinematic-recovery, .cinematic-comply, .cinematic-freeze
+  ) * {
+    animation: none !important;
+  }
+}

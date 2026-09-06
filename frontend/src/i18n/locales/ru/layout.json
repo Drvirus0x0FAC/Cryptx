@@ -1,0 +1,60 @@
+{
+  "topbar": {
+    "searchPlaceholder": "Поиск адреса, хэша, ENS, дела…",
+    "searchKbdHint": "Ctrl K",
+    "searchKbdEnter": "Enter",
+    "threatLandscape": "Ландшафт угроз",
+    "threatLandscapeTitle": "Ландшафт угроз блокчейна — ленты крипто- и блокчейн-безопасности в реальном времени",
+    "settings": "Настройки",
+    "logout": "Выйти",
+    "logoutTitle": "Выйти и отозвать сеанс",
+    "profile": "Профиль",
+    "userProfile": "Профиль пользователя",
+    "densityCompact": "Компактная плотность",
+    "densityComfortable": "Комфортная плотность",
+    "themeLight": "Светлый режим",
+    "themeDark": "Тёмный режим",
+    "language": "Язык"
+  },
+  "notifications": {
+    "title": "Уведомления",
+    "markAllRead": "Отметить всё как прочитанное",
+    "newBadge": "{{count}} новых",
+    "empty": "Пока нет уведомлений",
+    "taskReply": "{{name}} ответил(а) в «{{task}}»",
+    "taskAssigned": "Вам назначена новая задача",
+    "tooltip": "Уведомления"
+  },
+  "island": {
+    "missionModules": "Модули миссии",
+    "toolsCount_one": "{{count}} инструмент",
+    "toolsCount_few": "{{count}} инструмента",
+    "toolsCount_many": "{{count}} инструментов",
+    "toolsCount_other": "{{count}} инструментов"
+  },
+  "ambient": {
+    "txBridgeHop": "прыжок моста TRX",
+    "mixerExposure": "экспозиция миксера",
+    "ofacClear": "OFAC чисто",
+    "btcClusterRisk": "риск кластера",
+    "ethBridgePath": "путь моста",
+    "xmrMixerWatch": "наблюдение миксер",
+    "amlTrace": "СЛЕД AML",
+    "amlCaseScore": "оценка дела {{score}}",
+    "chainSwap": "ОБМЕН ЦЕПОЧЕК",
+    "chainSwapPath": "ETH на BASE",
+    "walletLink": "СВЯЗЬ КОШЕЛЬКА",
+    "hopsCount_one": "{{count}} прыжок",
+    "hopsCount_few": "{{count}} прыжка",
+    "hopsCount_many": "{{count}} прыжков",
+    "hopsCount_other": "{{count}} прыжков",
+    "ticker": {
+      "txTrace": "СЛЕД TX",
+      "amlScreen": "ПРОВЕРКА AML",
+      "chainSwap": "ОБМЕН ЦЕПОЧЕК",
+      "mixerWatch": "НАБЛЮДЕНИЕ МИКСЕР",
+      "riskNode": "УЗЕЛ РИСКА",
+      "caseVault": "ХРАНИЛИЩЕ ДЕЛ"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "palette": {
+    "placeholder": "Paste an address / tx hash, or type a module name…",
+    "title": "Command",
+    "hintEnter": "Enter",
+    "hintEsc": "ESC",
+    "sectionModules": "Modules",
+    "sectionActions": "Actions",
+    "sectionEntities": "Entities",
+    "investigatePrefix": "Investigate",
+    "empty": "No matches. Paste a BTC / EVM / TRON / SOL address, a transaction hash, an ENS name, or search an entity (\"Binance\", \"Lazarus\") or module name.",
+    "open": "Open command palette",
+    "footerNavigate": "navigate",
+    "footerOpen": "open",
+    "footerAutoDetect": "auto-detects chain from format"
+  },
+  "actions": {
+    "auto": { "label": "Auto-Investigate", "hint": "one-click full pipeline" },
+    "intel": { "label": "Address Intel", "hint": "full OSINT report" },
+    "nexus": { "label": "Nexus Graph", "hint": "relationship graph" },
+    "holistic": { "label": "Holistic Trace", "hint": "cross-chain trace" },
+    "forensics": { "label": "Forensic Analysis", "hint": "local algorithms" },
+    "trace": { "label": "Fund Tracer", "hint": "multi-hop flow" },
+    "txlens": { "label": "TX Lens", "hint": "transaction investigation" },
+    "txdetail": { "label": "TX Detail", "hint": "raw transaction view" },
+    "txdetailBtc": { "label": "TX Detail (BTC)", "hint": "raw transaction view" },
+    "perpdex": { "label": "Perp DEX Intel", "hint": "Hyperliquid account analysis" }
+  },
+  "entities": {
+    "loading": "Searching entities…",
+    "none": "No matching entities."
+  }
+}

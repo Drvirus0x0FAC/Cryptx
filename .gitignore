@@ -1,0 +1,124 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  CryptoOSINT Investigator — .gitignore
+#  Publishes SOURCE CODE ONLY. Secrets, caches, build output, local scratch,
+#  AI-assistant config, and internal research/planning notes stay out.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Secrets & credentials (NEVER commit) ─────────────────────────────────────
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+.auth_secret
+**/.auth_secret
+.uat_token.txt
+.uat_token*.txt
+arkham_cookies.json
+**/arkham_cookies.json
+
+# ── Databases & local data ──────────────────────────────────────────────────
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+venv/
+.venv/
+env/
+ENV/
+
+# ── Node / frontend build ───────────────────────────────────────────────────
+node_modules/
+frontend/dist/
+dist/
+build/
+.vite/
+*.tsbuildinfo
+
+# ── Logs ────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── OS / editor ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.fuse_hidden*
+**/.fuse_hidden*
+
+# ── AI assistant config / skills / prompts (not source) ─────────────────────
+.agents/
+.augment/
+.claude/
+.codebuddy/
+.codewhale/
+.continue/
+.cursor/
+.factory/
+.gemini/
+.kilocode/
+.kiro/
+.opencode/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.warp/
+.windsurf/
+.zcode/
+.github/prompts/
+.github/copilot-instructions.md
+CLAUDE.md
+GEMINI.md
+AGENTS.md
+.aider*
+
+# ── Internal research / planning / performance notes (not source) ───────────
+docs/
+QLUE_RESEARCH.md
+PERF_INTEGRATION_REPORT*.md
+PERF_RESULTS.json
+INTEGRATION_RESULTS.json
+UAT_API_RESULTS*.json
+UAT_VERIFY_RESULTS.json
+openapi.json
+cryptx-infographic.html
+*_REPORT_*.md
+
+# ── Engine / scraper caches & generated output ─────────────────────────────
+.cache/
+http_cache/
+graphify-out/
+benchmarks/benchmark_results.json
+**/benchmark_results.json
+**/.api_cache/
+python-modules/reports/
+**/reports/*.html
+**/reports/*.pdf
+**/reports/*.json
+
+# ── Local scratch / debug scripts ─────────────────────────────────────────---
+frontend/_*
+frontend/parsecheck.cjs
+frontend/public/_*
+tests/_*.css
+start_sp

@@ -1,0 +1,369 @@
+/* ============================================================================
+   CrypTX - "Command Vault" auth experience
+   Centered, professional two-column hero over an animated blockchain field.
+   Colors bound to the app theme (--accent-blue primary, --accent-red brand,
+   plus the bg and text vars). Absolutely-centered + height-clamped: never scrolls.
+   ============================================================================ */
+
+.cxv-root {
+  --cxv-acc: var(--accent-blue);     /* primary accent (purple in dark) */
+  --cxv-acc2: var(--accent-purple);  /* lighter accent for glints */
+  --cxv-brand: var(--accent-red);    /* CrypTX brand red */
+
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 700px at 50% -10%, rgb(var(--cxv-acc) / 0.18), transparent 60%),
+    radial-gradient(900px 600px at 50% 120%, rgb(var(--cxv-brand) / 0.10), transparent 60%),
+    rgb(var(--bg-primary));
+  font-family: 'Roboto', system-ui, sans-serif;
+  z-index: 1;
+}
+
+/* The drifting blockchain constellation canvas sits behind everything */
+.cxv-root .auth-canvas-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.8; }
+
+.cxv-vignette {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 85% 75% at 50% 50%, transparent 42%, rgb(var(--bg-primary) / 0.62) 100%);
+}
+.cxv-grid {
+  position: absolute; inset: -2px; z-index: 1; pointer-events: none; opacity: 0.55;
+  background-image:
+    linear-gradient(rgb(var(--cxv-acc) / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--cxv-acc) / 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 80%);
+  animation: cxv-grid-pan 26s linear infinite;
+}
+@keyframes cxv-grid-pan { to { background-position: 48px 48px; } }
+
+/* ── Side data streams (scrolling hashes) ───────────────────────────────── */
+.cxv-stream {
+  position: absolute; top: 0; bottom: 0; width: 140px; z-index: 1; overflow: hidden;
+  display: flex; flex-direction: column; gap: 18px; pointer-events: none;
+  font-family: 'Roboto Mono', monospace; font-size: 11px; letter-spacing: 0.04em;
+  color: rgb(var(--cxv-acc2) / 0.30);
+  mask-image: linear-gradient(transparent, #000 16%, #000 84%, transparent);
+}
+.cxv-stream span { white-space: nowrap; }
+.cxv-stream-l { left: 2vw; align-items: flex-start; animation: cxv-stream-up 22s linear infinite; }
+.cxv-stream-r { right: 2vw; align-items: flex-end; text-align: right; animation: cxv-stream-down 26s linear infinite; }
+@keyframes cxv-stream-up { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+@keyframes cxv-stream-down { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+@media (max-width: 1240px) { .cxv-stream { display: none; } }
+
+/* ── Floating intel chips ───────────────────────────────────────────────── */
+.cxv-chip {
+  position: absolute; z-index: 2; pointer-events: none;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 12px; border-radius: 12px;
+  background: rgb(var(--bg-card) / 0.6); backdrop-filter: blur(8px);
+  border: 1px solid rgb(var(--cxv-acc) / 0.24);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.45);
+  animation: cxv-chip-drift 9s ease-in-out infinite;
+}
+.cxv-chip b { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(var(--cxv-acc2) / 0.9); }
+.cxv-chip span { font-size: 13px; font-weight: 700; color: rgb(var(--text-bright)); font-family: 'Roboto Mono', monospace; }
+.cxv-chip-1 { top: 12%; left: 9%; animation-delay: 0s; }
+.cxv-chip-2 { top: 18%; right: 9%; animation-delay: 1.6s; }
+.cxv-chip-3 { bottom: 14%; left: 11%; animation-delay: 3.1s; }
+.cxv-chip-4 { bottom: 12%; right: 10%; animation-delay: 2.2s; }
+@keyframes cxv-chip-drift {
+  0%, 100% { transform: translateY(0) rotate(-0.4deg); opacity: 0.85; }
+  50% { transform: translateY(-12px) rotate(0.4deg); opacity: 1; }
+}
+@media (max-width: 1240px) { .cxv-chip { display: none; } }
+
+/* ── Console - absolutely centered two-column unit ──────────────────────── */
+.cxv-console {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex; align-items: center; justify-content: center; gap: 48px;
+  width: min(1200px, calc(100vw - 40px));
+  max-height: calc(100dvh - 28px);
+  animation: cxv-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes cxv-rise { from { opacity: 0; transform: translate(-50%, -46%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+
+/* Brand stage (left) */
+.cxv-stage { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+/* Card wrap (right) */
+.cxv-card-wrap { flex: 0 0 388px; width: 388px; display: flex; flex-direction: column; max-height: calc(100dvh - 28px); }
+
+/* ── Radar hero ─────────────────────────────────────────────────────────── */
+.cxv-radar { position: relative; width: 224px; height: 224px; flex-shrink: 0; }
+.cxv-radar-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgb(var(--cxv-acc) / 0.30); }
+.cxv-radar-ring.r2 { inset: 30px; border-color: rgb(var(--cxv-acc) / 0.20); }
+.cxv-radar-ring.r3 { inset: 60px; border-color: rgb(var(--cxv-acc) / 0.13); }
+.cxv-radar-pulse {
+  position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgb(var(--cxv-acc) / 0.5);
+  animation: cxv-ring-pulse 3s ease-out infinite;
+}
+@keyframes cxv-ring-pulse { 0% { transform: scale(0.5); opacity: 0.8; } 100% { transform: scale(1.15); opacity: 0; } }
+.cxv-radar-sweep {
+  position: absolute; inset: 0; border-radius: 50%; overflow: hidden;
+  background: conic-gradient(from 0deg, rgb(var(--cxv-acc) / 0.42), transparent 38%);
+  mask: radial-gradient(circle, transparent 16px, #000 16px);
+  animation: cxv-spin 4.6s linear infinite;
+}
+.cxv-orbit { position: absolute; inset: 0; border-radius: 50%; }
+.cxv-orbit > span {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  width: 30px; height: 30px; display: grid; place-items: center;
+  border-radius: 50%; font-size: 15px; font-weight: 700;
+  background: rgb(var(--bg-secondary) / 0.9); color: rgb(var(--cxv-acc2));
+  border: 1px solid rgb(var(--cxv-acc) / 0.45); box-shadow: 0 0 14px rgb(var(--cxv-acc) / 0.45);
+}
+.cxv-orbit.o1 { animation: cxv-spin 13s linear infinite; }
+.cxv-orbit.o2 { inset: 30px; animation: cxv-spin-rev 17s linear infinite; }
+.cxv-orbit.o3 { inset: 60px; animation: cxv-spin 21s linear infinite; }
+@keyframes cxv-spin { to { transform: rotate(360deg); } }
+@keyframes cxv-spin-rev { to { transform: rotate(-360deg); } }
+.cxv-radar-core {
+  position: absolute; inset: 60px; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle, rgb(var(--cxv-brand) / 0.22), rgb(var(--bg-primary) / 0.92));
+  border: 1px solid rgb(var(--cxv-brand) / 0.5);
+  box-shadow: 0 0 38px rgb(var(--cxv-brand) / 0.42), inset 0 0 24px rgb(var(--cxv-brand) / 0.26);
+  animation: cxv-core-breathe 3.4s ease-in-out infinite;
+}
+.cxv-radar-core img { width: 92%; height: 92%; object-fit: contain; filter: drop-shadow(0 0 10px rgb(var(--cxv-brand) / 0.55)) drop-shadow(0 0 22px rgba(255,255,255,0.12)); }
+@keyframes cxv-core-breathe {
+  0%,100% { box-shadow: 0 0 30px rgb(var(--cxv-brand) / 0.34), inset 0 0 18px rgb(var(--cxv-brand) / 0.22); }
+  50% { box-shadow: 0 0 50px rgb(var(--cxv-brand) / 0.58), inset 0 0 28px rgb(var(--cxv-brand) / 0.34); }
+}
+
+/* ── Brand wordmark + tagline + signals ─────────────────────────────────── */
+.cxv-brand { margin: 14px 0 4px; }
+.cxv-brand h1 {
+  font-family: 'Roboto', sans-serif; font-weight: 800; font-size: 3rem;
+  letter-spacing: -0.02em; color: rgb(var(--text-bright)); line-height: 1;
+}
+.cxv-brand h1 span { color: rgb(var(--cxv-brand)); text-shadow: 0 0 26px rgb(var(--cxv-brand) / 0.6); }
+.cxv-brand .cxv-tag {
+  margin-top: 10px; font-size: 11px; letter-spacing: 0.46em; text-transform: uppercase;
+  color: rgb(var(--cxv-acc2) / 0.75); font-weight: 600;
+}
+.cxv-pitch { margin-top: 14px; max-width: 320px; font-size: 13px; line-height: 1.6; color: rgb(var(--text-secondary)); }
+.cxv-signals { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; width: min(320px, 100%); }
+.cxv-signal {
+  display: flex; align-items: center; gap: 9px; padding: 9px 12px; border-radius: 11px; text-align: left;
+  background: rgb(var(--bg-card) / 0.45); border: 1px solid rgb(var(--cxv-acc) / 0.14);
+  font-size: 12px; color: rgb(var(--text-secondary)); animation: cxv-sig-in 0.5s ease both;
+}
+.cxv-signal i { width: 7px; height: 7px; border-radius: 50%; background: rgb(var(--cxv-acc)); box-shadow: 0 0 8px rgb(var(--cxv-acc)); flex-shrink: 0; animation: cxv-blink 2s ease-in-out infinite; }
+@keyframes cxv-sig-in { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+
+/* ── Glass card with rotating accent border ─────────────────────────────── */
+.cxv-card {
+  position: relative; width: 100%; padding: 24px 24px 20px; border-radius: 20px;
+  background: linear-gradient(180deg, rgb(var(--bg-card) / 0.88), rgb(var(--bg-secondary) / 0.94));
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 80px rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.04);
+  overflow: hidden; isolation: isolate;
+}
+.cxv-card::before {
+  content: ''; position: absolute; z-index: -2; inset: -60%;
+  background: conic-gradient(from 0deg, transparent 0 60%, rgb(var(--cxv-acc) / 0.85) 75%, rgb(var(--cxv-acc2) / 0.6) 85%, transparent 92%);
+  animation: cxv-spin 6.5s linear infinite;
+}
+.cxv-card::after {
+  content: ''; position: absolute; z-index: -1; inset: 1px; border-radius: 19px;
+  background: linear-gradient(180deg, rgb(var(--bg-card) / 0.97), rgb(var(--bg-secondary) / 0.98));
+}
+
+.cxv-hud {
+  display: flex; justify-content: space-between; gap: 8px; margin-bottom: 14px;
+  font-family: 'Roboto Mono', monospace; font-size: 8.5px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgb(var(--cxv-acc2) / 0.6);
+}
+.cxv-hud span { display: flex; align-items: center; gap: 5px; }
+.cxv-hud span::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: rgb(var(--cxv-acc)); box-shadow: 0 0 8px rgb(var(--cxv-acc)); animation: cxv-blink 1.8s ease-in-out infinite; }
+@keyframes cxv-blink { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+.cxv-seg {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  padding: 4px; border-radius: 13px; margin-bottom: 16px;
+  background: rgb(255 255 255 / 0.03); border: 1px solid rgb(var(--cxv-acc) / 0.16);
+}
+.cxv-seg-pill {
+  position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px);
+  border-radius: 10px; background: linear-gradient(135deg, rgb(var(--cxv-acc)), rgb(var(--cxv-acc2)));
+  box-shadow: 0 6px 18px rgb(var(--cxv-acc) / 0.42);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cxv-seg-pill.right { transform: translateX(calc(100% + 4px)); }
+.cxv-seg button {
+  position: relative; z-index: 1; padding: 9px; border: none; background: transparent; cursor: pointer;
+  font-size: 13px; font-weight: 700; color: rgb(var(--text-secondary)); transition: color 0.2s ease;
+}
+.cxv-seg button.on { color: #fff; }
+
+.cxv-form { display: flex; flex-direction: column; gap: 11px; }
+.cxv-form-head { margin-bottom: 1px; }
+.cxv-kicker { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(var(--cxv-acc2) / 0.7); }
+.cxv-form-head h3 { font-family: 'Roboto', sans-serif; font-size: 1.22rem; color: rgb(var(--text-bright)); margin-top: 3px; letter-spacing: -0.01em; }
+
+.cxv-field {
+  display: flex; align-items: center; gap: 10px; padding: 0 14px; height: 46px; border-radius: 13px;
+  background: rgb(255 255 255 / 0.025); border: 1px solid rgb(var(--bg-border) / 0.5);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.cxv-field svg { color: rgb(var(--text-muted)); flex-shrink: 0; transition: color 0.18s ease; }
+.cxv-field input { flex: 1; min-width: 0; background: transparent; border: none; outline: none; color: rgb(var(--text-primary)); font-size: 14px; }
+.cxv-field input::placeholder { color: rgb(var(--text-muted)); }
+.cxv-field:focus-within { border-color: rgb(var(--cxv-acc) / 0.6); background: rgb(var(--cxv-acc) / 0.06); box-shadow: 0 0 0 3px rgb(var(--cxv-acc) / 0.1); }
+.cxv-field:focus-within svg { color: rgb(var(--cxv-acc)); }
+
+.cxv-alert, .cxv-notice { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 11px; font-size: 12.5px; }
+.cxv-alert { background: rgb(var(--cxv-brand) / 0.12); border: 1px solid rgb(var(--cxv-brand) / 0.4); color: rgb(var(--cxv-brand)); }
+.cxv-notice { background: rgb(var(--accent-green) / 0.12); border: 1px solid rgb(var(--accent-green) / 0.4); color: rgb(var(--accent-green)); }
+.cxv-devtoken { display: flex; flex-direction: column; gap: 4px; padding: 9px 12px; border-radius: 11px; background: rgb(255 255 255 / 0.03); border: 1px dashed rgb(var(--cxv-acc) / 0.35); }
+.cxv-devtoken span { font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgb(var(--text-muted)); }
+.cxv-devtoken code { font-family: 'Roboto Mono', monospace; font-size: 12px; color: rgb(var(--cxv-acc2)); word-break: break-all; }
+
+.cxv-submit {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center; gap: 9px; height: 48px; margin-top: 5px;
+  border: none; border-radius: 13px; cursor: pointer; font-size: 14px; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, rgb(var(--cxv-acc)), rgb(var(--cxv-acc2)));
+  box-shadow: 0 14px 34px rgb(var(--cxv-acc) / 0.42);
+  transition: filter 0.18s ease, transform 0.1s ease, box-shadow 0.18s ease;
+}
+.cxv-submit::after {
+  content: ''; position: absolute; top: 0; left: -60%; width: 50%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.35), transparent);
+  transform: skewX(-18deg); animation: cxv-shimmer 3.2s ease-in-out infinite;
+}
+@keyframes cxv-shimmer { 0% { left: -60%; } 55%, 100% { left: 130%; } }
+.cxv-submit:hover:not(:disabled) { filter: brightness(1.08); box-shadow: 0 16px 40px rgb(var(--cxv-acc) / 0.55); }
+.cxv-submit:active:not(:disabled) { transform: translateY(1px) scale(0.995); }
+.cxv-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.cxv-links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 4px; }
+.cxv-links button { background: none; border: none; color: rgb(var(--text-secondary)); font-size: 12px; cursor: pointer; transition: color 0.15s ease; }
+.cxv-links button:hover { color: rgb(var(--cxv-acc2)); }
+
+.cxv-foot { margin-top: 14px; font-size: 10.5px; letter-spacing: 0.04em; color: rgb(var(--text-muted)); display: flex; align-items: center; justify-content: center; gap: 7px; }
+.cxv-foot svg { color: rgb(var(--cxv-acc2) / 0.75); }
+
+/* Language picker slot — sits under the form links, above the foot. */
+.cxv-lang { margin-top: 14px; }
+
+/* ── Responsive: stack on narrow, shrink on short ───────────────────────── */
+@media (max-width: 880px) {
+  .cxv-console { flex-direction: column; gap: 16px; width: min(404px, calc(100vw - 28px)); }
+  .cxv-stage { order: -1; }
+  .cxv-card-wrap { flex: 1 1 auto; width: 100%; }
+  .cxv-signals, .cxv-pitch { display: none; }
+  .cxv-radar { width: 150px; height: 150px; }
+  .cxv-radar-ring.r2 { inset: 20px; } .cxv-radar-ring.r3 { inset: 40px; }
+  .cxv-orbit.o2 { inset: 20px; } .cxv-orbit.o3 { inset: 40px; }
+  .cxv-radar-sweep { mask: radial-gradient(circle, transparent 11px, #000 11px); }
+  .cxv-radar-core { inset: 40px; }
+  .cxv-orbit > span { width: 24px; height: 24px; font-size: 12px; top: -11px; }
+  .cxv-brand { margin: 8px 0 2px; } .cxv-brand h1 { font-size: 2.2rem; }
+  .cxv-card { max-height: calc(100dvh - 200px); overflow-y: auto; }
+}
+@media (max-height: 720px) and (min-width: 881px) {
+  .cxv-radar { width: 170px; height: 170px; }
+  .cxv-radar-ring.r2 { inset: 22px; } .cxv-radar-ring.r3 { inset: 46px; }
+  .cxv-orbit.o2 { inset: 22px; } .cxv-orbit.o3 { inset: 46px; }
+  .cxv-radar-core { inset: 46px; }
+  .cxv-signals { display: none; } .cxv-pitch { margin-top: 10px; }
+  .cxv-brand h1 { font-size: 2.4rem; }
+}
+@media (max-height: 640px) {
+  .cxv-card { max-height: calc(100dvh - 24px); overflow-y: auto; }
+}
+
+/* ── Brand logo on a solid black badge (hides transparent-edge glitches) ──────── */
+.cxv-logo-badge {
+  width: 132px; height: 132px; border-radius: 50%;
+  display: grid; place-items: center; flex-shrink: 0;
+  background: #000;
+  border: 1px solid rgb(var(--cxv-brand) / 0.55);
+  box-shadow: 0 0 0 6px rgba(0,0,0,0.72), 0 0 44px rgb(var(--cxv-brand) / 0.4),
+              inset 0 0 26px rgba(0,0,0,0.9);
+  animation: cxv-badge-breathe 4.5s ease-in-out infinite;
+}
+.cxv-logo-badge img { width: 80%; height: 80%; object-fit: contain; display: block; }
+@keyframes cxv-badge-breathe {
+  0%,100% { box-shadow: 0 0 0 6px rgba(0,0,0,0.72), 0 0 34px rgb(var(--cxv-brand) / 0.30), inset 0 0 26px rgba(0,0,0,0.9); }
+  50%     { box-shadow: 0 0 0 6px rgba(0,0,0,0.72), 0 0 52px rgb(var(--cxv-brand) / 0.5),  inset 0 0 26px rgba(0,0,0,0.9); }
+}
+
+/* ── Interactive global crypto-transaction map (dotted world + live flows) ────── */
+.cxv-map {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  aspect-ratio: 2 / 1;
+  margin: 10px auto 8px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: radial-gradient(130% 120% at 50% 24%, #12121c, #07070b 72%);
+  box-shadow: inset 0 0 70px rgba(0,0,0,0.6), 0 24px 60px rgba(0,0,0,0.45);
+  overflow: hidden;
+}
+.cxv-map-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.cxv-map-land circle { fill: rgba(255,255,255,0.11); }
+.cxv-route-base { stroke: rgba(255,90,120,0.16); stroke-width: 1; }
+.cxv-route.on .cxv-route-base { stroke: rgba(255,110,135,0.55); stroke-width: 1.4; }
+.cxv-route-flow { stroke-width: 1.6; stroke-dasharray: 10 240; animation: cxv-flow linear infinite; }
+@keyframes cxv-flow { to { stroke-dashoffset: -250; } }
+.cxv-route-packet { fill: #ff8098; filter: drop-shadow(0 0 6px #ff2d55); }
+.cxv-hub { cursor: pointer; }
+.cxv-hub-glow { opacity: 0.5; transition: opacity 0.2s ease; }
+.cxv-hub-core { fill: #ff466b; }
+.cxv-hub-ring { stroke: #ff5a7a; stroke-width: 1; }
+.cxv-hub.on .cxv-hub-glow { opacity: 1; }
+.cxv-hub.on .cxv-hub-core { fill: #ffffff; }
+.cxv-map-glyph {
+  fill: rgba(255,255,255,0.4); font-size: 24px; font-weight: 700;
+  font-family: 'Roboto Mono', monospace; transform-box: fill-box; transform-origin: center;
+  animation: cxv-glyph-drift 6s ease-in-out infinite;
+}
+@keyframes cxv-glyph-drift { 0%,100% { transform: translateY(0); opacity: .28 } 50% { transform: translateY(-8px); opacity: .6 } }
+.cxv-map-feed {
+  position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 3;
+  display: flex; gap: 7px; justify-content: center; flex-wrap: wrap;
+  font-family: 'Roboto Mono', monospace; font-size: 9.5px; color: rgba(255,255,255,.5);
+}
+.cxv-map-feed span {
+  border: 1px solid rgba(255,255,255,.1); background: rgba(0,0,0,.45); backdrop-filter: blur(4px);
+  border-radius: 6px; padding: 3px 8px; white-space: nowrap;
+}
+.cxv-map-feed b { color: #ff6a86; font-weight: 700; }
+.cxv-map-feed i { color: #ffb020; font-style: normal; }
+
+/* ── Role selector (registration) ── */
+.cxv-role-select {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.cxv-role-card {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 14px 8px; border-radius: 13px; cursor: pointer;
+  background: rgb(255 255 255 / 0.025); border: 1px solid rgb(var(--bg-border) / 0.5);
+  color: rgb(var(--text-muted)); transition: all 0.18s ease;
+  font-size: 13px; font-weight: 600;
+}
+.cxv-role-card small { font-size: 10px; font-weight: 400; opacity: 0.7; }
+.cxv-role-card:hover { border-color: rgb(var(--cxv-acc) / 0.4); background: rgb(var(--cxv-acc) / 0.04); }
+.cxv-role-card.active {
+  border-color: rgb(var(--cxv-acc) / 0.7); background: rgb(var(--cxv-acc) / 0.1);
+  color: rgb(var(--cxv-acc)); box-shadow: 0 0 0 3px rgb(var(--cxv-acc) / 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cxv-logo-badge, .cxv-map-glyph, .cxv-route-flow,
+  .cxv-grid, .cxv-stream-l, .cxv-stream-r, .cxv-chip, .cxv-radar-sweep, .cxv-orbit,
+  .cxv-radar-pulse, .cxv-card::before, .cxv-radar-core, .cxv-submit::after, .cxv-hud span::before,
+  .cxv-signal i {
+    animation: none !important;
+  }
+}

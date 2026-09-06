@@ -1,0 +1,192 @@
+{
+  "mobileNav": {
+    "menu": "更多",
+    "close": "关闭菜单",
+    "openFullMenu": "打开完整菜单",
+    "investigator": "调查员",
+    "tabs": {
+      "home": "首页",
+      "nexus": "Nexus",
+      "alerts": "提醒",
+      "cases": "案件"
+    }
+  },
+  "boot": {
+    "tagline": "区块链网络犯罪调查",
+    "threatRadar": "威胁雷达",
+    "systemBootLog": "系统启动日志",
+    "statusReady": "就绪",
+    "statusInit": "初始化",
+    "steps": {
+      "kernel": "正在初始化安全内核",
+      "chains": "正在加载链上预言机",
+      "aml": "正在校准 AML 引擎",
+      "evidence": "正在挂载证据保险库",
+      "tunnel": "正在建立安全隧道",
+      "ai": "正在加载威胁情报",
+      "ready": "系统就绪"
+    },
+    "ok": "[OK]",
+    "pending": "[···]",
+    "bootSequence": "启动序列",
+    "allSystemsNominal": "所有系统正常",
+    "initializing": "正在初始化…",
+    "startCrypTX": "启动 CrypTX",
+    "readDocs": "阅读 CrypTX 文档",
+    "secureBoot": "CrypTX 安全启动",
+    "encryptedSession": "加密会话",
+    "zeroTrust": "零信任"
+  },
+  "errorBoundary": {
+    "title": "界面渲染错误",
+    "message": "某个屏幕模块在渲染时失败。应用已捕获该错误，而非显示空白页面。",
+    "returnToApp": "返回应用"
+  },
+  "riskBadge": {
+    "low": "低",
+    "medium": "中",
+    "high": "高",
+    "severe": "严重",
+    "critical": "危急"
+  },
+  "general": {
+    "copied": "已复制到剪贴板",
+    "copyFailed": "复制失败"
+  },
+  "shared": {
+    "counterparty": {
+      "title": "对手方",
+      "empty": "无对手方。",
+      "noPredictions": "无预测。",
+      "colEntity": "实体",
+      "colChains": "链",
+      "colTx": "交易",
+      "colNative": "原生",
+      "colUsd": "USD",
+      "sanctioned": "受制裁",
+      "openIntel": "情报"
+    },
+    "deepTrace": {
+      "deepBtc": "深度 Bitcoin",
+      "deepSol": "深度 Solana",
+      "run": "运行",
+      "colNodes": "节点",
+      "colEdges": "边",
+      "colHops": "跳/交易",
+      "source": "来源",
+      "target": "目标",
+      "value": "价值"
+    },
+    "deliveryChannels": {
+      "title": "投递渠道",
+      "empty": "无渠道。",
+      "recent": "最近投递"
+    },
+    "export": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "fincen": "FinCEN XML",
+      "stix": "STIX 2.1",
+      "misp": "MISP",
+      "failed": "失败："
+    },
+    "insights": {
+      "title": "洞察",
+      "analyzing": "分析中…",
+      "cashoutRisk": "套现风险",
+      "refresh": "刷新",
+      "riskTrajectory": "风险轨迹",
+      "vsPopulation": "对比分析群体",
+      "addresses": "个地址"
+    },
+    "mixer": {
+      "riskSignals": "风险信号"
+    },
+    "riskBadge": {
+      "clean": "干净",
+      "entity": "实体",
+      "bridgeSwap": "桥/兑换",
+      "scam": "骗局",
+      "mixer": "混币器",
+      "sanctioned": "受制裁",
+      "error": "错误"
+    },
+    "riskGauge": {
+      "clean": "干净",
+      "low": "低",
+      "medium": "中",
+      "high": "高",
+      "critical": "危急",
+      "sanctioned": "受制裁",
+      "error": "错误"
+    },
+    "riskSignals": {
+      "empty": "无信号"
+    },
+    "sanctions": {
+      "sanctionedAddress": "受制裁地址",
+      "indirect": "间接 OFAC",
+      "notOnList": "不在名单",
+      "noInteractions": "无交互"
+    },
+    "savedInv": {
+      "title": "已保存",
+      "empty": "无。"
+    },
+    "timeTravel": {
+      "title": "时间旅行",
+      "balanceEvolution": "余额演变",
+      "cumulativeIn": "流入",
+      "cumulativeOut": "流出",
+      "balances": "余额",
+      "counterparties": "对手方："
+    },
+    "tokenHoldings": {
+      "title": "代币持有"
+    },
+    "txTable": {
+      "openDetails": "交易详情",
+      "colDir": "方向",
+      "colTime": "时间",
+      "colHash": "哈希",
+      "colFrom": "来自",
+      "colTo": "至",
+      "colValue": "价值",
+      "empty": "无交易。"
+    },
+    "exposure": {
+      "directExposure": "直接敞口",
+      "risky": "风险",
+      "total": "总计",
+      "noDirectExposure": "未发现对已知风险对手方的直接敞口。"
+    },
+    "coverage": {
+      "title": "CrypTX 覆盖范围",
+      "blockchains": "条区块链",
+      "tokens": "个代币",
+      "liveTraceable": "可实时追踪",
+      "chains": "链",
+      "searchPh": "搜索链或代币...",
+      "trace": "追踪",
+      "liveTraceLegend": "实时追踪 = 支持实时资金流追踪",
+      "catNative": "原生 L1/L2",
+      "catStablecoin": "稳定币",
+      "catWrapped": "包装资产",
+      "catLst": "质押 / LST",
+      "catDefi": "DeFi / 治理",
+      "catMeme": "Meme / 风险"
+    },
+    "caseQa": {
+      "title": "询问案件",
+      "subtitle": "基于证据的AI",
+      "placeholder": "提问…"
+    },
+    "defiThreat": {
+      "title": "DeFi 威胁检测",
+      "stablecoin": "稳定币",
+      "flashLoan": "闪电贷",
+      "rugPull": "Rug Pulls",
+      "mevBots": "MEV"
+    }
+  }
+}

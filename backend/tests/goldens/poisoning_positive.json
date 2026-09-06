@@ -1,0 +1,23 @@
+{
+  "disclaimer": "Heuristic look-alike match on the supplied transfers; completeness depends on the input window.",
+  "guidance": "Never copy a counterparty address from transaction history; use a verified address book. Poison addresses should be added to the case blocklist.",
+  "inbound_dust_transfers": 1,
+  "poison_addresses": [
+    "0x4283fe0c46d1fb6dfbdb0ae0755281220e7e90d3"
+  ],
+  "poisoning_hits": [
+    {
+      "detail": "Dust transfer from an address mimicking 0x4283fefc\u20267e90d3 \u2014 primed for copy-paste theft.",
+      "poison_address": "0x4283fe0c46d1fb6dfbdb0ae0755281220e7e90d3",
+      "spoofs": "0x4283fefc63f0cd0e873a0000c6d07ef7b77e90d3",
+      "timestamp": 1700000600,
+      "token": "",
+      "tx_hash": "0xdust1",
+      "value_usd": 0.0
+    }
+  ],
+  "real_counterparties": 2,
+  "severity": "critical",
+  "subject": "0xa1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+  "verdict": "POISONING DETECTED \u2014 1 look-alike dust transfer(s); verify every saved/pasted address before sending."
+}

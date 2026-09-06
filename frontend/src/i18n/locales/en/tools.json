@@ -1,0 +1,1470 @@
+{
+  "perpDex": {
+    "title": "Perp DEX Intel — Hyperliquid",
+    "subtitle": "Coverage for where 2026 volume actually is: $200B+/month perp-DEX flow. Deterministic detectors for wash trading, intentional-loss laundering, pass-through placement, and HIP-3 thin-market abuse — every verdict a lead with its computed basis.",
+    "inputPlaceholder": "Hyperliquid account (0x… EVM address)",
+    "analyze": "Analyze",
+    "loading": "Pulling fills, ledger and state from the Hyperliquid public API…",
+    "stats": {
+      "accountValue": "Account value",
+      "tradedVolume": "Traded volume",
+      "fillsRoundTrips": "{{fills}} fills · {{rounds}} round trips",
+      "netClosedPnl": "Net closed PnL",
+      "fees": "fees ${{amount}}",
+      "depositsWithdrawals": "Deposits / withdrawals",
+      "in": "in",
+      "out": "out"
+    },
+    "detectors": {
+      "title": "Abuse detectors",
+      "basis": "Basis: {{basis}}",
+      "partialData": "Partial data: {{errors}}"
+    },
+    "volumeByMarket": {
+      "title": "Volume by market",
+      "colMarket": "Market",
+      "colVolume": "Volume",
+      "colPnl": "PnL",
+      "colFills": "Fills",
+      "noFills": "No fills."
+    },
+    "openPositions": {
+      "title": "Open positions",
+      "none": "None.",
+      "row": "{{coin}} · size {{size}} · entry {{entry}} · value ${{value}} · uPnL ${{upnl}} · {{lev}}x"
+    },
+    "pivots": {
+      "title": "On-chain pivots (same EOA settles USDC on Arbitrum)"
+    }
+  },
+  "entity": {
+    "title": "Entity Investigation",
+    "subtitle": "Treat a group of addresses as one entity — cluster, aggregate flows, find external counterparties",
+    "inputLabel": "Addresses under common control",
+    "inputPlaceholder": "Paste addresses (one per line, or comma-separated)\n0x1234...\n0x5678...\nbc1q...",
+    "chainPlaceholder": "chain (eth, btc, ... optional)",
+    "submit": "Investigate Entity",
+    "errors": {
+      "minTwo": "Enter at least 2 addresses to treat as one entity.",
+      "failed": "Investigation failed"
+    },
+    "stats": {
+      "addresses": "Addresses",
+      "totalIn": "Total IN",
+      "totalOut": "Total OUT",
+      "clusters": "Clusters"
+    },
+    "clusters": {
+      "title": "Detected Common-Control Clusters ({{count}})",
+      "disclaimer": "Cluster membership is a 'common-control lead', not proof of ownership.",
+      "clusterN": "Cluster {{n}}",
+      "members": "{{count}} members · confidence {{conf}}%"
+    },
+    "counterparties": {
+      "title": "External Counterparties (top 20)",
+      "colAddress": "Address",
+      "colType": "Type",
+      "colIn": "In",
+      "colOut": "Out",
+      "colTxs": "Txs"
+    }
+  },
+  "dex": {
+    "title": "DEX Analysis",
+    "subtitle": "On-chain DEX trading analysis: token flows, liquidity pools, swap paths, and counterparty exposure across major DEXes.",
+    "inputPlaceholder": "ETH / BSC address…",
+    "analyze": "Analyze",
+    "loading": "Fetching DEX activity via TheGraph…",
+    "empty": "Enter an ETH or BSC address to view DEX swap activity.",
+    "lookupFailed": "DEX lookup failed",
+    "noSwaps": "No DEX swaps found for this address.",
+    "noSwapsHint": "This lookup queries Uniswap v2/v3 (ETH) and PancakeSwap (BSC) via TheGraph. Set THEGRAPH_API_KEY in Settings for better rate limits.",
+    "stats": {
+      "totalSwaps": "Total Swaps",
+      "buys": "Buys",
+      "sells": "Sells",
+      "uniquePairs": "Unique Pairs"
+    },
+    "washTrading": {
+      "title": "⚠ Possible Wash Trading Detected"
+    },
+    "chart": {
+      "title": "Top Swap Pairs - Buy vs Sell",
+      "buys": "Buys",
+      "sells": "Sells"
+    },
+    "table": {
+      "historyTitle": "Swap History ({{count}})",
+      "showing": "Showing 50 of {{count}} swaps.",
+      "colDir": "Dir",
+      "colTime": "Time",
+      "colPair": "Pair",
+      "colAmounts": "Amounts",
+      "colDex": "DEX",
+      "colUsd": "USD"
+    }
+  },
+  "autoInvestigate": {
+    "title": "Auto-Investigation",
+    "subtitle": "One click: intel → risk → forensics → threat intel → attribution → draft report. All local engines, chain-of-custody optional.",
+    "inputLabel": "Subject address",
+    "inputPlaceholder": "BTC / ETH / TRX / SOL address…",
+    "caseLabel": "Case ID (custody, optional)",
+    "casePlaceholder": "register report in vault",
+    "run": "Investigate",
+    "failed": "Auto-investigation failed",
+    "empty": "Paste an address and let the full local pipeline run end-to-end.",
+    "stats": {
+      "risk": "Risk",
+      "threat": "Threat",
+      "role": "Role",
+      "courtDefensible": "Court-defensible",
+      "courtDefensibleSub": "attribution",
+      "txs": "TXs",
+      "yes": "YES",
+      "no": "no",
+      "motifs": "{{count}} motifs"
+    },
+    "package": {
+      "title": "Investigation Package",
+      "custody": "Registered in custody chain:",
+      "reportHtml": "Report (HTML)",
+      "reportMd": "Summary (MD)"
+    },
+    "exitVasp": {
+      "title": "Exit VASPs - serve legal process here",
+      "none": "No exchange deposit points reached within 2 hops - funds may still be on-chain.",
+      "unavailable": "Exit-VASP trace unavailable: {{error}}",
+      "hop": "hop {{n}}",
+      "kyvDirectory": "✓ KYV directory",
+      "inspect": "inspect deposit address",
+      "cashoutIndicators": "Cash-out indicators"
+    },
+    "continue": {
+      "title": "Continue the investigation",
+      "addressIntel": "Address Intel",
+      "nexusGraph": "Nexus Graph",
+      "holisticTrace": "Holistic Trace",
+      "forensics": "Forensics"
+    }
+  },
+  "walletMonitor": {
+    "title": "Wallet Monitor",
+    "subtitle": "Watch crypto wallets for new transactions and open alerts directly in transaction detail.",
+    "stats": {
+      "watching": "Watching",
+      "active": "Active",
+      "unread": "Unread",
+      "notifications": "Notifications",
+      "poll": "90s",
+      "pollSub": "background scanner"
+    },
+    "add": {
+      "placeholder": "One or several wallet addresses, separated by comma or new line...",
+      "labelPlaceholder": "Optional label",
+      "button": "Watch",
+      "baseline": "Baseline current transactions so alerts only trigger on future activity"
+    },
+    "rules": {
+      "title": "Alert Rules",
+      "hint": "e.g. \"Alert if any watched wallet sends >10 to a mixer\" - rules run automatically on every background scan.",
+      "ruleName": "Rule name",
+      "ruleNamePlaceholder": "\"Mixer out > 10\"",
+      "address": "Address (blank = all watches)",
+      "addressPlaceholder": "any watched address",
+      "direction": "Direction",
+      "minValue": "Min value",
+      "counterparty": "Counterparty",
+      "addRule": "Add Rule",
+      "colRule": "Rule",
+      "colScope": "Scope",
+      "colDirection": "Direction",
+      "colMinValue": "Min value",
+      "colCounterparty": "Counterparty",
+      "colStatus": "Status",
+      "allWatches": "all watches",
+      "enabled": "enabled",
+      "disabled": "disabled"
+    },
+    "watchlist": {
+      "title": "Watchlist",
+      "scanNow": "Scan Now",
+      "filterPlaceholder": "Filter watched wallets...",
+      "colStatus": "Status",
+      "colAddress": "Address",
+      "colChain": "Chain",
+      "colLabel": "Label",
+      "colLastChecked": "Last Checked",
+      "colActions": "Actions",
+      "active": "active",
+      "paused": "paused",
+      "empty": "No watched wallets yet."
+    },
+    "notifications": {
+      "title": "Transaction Notifications",
+      "ruleBadge": "rule: {{name}}",
+      "new": "new",
+      "openDetails": "Open transaction details",
+      "empty": "No transaction notifications yet."
+    }
+  },
+  "fundTracer": {
+    "title": "Fund Flow Tracer",
+    "subtitle": "Multi-hop fund tracing · pattern detection · risk graph",
+    "completedIn": "completed in {{seconds}}s",
+    "controls": {
+      "seedAddress": "Seed Address",
+      "inputPlaceholder": "BTC / ETH / TRX / SOL address…",
+      "hops": "Hops (1-5)",
+      "mode": "Mode",
+      "modeLinear": "Linear",
+      "modeWide": "Wide",
+      "direction": "Direction",
+      "dirOutflows": "Outflows",
+      "dirInflows": "Inflows",
+      "dirBoth": "Both",
+      "trace": "Trace",
+      "tracing": "Tracing…",
+      "traceTitle": "Quick multi-hop trace",
+      "deepAnalyze": "Deep Analyze",
+      "analyzing": "Analyzing…",
+      "deepTitle": "Deep analysis with live progress: forensic motifs, cashout, cross-chain, clustering, risk, peel-chain, layering, dwell",
+      "exportTitle": "Export JSON"
+    },
+    "modeHintLinear": "Linear - largest single flow per hop.",
+    "modeHintWide": "Wide - top 3 counterparties per hop (max 20 nodes). Click a node in the graph for full details.",
+    "errors": {
+      "traceFailed": "Trace failed",
+      "deepTimeout": "Deep analysis timed out — it can take 1–3 minutes for active addresses. Try fewer hops, or use plain Trace for a quick first pass."
+    },
+    "progress": {
+      "starting": "Starting deep analysis",
+      "connecting": "Connecting…",
+      "following": "Following the money across {{hops}} hops and running 8 analysis passes. Very active wallets return a partial trace within the time budget.",
+      "runningDeep": "Running deep analysis…",
+      "tracingFlows": "Tracing fund flows…",
+      "deepHint": "Tracing {{hops}} hops then running 5 engines + 3 algorithms. May take 30-90s.",
+      "traceHint": "Querying blockchain APIs across {{hops}} hops. May take 15-60 seconds."
+    },
+    "stats": {
+      "wallets": "Wallets",
+      "transfers": "Transfers",
+      "flagged": "Flagged",
+      "patterns": "Patterns",
+      "tlEvents": "TL Events"
+    },
+    "warnings": {
+      "title": "Tracer notes",
+      "hidden": "+{{count}} additional notes hidden"
+    },
+    "chips": {
+      "walletClusters": "Wallet clusters",
+      "crosschain": "Cross-chain",
+      "crosschainValue": "{{bridges}} bridges · {{matches}} value matches",
+      "peelChains": "Peel chains",
+      "layering": "Layering",
+      "rapidWallets": "Rapid wallets",
+      "primaryCashout": "Primary cashout"
+    },
+    "patterns": {
+      "title": "Pattern Alerts ({{count}})",
+      "colSeverity": "Severity",
+      "colPattern": "Pattern",
+      "colConfidence": "Confidence",
+      "colDescription": "Description",
+      "docs": {
+        "sanctioned_exposure": "Funds passed through OFAC/Chainalysis sanctioned address",
+        "mixer_exposure": "Mixer or tumbler interaction detected in fund flow",
+        "scam_exposure": "Counterparty flagged in community scam databases",
+        "bridge_swap_exposure": "Cross-chain bridge or DEX swap activity - potential layering",
+        "peel_chain": "Consecutive single-output transactions - classic UTXO peel chain",
+        "fan_out": "Funds split to many recipients from single source - dispersal pattern",
+        "fan_in": "Many inputs converging to one address - aggregation/consolidation",
+        "pass_through": "Wallet receives and sends nearly all funds with no retention",
+        "round_amounts": "Suspicious round-number transaction amounts - structuring indicator",
+        "rapid_movement": "Funds moved very quickly after receipt - no dwell time",
+        "high_volume_low_balance": "High transaction volume with minimal remaining balance"
+      }
+    },
+    "empty": {
+      "title": "Enter a crypto address to trace fund flows",
+      "hint": "The tracer follows money across blockchain hops, detecting mixers, sanctioned addresses, bridge layering, and behavioral patterns."
+    }
+  },
+  "evidenceVault": {
+    "title": "Evidence Vault",
+    "subtitle": "Immutable artifact storage with SHA-256 hashing + tamper-evident custody chain",
+    "casePlaceholder": "Case ID (UUID)",
+    "load": "Load",
+    "saveArtifact": "Save Artifact",
+    "deleteConfirm": "Delete this evidence artifact?",
+    "summary": {
+      "artifacts": "Artifacts",
+      "avgQuality": "Avg Quality",
+      "byType": "By Type"
+    },
+    "filterPlaceholder": "Filter by title, address, type, tag…",
+    "emptyWithCase": "No evidence artifacts found. Save your first artifact using the button above.",
+    "emptyNoCase": "Enter a Case ID to view or add evidence",
+    "card": {
+      "notesPlaceholder": "Analyst notes…",
+      "tagsPlaceholder": "Tags (comma separated)",
+      "saving": "Saving…",
+      "save": "Save",
+      "cancel": "Cancel",
+      "annotate": "Annotate",
+      "export": "Export",
+      "auditLog": "Audit log",
+      "hide": "Hide",
+      "delete": "Delete"
+    },
+    "dialog": {
+      "title": "Save Evidence",
+      "type": "Type",
+      "subjectAddress": "Subject address",
+      "subjectPlaceholder": "0x…",
+      "titleField": "Title *",
+      "titlePlaceholder": "Evidence title",
+      "content": "Content (JSON or plain text)",
+      "contentPlaceholder": "{\"key\": \"value\"} or plain text",
+      "tags": "Tags",
+      "tagsPlaceholder": "exchange, structuring, …",
+      "analystNotes": "Analyst notes",
+      "notesPlaceholder": "Optional note",
+      "titleRequired": "Title is required",
+      "save": "Save Evidence",
+      "cancel": "Cancel"
+    },
+    "custody": {
+      "verify": "Verify Custody Chain",
+      "verifying": "…",
+      "chainIntact": "✓ Chain intact ({{count}} records)",
+      "chainBroken": "✗ CHAIN BROKEN - {{count}} problem(s)",
+      "tipValid": "Chain tip {{tip}} · verified {{at}}",
+      "tipInvalid": "{{title}}: {{error}}"
+    }
+  },
+  "txLens": {
+    "title": "TX Lens",
+    "subtitle": "Transaction-ID investigation with local value-flow graph, party attribution leads, pivots, traces, and AI synthesis",
+    "inputPlaceholder": "Transaction hash / TXID...",
+    "focusPlaceholder": "Optional AI focus, e.g. identify likely source of funds, exchange exit, mixer exposure, or common-control leads.",
+    "submit": "Investigate TX",
+    "options": {
+      "includeAi": "Include AI synthesis",
+      "deepEnrichment": "Deep party enrichment",
+      "expandTraces": "Expand traces around top parties",
+      "fullModeHint": "Full-quality mode is enabled by default; progress is shown while backend stages run."
+    },
+    "errors": {
+      "failed": "TX Lens failed",
+      "jobFailed": "TX Lens job failed",
+      "noResult": "TX Lens job completed without a result"
+    },
+    "progress": {
+      "starting": "Starting",
+      "detailFallback": "Preparing backend investigation job.",
+      "stages": {
+        "resolving": "Resolving Transaction",
+        "extracting": "Extracting Value Flows",
+        "enriching": "Enriching Parties",
+        "labels": "Loading Local Labels",
+        "expanding": "Expanding Trace Context",
+        "algorithms": "Running Local Algorithms",
+        "ai": "Synthesizing AI Assessment",
+        "finalizing": "Finalizing Report"
+      }
+    },
+    "graph": {
+      "findPlaceholder": "Find party address, role, or risk...",
+      "layoutFlow": "Flow lanes",
+      "layoutRisk": "Risk lanes",
+      "layoutRole": "Role lanes",
+      "allFlows": "All flows",
+      "focusOn": "Focus On",
+      "focusOff": "Focus Off",
+      "labelsOn": "Labels On",
+      "labelsOff": "Labels Off",
+      "minRisk": "Minimum party risk:",
+      "colSenders": "SENDERS",
+      "colIntermediates": "INTERMEDIATES",
+      "colMediumRisk": "MEDIUM RISK",
+      "colRecipients": "RECIPIENTS",
+      "colLowRisk": "LOW RISK",
+      "legendNative": "native",
+      "legendToken": "token",
+      "legendInternal": "internal",
+      "legendHighRisk": "high-risk party",
+      "statVisibleParties": "Visible Parties",
+      "statVisibleFlows": "Visible Flows",
+      "statAssetFilter": "Asset Filter",
+      "statSelected": "Selected",
+      "statLayout": "Layout",
+      "flowContract": "Contract: {{addr}}",
+      "flowTimeUnknown": "time unknown"
+    },
+    "profile": {
+      "title": "Transaction Profile",
+      "timeUnavailable": "time unavailable",
+      "explorer": "Explorer",
+      "exportJson": "Export JSON",
+      "statTxRisk": "TX Risk",
+      "statParties": "Parties",
+      "statFlows": "Flows",
+      "statAssets": "Assets",
+      "statIndicators": "Indicators",
+      "statTopParty": "Top Party",
+      "statValue": "Value"
+    },
+    "tabs": {
+      "flowGraph": "Flow Graph",
+      "analysis": "Analysis",
+      "parties": "Parties & Pivots"
+    },
+    "panels": {
+      "graphTitle": "Transaction Value-Flow Graph",
+      "selectedParty": "Selected Party",
+      "selectPartyHint": "Select a party node in the graph.",
+      "risk": "Risk",
+      "role": "Role",
+      "inbound": "Inbound",
+      "outbound": "Outbound",
+      "labels": "Labels:",
+      "openIntel": "Open address intelligence",
+      "traceContext": "Trace Context",
+      "traced": "Traced:",
+      "notExpanded": "not expanded",
+      "aiTitle": "AI Transaction Assessment",
+      "laundering": "Laundering Indicators",
+      "launderingEmpty": "No transaction-level laundering indicators were detected.",
+      "attribution": "Attribution Leads",
+      "nextSteps": "Next Steps",
+      "partyQueue": "Party Risk And Pivot Queue"
+    },
+    "table": {
+      "colPriority": "Priority",
+      "colAddress": "Address",
+      "colRole": "Role",
+      "colRisk": "Risk",
+      "colFlow": "Flow",
+      "colReasons": "Reasons"
+    }
+  },
+  "addressIntel": {
+    "title": "Address Intel",
+    "subtitle": "Holistic address intelligence — risk scoring, sanctions exposure, token holdings, mixer alerts, and attribution provenance in one lookup.",
+    "inputPlaceholder": "Crypto address / ENS name…",
+    "lookup": "Lookup",
+    "trace": "Trace",
+    "ai": "AI",
+    "forensics": "Forensics",
+    "dex": "DEX",
+    "errors": {
+      "lookupFailed": "Lookup failed"
+    },
+    "header": {
+      "via": "via {{source}}",
+      "copied": "Copied!",
+      "viewOnExplorer": "View on explorer"
+    },
+    "stats": {
+      "balance": "Balance",
+      "transactions": "Transactions",
+      "txSplit": "{{native}} native / {{token}} token",
+      "firstSeen": "First Seen",
+      "lastActive": "Last Active",
+      "totalReceived": "Total received:"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "intel": "Intelligence",
+      "activity": "Activity",
+      "network": "Network"
+    },
+    "risk": {
+      "title": "Risk Assessment",
+      "categories": "Risk Categories",
+      "noneDetected": "None detected",
+      "indicators": {
+        "mixer": "Mixer interactions",
+        "scam": "Scam reports",
+        "bridge": "Bridge hops",
+        "swap": "DEX swaps"
+      },
+      "exposure": "Fund Exposure",
+      "signals": "Risk Signals ({{count}})",
+      "snapshot": "Risk Snapshot",
+      "scoring": "Scoring…",
+      "unavailable": "Risk score unavailable."
+    },
+    "pivots": {
+      "title": "Fast Pivots",
+      "openNexus": "Open Nexus",
+      "holisticTrace": "Holistic Trace",
+      "fundTracer": "Fund Tracer"
+    },
+    "addToCase": {
+      "button": "Add to Case",
+      "title": "Add to Investigation Case",
+      "noCases": "No cases yet.",
+      "createOne": "Create one",
+      "selectCase": "Select case…",
+      "labelPlaceholder": "Label (optional)",
+      "addAddress": "Add Address",
+      "saving": "Saving…",
+      "added": "✓ Added!"
+    },
+    "attribution": {
+      "title": "Attribution Analysis",
+      "running": "Running attribution analysis across intelligence sources…",
+      "failed": "Attribution analysis failed: {{error}}",
+      "retry": "Retry",
+      "none": "No public owner attribution or wallet profile was found for this address.",
+      "rerun": "Re-run analysis",
+      "owner": "Owner",
+      "verified": "verified",
+      "confidence": "{{pct}}% conf.",
+      "alsoKnownAs": "Also known as: {{aliases}}",
+      "balances": "Associated Wallet Balances",
+      "tokenCol": "Token",
+      "priceCol": "Price",
+      "amountCol": "Amount",
+      "usdCol": "USD Value",
+      "moreTokens": "+{{count}} more tokens",
+      "scam": "scam",
+      "suspicious": "suspicious",
+      "defiPositions": "DeFi Positions"
+    },
+    "scam": {
+      "title": "ScamSearch Reports ({{count}})",
+      "name": "Name:",
+      "category": "Category:",
+      "date": "Date:"
+    },
+    "enrichment": {
+      "title": "Public Enrichment",
+      "subtitle": "Open feeds + free APIs",
+      "publicLabels": "Public Labels",
+      "abuseReports": "Abuse Reports",
+      "ransomwareHits": "Ransomware Hits",
+      "chainTvl": "Chain TVL · market",
+      "ransomwareMatch": "Ransomware Dataset Match",
+      "via": "via {{source}}",
+      "labelsTitle": "Labels & Dataset Matches",
+      "labelCategoryLabel": "label",
+      "marketContext": "Market Context",
+      "marketContextSub": "· global prices, not address-specific",
+      "providerWarnings": "Provider warnings: {{warnings}}",
+      "unavailable": "unavailable",
+      "optionalProviders": "Optional providers available in Settings: {{providers}}"
+    },
+    "activity": {
+      "title": "Activity",
+      "empty": "No transaction rows were returned by the current public data source.",
+      "allTransactions": "All Transactions",
+      "recentTransactions": "Recent Transactions"
+    }
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong.",
+    "retry": "Retry",
+    "copy": "Copy",
+    "copied": "Copied",
+    "export": "Export",
+    "noData": "No data",
+    "address": "Address",
+    "amount": "Amount",
+    "timestamp": "Timestamp"
+  },
+  "scamAtlas": {
+    "title": "Scam Network Atlas",
+    "subtitle": "Cross-victim infrastructure clustering: shared deposit addresses, domains, emails and handles collapse individual victim reports into named scam networks — with kit-fingerprint and deepfake-KYC signals as leads.",
+    "recluster": "Recluster",
+    "stats": {
+      "victimReports": "Victim reports",
+      "scamNetworks": "Scam networks",
+      "totalDamage": "Total damage",
+      "syntheticKyc": "Synthetic-KYC flags"
+    },
+    "list": {
+      "victimsDamage": "{{count}} victim(s) · ${{damage}}",
+      "empty": "No networks — file victim reports first.",
+      "selectPrompt": "Select a network."
+    },
+    "detail": {
+      "loading": "Loading network…",
+      "meta": "{{count}} victim report(s) · ${{damage}} damage · {{dates}} · chains {{chains}}",
+      "undated": "undated",
+      "dateRange": "{{from}} → {{to}}",
+      "promote": "Promote to Attribution",
+      "promoted": "{{count}} address(es) registered as provenance-tracked attribution leads.",
+      "basis": "Basis: {{basis}}",
+      "addresses": "Deposit addresses ({{count}})",
+      "intel": "intel",
+      "domains": "Domains",
+      "emails": "Emails",
+      "handles": "Handles",
+      "linkingArtifacts": "Linking artifacts",
+      "memberReports": "Member victim reports",
+      "colType": "Type",
+      "colScammerAddr": "Scammer address",
+      "colUsd": "USD",
+      "colChain": "Chain",
+      "colIncident": "Incident",
+      "colStatus": "Status"
+    }
+  },
+  "caseManager": {
+    "title": "Investigation Cases",
+    "subtitle": "Manage cryptocurrency cybercrime investigation cases",
+    "newCase": "New Case",
+    "create": {
+      "title": "New Investigation Case",
+      "namePlaceholder": "Case name (e.g. Binance Hack 2024-Q3)",
+      "descPlaceholder": "Description / objective (optional)",
+      "submit": "Create Case",
+      "cancel": "Cancel",
+      "failed": "Failed to create case. Try again."
+    },
+    "filter": {
+      "all": "all",
+      "active": "active",
+      "closed": "closed",
+      "archived": "archived"
+    },
+    "count_one": "{{count}} case",
+    "count_other": "{{count}} cases",
+    "loadFailed": "Failed to load cases",
+    "empty": "No cases yet - create your first investigation",
+    "card": {
+      "addrCount": "{{count}} addr",
+      "updated": "Updated {{date}}",
+      "maxRisk": "Max risk: {{score}}/100",
+      "open": "Open",
+      "deleteConfirm": "Delete case \"{{name}}\"?"
+    }
+  },
+  "boardShared": {
+    "errors": {
+      "revoked": "This share link has been revoked.",
+      "expired": "This share link has expired.",
+      "notFound": "Share link not found.",
+      "denied": "Access denied",
+      "unable": "Unable to open this board."
+    },
+    "opening": "Opening shared board…",
+    "password": {
+      "title": "Protected investigation board",
+      "hint": "This board was shared with password protection. Enter the password provided by the investigator.",
+      "placeholder": "Password",
+      "unlock": "Unlock"
+    },
+    "header": {
+      "readonlyLive": "read-only · live board",
+      "readonlySnapshot": "read-only · snapshot frozen {{date}}",
+      "sealTitle": "SHA-256 integrity seal of the board state",
+      "stats": "{{nodes}} nodes · {{edges}} edges · Shared via CrypTX"
+    }
+  },
+  "reportStudio": {
+    "title": "Report Studio",
+    "subtitle": "Generate audience-tailored, CrypTX-branded investigation reports from a case.",
+    "caseLabel": "Case",
+    "noCases": "No cases found",
+    "caseMeta": "{{count}} addresses · status {{status}}",
+    "reportTypeLabel": "Report type",
+    "generate": "Generate report",
+    "generating": "Generating...",
+    "errors": {
+      "failed": "Report generation failed. Check the case has data and try again."
+    },
+    "preview": {
+      "title": "Preview",
+      "regenerate": "Regenerate",
+      "print": "Print / Save as PDF",
+      "openTab": "Open in new tab",
+      "download": "Download HTML",
+      "downloadBtn": "Download",
+      "exportAs": "Export as:",
+      "building": "Building report…",
+      "empty": "Pick a case and report type, then generate."
+    }
+  },
+  "batchScreener": {
+    "title": "Batch Address Screener",
+    "subtitle": "Screen up to 100 addresses in parallel for sanctions, mixers, and risk signals",
+    "inputLabel": "Input Addresses",
+    "countLabel": "{{count}} / 100 addresses",
+    "screenBtn": "Screen {{count}} Addresses",
+    "screening": "Screening…",
+    "clear": "Clear",
+    "exportCsv": "Export CSV",
+    "errors": {
+      "failed": "Screening failed - is the backend running?"
+    },
+    "stats": {
+      "total": "Total",
+      "scored": "Scored",
+      "avg": "Avg",
+      "max": "Max",
+      "sanctioned": "Sanctioned",
+      "critHigh": "Crit+High",
+      "medium": "Medium",
+      "clean": "Clean"
+    },
+    "filter": {
+      "all": "all",
+      "sanctioned": "sanctioned",
+      "critical": "critical",
+      "high": "high",
+      "medium": "medium",
+      "low": "low",
+      "clean": "clean"
+    },
+    "rowsCount": "{{count}} rows",
+    "table": {
+      "score": "Score",
+      "level": "Level",
+      "address": "Address",
+      "chain": "Chain",
+      "signals": "Signals",
+      "actions": "Actions",
+      "fullIntel": "Full Intel →"
+    },
+    "empty": "Paste addresses above and click Screen"
+  },
+  "labelIntel": {
+    "title": "Local Label Intelligence",
+    "subtitle": "Investigator-owned attribution, risk labels, and CSV imports used by the local forensic engine",
+    "addLabel": {
+      "title": "Add Label",
+      "addressPh": "Address",
+      "chainPh": "Chain",
+      "labelPh": "Label",
+      "categoryPh": "Category",
+      "riskPh": "Risk",
+      "confPh": "Conf",
+      "notesPh": "Notes",
+      "addBtn": "Add"
+    },
+    "csv": {
+      "title": "CSV Import",
+      "placeholder": "address,chain,label,category,risk_weight,confidence,source,notes",
+      "importBtn": "Import CSV"
+    },
+    "attributionImports": {
+      "title": "Attribution Database Imports",
+      "hint": "Grow the provenance-tracked attribution database from open label sets. Deduped automatically; every record keeps its source. Confirmed victim reports also feed this database automatically.",
+      "ofacBtn": "Import bundled OFAC SDN list",
+      "ofacResult": "Imported {{imported}} · skipped {{skipped}} dupes (of {{rows}} rows)",
+      "ofacFailed": "Import failed - check backend logs.",
+      "duneHint": "Dune / GitHub label sets: convert to JSON and POST to /api/attribution/import with {items: [{address, category, label, source}]}."
+    },
+    "vasp": {
+      "title": "VASP Due-Diligence Dossier",
+      "placeholder": "VASP name, e.g. \"Binance\"",
+      "buildBtn": "Build Dossier",
+      "downloadMd": "Download (MD)",
+      "failed": "Dossier failed",
+      "countryUnknown": "country unknown",
+      "jurisdictionUnknown": "jurisdiction unknown",
+      "risk": "RISK: {{level}}",
+      "statAddresses": "Addresses",
+      "statChains": "Chains",
+      "statSanctions": "Sanctions hits",
+      "statHighRisk": "High-risk labels"
+    },
+    "labelsTable": {
+      "title": "Labels ({{count}})",
+      "searchPh": "Search labels...",
+      "empty": "No local labels yet.",
+      "colAddress": "Address",
+      "colChain": "Chain",
+      "colLabel": "Label",
+      "colCategory": "Category",
+      "colRisk": "Risk",
+      "colSource": "Source"
+    }
+  },
+  "osintSweep": {
+    "title": "OSINT Sweep",
+    "subtitle": "Scan social media, forums, paste sites, the darkweb index, and deep Reddit (posts + comments) for any address",
+    "inputPlaceholder": "Enter any cryptocurrency address…",
+    "sweep": "Sweep",
+    "loading": "Querying CryptoScamDB, Chainabuse, Ahmia darkweb, Reddit, X, Telegram, BitcoinTalk, GitHub, Pastebin, open web…",
+    "errors": {
+      "failed": "Sweep failed"
+    },
+    "reddit": {
+      "all": "Reddit: posts + comments",
+      "posts": "Reddit: posts only",
+      "comments": "Reddit: comments only",
+      "off": "Reddit: quick (no deep scan)"
+    },
+    "deepReddit": {
+      "title": "Deep Reddit research",
+      "postsWord": "posts",
+      "commentsWord": "comments matched",
+      "showAll": "Show all",
+      "showReddit": "Show Reddit only"
+    },
+    "pivots": {
+      "label": "Pivot",
+      "nexus": "Investigate in Nexus",
+      "addressIntel": "Address Intel"
+    },
+    "evidence": {
+      "totalHits": "{{count}} total hits · swept {{at}}",
+      "cached": "cached",
+      "selectCase": "Select case…",
+      "fileBtn": "File into evidence vault",
+      "filedOk": "Filed as evidence {{id}}… (chain {{hash}}…)",
+      "filedFail": "Filing failed"
+    },
+    "hits": {
+      "empty": "No public mentions found. Absence of OSINT hits is itself an investigative signal.",
+      "open": "open"
+    },
+    "sources": {
+      "additional": "Additional sources (API key required)",
+      "fallback": "Used fallback search"
+    }
+  },
+  "predictive": {
+    "title": "Predictive AI",
+    "subtitle": "Pre-crime detection — hybrid precursor patterns · population anomaly statistics · ML on historic labels",
+    "inputPlaceholder": "Address to analyze for future criminal activity…",
+    "predict": "Predict",
+    "errors": {
+      "prediction": "prediction failed",
+      "training": "training failed"
+    },
+    "model": {
+      "mlModel": "ML model",
+      "notTrained": "not trained",
+      "heuristicMode": "heuristic + anomaly mode",
+      "samples": "{{count}} samples / {{positives}} illicit",
+      "featureStore": "Feature store",
+      "profiles": "{{count}} profiles",
+      "baselineStats": "{{count}} baseline stats",
+      "predictions": "Predictions",
+      "logged": "{{count}} logged",
+      "fullAudit": "full audit trail",
+      "retrain": "Retrain from history",
+      "trainMl": "Train ML layer",
+      "training": "Training…",
+      "trainHint": "uses labels + sanctions + scam data",
+      "trainedMsg": "Model trained: {{samples}} samples ({{positives}} illicit), accuracy {{accuracy}}% [{{engine}}]",
+      "notTrainedMsg": "Not trained — {{reason}}"
+    },
+    "verdict": {
+      "titlePrefix": "Composite threat:",
+      "primaryVector": "Primary threat vector:",
+      "expectedWindow": "expected window",
+      "addToMonitor": "→ Add to Monitor",
+      "traceFunds": "→ Trace funds",
+      "fullIntel": "→ Full intel"
+    },
+    "card": {
+      "confidence": "confidence {{pct}}%",
+      "trend": "trend: {{trend}}",
+      "layerPrecursors": "Precursors",
+      "layerAnomaly": "Anomaly",
+      "layerMl": "ML model",
+      "evidence": "Evidence chain ({{count}})",
+      "recommendedActions": "Recommended actions"
+    },
+    "history": {
+      "title": "Recent predictions"
+    },
+    "types": {
+      "laundering": "Laundering / Cash-out",
+      "rugpull": "Scam / Rug-pull",
+      "trajectory": "Risk Trajectory",
+      "victim": "Victim Targeting",
+      "launderingBlurb": "Staging behavior before funds move",
+      "rugpullBlurb": "Operator & deployer pre-crime signatures",
+      "trajectoryBlurb": "Escalation forecast at 7/30/90 days",
+      "victimBlurb": "Dusting, poisoning & drainer recon"
+    }
+  },
+  "boards": {
+    "title": "Investigation Boards",
+    "subtitle": "Crimewall canvases - pin entities, string relationships, zone the flow, and hand off investigations",
+    "newBoard": "New Board",
+    "stats": {
+      "boards": "boards",
+      "pins": "pins",
+      "connections": "connections",
+      "openNotes": "open handoff notes"
+    },
+    "search": "Search boards…",
+    "sort": {
+      "updated": "Last updated",
+      "created": "Newest",
+      "name": "Name A–Z",
+      "nodes": "Most pins"
+    },
+    "create": {
+      "title": "New Board",
+      "namePh": "Board name (e.g. Alphapo hot-wallet drain - ETH leg)",
+      "descPh": "Description (optional)",
+      "noCase": "No linked case",
+      "submit": "Create & Open",
+      "cancel": "Cancel"
+    },
+    "folders": {
+      "label": "Folders",
+      "newFolder": "New folder",
+      "allBoards": "All boards",
+      "namePh": "Folder name…",
+      "rename": "Rename",
+      "deleteFolder": "Delete folder (boards are kept)"
+    },
+    "loading": "Loading boards…",
+    "empty": {
+      "noMatch": "No boards match \"{{query}}\".",
+      "noBoards": "No boards yet. Create one to start pinning addresses, entities and evidence to a persistent crimewall.",
+      "noBoardsFolder": "No boards in this folder. Create one to start pinning addresses, entities and evidence to a persistent crimewall."
+    },
+    "groups": {
+      "assigned": "Assigned to Cases ({{count}})",
+      "unassigned": "Unassigned ({{count}})",
+      "boardsCount_one": "· {{count}} board",
+      "boardsCount_other": "· {{count}} boards"
+    },
+    "card": {
+      "pins": "{{count}} pins",
+      "links": "{{count}} links",
+      "updated": "updated {{date}}",
+      "duplicate": "Duplicate",
+      "delete": "Delete",
+      "deleteConfirm": "Delete board \"{{name}}\"?"
+    }
+  },
+  "aiAgent": {
+    "title": "AI Investigator",
+    "subtitle": "Pick a case to assign to the AI. It loads the case's addresses, evidence, risk, and notes into context, then answers your questions and runs structured actions — grounded, with citations.",
+    "loadingCases": "Loading cases…",
+    "noCases": "No cases yet. Create one in Cases, then come back to assign it to the AI.",
+    "caseMeta": "{{addr}} addr · {{evidence}} evidence · {{notes}} notes",
+    "assignToAi": "Assign to AI",
+    "changeCase": "Change case",
+    "case": "Case",
+    "assigning": "Assigning case…",
+    "thinking": "Investigator is thinking…",
+    "chatPlaceholder": "Ask about this case's addresses, evidence, laundering path, next steps…",
+    "runAction": "▶ Run action: {{label}}",
+    "unparseable": "The model returned an unparseable result.",
+    "sidebar": {
+      "context": "Case context",
+      "addresses": "Addresses",
+      "evidence": "Evidence",
+      "notes": "Notes",
+      "quickActions": "Quick actions",
+      "suggestedPrompts": "Suggested prompts"
+    },
+    "status": {
+      "connected": "AI provider connected",
+      "notConfigured": "AI not configured",
+      "notConfiguredHint": "AI not configured — add a provider key in Settings to enable answers"
+    }
+  },
+  "caseDetail": {
+    "notFound": "Case not found",
+    "allCases": "All Cases",
+    "created": "Created {{date}}",
+    "addressCount_one": "{{count}} address",
+    "addressCount_other": "{{count}} addresses",
+    "forensicReport": "Forensic Report",
+    "exportReport": "Export Report",
+    "addAddress": {
+      "title": "Add Address",
+      "addrPh": "0x… / bc1… / T… / r… any chain",
+      "labelPh": "Label (optional)",
+      "addBtn": "Add"
+    },
+    "addresses": {
+      "title": "Subject Addresses ({{count}})",
+      "empty": "No addresses added yet.",
+      "unscored": "unscored",
+      "rescan": "Rescan",
+      "screen": "Screen",
+      "fullIntel": "Full Intel",
+      "riskChain": "Chain",
+      "riskBalance": "Balance",
+      "riskTxs": "Transactions"
+    },
+    "notes": {
+      "title": "Investigator Notes ({{count}})",
+      "placeholder": "Add investigation note…",
+      "addBtn": "Add"
+    },
+    "boards": {
+      "title": "Investigation Boards ({{count}})",
+      "newBoard": "New board",
+      "namePh": "Board name (e.g. Brainstorm — cashout routes)",
+      "createLink": "Create & link to this case",
+      "loading": "Loading boards…",
+      "empty": "No boards linked to this case yet.",
+      "emptyHint": "Create a brainstorming canvas and link it here.",
+      "pins": "{{count}} pins",
+      "links": "{{count}} links",
+      "comments_one": "{{count}} comment",
+      "comments_other": "{{count}} comments"
+    },
+    "taskManagement": "Task Management",
+    "auditLog": "Audit Log",
+    "backToCase": "Back to Case",
+    "team": {
+      "title": "Team ({{count}})",
+      "reviewer": "Reviewer",
+      "fullAccess": "Full Access",
+      "rev": "Rev",
+      "full": "Full",
+      "changeRole": "Change role",
+      "removeFromCase": "Remove from case",
+      "toggleRole": "Toggle role",
+      "remove": "Remove",
+      "removeConfirm": "Remove member?",
+      "selectMember": "Select a team member to assign:",
+      "allAssigned": "All team members are already assigned.",
+      "allAssignedShort": "All team members assigned.",
+      "role": "Role:",
+      "assign": "Assign",
+      "cancel": "Cancel"
+    }
+  },
+  "caseTask": {
+    "title": "Task Management",
+    "pageTitle": "{{name}} — Task Management",
+    "caseNotFound": "Case not found",
+    "backToCase": "Back to Case",
+    "auditLog": "Audit Log",
+    "newTask": "New Task",
+    "tabs": {
+      "tasks": "Tasks",
+      "audit": "Audit"
+    },
+    "stats": {
+      "open": "{{count}} open",
+      "inProgress": "{{count}} in progress",
+      "done": "{{count}} done",
+      "overdue": "{{count}} overdue",
+      "members": "{{count}} members"
+    },
+    "filters": {
+      "searchPh": "Search tasks...",
+      "allStatus": "All Status",
+      "allPriority": "All Priority",
+      "allAssignees": "All Assignees",
+      "clear": "Clear filters"
+    },
+    "status": {
+      "open": "Open",
+      "in_progress": "In Progress",
+      "done": "Done",
+      "closed": "Closed"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "taskCard": {
+      "assigned": "Assigned:",
+      "overdue": "Overdue"
+    },
+    "detail": {
+      "assignedTo": "Assigned to:",
+      "createdBy": "Created by:",
+      "due": "Due:",
+      "created": "Created:",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this task?",
+      "chat": "Chat",
+      "deliverables": "Deliverables ({{count}})",
+      "noMessages": "No messages yet. Start the conversation.",
+      "typeMsgPh": "Type a message...",
+      "noDeliverables": "No deliverables submitted yet.",
+      "review": "Review:",
+      "reviewNotePh": "Review note...",
+      "approve": "Approve",
+      "revise": "Revise",
+      "reject": "Reject",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "titlePh": "Title *",
+      "descPh": "Description",
+      "contentPh": "Content / findings...",
+      "submitDeliverable": "Submit Deliverable"
+    },
+    "create": {
+      "title": "Assign New Task",
+      "titleLabel": "Title *",
+      "taskTitlePh": "Task title",
+      "descLabel": "Description",
+      "taskDescPh": "Task description",
+      "assigneeLabel": "Assignee *",
+      "selectAssignee": "Select assignee",
+      "priorityLabel": "Priority",
+      "dueDateLabel": "Due Date",
+      "createBtn": "Create Task",
+      "cancel": "Cancel"
+    }
+  },
+  "victimReport": {
+    "title": "Victim Report & Scam Intelligence",
+    "subtitle": "Intake • Clustering • Law enforcement export",
+    "submitReport": "Submit Report",
+    "tabs": {
+      "reports": "Victim Reports",
+      "intel": "Scam Intelligence"
+    },
+    "stats": {
+      "totalReports": "Total Reports",
+      "uniqueScammers": "Unique Scammers",
+      "totalDamage": "Total Damage",
+      "chainsAffected": "Chains Affected"
+    },
+    "form": {
+      "title": "Submit Victim Report",
+      "scamType": "Scam Type *",
+      "chain": "Chain *",
+      "scammerAddr": "Scammer Address *",
+      "scammerAddrPh": "0x… or bc1… or Tron…",
+      "amountLost": "Amount Lost (USD)",
+      "token": "Token / Asset",
+      "tokenPh": "ETH, USDT, BTC…",
+      "incidentDate": "Incident Date",
+      "victimAddr": "Victim Address (optional)",
+      "victimAddrPh": "Your wallet address",
+      "description": "Description of Scam",
+      "descriptionPh": "Describe how the scam occurred, what promises were made, communication channels used…",
+      "txHashes": "Transaction Hashes (one per line or comma-separated)",
+      "contactInfo": "Contact Information (for investigator use only)",
+      "yourName": "Your Name",
+      "email": "Email",
+      "jurisdiction": "Jurisdiction (country / state)",
+      "jurisdictionPh": "e.g. United States / California",
+      "tags": "Tags (comma-separated)",
+      "tagsPh": "romance, crypto, 2024",
+      "linkCase": "Link to Case ID",
+      "linkCasePh": "case UUID (optional)",
+      "cancel": "Cancel",
+      "submit": "Submit Report",
+      "submitting": "Submitting…",
+      "addrRequired": "Scammer address is required",
+      "privacyNote": "Contact details are stored securely and only shared with investigators working this case."
+    },
+    "report": {
+      "scammerAddr": "Scammer Address",
+      "victimAddr": "Victim Address",
+      "description": "Description",
+      "txHashes": "Transaction Hashes",
+      "analystNotes": "Analyst Notes",
+      "statusLabel": "Status:",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this victim report? This cannot be undone."
+    },
+    "status": {
+      "open": "Open",
+      "underReview": "Under Review",
+      "escalated": "Escalated",
+      "referred": "Referred LE",
+      "closed": "Closed"
+    },
+    "cluster": {
+      "victims_one": "{{count}} victim",
+      "victims_other": "{{count}} victims",
+      "filterReports": "Filter reports for this address"
+    },
+    "filters": {
+      "byAddrPh": "Filter by scammer address…",
+      "allTypes": "All scam types",
+      "allStatuses": "All statuses",
+      "allChains": "All chains",
+      "clear": "Clear",
+      "selectAll": "Select all ({{count}})",
+      "deselectAll": "Deselect all",
+      "exportSelected": "Export {{count}} selected",
+      "reportCount_one": "{{count}} report total",
+      "reportCount_other": "{{count}} reports total",
+      "loading": "Loading…"
+    },
+    "empty": {
+      "noReports": "No reports found",
+      "tryFilters": "Try adjusting your filters.",
+      "submitFirst": "Submit the first victim report to start tracking scam activity."
+    },
+    "intel": {
+      "clusters": "Scammer Clusters",
+      "clustersByDamage_one": "{{count}} cluster by damage",
+      "clustersByDamage_other": "{{count}} clusters by damage",
+      "noClusters": "No clusters yet. Submit victim reports to build intelligence.",
+      "byScamType": "By Scam Type",
+      "byStatus": "By Status",
+      "topScammers": "Top Scammers by Damage",
+      "recentReports": "Recent Reports",
+      "ongoing": "ongoing"
+    }
+  },
+  "boardCanvas": {
+    "loadFailed": "Failed to load board",
+    "backToBoards": "Back to Boards",
+    "allBoards": "All boards",
+    "saved": "saved · v{{version}}",
+    "saving": "saving…",
+    "saveError": "save failed",
+    "unsaved": "unsaved changes",
+    "addPlaceholder": "Add address or tx hash…",
+    "busy": {
+      "autoConnecting": "Auto-connecting…",
+      "expanding": "Expanding {{addr}}…",
+      "fetchingTx": "Fetching tx {{hash}}…"
+    },
+    "toolbar": {
+      "entityPin": "Add crimewall entity pin",
+      "selectMode": "Select / move (Esc)",
+      "linkMode": "Red string: click two pins to link them (L)",
+      "zoneMode": "Draw investigation zone (drag on canvas)",
+      "autoLayout": "Auto-layout",
+      "forceLayout": "Force-directed layout",
+      "timelineLayout": "Timeline (by tx time)",
+      "gridLayout": "Grid",
+      "hierarchicalLayout": "Hierarchical (flow tree)",
+      "fitView": "Fit to view (F)",
+      "undo": "Undo (Ctrl+Z)",
+      "redo": "Redo (Ctrl+Shift+Z)",
+      "fiatToggle": "Toggle USD ↔ native (historical price fill)",
+      "addNote": "Add annotation note",
+      "legend": "Legend",
+      "exportPng": "Export canvas as PNG exhibit",
+      "nexus": "Open {{subject}} in the Nexus investigation graph",
+      "share": "Share board",
+      "comments": "Comments & handoff notes"
+    },
+    "mode": {
+      "link": "Link mode: click two pins to draw a relationship (Esc to exit)",
+      "zone": "Zone mode: drag on the canvas to draw a named investigation zone (Esc to exit)"
+    },
+    "search": {
+      "placeholder": "Search canvas…",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "cluster": {
+      "namePh": "Cluster name (e.g. \"Suspect wallet group A\")"
+    },
+    "context": {
+      "expand": "Expand 1-hop",
+      "split": "Split transaction",
+      "delete": "Delete",
+      "groupSelection": "Group selection",
+      "ungroup": "Ungroup",
+      "deleteZone": "Delete zone"
+    },
+    "legend": {
+      "title": "Legend"
+    },
+    "node": {
+      "labelPh": "e.g. Victim deposit wallet",
+      "notePh": "Free-text analyst note…",
+      "socialPh": "@handle / profile URL",
+      "attrKey": "key",
+      "attrValue": "value"
+    },
+    "edge": {
+      "labelPh": "e.g. shared KYC selfie"
+    },
+    "zone": {
+      "labelPh": "e.g. \"Layering\", \"Cash-out\", \"Victim funds\"",
+      "nameLabel": "Zone name",
+      "colorLabel": "Zone color"
+    },
+    "share": {
+      "title": "Share board",
+      "public": "Public",
+      "private": "Private",
+      "passwordPh": "Password for external party…",
+      "snapshot": "Snapshot (frozen)",
+      "noExpiry": "No expiry",
+      "hours": "{{hours}}h",
+      "create": "Create share link",
+      "created": "Read-only link created",
+      "encrypted": "snapshot encrypted at rest",
+      "copy": "Copy",
+      "copied": "Copied",
+      "revoke": "Revoke",
+      "noLinks": "No active share links."
+    },
+    "comments": {
+      "title": "Comments & handoff notes",
+      "resolve": "Resolve",
+      "placeholder": "Handoff note for the team…",
+      "add": "Add note"
+    }
+  },
+  "nexusGraph": {
+    "title": "Nexus Graph",
+    "subtitle": "Force-directed investigation graph · drag nodes · right-click for actions · double-click to pin",
+    "searchPlaceholder": "Address or ENS…",
+    "loading": "Building investigation graph…",
+    "empty": "Enter a wallet address above to build the investigation graph",
+    "phases": {
+      "intel": "Phase 1 · Address Intelligence",
+      "trace": "Phase 2 · Transaction Trace",
+      "nexus": "Phase 3 · Nexus Graph Analysis"
+    },
+    "stats": {
+      "nodes": "Nodes",
+      "edges": "Edges",
+      "risk": "Risk"
+    },
+    "controls": {
+      "layout": "Layout",
+      "flow": "Flow (fund trace)",
+      "force": "Force physics",
+      "community": "Community",
+      "radial": "Radial",
+      "nodeSize": "Node size metric",
+      "risk": "Risk",
+      "degree": "Degree",
+      "volume": "Volume",
+      "uniform": "Uniform",
+      "traceLines": "Trace Lines",
+      "bundled": "Bundled pairs",
+      "traceScope": "Trace Scope",
+      "expand": "Expand",
+      "trace": "Trace",
+      "restore": "Restore original graph",
+      "expandSelected": "Expand selected wallet",
+      "legend": "Toggle on-canvas legend"
+    },
+    "context": {
+      "copyAddress": "Copy address",
+      "fullIntel": "Full Address Intel",
+      "expand1hop": "Expand 1-hop both ways",
+      "deepExpand": "Deep expand 2-hop",
+      "traceIn": "Trace inbound only",
+      "traceOut": "Trace outbound only"
+    },
+    "detail": {
+      "risk": "Risk",
+      "degree": "Degree",
+      "volume": "Volume",
+      "expand1hop": "Expand 1-hop",
+      "expanding": "Expanding…",
+      "deepExpand": "Deep Expand",
+      "latestTrace": "Open Latest Trace Subgraph",
+      "valueFlow": "Value Flow",
+      "txFlows": "Connected Transaction Flows",
+      "noTxEdges": "No transaction edges attached to this node.",
+      "noCorrEdges": "No behavioral correlations attached to this node.",
+      "ownership": "Ownership Cluster Leads",
+      "links": "Strongest Behavioral Links",
+      "paths": "Paths From Seed",
+      "pivots": "Pivot Queue",
+      "bridges": "Bridge Wallets",
+      "openDetails": "Open Details",
+      "noPaths": "No paths found.",
+      "noBridges": "No bridge wallets found."
+    },
+    "demix": {
+      "title": "Nexus Demixing Agent",
+      "subtitle": "Runs mixer, Tornado, bridge, chain-swap, and AML demixing over the current Nexus graph, then overlays candidate links on the canvas.",
+      "runGraph": "Run on Graph",
+      "runSelected": "Run on Selected",
+      "empty": "Build a Nexus graph, then run the Demixing Agent on the whole graph or the selected wallet neighborhood."
+    },
+    "forensics": {
+      "title": "Embedded Local Forensics",
+      "runSeed": "Run on Seed",
+      "runSelected": "Run on Selected"
+    },
+    "identity": {
+      "title": "Identity Lens",
+      "buildSeed": "Build from Seed",
+      "buildSelected": "Build from Selected",
+      "copyAddress": "Copy Address",
+      "unknownWallet": "Unknown Wallet",
+      "resolving": "Resolving…"
+    }
+  },
+  "sanctions": {
+    "title": "Sanctions Screening",
+    "subtitle": "Screen addresses against OFAC SDN, EU, UN, and UK sanctions lists",
+    "inputPlaceholder": "Address to screen…",
+    "screen": "Screen",
+    "searchPlaceholder": "Search entity name, alias, or address…",
+    "search": "Search",
+    "clear": "Clear",
+    "refresh": "Refresh lists",
+    "noMatches": "No sanctions matches found.",
+    "matchScore": "{{pct}}% match",
+    "viewDetails": "View full details →",
+    "copyAddress": "Copy address",
+    "explorer": "Open in explorer",
+    "close": "Close",
+    "listedOn": "listed {{date}}",
+    "aka": "aka: {{aliases}}"
+  },
+  "attribution": {
+    "title": "Attribution & Provenance",
+    "subtitle": "Investigator-owned address-to-entity attribution with evidence-backed provenance",
+    "lookupPlaceholder": "Enter address to look up…",
+    "lookup": "Look Up",
+    "addAttribution": "Add Attribution",
+    "noResults": "No attributions found for this address.",
+    "confidence": "confidence",
+    "source": "Source:",
+    "by": "By:"
+  },
+  "attrSubmissions": {
+    "title": "Attribution Submissions",
+    "subtitle": "Analyst label-growth loop: submit attributions with evidence for review",
+    "tabs": { "pending": "Pending", "approved": "Approved", "rejected": "Rejected" },
+    "newSubmission": "New attribution submission",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "approve": "Approve",
+    "reject": "Reject",
+    "reviewNotes": "Review notes…",
+    "noSubmissions": "No {{status}} submissions."
+  },
+  "regulatory": {
+    "title": "Regulatory Reporting",
+    "subtitle": "Generate SAR, CTR, Travel Rule, and KYV reports for compliance",
+    "tabs": { "sar": "SAR", "ctr": "CTR", "travel": "Travel Rule", "kyv": "KYV Lookup" },
+    "export": "Export .md",
+    "generate": "Generate"
+  },
+  "demix": {
+    "title": "AML Demixing Engine",
+    "subtitle": "Mixer, bridge, and chain-swap demixing: reconstruct the path funds took through obfuscation layers",
+    "tabs": { "mixer": "Mixer Demix", "bridge": "Bridge Demix", "aml": "AML Typologies" },
+    "run": "Run",
+    "noResults": "No demixing results yet."
+  },
+  "comply": {
+    "title": "CrypTX Comply — Stablecoin Compliance",
+    "subtitle": "GENIUS-Act-shaped monitoring: monitored address book, KYT screening, Travel-Rule evaluation, examiner report + audit trail.",
+    "newProgram": "New Program",
+    "noPrograms": "No compliance programs yet. Create one to start monitoring."
+  },
+  "batchD": {
+    "contractForensics": { "title": "Contract Forensics", "subtitle": "Static analysis of smart contracts: detect honeypots, reentrancy, hidden mints, and malicious logic" },
+    "launderingTrace": { "title": "Laundering Trace", "subtitle": "Layering detection: follow funds through mixers, bridges, and chain swaps to reconstruct the laundering chain" },
+    "courtReadiness": { "title": "Court Readiness", "subtitle": "Assess investigation completeness for legal proceedings: evidence chain, attribution strength, chain of custody" },
+    "recoveryOps": { "title": "Freeze & Recovery", "subtitle": "Coordinate asset freezing and recovery operations with exchanges, law enforcement, and legal teams" },
+    "freezeDesk": { "title": "Freeze Desk", "subtitle": "Manage freeze requests, track status, and coordinate with VASPs and exchanges" },
+    "threatLandscape": { "title": "Blockchain Threat Landscape", "subtitle": "Live threat intelligence feeds: exploits, hacks, scams, and emerging attack vectors" },
+    "nftTron": { "title": "NFT / TON Sentinel", "subtitle": "NFT wash trading detection and TON blockchain intelligence" },
+    "victimPortal": { "title": "Report Crypto Fraud", "subtitle": "Public-facing victim intake portal for reporting crypto scams and fraud" },
+    "aboutAuthor": { "title": "About", "subtitle": "About CrypTX and the development team" },
+    "docs": { "title": "Documentation", "subtitle": "Master CrypTX — user guides, API reference, and operational playbooks" },
+    "profile": { "title": "Investigator Profile", "subtitle": "Your account settings, preferences, and activity history" }
+  }
+}

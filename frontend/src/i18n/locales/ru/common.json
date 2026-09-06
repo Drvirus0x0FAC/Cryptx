@@ -1,0 +1,97 @@
+{
+  "brand": {
+    "tagline": "Расследование блокчейна",
+    "followTheFlow": "Следуй за потоком"
+  },
+  "status": {
+    "online": "В сети",
+    "offline": "Не в сети",
+    "sync": "Синхр.",
+    "syncing": "Синхронизация…",
+    "loading": "Загрузка…",
+    "loadingModule": "Загрузка модуля…",
+    "verifyingSession": "Проверка защищённого сеанса…",
+    "ready": "Готово",
+    "error": "Ошибка",
+    "none": "Нет",
+    "unknown": "Неизвестно",
+    "all": "Все"
+  },
+  "actions": {
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "close": "Закрыть",
+    "apply": "Применить",
+    "retry": "Повторить",
+    "reset": "Сбросить",
+    "submit": "Отправить",
+    "search": "Поиск",
+    "clear": "Очистить",
+    "copy": "Копировать",
+    "copied": "Скопировано",
+    "refresh": "Обновить",
+    "export": "Экспорт",
+    "download": "Скачать",
+    "open": "Открыть",
+    "expand": "Развернуть",
+    "collapse": "Свернуть",
+    "next": "Далее",
+    "previous": "Назад",
+    "back": "Назад",
+    "continue": "Продолжить",
+    "confirm": "Подтвердить",
+    "delete": "Удалить",
+    "remove": "Убрать",
+    "edit": "Изменить",
+    "view": "Просмотр",
+    "details": "Подробности",
+    "loadMore": "Загрузить ещё",
+    "viewAll": "Показать все",
+    "showMore": "Показать ещё",
+    "showLess": "Показать меньше",
+    "tryAgain": "Попробовать снова"
+  },
+  "units": {
+    "tools_one": "{{count}} инструмент",
+    "tools_few": "{{count}} инструмента",
+    "tools_many": "{{count}} инструментов",
+    "tools_other": "{{count}} инструментов",
+    "hops_one": "{{count}} прыжок",
+    "hops_few": "{{count}} прыжка",
+    "hops_many": "{{count}} прыжков",
+    "hops_other": "{{count}} прыжков",
+    "results_one": "{{count}} результат",
+    "results_few": "{{count}} результата",
+    "results_many": "{{count}} результатов",
+    "results_other": "{{count}} результатов",
+    "items_one": "{{count}} элемент",
+    "items_few": "{{count}} элемента",
+    "items_many": "{{count}} элементов",
+    "items_other": "{{count}} элементов",
+    "seconds_one": "{{count}} с",
+    "seconds_few": "{{count}} с",
+    "seconds_many": "{{count}} с",
+    "seconds_other": "{{count}} с"
+  },
+  "errors": {
+    "generic": "Что-то пошло не так.",
+    "network": "Ошибка сети. Проверьте подключение и попробуйте снова.",
+    "notFound": "Не найдено.",
+    "unauthorized": "У вас нет прав на это действие.",
+    "timeout": "Время запроса истекло. Попробуйте снова.",
+    "serverError": "Ошибка сервера. Попробуйте позже."
+  },
+  "empty": {
+    "noData": "Нет данных",
+    "noResults": "Результаты не найдены",
+    "nothingHere": "Здесь пока пусто"
+  },
+  "time": {
+    "now": "сейчас",
+    "ago": "назад",
+    "inFuture": "через"
+  },
+  "misc": {
+    "language": "Язык"
+  }
+}

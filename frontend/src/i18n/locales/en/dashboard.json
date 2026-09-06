@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "CrypTX Blockchain Cyber Crime Investigation Solution",
+    "subtitle": "Trace illicit funds, connect attribution, score risk, and preserve evidence across chains without losing the investigative thread."
+  },
+  "pills": {
+    "evidencePipelineArmed": "Evidence pipeline armed",
+    "systemsOnline": "Systems Online",
+    "chainsSupported": "{{count}} chains supported",
+    "aiTriageReady": "AI triage ready"
+  },
+  "search": {
+    "placeholder": "Enter wallet address, ENS domain, TX hash, entity, or case lead…",
+    "button": "Investigate",
+    "try": "Try"
+  },
+  "liveBrief": {
+    "title": "Live intelligence brief",
+    "radarLabel": "Live triage radar",
+    "prioritySignals_one": "priority signal",
+    "prioritySignals_other": "priority signals"
+  },
+  "panels": {
+    "portfolioRisk": "Portfolio Risk",
+    "coverageMatrix": "Coverage Matrix",
+    "openMatrix": "Open matrix",
+    "liveIntelWire": "Live Intelligence Wire",
+    "threatLandscape": "Threat Landscape",
+    "threatFeedIdle": "Threat feed idle — open Threat Landscape to sync RSS sources.",
+    "marketPulse": "Market pulse",
+    "marketPulseHint": "USD-at-time valuations power trace + freeze packages",
+    "operationsDeck": "Operations Deck",
+    "live": "live",
+    "valueFrozen": "value frozen / seized",
+    "autoQueued": "auto-queued freezes",
+    "scamNetworks": "scam networks mapped",
+    "unreadMonitor": "unread monitor alerts",
+    "newActivity": "new activity",
+    "monitorsQuiet": "Monitors quiet — no unread alerts.",
+    "caseRiskDist": "Case risk distribution",
+    "activeInvestigations": "Active Investigations",
+    "viewAll": "View all",
+    "noCases": "No cases yet",
+    "createCase": "Create case",
+    "highRiskAlert": "{{count}} high-risk investigation(s) require review",
+    "noHighRisk": "No high-risk case review queue.",
+    "intelWire": "INTEL WIRE",
+    "stablecoins": "stablecoins",
+    "liveTraceable": "live traceable",
+    "addressesCount": "{{count}} addresses"
+  },
+  "stats": {
+    "activeCases": "Active cases",
+    "highRisk": "High risk",
+    "totalCases": "Total cases",
+    "addresses": "Addresses",
+    "chains": "chains",
+    "liveTrace": "live trace",
+    "tokens": "tokens"
+  },
+  "families": {
+    "evm": "EVM networks",
+    "utxo": "UTXO chains",
+    "solana": "Solana VM",
+    "tron": "Tron stack",
+    "cosmos": "Cosmos IBC",
+    "others": "Specialized rails"
+  },
+  "ticker": {
+    "risk": "risk",
+    "frozenSeized": "frozen/seized to date",
+    "syntheticKyc": "synthetic-KYC flags",
+    "trackedAssets": "tracked assets"
+  }
+}

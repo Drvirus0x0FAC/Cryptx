@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "core": "Core",
+    "investigation": "Investigation",
+    "intelligence": "Intelligence",
+    "compliance": "Compliance",
+    "advanced": "Advanced Forensics"
+  },
+  "items": {
+    "dashboard": "Dashboard",
+    "boards": "Boards",
+    "nexus": "Nexus Graph",
+    "trace": "Fund Tracer",
+    "intel": "Address Intel",
+    "nftTron": "NFT / TON",
+    "auto": "Auto-Investigate",
+    "entity": "Entity Investigation",
+    "txLens": "TX Lens",
+    "dex": "DEX Analysis",
+    "perpDex": "Perp DEX",
+    "monitor": "Monitor",
+    "evidence": "Evidence",
+    "predictive": "Predictive AI",
+    "aiAgent": "AI Agent",
+    "osint": "OSINT Sweep",
+    "cases": "Cases",
+    "batch": "Batch Screen",
+    "labels": "Labels",
+    "victimReports": "Victim Reports",
+    "scamAtlas": "Scam Atlas",
+    "reports": "Report Studio",
+    "sanctions": "Sanctions",
+    "attribution": "Attribution",
+    "submissions": "Submissions",
+    "regulatory": "Regulatory",
+    "demix": "AML Demixing",
+    "comply": "Comply Suite",
+    "contractForensics": "Contract Forensics",
+    "laundering": "Laundering Trace",
+    "courtReadiness": "Court Readiness",
+    "recovery": "Freeze & Recovery",
+    "freezeDesk": "Freeze Desk",
+    "team": "Team"
+  },
+  "quick": {
+    "workspace": "Workspace",
+    "openPalette": "Open module palette"
+  }
+}

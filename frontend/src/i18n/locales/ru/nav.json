@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "core": "Основное",
+    "investigation": "Расследование",
+    "intelligence": "Разведка",
+    "compliance": "Комплаенс",
+    "advanced": "Продвинутая криминалистика"
+  },
+  "items": {
+    "dashboard": "Панель",
+    "boards": "Доски",
+    "nexus": "Граф Nexus",
+    "trace": "Трассировщик средств",
+    "intel": "Анализ адреса",
+    "nftTron": "NFT / TON",
+    "auto": "Авто-расследование",
+    "entity": "Расследование сущности",
+    "txLens": "Линза TX",
+    "dex": "Анализ DEX",
+    "perpDex": "Perp DEX",
+    "monitor": "Монитор",
+    "evidence": "Доказательства",
+    "predictive": "Предиктивный ИИ",
+    "aiAgent": "ИИ-агент",
+    "osint": "OSINT-обход",
+    "cases": "Дела",
+    "batch": "Пакетная проверка",
+    "labels": "Метки",
+    "victimReports": "Отчёты жертв",
+    "scamAtlas": "Атлас мошенничеств",
+    "reports": "Студия отчётов",
+    "sanctions": "Санкции",
+    "attribution": "Атрибуция",
+    "submissions": "Отправки",
+    "regulatory": "Регуляторное",
+    "demix": "Демиксинг AML",
+    "comply": "Комплаенс-набор",
+    "contractForensics": "Контрактная криминалистика",
+    "laundering": "След отмывания",
+    "courtReadiness": "Судебная готовность",
+    "recovery": "Заморозка и возврат",
+    "freezeDesk": "Стол заморозки",
+    "team": "Команда"
+  },
+  "quick": {
+    "workspace": "Рабочее пространство",
+    "openPalette": "Открыть палитру модулей"
+  }
+}

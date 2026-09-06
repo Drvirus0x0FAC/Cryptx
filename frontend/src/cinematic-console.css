@@ -1,0 +1,217 @@
+/**
+ * Cinematic Console — the shared input-screen skin.
+ * ────────────────────────────────────────────────────────────────────────────
+ * Layered over `cinematic-stages.css` (which still owns the collapsed bar) to
+ * give every module's input screen the same staging as the Nexus run screen:
+ * one centred console panel, one uniform backdrop, one typographic system.
+ * Module identity comes from the icon/kicker/title a page passes, not from a
+ * bespoke colour theme — so the whole product reads as one instrument.
+ *
+ * Nothing here touches `.cine-stage--bar`; a collapsed stage keeps its
+ * existing slim-bar behaviour.
+ */
+
+/* ── 1. The panel ─────────────────────────────────────────────────────────── */
+.cine-console:not(.cine-stage--bar) {
+  /* Hug the content and sit centred instead of flooding ~80vh. */
+  min-height: 0;
+  max-width: 1180px;
+  margin-inline: auto;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgb(var(--bg-border) / 0.45);
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, rgb(var(--accent-blue) / 0.10), transparent 62%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgb(var(--accent-purple) / 0.08), transparent 60%),
+    rgb(var(--bg-secondary) / 0.92) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 24px 64px rgb(0 0 0 / 0.35);
+}
+
+/* Retire every per-variant gradient/glow so no module fights the palette. */
+.cine-console:not(.cine-stage--bar) .cine-fx > span:not(.nxc-particle),
+.cine-console:not(.cine-stage--bar) .cine-fx::before,
+.cine-console:not(.cine-stage--bar) .cine-fx::after { display: none !important; }
+
+/* Scoped to the hero: the collapsed bar keeps its own dimmed FX opacity. */
+.cine-console:not(.cine-stage--bar) .cine-fx { opacity: 1 !important; }
+
+/* Constellation — same drawing as the Nexus launch console. */
+.cine-console .cine-net {
+  position: absolute;
+  left: 0; right: 0; top: -8px;
+  width: 100%; height: 210px;
+  opacity: 0.62;
+  mask-image: radial-gradient(ellipse 56% 60% at 50% 22%, #000 14%, transparent 66%);
+  -webkit-mask-image: radial-gradient(ellipse 56% 60% at 50% 22%, #000 14%, transparent 66%);
+}
+.cine-console .cine-net line   { stroke: rgb(var(--accent-blue) / 0.5); stroke-width: 1.1; }
+.cine-console .cine-net circle { fill: rgb(var(--accent-blue)); }
+.cine-stage--bar .cine-net { display: none; }
+
+/* ── 1b. Collapsed bar — same palette, still slim ─────────────────────────── */
+.cine-console.cine-stage--bar {
+  background:
+    linear-gradient(90deg, rgb(var(--accent-blue) / 0.08), transparent 55%),
+    rgb(var(--bg-secondary) / 0.94) !important;
+  border: 1px solid rgb(var(--bg-border) / 0.5);
+}
+.cine-console.cine-stage--bar .cine-fx > *,
+.cine-console.cine-stage--bar .cine-fx::before,
+.cine-console.cine-stage--bar .cine-fx::after { display: none !important; }
+.cine-console.cine-stage--bar .input,
+.cine-console.cine-stage--bar .input:not(:focus) {
+  border-color: rgb(var(--bg-border) / 0.5);
+  box-shadow: none;
+}
+.cine-console.cine-stage--bar .cine-chip { color: rgb(var(--text-bright)); }
+.cine-console.cine-stage--bar .cine-chip svg { color: rgb(var(--accent-blue)); }
+
+/* ── 2. Centred hero ──────────────────────────────────────────────────────── */
+.cine-console:not(.cine-stage--bar) .cine-hero {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 34px 28px 8px;
+}
+.cine-console:not(.cine-stage--bar) .cine-hero__text { flex: 0 1 auto; }
+
+.cine-console:not(.cine-stage--bar) .cine-crest {
+  width: 52px;
+  height: 52px;
+  color: rgb(var(--accent-blue));
+  border-radius: 16px;
+  background: linear-gradient(140deg, rgb(var(--accent-blue) / 0.22), rgb(var(--accent-purple) / 0.14));
+  border: 1px solid rgb(var(--accent-blue) / 0.4);
+  box-shadow: 0 0 28px rgb(var(--accent-blue) / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+.cine-console:not(.cine-stage--bar) .cine-crest__icon { color: rgb(var(--text-bright)); }
+
+.cine-console:not(.cine-stage--bar) .cine-kicker {
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  font-weight: 700;
+  opacity: 1;
+  color: rgb(var(--accent-blue));
+  margin: 0 0 8px;
+}
+.cine-console:not(.cine-stage--bar) .cine-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: rgb(var(--text-bright));
+}
+.cine-console:not(.cine-stage--bar) .cine-subtitle {
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 10px auto 0;
+  max-width: 66ch;
+  opacity: 1;
+  color: rgb(var(--text-muted));
+}
+.cine-console:not(.cine-stage--bar) .cine-hero__actions { margin-top: 4px; }
+
+/* ── 3. Form slot ─────────────────────────────────────────────────────────── */
+.cine-console:not(.cine-stage--bar) .cine-form-slot {
+  flex: 0 1 auto;
+  gap: 14px;
+  padding: 14px 28px 30px;
+}
+
+/* Labels above fields read as instrument captions. */
+.cine-console:not(.cine-stage--bar) .cine-form-slot label {
+  letter-spacing: 0.2em;
+}
+
+/* Inputs, selects and textareas become console fields. */
+.cine-console:not(.cine-stage--bar) .cine-form-slot .input,
+.cine-console:not(.cine-stage--bar) .cine-form-slot input:not([type='checkbox']):not([type='radio']),
+.cine-console:not(.cine-stage--bar) .cine-form-slot select,
+.cine-console:not(.cine-stage--bar) .cine-form-slot textarea {
+  background: rgb(var(--bg-primary) / 0.72);
+  border: 1px solid rgb(var(--bg-border) / 0.5);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: rgb(var(--text-bright));
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.cine-console:not(.cine-stage--bar) .cine-form-slot .input:focus,
+.cine-console:not(.cine-stage--bar) .cine-form-slot input:focus,
+.cine-console:not(.cine-stage--bar) .cine-form-slot select:focus,
+.cine-console:not(.cine-stage--bar) .cine-form-slot textarea:focus {
+  transform: none;
+  border-color: rgb(var(--accent-blue) / 0.6);
+  box-shadow: 0 0 0 4px rgb(var(--accent-blue) / 0.10), 0 0 34px rgb(var(--accent-blue) / 0.18);
+}
+/* An icon sitting inside a relative field wrapper needs the extra left inset.
+   Specificity note: the block above matches these inputs through its
+   `input:not([type=…]):not([type=…])` branch at (0,5,1), so this rule has to
+   clear that bar or the shorthand `padding` there wins and the text lands
+   under the icon. */
+.cine-console:not(.cine-stage--bar) .cine-form-slot .input.pl-8:not([type='checkbox']):not([type='radio']),
+.cine-console:not(.cine-stage--bar) .cine-form-slot .input.pl-9:not([type='checkbox']):not([type='radio']) {
+  padding-left: 40px;
+}
+.cine-console:not(.cine-stage--bar) .cine-form-slot select { cursor: pointer; }
+.cine-console:not(.cine-stage--bar) .cine-form-slot option { background: rgb(var(--bg-surface)); }
+
+/* Checkboxes pick up the accent. */
+.cine-console:not(.cine-stage--bar) .cine-form-slot input[type='checkbox'] {
+  accent-color: rgb(var(--accent-blue));
+  width: 15px; height: 15px;
+  cursor: pointer;
+}
+
+/* The primary action becomes the launch key. */
+.cine-console:not(.cine-stage--bar) .cine-form-slot .btn-primary {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, rgb(var(--accent-blue)), rgb(var(--accent-indigo)));
+  color: rgb(var(--bg-primary));
+  border: 1px solid rgb(var(--accent-blue) / 0.7);
+  box-shadow: 0 0 30px rgb(var(--accent-blue) / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.25);
+}
+.cine-console:not(.cine-stage--bar) .cine-form-slot .btn-primary::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 36%, rgb(255 255 255 / 0.3) 50%, transparent 64%);
+  transform: translateX(-120%);
+}
+.cine-console:not(.cine-stage--bar) .cine-form-slot .btn-primary:not(:disabled):hover::after {
+  animation: nxc-sweep 0.75s ease-out;
+}
+.cine-console:not(.cine-stage--bar) .cine-form-slot .btn-primary:disabled { opacity: 0.42; }
+
+/* Secondary actions stay quiet but match the radius. */
+.cine-console:not(.cine-stage--bar) .cine-form-slot .btn-secondary,
+.cine-console:not(.cine-stage--bar) .cine-form-slot .btn-ghost {
+  border-radius: 12px;
+  padding: 11px 18px;
+}
+
+/* Cards dropped into a console get a real surface back (the legacy rule
+   flattened them to transparent, which read as broken on the new panel). */
+.cine-console:not(.cine-stage--bar) .cine-form-slot .card,
+.cine-console:not(.cine-stage--bar) .cine-form-slot .card-cyber {
+  background: rgb(var(--bg-primary) / 0.62);
+  border: 1px solid rgb(var(--bg-border) / 0.4);
+  border-radius: 12px;
+}
+
+/* ── 4. Centre the console when the result region is still empty ──────────── */
+@media (min-width: 1024px) {
+  .noscroll-page:has(> .noscroll-grow:empty) { justify-content: center; }
+  .noscroll-page > .noscroll-grow:empty { flex: 0 0 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cine-console .cine-net, .cine-console .nxc-grid { animation: none !important; }
+  .cine-console .nxc-scan, .cine-console .nxc-particle { display: none; }
+  .cine-console:not(.cine-stage--bar) .cine-form-slot .btn-primary::after { animation: none !important; }
+}

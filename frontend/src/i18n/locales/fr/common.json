@@ -1,0 +1,87 @@
+{
+  "brand": {
+    "tagline": "Investigation Blockchain",
+    "followTheFlow": "Suivez le flux"
+  },
+  "status": {
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "sync": "Synchro",
+    "syncing": "Synchronisation…",
+    "loading": "Chargement…",
+    "loadingModule": "Chargement du module…",
+    "verifyingSession": "Vérification de la session sécurisée…",
+    "ready": "Prêt",
+    "error": "Erreur",
+    "none": "Aucun",
+    "unknown": "Inconnu",
+    "all": "Tout"
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "apply": "Appliquer",
+    "retry": "Réessayer",
+    "reset": "Réinitialiser",
+    "submit": "Envoyer",
+    "search": "Rechercher",
+    "clear": "Effacer",
+    "copy": "Copier",
+    "copied": "Copié",
+    "refresh": "Actualiser",
+    "export": "Exporter",
+    "download": "Télécharger",
+    "open": "Ouvrir",
+    "expand": "Déplier",
+    "collapse": "Replier",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "back": "Retour",
+    "continue": "Continuer",
+    "confirm": "Confirmer",
+    "delete": "Supprimer",
+    "remove": "Retirer",
+    "edit": "Modifier",
+    "view": "Afficher",
+    "details": "Détails",
+    "loadMore": "Charger plus",
+    "viewAll": "Tout afficher",
+    "showMore": "Afficher plus",
+    "showLess": "Afficher moins",
+    "tryAgain": "Réessayer"
+  },
+  "units": {
+    "tools_one": "{{count}} outil",
+    "tools_other": "{{count}} outils",
+    "hops_one": "{{count}} saut",
+    "hops_other": "{{count}} sauts",
+    "results_one": "{{count}} résultat",
+    "results_other": "{{count}} résultats",
+    "items_one": "{{count}} élément",
+    "items_other": "{{count}} éléments",
+    "seconds_one": "{{count}} s",
+    "seconds_other": "{{count}} s"
+  },
+  "errors": {
+    "generic": "Une erreur est survenue.",
+    "network": "Erreur réseau. Vérifiez votre connexion et réessayez.",
+    "notFound": "Introuvable.",
+    "unauthorized": "Vous n'êtes pas autorisé à effectuer cette action.",
+    "timeout": "La requête a expiré. Veuillez réessayer.",
+    "serverError": "Erreur serveur. Veuillez réessayer plus tard."
+  },
+  "empty": {
+    "noData": "Aucune donnée disponible",
+    "noResults": "Aucun résultat trouvé",
+    "nothingHere": "Rien ici pour le moment"
+  },
+  "time": {
+    "now": "maintenant",
+    "ago": "il y a",
+    "inFuture": "dans"
+  },
+  "misc": {
+    "language": "Langue"
+  }
+}

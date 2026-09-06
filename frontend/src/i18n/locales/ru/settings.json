@@ -1,0 +1,117 @@
+{
+  "title": "Настройки",
+  "subtitle": "Управление API-ключами · конфигурация источников данных и инструментов",
+  "head": {
+    "syncEnv": "СИНХР {{count}} .env",
+    "saved": "Сохранено",
+    "saveFailed": "Ошибка сохранения",
+    "saveButton": "Сохранить",
+    "saveButtonCount_one": "Сохранить ({{count}})",
+    "saveButtonCount_few": "Сохранить ({{count}})",
+    "saveButtonCount_many": "Сохранить ({{count}})",
+    "saveButtonCount_other": "Сохранить ({{count}})",
+    "saving": "Сохранение…"
+  },
+  "status": {
+    "configured": "НАСТРОЕН",
+    "pending": "ОЖИДАНИЕ",
+    "notSet": "НЕ ЗАДАН",
+    "set": "задан",
+    "off": "ВЫКЛ"
+  },
+  "keys": {
+    "configuredCount": "{{count}}/{{total}} настроено",
+    "groups": {
+      "chainData": "Данные цепочек",
+      "attributionRisk": "Атрибуция и риск",
+      "osint": "OSINT"
+    }
+  },
+  "editor": {
+    "configured": "настроено",
+    "placeholderReplace": "Введите новое значение, чтобы заменить сохранённое",
+    "placeholderGeneric": "Введите {{label}}",
+    "getKey": "Получить API-ключ",
+    "apply": "Применить",
+    "cancel": "Отмена"
+  },
+  "ai": {
+    "provider": "Провайдер",
+    "providerNone": "нет",
+    "model": "Модель",
+    "modelNone": "нет",
+    "modelPlaceholder": "Введите id модели",
+    "baseUrl": "Базовый URL",
+    "baseUrlPlaceholder": "https://ваш-шлюз.example/v1",
+    "apiKey": "API-ключ",
+    "apiKeySet": "задан",
+    "apiKeyPending": "ожидание",
+    "apiKeyPlaceholder": "API-ключ {{label}}",
+    "apiKeyConfiguredPlaceholder": "Настроено — введите новое значение для замены",
+    "keyConfigured": "настроено",
+    "keyNotConfigured": "не настроено",
+    "saveToActivate": "сохранить, чтобы активировать {{label}}",
+    "testProvider": "Проверить провайдера ИИ",
+    "testing": "Проверка…",
+    "testOk": "Подключение успешно",
+    "testFailed": "Ошибка проверки провайдера ИИ",
+    "liveLabel": "Вживую",
+    "statusOnline": "В сети",
+    "statusOffline": "Не в сети",
+    "activeProvider": "Активный провайдер"
+  },
+  "panels": {
+    "dataSourceKeys": "API-ключи источников данных",
+    "aiRuntime": "Среда ИИ",
+    "toolFeatures": "Функции инструментов",
+    "workspace": "Рабочее пространство"
+  },
+  "fields": {
+    "deepseekKey": { "label": "API-ключ DeepSeek", "hint": "Надёжное значение по умолчанию для брифингов расследования, гипотез и структурированного JSON-синтеза." },
+    "claudeKey": { "label": "API-ключ Claude", "hint": "Нативный коннектор Claude для аккуратной повествовательной отчётности и обоснованного на доказательствах рассуждения." },
+    "geminiKey": { "label": "API-ключ Gemini", "hint": "Коннектор Google Gemini для анализа длинного контекста и генерации отчётов." },
+    "openaiKey": { "label": "API-ключ OpenAI", "hint": "Совместимый с chat-completions OpenAI коннектор для общих ИИ-функций расследования." },
+    "codexKey": { "label": "API-ключ Codex / OpenAI", "hint": "Используйте совместимый с OpenAI ключ и модель для рабочих процессов Codex внутри CrypTX." },
+    "tonApiKey": { "label": "API-ключ TON", "hint": "Ключ доступа TON — обеспечивает обогащение профиля TON в Анализе адреса." },
+    "trongridKey": { "label": "API-ключ TronGrid", "hint": "Ключ TronGrid — обеспечивает поиск адресов и транзакций Tron." },
+    "etherscanKey": { "label": "API-ключ Etherscan", "hint": "Ключ Etherscan — обеспечивает обогащение адресов и транзакций EVM." },
+    "blockstreamKey": { "label": "API-ключ Blockstream", "hint": "Ключ Blockstream / esplora — обеспечивает обогащение адресов и транзакций Bitcoin." }
+  },
+  "rows": {
+    "apiTimeout": { "label": "Таймаут запроса", "sub": "Макс. ожидание на API-вызов" },
+    "defaultHops": { "label": "Глубина трассировки по умолчанию", "sub": "Прыжки Трассировщика средств" },
+    "traceMode": { "label": "Режим трассировки" },
+    "monitorRefresh": { "label": "Обновление монитора", "sub": "Опрос Монитора кошельков" },
+    "riskThreshold": { "label": "Порог тревоги риска", "sub": "Отметка на / выше значения" },
+    "batchSize": { "label": "Размер пакета", "sub": "Адресов на экран" },
+    "autoEnrich": { "label": "Авто публичное обогащение", "sub": "При каждом поиске адреса" },
+    "confirmDelete": { "label": "Подтверждать удаление" },
+    "resultRows": { "label": "Строк результата", "sub": "Строки по умолчанию в таблицах результатов" },
+    "liveThreatFeed": { "label": "Лента угроз в реальном времени", "sub": "Бегущая строка Ландшафта угроз" },
+    "animations": { "label": "Анимации интерфейса", "sub": "Декоративное движение по всему приложению" },
+    "theme": "Тема",
+    "density": "Плотность",
+    "defaultChain": "Цепочка по умолчанию",
+    "language": "Язык"
+  },
+  "segmented": {
+    "dark": "ТЁМНАЯ",
+    "light": "СВЕТЛАЯ",
+    "comfortable": "КОМФОРТ",
+    "compact": "КОМПАКТ",
+    "linear": "ЛИНЕЙНЫЙ",
+    "wide": "ШИРОКИЙ"
+  },
+  "chains": {
+    "auto": "АВТО",
+    "btc": "BTC",
+    "eth": "ETH",
+    "bsc": "BSC",
+    "polygon": "POLYGON",
+    "arbitrum": "ARBITRUM",
+    "optimism": "OPTIMISM",
+    "base": "BASE",
+    "tron": "TRON",
+    "solana": "SOLANA"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "title": "Ajustes",
+  "subtitle": "Gestión de claves API · configuración de fuentes de datos y herramientas",
+  "head": {
+    "syncEnv": "SINC {{count}} .env",
+    "saved": "Guardado",
+    "saveFailed": "Error al guardar",
+    "saveButton": "Guardar",
+    "saveButtonCount": "Guardar ({{count}})",
+    "saving": "Guardando…"
+  },
+  "status": {
+    "configured": "CONFIGURADO",
+    "pending": "PENDIENTE",
+    "notSet": "NO DEFINIDO",
+    "set": "definido",
+    "off": "OFF"
+  },
+  "keys": {
+    "configuredCount": "{{count}}/{{total}} configuradas",
+    "groups": {
+      "chainData": "Datos de cadena",
+      "attributionRisk": "Atribución y riesgo",
+      "osint": "OSINT"
+    }
+  },
+  "editor": {
+    "configured": "configurado",
+    "placeholderReplace": "Introduce un nuevo valor para reemplazar el almacenado",
+    "placeholderGeneric": "Introducir {{label}}",
+    "getKey": "Obtener una clave API",
+    "apply": "Aplicar",
+    "cancel": "Cancelar"
+  },
+  "ai": {
+    "provider": "Proveedor",
+    "providerNone": "ninguno",
+    "model": "Modelo",
+    "modelNone": "ninguno",
+    "modelPlaceholder": "Introducir id del modelo",
+    "baseUrl": "URL base",
+    "baseUrlPlaceholder": "https://tu-pasarela.ejemplo/v1",
+    "apiKey": "Clave API",
+    "apiKeySet": "definido",
+    "apiKeyPending": "pendiente",
+    "apiKeyPlaceholder": "Clave API de {{label}}",
+    "apiKeyConfiguredPlaceholder": "Configurado — introduce un nuevo valor para reemplazar",
+    "keyConfigured": "configurado",
+    "keyNotConfigured": "no configurado",
+    "saveToActivate": "guardar para activar {{label}}",
+    "testProvider": "Probar proveedor IA",
+    "testing": "Probando…",
+    "testOk": "Conexión correcta",
+    "testFailed": "Error en la prueba del proveedor IA",
+    "liveLabel": "En vivo",
+    "statusOnline": "En línea",
+    "statusOffline": "Sin conexión",
+    "activeProvider": "Proveedor activo"
+  },
+  "panels": {
+    "dataSourceKeys": "Claves API de fuentes de datos",
+    "aiRuntime": "Entorno IA",
+    "toolFeatures": "Funciones de herramientas",
+    "workspace": "Espacio de trabajo"
+  },
+  "fields": {
+    "deepseekKey": { "label": "Clave API de DeepSeek", "hint": "Valor predeterminado robusto para resúmenes de investigación, hipótesis y síntesis JSON estructurada." },
+    "claudeKey": { "label": "Clave API de Claude", "hint": "Conector nativo de Claude para reportes narrativos cuidadosos y razonamiento basado en evidencia." },
+    "geminiKey": { "label": "Clave API de Gemini", "hint": "Conector de Google Gemini para análisis de contexto largo y generación de informes." },
+    "openaiKey": { "label": "Clave API de OpenAI", "hint": "Conector compatible con chat-completions de OpenAI para funciones generales de investigación con IA." },
+    "codexKey": { "label": "Clave API de Codex / OpenAI", "hint": "Usa una clave y modelo compatibles con OpenAI para flujos de trabajo tipo Codex dentro de CrypTX." },
+    "tonApiKey": { "label": "Clave API de TON", "hint": "Clave de acceso TON — alimenta el enriquecimiento de perfil TON en Inteligencia de dirección." },
+    "trongridKey": { "label": "Clave API de TronGrid", "hint": "Clave TronGrid — alimenta búsquedas de direcciones y transacciones Tron." },
+    "etherscanKey": { "label": "Clave API de Etherscan", "hint": "Clave Etherscan — alimenta el enriquecimiento de direcciones y transacciones EVM." },
+    "blockstreamKey": { "label": "Clave API de Blockstream", "hint": "Clave Blockstream / esplora — alimenta el enriquecimiento de direcciones y transacciones Bitcoin." }
+  },
+  "rows": {
+    "apiTimeout": { "label": "Tiempo de espera", "sub": "Espera máxima por llamada API" },
+    "defaultHops": { "label": "Profundidad de rastreo predeterminada", "sub": "Saltos del Rastreador de fondos" },
+    "traceMode": { "label": "Modo de rastreo" },
+    "monitorRefresh": { "label": "Actualización del monitor", "sub": "Sondeo del Monitor de billeteras" },
+    "riskThreshold": { "label": "Umbral de alerta de riesgo", "sub": "Marcar en / por encima de" },
+    "batchSize": { "label": "Tamaño de lote", "sub": "Direcciones por pantalla" },
+    "autoEnrich": { "label": "Enriquecimiento público auto", "sub": "En cada búsqueda de dirección" },
+    "confirmDelete": { "label": "Confirmar antes de eliminar" },
+    "resultRows": { "label": "Filas de resultados", "sub": "Filas predeterminadas en tablas de resultados" },
+    "liveThreatFeed": { "label": "Feed de amenazas en vivo", "sub": "Cinta del Panorama de amenazas" },
+    "animations": { "label": "Animaciones de la interfaz", "sub": "Movimiento decorativo en toda la app" },
+    "theme": "Tema",
+    "density": "Densidad",
+    "defaultChain": "Cadena predeterminada",
+    "language": "Idioma"
+  },
+  "segmented": {
+    "dark": "OSCURO",
+    "light": "CLARO",
+    "comfortable": "CÓMODO",
+    "compact": "COMPACTO",
+    "linear": "LINEAL",
+    "wide": "AMPLIO"
+  },
+  "chains": {
+    "auto": "AUTO",
+    "btc": "BTC",
+    "eth": "ETH",
+    "bsc": "BSC",
+    "polygon": "POLYGON",
+    "arbitrum": "ARBITRUM",
+    "optimism": "OPTIMISM",
+    "base": "BASE",
+    "tron": "TRON",
+    "solana": "SOLANA"
+  }
+}

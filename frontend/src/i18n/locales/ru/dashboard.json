@@ -1,0 +1,77 @@
+{
+  "hero": {
+    "title": "Решение CrypTX для расследования киберпреступлений в блокчейне",
+    "subtitle": "Отслеживайте незаконные средства, связывайте атрибуцию, оценивайте риск и сохраняйте доказательства между цепочками, не теряя нити расследования."
+  },
+  "pills": {
+    "evidencePipelineArmed": "Конвейер доказательств активен",
+    "systemsOnline": "В сети",
+    "chainsSupported": "{{count}} цепочек поддерживается",
+    "aiTriageReady": "ИИ-триаж готов"
+  },
+  "search": {
+    "placeholder": "Введите адрес кошелька, ENS-домен, хэш TX, сущность или зацепку дела…",
+    "button": "Расследовать",
+    "try": "Попробовать"
+  },
+  "liveBrief": {
+    "title": "Брифинг разведки в реальном времени",
+    "radarLabel": "Радар приоритизации в реальном времени",
+    "prioritySignals_one": "приоритетный сигнал",
+    "prioritySignals_few": "приоритетных сигнала",
+    "prioritySignals_many": "приоритетных сигналов",
+    "prioritySignals_other": "приоритетных сигналов"
+  },
+  "panels": {
+    "portfolioRisk": "Риск портфеля",
+    "coverageMatrix": "Матрица покрытия",
+    "openMatrix": "Открыть матрицу",
+    "liveIntelWire": "Лента разведки в реальном времени",
+    "threatLandscape": "Ландшафт угроз",
+    "threatFeedIdle": "Лента угроз неактивна — откройте Ландшафт угроз для синхронизации RSS.",
+    "marketPulse": "Пульс рынка",
+    "marketPulseHint": "Оценки USD для трассировки + заморозки",
+    "operationsDeck": "Операционный центр",
+    "live": "вживую",
+    "valueFrozen": "заморожено / изъято",
+    "autoQueued": "авто-заморозки в очереди",
+    "scamNetworks": "сетей мошенничеств нанесено",
+    "unreadMonitor": "непрочитанных оповещений",
+    "newActivity": "новая активность",
+    "monitorsQuiet": "Мониторы тихи — нет непрочитанных оповещений.",
+    "caseRiskDist": "Распределение риска дел",
+    "activeInvestigations": "Активные расследования",
+    "viewAll": "Показать все",
+    "noCases": "Нет дел",
+    "createCase": "Создать дело",
+    "highRiskAlert": "{{count}} расследование(ий) высокого риска требуют проверки",
+    "noHighRisk": "Нет очереди проверки высокого риска.",
+    "intelWire": "ЛЕНТА РАЗВЕДКИ",
+    "stablecoins": "стейблкоинов",
+    "liveTraceable": "трассируемо",
+    "addressesCount": "{{count}} адресов"
+  },
+  "stats": {
+    "activeCases": "Активные дела",
+    "highRisk": "Высокий риск",
+    "totalCases": "Всего дел",
+    "addresses": "Адреса",
+    "chains": "цепочек",
+    "liveTrace": "трасс в реальном времени",
+    "tokens": "токенов"
+  },
+  "families": {
+    "evm": "Сети EVM",
+    "utxo": "Цепочки UTXO",
+    "solana": "Solana VM",
+    "tron": "Tron стек",
+    "cosmos": "Cosmos IBC",
+    "others": "Специализированные рельсы"
+  },
+  "ticker": {
+    "risk": "риск",
+    "frozenSeized": "заморожено/изъято на дату",
+    "syntheticKyc": "флагов синтетического KYC",
+    "trackedAssets": "отслеживаемых активов"
+  }
+}
